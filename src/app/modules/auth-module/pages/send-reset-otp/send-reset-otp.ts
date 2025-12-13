@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
@@ -20,20 +20,13 @@ import { AuthFacade } from '../../services';
   templateUrl: './send-reset-otp.html',
 })
 export class SendResetOtp {
-  form!: FormGroup;
   INPUT_TYPES = INPUT_TYPES
   #authFacade = inject(AuthFacade);
 
-  constructor(private fb: FormBuilder) {}
+  email = new FormControl('', [Validators.required, Validators.email]);
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
-  }
-
-  onSubmit(event: Event) {
-    if (this.form.invalid) return;
-    this.#authFacade.sendPasswordResetOtp(this.form.value.email);
+  onSubmit() {
+    if (this.email.invalid) return;
+    this.#authFacade.sendPasswordResetOtp(this.email.value as string);
   }
 }

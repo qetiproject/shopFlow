@@ -4,23 +4,22 @@
       Forgot Password
     </h2>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="space-y-4">
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
       <app-input
         label="Email"
         [type]="INPUT_TYPES.EMAIL"
-        formControlName="email"
+        [formControl]="email"
       ></app-input>
-
       <button
-        type="submit"
-        [disabled]="!form.valid"
-        [ngClass]="{
-          'bg-blue-600 hover:bg-blue-700 text-white': form.valid,
-          'bg-gray-200 text-gray-500 cursor-not-allowed opacity-70': form.invalid
-        }"
-        class="w-full mt-3 px-4 py-2 text-sm font-medium rounded-lg transition shadow"
-      >
-        Send Reset OTP
+          type="submit"
+          [disabled]="!email.valid"
+          [ngClass]="{
+            'bg-blue-600 hover:bg-blue-700 text-white': email.valid,
+            'bg-gray-200 text-gray-500 cursor-not-allowed opacity-70': email.invalid
+          }"
+          class="w-full mt-3 px-4 py-2 text-sm font-medium rounded-lg transition shadow"
+        >
+          Send Reset OTP
       </button>
     </form>
 
