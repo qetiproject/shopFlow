@@ -23,6 +23,10 @@ export class AuthApiService {
     return this.#http.post<LoginResponse>(`${this.baseUrl}/login`, user)
   }
 
+  sendResetOtp(emailId: string): Observable<{message: string}> {
+    return this.#http.post<{message: string}>(`${environment.userApp}/send-reset-otp?emailId=${emailId}`, null)
+  }
+
   async logout() {
     this.#tokenService.clear();
     await this.#router.navigateByUrl('/login')
