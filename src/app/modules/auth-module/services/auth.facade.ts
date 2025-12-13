@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthApiService, CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse } from '@auth-module';
+import { AuthApiService, CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '@auth-module';
 import { MessagesService } from '@core';
 import { MessageSeverity } from '@types';
 import { Observable, tap } from 'rxjs';
@@ -31,6 +31,18 @@ export class AuthFacade {
         this.#router.navigate(['/reset-password'])
       })
     ).subscribe()
+  }
+
+  resetPassword(data: ResetPasswordRequest): void {
+    this.#authApi.resetPassword(data).pipe(
+      tap((response) => {
+         this.#messages.showMessage({
+          text: response,
+          severity: MessageSeverity.Success,
+        });
+        this.#router.navigate(['/login'])
+      })
+    ).subscribe();
   }
 
   logoutUser() {

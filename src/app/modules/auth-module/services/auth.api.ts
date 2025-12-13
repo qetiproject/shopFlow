@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, TokenService } from '@auth-module';
+import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest, TokenService } from '@auth-module';
 import { environment } from '@env-dev';
 import { Observable } from 'rxjs';
 
@@ -25,6 +25,13 @@ export class AuthApiService {
 
   sendResetOtp(emailId: string): Observable<{message: string}> {
     return this.#http.post<{message: string}>(`${environment.userApp}/send-reset-otp?emailId=${emailId}`, null)
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<string> {
+    return this.#http.post<string>(
+      `${environment.userApp}/verify-otp-reset-password`, data,
+      { responseType: 'text' as 'json' }
+    )
   }
 
   async logout() {
