@@ -9,7 +9,7 @@ export interface ResetPasswordForm {
 export function resetPasswordForm(fb: NonNullableFormBuilder) {
   return fb.group<ResetPasswordForm>({
     email: fb.control('', [Validators.required, Validators.email]),
-    otp: fb.control('', [Validators.required, Validators.minLength(4)]),
+    otp: fb.control('', [Validators.required, Validators.minLength(6)]),
     newPassword: fb.control('', [Validators.required, Validators.minLength(8)]),
   });
 }
