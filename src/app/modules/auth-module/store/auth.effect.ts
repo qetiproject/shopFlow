@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import * as AuthActions from '@auth-module';
-import { AuthFacade, TokenService, UserStorage } from "@auth-module";
+import { AuthFacade, LoginStoreResponse, TokenService, UserStorage } from "@auth-module";
 import { MessagesService } from "@core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { MessageSeverity } from "@types";
@@ -96,7 +96,15 @@ export class AuthEffects {
                                 fullName: null
                             })
                         }
-                        return AuthActions.loginUserSuccess({data: response})
+                        const data: LoginStoreResponse = {
+                            message: response.message,
+                            result: response.result,
+                            data: {
+                                userId: response.data.userId,
+                                emailId: response.data.emailId,
+                            }
+                        }
+                        return AuthActions.loginUserSuccess({data})
                     }),
                     catchError(error => of(AuthActions.loginUserFailure({ error})))
                 )
