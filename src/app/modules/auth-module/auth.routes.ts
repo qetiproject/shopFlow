@@ -12,4 +12,14 @@ export const authRoutes: Routes = [
     loadComponent: () => 
       import('@auth-module').then(c => c.Register),
   },
+  {
+    path: 'send-reset-otp',
+    loadComponent: () => 
+      import('@auth-module').then(c => c.SendResetOtp),
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () => 
+      import('@auth-module').then(c => c.ResetPassword),
+  }
 ]
