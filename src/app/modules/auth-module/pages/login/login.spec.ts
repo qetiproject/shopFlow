@@ -36,14 +36,14 @@ describe('Login ', () => {
     });
 
     it('form should be invalid initially', () => {
-        expect(component.form.invalid).toBeTrue()
+        expect(component.form.invalid).toBe(true)
     });
 
     it('submit button should be disabled when form is invalid', () => {
         const el: HTMLElement = fixture.nativeElement;
         const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
-        expect(component.form.invalid).toBeTrue();
-        expect(submit.disabled).toBeTrue();
+        expect(component.form.invalid).toBe(true);
+        expect(submit.disabled).toBe(true);
 
     });
 
@@ -58,8 +58,8 @@ describe('Login ', () => {
 
         const el = fixture.nativeElement;
         const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
-        expect(component.form.valid).toBeTrue();
-        expect(submit.disabled).toBeFalse();
+        expect(component.form.valid).toBe(true);
+        expect(submit.disabled).toBe(false);
     });
 
     it('should dispatch loginUser action with correct payload on submit', () => {
@@ -76,7 +76,7 @@ describe('Login ', () => {
 
         component.onSubmit();
 
-        const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
+        const store = TestBed.inject(Store) as jest.Mocked<Store>;
         expect(store.dispatch).toHaveBeenCalledWith(
             AuthActions.loginUser({ payload: credentials })
         );
