@@ -2,17 +2,17 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideRouter } from "@angular/router";
 import * as AuthActions from '@auth-module';
-import { Login, LoginRequest } from "@auth-module";
+import { Register } from "@auth-module";
 import { Store } from "@ngrx/store";
 import { provideMockStore, setupComponent } from "@test-utils";
 
-describe('Login ', () => {
-    let component: Login;
-    let fixture: ComponentFixture<Login>;
+describe('Register', () => {
+    let component: Register;
+    let fixture: ComponentFixture<Register>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [Login],
+            imports: [Register],
             providers: [
                 provideRouter([]),
                 provideMockStore()
@@ -20,7 +20,7 @@ describe('Login ', () => {
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
 
-        const setup = setupComponent(Login);
+        const setup = setupComponent(Register);
         fixture = setup.fixture;
         component = setup.instance;
     });
@@ -29,58 +29,62 @@ describe('Login ', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render Login title', () => {
+    it('should render Register title', () => {
         const el: HTMLElement = fixture.nativeElement;
-        const title = el.querySelector('[data-testid="LoginTitle"]');
+        const title = el.querySelector('[data-testid="RegisterTitle"]');
         expect(title).toBeTruthy();
     });
 
     it('form should be invalid initially', () => {
-        expect(component.form.invalid).toBe(true)
+        expect(component.form.invalid).toBe(true);
     });
 
     it('submit button should be disabled when form is invalid', () => {
         const el: HTMLElement = fixture.nativeElement;
-        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        const submit = el.querySelector('[data-testid="RegisterSubmit"]') as HTMLButtonElement;
         expect(component.form.invalid).toBe(true);
         expect(submit.disabled).toBe(true);
-
     });
 
     it('submit button should be enabled when form is valid', () => {
-         const credentials: LoginRequest = {
+        const credentials = {
             emailId: 'test@mail.com',
-            password: '123456'
+            password: '123456',
+            fullName: 'keti',
         };
 
-        component.form.setValue(credentials);
+        component.form.patchValue(credentials);
         fixture.detectChanges();
 
         const el = fixture.nativeElement;
-        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        const submit = el.querySelector('[data-testid="RegisterSubmit"]') as HTMLButtonElement;
         expect(component.form.valid).toBe(true);
         expect(submit.disabled).toBe(false);
     });
 
-    it('should dispatch loginUser action with correct payload on submit', () => {
-         const credentials: LoginRequest = {
+    it('should dispatch registerUser action with correct payload on submit', () => {
+        const credentials = {
             emailId: 'test@mail.com',
-            password: '123456'
+            password: '123456',
+            fullName: 'keti',
         };
 
-        component.form.setValue(credentials);
+        component.form.patchValue(credentials);
 
-         (component as any).formDir = {
+        (component as any).formDir = {
             resetForm: jasmine.createSpy('resetForm')
         };
-
+        // (component as any).formDir = {
+        //     resetForm: jest.fn()
+        // };
+    
         component.onSubmit();
-
         const store = TestBed.inject(Store) as jest.Mocked<Store>;
         expect(store.dispatch).toHaveBeenCalledWith(
-            AuthActions.loginUser({ payload: credentials })
+            AuthActions.registerUser({
+                payload: credentials
+            })
         );
-
+        
     });
-
-});
+})
