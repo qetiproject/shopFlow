@@ -37,4 +37,29 @@ describe('Login ', () => {
         const title = el.querySelector('[data-testid="LoginHeader"]');
         expect(title).toBeTruthy();
     });
+
+    it('form should be invalid initially', () => {
+        expect(component.form.invalid).toBeTrue()
+    })
+    it('submit button should be disabled when form is invalid', () => {
+        const el: HTMLElement = fixture.nativeElement;
+        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        expect(component.form.invalid).toBeTrue();
+        expect(submit.disabled).toBeTrue();
+
+    })
+    it('submit button should be enabled when form is valid', () => {
+        component.form.setValue({
+            emailId: 'keti.xecuriani@gmail.com',
+            password: 'Option123!'
+        });
+
+        fixture.detectChanges();
+        
+        const el = fixture.nativeElement;
+        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        expect(component.form.valid).toBeTrue();
+        expect(submit.disabled).toBeFalse();
+    })
+
 });
