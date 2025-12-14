@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import * as AuthActions from '@auth-module';
 import { loginForm, LoginRequest } from '@auth-module';
-import { MessagesService } from '@core';
 import { DynamicValidatorMessage, InputComponent, } from '@features';
 import { Store } from '@ngrx/store';
 import { INPUT_TYPES } from '@types';
@@ -24,8 +23,6 @@ import { INPUT_TYPES } from '@types';
 })
 export class Login {
   #fb = inject(NonNullableFormBuilder);
-  #router = inject(Router);
-  #messages = inject(MessagesService);
   #store = inject(Store);
 
   INPUT_TYPES = INPUT_TYPES;
