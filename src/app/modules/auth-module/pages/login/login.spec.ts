@@ -4,6 +4,7 @@ import { provideRouter } from "@angular/router";
 import * as AuthActions from '@auth-module';
 import { Login } from "@auth-module";
 import { Store } from "@ngrx/store";
+import { provideMockStore, setupComponent } from "@utils";
 
 describe('Login ', () => {
     let component: Login;
@@ -14,17 +15,14 @@ describe('Login ', () => {
             imports: [Login],
             providers: [
                 provideRouter([]),
-                {
-                    provide: Store,
-                    useValue: jasmine.createSpyObj('Store', ['dispatch'])
-                },
+                provideMockStore()
             ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(Login);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        const setup = setupComponent(Login);
+        fixture = setup.fixture;
+        component = setup.comptInstance;
     });
 
     it('creates a component', () => {
