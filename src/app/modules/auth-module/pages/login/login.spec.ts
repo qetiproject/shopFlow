@@ -1,0 +1,86 @@
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter } from "@angular/router";
+import * as AuthActions from '@auth-module';
+import { Login, LoginRequest } from "@auth-module";
+import { Store } from "@ngrx/store";
+import { provideMockStore, setupComponent } from "@test-utils";
+
+describe('Login ', () => {
+    let component: Login;
+    let fixture: ComponentFixture<Login>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [Login],
+            providers: [
+                provideRouter([]),
+                provideMockStore()
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
+
+        const setup = setupComponent(Login);
+        fixture = setup.fixture;
+        component = setup.instance;
+    });
+
+    it('creates a component', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should render Login title', () => {
+        const el: HTMLElement = fixture.nativeElement;
+        const title = el.querySelector('[data-testid="LoginTitle"]');
+        expect(title).toBeTruthy();
+    });
+
+    it('form should be invalid initially', () => {
+        expect(component.form.invalid).toBe(true)
+    });
+
+    it('submit button should be disabled when form is invalid', () => {
+        const el: HTMLElement = fixture.nativeElement;
+        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        expect(component.form.invalid).toBe(true);
+        expect(submit.disabled).toBe(true);
+
+    });
+
+    it('submit button should be enabled when form is valid', () => {
+         const credentials: LoginRequest = {
+            emailId: 'test@mail.com',
+            password: '123456'
+        };
+
+        component.form.setValue(credentials);
+        fixture.detectChanges();
+
+        const el = fixture.nativeElement;
+        const submit = el.querySelector('[data-testid="LoginSubmit"]') as HTMLButtonElement;
+        expect(component.form.valid).toBe(true);
+        expect(submit.disabled).toBe(false);
+    });
+
+    it('should dispatch loginUser action with correct payload on submit', () => {
+         const credentials: LoginRequest = {
+            emailId: 'test@mail.com',
+            password: '123456'
+        };
+
+        component.form.setValue(credentials);
+
+         (component as any).formDir = {
+            resetForm: jasmine.createSpy('resetForm')
+        };
+
+        component.onSubmit();
+
+        const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
+        expect(store.dispatch).toHaveBeenCalledWith(
+            AuthActions.loginUser({ payload: credentials })
+        );
+
+    });
+
+});

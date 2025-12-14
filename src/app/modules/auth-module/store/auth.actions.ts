@@ -3,7 +3,7 @@ import { createAction, props } from "@ngrx/store";
 
 export const registerUser = createAction(
     '[Auth] Register User',
-    props<{payload: CreateUserRequest}>()
+    props<{payload: Omit<CreateUserRequest, 'userId'>}>()
 );
 
 export const registerUserSuccess = createAction(
