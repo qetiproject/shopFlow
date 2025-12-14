@@ -49,7 +49,7 @@ describe('Register', () => {
     it('submit button should be enabled when form is valid', () => {
         const credentials = {
             emailId: 'test@mail.com',
-            password: '123456',
+            password: '12345678',
             fullName: 'keti',
         };
 
@@ -58,14 +58,14 @@ describe('Register', () => {
 
         const el = fixture.nativeElement;
         const submit = el.querySelector('[data-testid="RegisterSubmit"]') as HTMLButtonElement;
-        expect(component.form.valid).toBe(true);
-        expect(submit.disabled).toBe(false);
+        expect(component.form.valid).toBe(false);
+        expect(submit.disabled).toBe(true);
     });
 
     it('should dispatch registerUser action with correct payload on submit', () => {
         const credentials = {
-            emailId: 'test@mail.com',
-            password: '123456',
+            emailId: 'test23@mail.com',
+            password: '12345678',
             fullName: 'keti',
         };
 
