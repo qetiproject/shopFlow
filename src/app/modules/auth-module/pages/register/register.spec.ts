@@ -74,12 +74,9 @@ describe('Register', () => {
         (component as any).formDir = {
             resetForm: jasmine.createSpy('resetForm')
         };
-        // (component as any).formDir = {
-        //     resetForm: jest.fn()
-        // };
     
         component.onSubmit();
-        const store = TestBed.inject(Store) as jest.Mocked<Store>;
+        const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
         expect(store.dispatch).toHaveBeenCalledWith(
             AuthActions.registerUser({
                 payload: credentials
