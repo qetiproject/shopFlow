@@ -3,7 +3,7 @@ import { TestBed } from "@angular/core/testing";
 
 export function setupComponent<T>(component: Type<T>) {
   const fixture = TestBed.createComponent(component);
-  const comptInstance = fixture.componentInstance;
+  const instance = fixture.componentInstance;
   fixture.detectChanges();
-  return { fixture, comptInstance };
+  return { fixture, instance };
 }

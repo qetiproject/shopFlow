@@ -4,7 +4,7 @@ import { provideRouter } from "@angular/router";
 import * as AuthActions from '@auth-module';
 import { Login } from "@auth-module";
 import { Store } from "@ngrx/store";
-import { provideMockStore, setupComponent } from "@utils";
+import { provideMockStore, setupComponent } from "@test-utils";
 
 describe('Login ', () => {
     let component: Login;
@@ -22,7 +22,7 @@ describe('Login ', () => {
 
         const setup = setupComponent(Login);
         fixture = setup.fixture;
-        component = setup.comptInstance;
+        component = setup.instance;
     });
 
     it('creates a component', () => {
