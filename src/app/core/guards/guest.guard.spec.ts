@@ -7,20 +7,21 @@ import { GuestGuard } from './guest.guard';
 
 describe('GuestGuard', () => {
     let router: jasmine.SpyObj<Router>;
+    let store: jasmine.SpyObj<Store>;
 
     beforeEach(() => {
         router = jasmine.createSpyObj('Router', ['parseUrl']);
 
         TestBed.configureTestingModule({
-        providers: [
-            provideMockStore(),
-            { provide: Router, useValue: router },
-        ],
+          providers: [
+              provideMockStore(),
+              { provide: Router, useValue: router },
+          ],
         });
+        store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
     });
 
     it('should allow access when user is logged out', async () => {
-        const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
         store.select.and.returnValue(of(false));
 
         const route = {} as any;
@@ -41,7 +42,6 @@ describe('GuestGuard', () => {
 
     it('should redirect to /dashboard when user is logged in', async() => {
         const urlTree = {} as UrlTree;
-        const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
         store.select.and.returnValue(of(true));
         router.parseUrl.and.returnValue(urlTree);
 
