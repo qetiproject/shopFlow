@@ -1,1 +1,26 @@
-Angular 20.3
+# Shop Flow App
+
+**Shop Flow App** is a scalable and interactive **Angular 20.3** web application for browsing and managing products.  
+The project demonstrates **modern Angular best practices**, focusing on **clean architecture, performance, and maintainability**.
+
+## ✨ Key Features
+- **User Authentication:** Register, Login, Forgot Password, and Email OTP verification
+- **State Management:** Reactive state handling using **NgRx**, **Angular Signals**, and **RxJS**
+- **Security:** Secure user data handling with SessionStorage and route guards
+- **UI & UX:** Fully responsive design built with **Tailwind CSS**
+- **Component-Driven Development:** Reusable, self-contained components documented with **Storybook**
+- **Testing:** Unit tests to ensure reliability and predictable behavior
+
+## 🛠 Technologies
+- **Framework:** Angular 20.3
+- **Language:** TypeScript (ES6+)
+- **State Management:** NgRx, Signals, RxJS
+- **Styling:** Tailwind CSS
+- **UI Documentation & Testing:** Storybook
+- **Architecture:** Modular, lazy-loaded structure following clean architecture principles
+
+## 🎯 Highlights
+- Designed for **scalability and easy extension**
+- Emphasis on **maintainable and reusable components**
+- Optimized for **performance on desktop and mobile**
+- Built as a **production-like project** reflecting real-world application structure
