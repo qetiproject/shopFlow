@@ -26,7 +26,6 @@ export class SendResetOtp {
   email = new FormControl('', [Validators.required, Validators.email]);
 
   onSubmit() {
-    if (this.email.invalid) return;
     this.#authFacade.sendPasswordResetOtp(this.email.value as string);
   }
 }
