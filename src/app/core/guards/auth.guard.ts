@@ -4,7 +4,10 @@ import { selectCheckAuth } from "@auth-module";
 import { Store } from "@ngrx/store";
 import { filter, map, take } from "rxjs/operators";
 
-export const AuthGuard: CanActivateFn = () => {
+export const AuthGuard: CanActivateFn = (
+  route,
+  state
+) => {
   const store = inject(Store);
   const router = inject(Router);
 
