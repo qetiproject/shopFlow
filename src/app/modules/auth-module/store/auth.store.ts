@@ -17,7 +17,7 @@ export type LoginStoreResponse = {
   message: string;
   result: boolean;
   data: {
-     userId: number;
+    userId: number;
     emailId: string;
   }
 }
