@@ -49,8 +49,8 @@ describe('Register', () => {
     it('submit button should be enabled when form is valid', () => {
         const credentials = {
             emailId: 'test@mail.com',
+            fullName: 'keti Khetsuriani',
             password: '12345678',
-            fullName: 'keti',
         };
 
         component.form.patchValue(credentials);
@@ -58,8 +58,8 @@ describe('Register', () => {
 
         const el = fixture.nativeElement;
         const submit = el.querySelector('[data-testid="RegisterSubmit"]') as HTMLButtonElement;
-        expect(component.form.valid).toBe(false);
-        expect(submit.disabled).toBe(true);
+        expect(component.form.valid).toBe(true);
+        expect(submit.disabled).toBe(false);
     });
 
     it('should dispatch registerUser action with correct payload on submit', () => {
