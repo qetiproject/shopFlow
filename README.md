@@ -9,7 +9,6 @@ The project demonstrates **modern Angular best practices**, focusing on **clean 
 - **State Management:** Reactive state handling using **NgRx**, **Angular Signals**, and **RxJS**
 - **Security:** Secure user data handling with SessionStorage and route guards
 - **UI & UX:** Fully responsive design built with **Tailwind CSS**
-- **Component-Driven Development:** Reusable, self-contained components documented with **Storybook**
 - **Testing:** Unit tests to ensure reliability and predictable behavior
 
 ## 🛠 Technologies
