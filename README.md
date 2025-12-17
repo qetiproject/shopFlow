@@ -16,7 +16,6 @@ The project demonstrates **modern Angular best practices**, focusing on **clean 
 - **Language:** TypeScript (ES6+)
 - **State Management:** NgRx, Signals, RxJS
 - **Styling:** Tailwind CSS
-- **UI Documentation & Testing:** Storybook
 - **Architecture:** Modular, lazy-loaded structure following clean architecture principles
 
 ## 🎯 Highlights
