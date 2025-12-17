@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { MessagesService } from '@core';
 import { MessageDirective } from '@features';
@@ -6,7 +6,7 @@ import { MessageDirective } from '@features';
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule, MessageDirective],
+  imports: [MessageDirective],
   templateUrl: './messages.html',
   styles: `
     @keyframes slide-in {

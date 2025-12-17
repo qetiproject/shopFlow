@@ -9,11 +9,13 @@ import { ErrorMessagePipe } from "..";
     imports: [CommonModule, ErrorMessagePipe],
     template: `
        <ul class="mt-1 text-sm text-red-600 list-disc list-inside">
-        <li *ngFor="let error of errors | keyvalue; trackBy: trackByFn">
-          {{ error.key | errorMessage: error.value }}
-        </li>
-      </ul>
-    `,
+         @for (error of errors | keyvalue; track trackByFn($index, error)) {
+           <li>
+             {{ error.key | errorMessage: error.value }}
+           </li>
+         }
+       </ul>
+       `,
     styles: [
     `
       :host {
