@@ -13,7 +13,7 @@ The project demonstrates **modern Angular best practices**, focusing on **clean 
 
 ## 🛠 Technologies
 - **Framework:** Angular 20.3
-- **Language:** TypeScript (ES6+)
+- **Languages: TypeScript, JavaScript (ES6+)
 - **State Management:** NgRx, Signals, RxJS
 - **Styling:** Tailwind CSS
 - **Architecture:** Modular, lazy-loaded structure following clean architecture principles
