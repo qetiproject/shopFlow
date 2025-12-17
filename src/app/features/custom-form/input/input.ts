@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, computed, forwardRef, Input, input, signal } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 import { INPUT_TYPES, InputType } from "@types";
@@ -6,7 +6,7 @@ import { INPUT_TYPES, InputType } from "@types";
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './input.html',
   providers: [
     {
