@@ -17,7 +17,7 @@ The project demonstrates modern Angular best practices with a strong focus on cl
 
 ## 🛠️ Technologies
 
-- Framework: Angular 20.3
+- Framework: Angular 21
 - Languages: TypeScript, JavaScript (ES6+)
 - State Management: NgRx, Signals, RxJS
 - Unit Testing: Jasmine 
