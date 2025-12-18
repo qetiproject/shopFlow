@@ -8,8 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:ssr": "node dist/ssr/server/server.mjs",
-    "storybook": "ng run shopFlow:storybook",
-    "build-storybook": "ng run shopFlow:build-storybook",
     "lint": "ng lint"
   },
   "prettier": {
@@ -43,10 +41,12 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^21.0.3",
+    "@angular-devkit/schematics": "^21.0.3",
     "@angular/build": "^21.0.3",
     "@angular/cli": "^21.0.3",
     "@angular/compiler-cli": "^21.0.5",
-    "@storybook/angular": "^9.1.15",
+    "@schematics/angular": "^21.0.3",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
