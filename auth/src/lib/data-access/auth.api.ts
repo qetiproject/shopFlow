@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest, TokenService } from '@auth-module';
-import { environment } from '@env-dev';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../shop/environment/environment.development';
+import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '../types/index';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class AuthApiService {
   }
 
   login(user: LoginRequest): Observable<LoginResponse> {
+    console.log(this.baseUrl, "url")
     return this.#http.post<LoginResponse>(`${this.baseUrl}/login`, user)
   }
 

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
-import * as AuthActions from '@auth-module';
-import { loginForm, LoginRequest } from '@auth-module';
 import { Store } from '@ngrx/store';
+import { loginForm, LoginRequest } from '../../../index';
+import * as AuthActions from '../../data-access/store/index';
 import { UILogin } from '../../UI';
 
 @Component({
@@ -28,6 +28,6 @@ export class FeaturesLogin {
 
     this.#store.dispatch(AuthActions.loginUser({payload: credentials}));
 
-    this.formDir.resetForm(this.form.value);
+    // this.formDir.resetForm(this.form.value);
   }
 }

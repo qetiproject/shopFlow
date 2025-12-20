@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthApiService, CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '@auth-module';
 import { MessagesService } from '@core';
 import { MessageSeverity } from '@types';
 import { Observable, tap } from 'rxjs';
+import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '../types';
+import { AuthApiService } from './auth.api';
 
 @Injectable({
   providedIn: 'root',

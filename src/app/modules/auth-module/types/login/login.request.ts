@@ -1,4 +1,4 @@
-export interface LoginRequest {
-    emailId: string;
-    password: string;
-}
+// export interface LoginRequest {
+//     emailId: string;
+//     password: string;
+// }

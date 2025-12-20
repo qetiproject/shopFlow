@@ -20,10 +20,9 @@
       "@test-utils": ["app/test-utils/index.ts"],
       "@custom-form/*": ["app/features/custom-form/*"],
       "@custom-form-validators": ["app/features/custom-form-validators/index.ts"],
-      "@auth-module": ["app/modules/auth-module/index.ts"],
+      // "@auth-module": ["app/modules/auth-module/index.ts"],
       "@env-dev": ["environment/environment.development"],
-      "shared": ["shared/src/index.ts"],
-      "features/login": ["auth/src/index.ts"]
+      "@auth": ["auth/src/index.ts"],
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { UserAfterLogin } from "@auth-module";
 import { STORAGE_KEYS } from "@core";
+import { UserAfterLogin } from "../../index";
 
 @Injectable({
     providedIn: 'root'

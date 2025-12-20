@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { LoginRequest } from '@auth-module';
 import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
+import { LoginRequest } from '../../types';
 
 @Component({
   selector: 'lib-ui-login',
