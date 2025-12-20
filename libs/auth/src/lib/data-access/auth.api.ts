@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../shop/environment/environment.development';
+import { environment } from '../../../../../shop/environment/environment.development';
 import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '../types/index';
 import { TokenService } from './token.service';
 

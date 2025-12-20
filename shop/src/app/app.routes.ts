@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authRoutes } from '../../../auth/src/auth.routes';
+import { authRoutes } from '../../../libs/auth/src/auth.routes';
 
 export const appRoutes: Routes = [
 //   {

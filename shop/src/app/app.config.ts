@@ -9,7 +9,7 @@ import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from "@ngrx/store-devtools";
-import { AuthEffects, AuthReducer } from '../../../auth/src';
+import { AuthEffects, AuthReducer } from '../../../libs/auth/src';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
