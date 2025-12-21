@@ -18,11 +18,11 @@ import { UISendResetOtp } from '../../UI/send-reset-otp/send-reset-otp';
 export class FeaturesSendResetOtp {
   INPUT_TYPES = INPUT_TYPES
 
-  #authFacade = inject(AuthFacade);
+  private authFacade = inject(AuthFacade);
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
   onSubmit() {
-    this.#authFacade.sendPasswordResetOtp(this.email.value as string);
+    this.authFacade.sendPasswordResetOtp(this.email.value as string);
   }
 }

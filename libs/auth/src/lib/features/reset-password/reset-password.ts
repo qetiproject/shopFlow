@@ -17,12 +17,13 @@ import { resetPasswordForm } from '../../utils';
   templateUrl: './reset-password.html',
 })
 export class FeaturesResetPassword {
-  #fb = inject(NonNullableFormBuilder);
-  #authFacade = inject(AuthFacade);
+  private fb = inject(NonNullableFormBuilder);
+  private authFacade = inject(AuthFacade);
 
-  form = resetPasswordForm(this.#fb);
+  form = resetPasswordForm(this.fb);
 
   onSubmit(credentials: ResetPasswordRequest) {
-    this.#authFacade.resetPassword(credentials);
+    this.authFacade.resetPassword(credentials);
+    this.form.reset();
   }
 }
