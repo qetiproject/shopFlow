@@ -4,5 +4,9 @@ export const authRoutes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('./index').then(c => c.FeaturesLogin)
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./index').then(c => c.FeaturesRegister)
     }
 ]
