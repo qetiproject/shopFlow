@@ -11,18 +11,9 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "@components": ["app/components/index.ts"],
-      "@core": ["app/core/index.ts"],
-      "@features": ["app/features/index.ts"],
-      "@pages": ["app/pages/index.ts"],
-      "@types": ["app/types/index.ts"],
-      "@utils": ["app/utils/index.ts"],
-      "@test-utils": ["app/test-utils/index.ts"],
-      "@custom-form/*": ["app/features/custom-form/*"],
-      "@custom-form-validators": ["app/features/custom-form-validators/index.ts"],
-      // "@auth-module": ["app/modules/auth-module/index.ts"],
       "@env-dev": ["environment/environment.development"],
       "@auth": ["auth/src/index.ts"],
+      "shared": ["shared/src/index.ts"]
     }
   }
 }

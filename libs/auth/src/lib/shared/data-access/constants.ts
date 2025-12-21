@@ -1,4 +1,0 @@
-export const STORAGE_KEYS = {
-  USER: 'USER_STORAGE_KEY',
-  ACCESS_TOKEN: 'ACCESS_TOKEN_KEY',
-} as const;

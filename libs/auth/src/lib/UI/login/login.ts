@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { InputComponent } from '../../../../../../src/app/features/index';
-import { INPUT_TYPES } from '../../../../../../src/app/types';
+import { InputComponent } from '../../../../../shared/src/lib/UI/index';
+import { INPUT_TYPES } from '../../../../../shared/src/lib/types/index';
 import { LoginRequest } from '../../types';
 
 @Component({

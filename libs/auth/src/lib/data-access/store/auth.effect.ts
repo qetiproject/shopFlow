@@ -1,9 +1,9 @@
 import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { MessagesService } from "@core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { MessageSeverity } from "@types";
 import { catchError, map, of, switchMap, tap } from "rxjs";
+import { MessagesService } from "../../../../../shared/src/index";
+import { MessageSeverity } from '../../../../../shared/src/lib/types/index';
 import { AuthFacade } from "../auth.facade";
 import { TokenService } from "../token.service";
 import { UserStorage } from "../user.storage";
@@ -14,10 +14,10 @@ import { LoginStoreResponse } from "./auth.store";
 export class AuthEffects {
     actions$ = inject(Actions);
     authFacade = inject(AuthFacade);
-    #messages = inject(MessagesService);
-    #router = inject(Router);
-    #tokenService = inject(TokenService);
-    #userStorage = inject(UserStorage);
+    private messages = inject(MessagesService);
+    private router = inject(Router);
+    private  tokenService = inject(TokenService);
+    private userStorage = inject(UserStorage);
 
     registerUser$ = createEffect(() =>
         this.actions$.pipe(
@@ -28,7 +28,7 @@ export class AuthEffects {
                     userId: Math.floor(Math.random() * 100000)
                 }).pipe(
                     map((response) => {
-                        this.#userStorage.saveUser({
+                        this.userStorage.saveUser({
                             userId: response.data.userId,
                             emailId: response.data.emailId, 
                             fullName: response.data.fullName
@@ -47,7 +47,7 @@ export class AuthEffects {
             ofType(AuthActions.registerUserSuccess),
             tap((action) => {
                 if (action.data.result) {
-                    this.#router.navigate(['/login']);
+                    this.router.navigate(['/login']);
             }
             })
         ),
@@ -65,7 +65,7 @@ export class AuthEffects {
             ),
             tap((action) => {
                 if ('data' in action) {
-                    this.#messages.showMessage({
+                    this.messages.showMessage({
                         text: action.data.message,
                         severity: action.data.result
                             ? MessageSeverity.Success
@@ -74,7 +74,7 @@ export class AuthEffects {
                 }
 
                 if ('error' in action) {
-                    this.#messages.showMessage({
+                    this.messages.showMessage({
                         text: action.error,
                         severity: MessageSeverity.Error,
                     });
@@ -90,10 +90,10 @@ export class AuthEffects {
             switchMap(({payload}) => 
                 this.authFacade.loginUser(payload).pipe(
                     map(response => {
-                        this.#tokenService.saveToken(response.data.token);
-                        const user = this.#userStorage.getUser();
+                        this.tokenService.saveToken(response.data.token);
+                        const user = this.userStorage.getUser();
                         if(!user) {
-                            this.#userStorage.saveUser({
+                            this.userStorage.saveUser({
                                 userId: response.data.userId,   
                                 emailId: response.data.emailId,
                                 fullName: null
@@ -120,7 +120,7 @@ export class AuthEffects {
             ofType(AuthActions.loginUserSuccess),
             tap((action) => {
                 if(action.data.result) {
-                    this.#router.navigate(['/dashboard'])
+                    this.router.navigate(['/dashboard'])
                 }
             })
         ),
@@ -131,9 +131,9 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.logoutUser),
             tap(() => {
-                this.#tokenService.clear();
-                this.#userStorage.clear();
-                this.#router.navigateByUrl('/login');
+                this.tokenService.clear();
+                this.userStorage.clear();
+                this.router.navigateByUrl('/login');
             })
         ),
         { dispatch: false }
@@ -143,7 +143,7 @@ export class AuthEffects {
         this.actions$.pipe(     
             ofType(AuthActions.checkAuth),
             map(() => {     
-                const token = this.#tokenService.getToken();  
+                const token = this.tokenService.getToken();  
                 if (token) {
                     return AuthActions.checkAuthSuccess();
                 } else {
