@@ -1,33 +1,31 @@
-// import { CommonModule } from '@angular/common';
-// import { Component, inject } from '@angular/core';
-// import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-// import { AuthFacade, resetPasswordForm } from '@auth-module';
-// import { DynamicValidatorMessage, InputComponent } from '@features';
-// import { INPUT_TYPES } from '@types';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { DynamicValidatorMessage, InputComponent } from '../../../../../../src/app/features/index';
+import { INPUT_TYPES } from '../../../../../../src/app/types/index';
+import { ResetPasswordRequest } from '../../types';
 
-// @Component({
-//   selector: 'reset-password',
-//   standalone: true,
-//   imports: [
-//     CommonModule,
-//     RouterModule,
-//     FormsModule,
-//     ReactiveFormsModule,
-//     InputComponent,
-//     DynamicValidatorMessage
-//   ],
-//   templateUrl: './reset-password.html',
-// })
-// export class ResetPassword {
-//   #fb = inject(NonNullableFormBuilder);
-//   INPUT_TYPES = INPUT_TYPES
-//   #authFacade = inject(AuthFacade);
+@Component({
+  selector: 'lib-ui-reset-password',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputComponent,
+    DynamicValidatorMessage
+  ],
+  templateUrl: './reset-password.html',
+})
+export class UIResetPassword {
+  INPUT_TYPES = INPUT_TYPES;
 
-//   form = resetPasswordForm(this.#fb);
+  @Input({ required: true}) form!: FormGroup;
+  @Output() submitForm = new EventEmitter<ResetPasswordRequest>();
 
-//   onSubmit() {
-//     const value = this.form.getRawValue();
-//     this.#authFacade.resetPassword(value);
-//   }
-// }
+  onSubmit() {
+    this.submitForm.emit(this.form.getRawValue());
+  }
+}

@@ -1,33 +1,28 @@
-// import { CommonModule } from '@angular/common';
-// import { Component, inject } from '@angular/core';
-// import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-// import { AuthFacade, resetPasswordForm } from '@auth-module';
-// import { DynamicValidatorMessage, InputComponent } from '@features';
-// import { INPUT_TYPES } from '@types';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { AuthFacade } from '../../data-access';
+import { ResetPasswordRequest } from '../../types';
+import { UIResetPassword } from '../../UI/reset-password/reset-password';
+import { resetPasswordForm } from '../../utils';
 
-// @Component({
-//   selector: 'reset-password',
-//   standalone: true,
-//   imports: [
-//     CommonModule,
-//     RouterModule,
-//     FormsModule,
-//     ReactiveFormsModule,
-//     InputComponent,
-//     DynamicValidatorMessage
-//   ],
-//   templateUrl: './reset-password.html',
-// })
-// export class ResetPassword {
-//   #fb = inject(NonNullableFormBuilder);
-//   INPUT_TYPES = INPUT_TYPES
-//   #authFacade = inject(AuthFacade);
+@Component({
+  selector: 'lib-features-reset-password',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UIResetPassword
+  ],
+  templateUrl: './reset-password.html',
+})
+export class FeaturesResetPassword {
+  #fb = inject(NonNullableFormBuilder);
+  #authFacade = inject(AuthFacade);
 
-//   form = resetPasswordForm(this.#fb);
+  form = resetPasswordForm(this.#fb);
 
-//   onSubmit() {
-//     const value = this.form.getRawValue();
-//     this.#authFacade.resetPassword(value);
-//   }
-// }
+  onSubmit(credentials: ResetPasswordRequest) {
+    this.#authFacade.resetPassword(credentials);
+  }
+}

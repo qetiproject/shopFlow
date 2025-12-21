@@ -1,31 +1,32 @@
-// import { CommonModule } from '@angular/common';
-// import { Component, inject } from '@angular/core';
-// import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-// import { AuthFacade } from '@auth-module';
-// import { DynamicValidatorMessage, InputComponent } from '@features';
-// import { INPUT_TYPES } from '@types';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { DynamicValidatorMessage, InputComponent } from '../../../../../../src/app/features/index';
+import { INPUT_TYPES } from '../../../../../../src/app/types';
 
-// @Component({
-//   selector: 'send-reset-otp',
-//   standalone: true,
-//   imports: [
-//     CommonModule,
-//     RouterModule,
-//     FormsModule,
-//     ReactiveFormsModule,
-//     InputComponent,
-//     DynamicValidatorMessage
-//   ],
-//   templateUrl: './send-reset-otp.html',
-// })
-// export class SendResetOtp {
-//   INPUT_TYPES = INPUT_TYPES
-//   #authFacade = inject(AuthFacade);
+@Component({
+  selector: 'lib-ui-send-reset-otp',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputComponent,
+    DynamicValidatorMessage
+  ],
+  templateUrl: './send-reset-otp.html',
+})
+export class UISendResetOtp {
+  INPUT_TYPES = INPUT_TYPES
 
-//   email = new FormControl('', [Validators.required, Validators.email]);
-
-//   onSubmit() {
-//     this.#authFacade.sendPasswordResetOtp(this.email.value as string);
-//   }
-// }
+  @Input({ required: true}) email!: FormControl;
+  @Output() submitForm = new EventEmitter<string>();
+  
+  onSubmit() {
+     if (this.email.valid) {
+      this.submitForm.emit(this.email.value as string);
+    }
+  }
+}

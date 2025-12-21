@@ -8,7 +8,7 @@ import { UIRegister } from '../../UI/register/register';
 import { registerForm } from '../../utils';
 
 @Component({
-  selector: 'app-register',
+  selector: 'lib-features-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, UIRegister],
   templateUrl: './register.html',
