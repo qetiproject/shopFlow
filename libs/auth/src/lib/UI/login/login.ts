@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { InputComponent } from '../../../../../shared/src/lib/UI/index';
-import { INPUT_TYPES } from '../../../../../shared/src/lib/types/index';
-import { LoginRequest } from '../../types';
+import { LoginRequest } from '@auth';
+import { INPUT_TYPES, InputComponent } from '@shared';
 
 @Component({
   selector: 'lib-ui-login',

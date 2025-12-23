@@ -1,14 +1,10 @@
 import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import * as AuthActions from '@auth';
+import { AuthFacade, LoginStoreResponse, TokenService, UserStorage } from "@auth";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { MessageSeverity, MessagesService } from "@shared";
 import { catchError, map, of, switchMap, tap } from "rxjs";
-import { MessagesService } from "../../../../../shared/src/index";
-import { MessageSeverity } from '../../../../../shared/src/lib/types/index';
-import { AuthFacade } from "../auth.facade";
-import { TokenService } from "../token.service";
-import { UserStorage } from "../user.storage";
-import * as AuthActions from './auth.actions';
-import { LoginStoreResponse } from "./auth.store";
 
 @Injectable()
 export class AuthEffects {

@@ -9,11 +9,11 @@
     "target": "ES2022",
     "module": "ES2022",
     "skipLibCheck": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@env-dev": ["environment/environment.development"],
-      "@auth": ["auth/src/index.ts"],
-      "shared": ["shared/src/index.ts"]
+      "@env-dev": ["src/environment/environment.development"],
+      "@auth": ["libs/auth/src/index.ts"],
+      "@shared": ["libs/shared/src/index.ts"]
     }
   }
 }

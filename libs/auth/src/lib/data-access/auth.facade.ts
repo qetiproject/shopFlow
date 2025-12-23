@@ -1,10 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthApiService, CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '@auth';
+import { MessageSeverity, MessagesService } from '@shared';
 import { Observable, tap } from 'rxjs';
-import { MessagesService, } from '../../../../shared/src';
-import { MessageSeverity } from '../../../../shared/src/lib/types/index';
-import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '../types';
-import { AuthApiService } from './auth.api';
 
 @Injectable({
   providedIn: 'root',
