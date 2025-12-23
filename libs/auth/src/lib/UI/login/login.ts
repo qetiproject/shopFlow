@@ -7,6 +7,7 @@ import { INPUT_TYPES, InputComponent } from '@shared';
 
 @Component({
   selector: 'lib-ui-login',
+  standalone: true,
   imports: [
     CommonModule,
     RouterModule,

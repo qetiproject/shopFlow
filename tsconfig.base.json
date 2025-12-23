@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@env-dev": ["src/environment/environment.development"],
+      "@env-dev": ["shop/environment/environment.development"],
       "@auth": ["libs/auth/src/index.ts"],
       "@shared": ["libs/shared/src/index.ts"]
     }

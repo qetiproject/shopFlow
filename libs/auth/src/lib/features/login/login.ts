@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import * as AuthActions from '@auth';
-import { loginForm, LoginRequest, UILogin } from '@auth';
+import { loginForm, LoginRequest } from '@auth';
 import { Store } from '@ngrx/store';
+import { UILogin } from '../../UI/index';
 
 @Component({
   selector: 'lib-features-login',
