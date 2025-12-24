@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { CreateUserRequest, registerForm, UIRegister } from '@auth';
+import * as AuthActions from '@auth';
+import { CreateUserRequest, registerForm } from '@auth';
 import { Store } from '@ngrx/store';
-import * as AuthActions from '../../data-access/store/auth.actions';
+import { UIRegister } from '../../UI/index';
 
 @Component({
   selector: 'lib-features-register',

@@ -1,8 +1,8 @@
 import { HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { finalize } from "rxjs";
-import { LoadingService } from "..";
-import { SkipLoading } from "../../UI/loading/skip-loading.component";
+import { SkipLoading } from "../../UI";
+import { LoadingService } from "../services";
 
 export const LoadingInterceptor = 
     (req: HttpRequest<unknown>, next: HttpHandlerFn) => {

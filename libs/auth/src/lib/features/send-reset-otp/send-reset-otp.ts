@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthFacade, UISendResetOtp } from '@auth';
+import { AuthFacade } from '@auth';
 import { INPUT_TYPES } from '@shared';
+import { UISendResetOtp } from '../../UI/index';
 
 @Component({
   selector: 'lib-features-send-reset-otp',

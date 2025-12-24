@@ -1,6 +1,7 @@
 import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { AuthInterceptor } from "@auth";
 import { provideEffects } from "@ngrx/effects";
 import { provideStore } from "@ngrx/store";
 import { routes } from './app.routes';
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withFetch(),
       withInterceptors([
-        // AuthInterceptor,
+        AuthInterceptor,
         // LoadingInterceptor,
         // GlobalHttpErrorInterceptor,
       ])

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { AuthFacade, resetPasswordForm, ResetPasswordRequest, UIResetPassword } from '@auth';
+import { AuthFacade, resetPasswordForm, ResetPasswordRequest } from '@auth';
+import { UIResetPassword } from '../../UI/index';
 
 @Component({
   selector: 'lib-features-reset-password',
