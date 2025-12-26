@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ],
   templateUrl: './users.html',
 })
-export class Users {}
+export class Users{}

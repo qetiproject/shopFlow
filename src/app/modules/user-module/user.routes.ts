@@ -7,5 +7,9 @@ export const userRoutes: Routes = [
     loadComponent: () => 
       import('@user-module').then(c => c.Users),
   },
+  {
+    path: 'profile',
+    loadComponent: () => import('@user-module').then(c => c.UserProfile)
+  }
  
 ]
