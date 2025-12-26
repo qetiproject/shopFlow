@@ -17,6 +17,7 @@ export class HeaderComponent {
 
   navLinks = [
     { path: '/dashboard', label: 'Dashboard' },
+    { path: '/users', label: 'Users' },
   ];
 
   toggleDropdown() {
