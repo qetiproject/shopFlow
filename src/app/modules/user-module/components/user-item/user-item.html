@@ -1,1 +1,35 @@
-<p>user-item works!</p>
+
+<tr class="hover:bg-blue-50/40 transition-colors">
+<td class="px-6 py-4">
+    <div class="flex items-center gap-3">
+    <div
+        class="h-10 w-10 rounded-full
+            bg-blue-600 text-white
+            flex items-center justify-center
+            text-sm font-semibold">
+        {{user.emailId.charAt(0).toUpperCase()}}
+        
+    </div>
+
+    <div>
+        <p class="font-medium text-gray-900 leading-tight">
+        {{user.emailId}}
+        </p>
+    </div>
+    </div>
+</td>
+<td class="px-6 py-4 text-gray-700">
+    {{user.fullName || '-'}}
+</td>
+<td class="px-6 py-4">
+    <span class="text-xs text-gray-400 italic">
+    {{ user.role || 'Not assigned'}}
+    </span>
+</td>
+<td class="px-6 py-4 text-gray-700">
+    {{user.projectName}}
+</td>
+<td class="px-6 py-4 text-gray-500">
+    {{ user.createdDate | date:'dd MMM yyyy' }}
+</td>
+</tr>
