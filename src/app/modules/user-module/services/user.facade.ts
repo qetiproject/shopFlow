@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { UserApiService, UserViewModel } from '@user-module';
+import { UserApiService, UsersViewModel, UserViewModel } from '@user-module';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,9 +8,17 @@ import { map, Observable } from 'rxjs';
 export class UserFacade {
   #userApi = inject(UserApiService);
 
-  // searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<IUsers[]> {
-  //   return this.#userApi.searchUsers(searchText, pageNumber, pageSize);
-  // }
+  searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<UsersViewModel> {
+    return this.#userApi.searchUsers(searchText, pageNumber, pageSize)
+      .pipe(
+        map(result => ({
+          data: (result.data ??[]).map(user=> this.toUserViewModel(user)),
+          totalRecords: result.totalRecords,
+          pageNumber: result.pageNumber,
+          pageSize: result.pageSize
+        }))
+      )
+  }
 
   getUserByEmail(email: string): Observable<UserViewModel | null> {
     return this.#userApi.userByEmail(email).pipe(
@@ -19,7 +27,6 @@ export class UserFacade {
       map(user => user ? this.toUserViewModel(user) : null),
     );
   }
-
 
   private toUserViewModel(user: UserViewModel): UserViewModel {
     return {

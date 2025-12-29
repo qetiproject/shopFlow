@@ -1,1 +1,63 @@
-<p>users</p>
+@let users = users$ | async;
+
+<div class="min-h-screen  py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6">
+      <h1 class="text-xl font-semibold text-gray-900">
+        Users
+      </h1>
+    </div>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                <th class="px-6 py-4 text-left font-semibold">Email</th>
+                <th class="px-6 py-4 text-left font-semibold">FullName</th>
+                <th class="px-6 py-4 text-left font-semibold">Role</th>
+                <th class="px-6 py-4 text-left font-semibold">Project</th>
+                <th class="px-6 py-4 text-left font-semibold">Created</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @for (user of  users?.data; track user.userId){
+                <tr class="hover:bg-blue-50/40 transition-colors">
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                    <div
+                        class="h-10 w-10 rounded-full
+                            bg-blue-600 text-white
+                            flex items-center justify-center
+                            text-sm font-semibold">
+                        {{user.emailId.slice(0,1).toUpperCase()}}
+                    </div>
+
+                    <div>
+                        <p class="font-medium text-gray-900 leading-tight">
+                       {{user.emailId}}
+                        </p>
+                    </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-gray-700">
+                    {{user.fullName || ''}}
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-xs text-gray-400 italic">
+                    {{ user.role || 'Not assigned'}}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-gray-700">
+                    {{user.projectName}}
+                </td>
+                <td class="px-6 py-4 text-gray-500">
+                    {{ user.createdDate | date }}
+                </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

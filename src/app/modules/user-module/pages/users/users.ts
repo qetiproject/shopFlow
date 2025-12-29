@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { UserFacade, UsersViewModel } from '@user-module';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
   imports: [CommonModule, ],
   templateUrl: './users.html',
 })
-export class Users{}
+export class Users{
+  #userFacade = inject(UserFacade);
+
+  users$: Observable<UsersViewModel> = this.#userFacade.searchUsers()
+}
