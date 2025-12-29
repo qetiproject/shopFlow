@@ -12,11 +12,9 @@
         <table class="min-w-full text-sm">
             <thead class="bg-gray-50 text-gray-600">
                 <tr>
-                <th class="px-6 py-4 text-left font-semibold">Email</th>
-                <th class="px-6 py-4 text-left font-semibold">FullName</th>
-                <th class="px-6 py-4 text-left font-semibold">Role</th>
-                <th class="px-6 py-4 text-left font-semibold">Project</th>
-                <th class="px-6 py-4 text-left font-semibold">Created</th>
+                  @for (col of columns; track col.key ) {
+                    <th class="px-6 py-4 text-left font-semibold">{{col.key}}</th>
+                  }
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">

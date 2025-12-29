@@ -6,6 +6,11 @@ import { UserViewModel } from '@user-module';
   selector: 'user-item',
   imports: [DatePipe],
   templateUrl: './user-item.html',
+  styles: `
+    :host {
+      display: contents;
+    }
+  `
 })
 export class UserItem {
   @Input({required: true}) user!: UserViewModel;

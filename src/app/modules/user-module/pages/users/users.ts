@@ -12,5 +12,13 @@ import { Observable } from 'rxjs';
 export class Users{
   #userFacade = inject(UserFacade);
 
-  users$: Observable<UsersViewModel> = this.#userFacade.searchUsers()
+  users$: Observable<UsersViewModel> = this.#userFacade.searchUsers();
+
+  columns = [
+  { key: 'emailId', label: 'Email' },
+  { key: 'fullName', label: 'Full name' },
+  { key: 'role', label: 'Role' },
+  { key: 'projectName', label: 'Project' },
+  { key: 'createdDate', label: 'Created' },
+];
 }
