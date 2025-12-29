@@ -12,11 +12,11 @@ export class UserFacade {
   //   return this.#userApi.searchUsers(searchText, pageNumber, pageSize);
   // }
 
-  getUserByEmail(email: string): Observable<UserViewModel | undefined> {
+  getUserByEmail(email: string): Observable<UserViewModel | null> {
     return this.#userApi.userByEmail(email).pipe(
       map(users => users.data ?? []),
       map(users => users.find(user => user.emailId === email)),
-      map(user => user ? this.toUserViewModel(user) : undefined),
+      map(user => user ? this.toUserViewModel(user) : null),
     );
   }
 

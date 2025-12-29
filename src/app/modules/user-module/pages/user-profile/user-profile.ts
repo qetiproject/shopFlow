@@ -1,9 +1,9 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { UserAfterLogin } from '@auth-module';
+import { Component, inject, OnInit } from '@angular/core';
 import { STORAGE_KEYS } from '@core';
-import { UserFacade } from '@user-module';
-import { EMPTY } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { UserFacade } from '../../services';
+import { UserViewModel } from '../../types';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,14 +11,20 @@ import { EMPTY } from 'rxjs';
   imports: [CommonModule, AsyncPipe],
   templateUrl: './user-profile.html',
 })
-export class UserProfile {
+export class UserProfile implements OnInit{
 
   #userFacade = inject(UserFacade);
-  user = JSON.parse(
-    sessionStorage.getItem(STORAGE_KEYS.USER) || 'null'
-  ) as UserAfterLogin | null;
-  user$ = this.user
-    ? this.#userFacade.getUserByEmail(this.user.emailId)
-    : EMPTY;
+  user = sessionStorage.getItem(STORAGE_KEYS.USER);
+  #storedUser: string | null = sessionStorage.getItem(STORAGE_KEYS.USER);
+  
+  user$: Observable<UserViewModel | null> = this.#storedUser
+    ? this.#userFacade.getUserByEmail(
+        JSON.parse(this.#storedUser).emailId
+      )
+    : of(null);
+  
+  ngOnInit(): void {
+   
+  }
 
 }
