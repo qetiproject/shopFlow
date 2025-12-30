@@ -13,8 +13,8 @@ import { map, Observable } from 'rxjs';
 export class Users{
   #userFacade = inject(UserFacade);
 
-  searchValue!: string;
-  users$: Observable<UsersViewModel> = this.#userFacade.searchUsers();
+  #baseUsers$: Observable<UsersViewModel> = this.#userFacade.searchUsers();
+  users$: Observable<UsersViewModel> = this.#baseUsers$;
 
   columns = [
     { key: 'emailId', label: 'Email' },
@@ -25,13 +25,13 @@ export class Users{
   ];
 
   onSearch(value: string): void {
-    this.searchValue = value;
-    this.users$ = this.#userFacade.searchUsers(this.searchValue)
+    this.users$ = this.#baseUsers$
       .pipe(
         map(users => ({
-          ...users, 
-          data: users.data.filter(user => user.emailId.toLowerCase().includes(value)),
+          ...users,
+          data: users.data.filter(user => user.emailId.toLowerCase().includes(value))
         }))
       )
   }
+
 }

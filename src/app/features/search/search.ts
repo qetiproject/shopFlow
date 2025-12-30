@@ -16,10 +16,9 @@ export class Search {
     this.search.valueChanges
       .pipe(
         startWith(''),
-        map(v => v?.trim() || ''),
+        distinctUntilChanged(),
         debounceTime(300),
-        distinctUntilChanged()
-      )
-      .subscribe(v => this.searchValue.emit(v))
+        map(v => v?.trim().toLowerCase() || ''),
+      ).subscribe(v => this.searchValue.emit(v))
   }
 }
