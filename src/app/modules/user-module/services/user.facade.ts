@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UserApiService, UsersViewModel, UserViewModel } from '@user-module';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,8 @@ export class UserFacade {
           totalRecords: result.totalRecords,
           pageNumber: result.pageNumber,
           pageSize: result.pageSize
-        }))
+        })),
+        shareReplay({ refCount: true, bufferSize: 1})
       )
   }
 

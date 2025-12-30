@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { UserFacade, UserItem, UsersViewModel } from '@user-module';
 import { Search } from 'app/features/search/search';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +14,18 @@ export class Users{
   #userFacade = inject(UserFacade);
 
   #baseUsers$: Observable<UsersViewModel> = this.#userFacade.searchUsers();
-  users$: Observable<UsersViewModel> = this.#baseUsers$;
+  private search$ = new BehaviorSubject<string>("");
+  users$: Observable<UsersViewModel> = 
+    combineLatest([this.#baseUsers$, this.search$]).pipe(
+        map(([users, search]) => {
+          const data = users.data.filter(user => user.emailId.toLowerCase().includes(search));
+          return {
+            ...users,
+            data
+          }
+          
+        }),
+      )
 
   columns = [
     { key: 'emailId', label: 'Email' },
@@ -25,13 +36,7 @@ export class Users{
   ];
 
   onSearch(value: string): void {
-    this.users$ = this.#baseUsers$
-      .pipe(
-        map(users => ({
-          ...users,
-          data: users.data.filter(user => user.emailId.toLowerCase().includes(value))
-        }))
-      )
+    this.search$.next(value);
   }
 
 }
