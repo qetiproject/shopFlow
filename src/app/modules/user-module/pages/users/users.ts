@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { UserFacade, UserItem, UsersViewModel } from '@user-module';
 import { Search } from 'app/features/search/search';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -16,19 +16,6 @@ export class Users{
   private search$ = new BehaviorSubject<string>("");
   users$: Observable<UsersViewModel> = this.search$.pipe(
     switchMap(value => this.#userFacade.searchUsers(value)),
-    map(users => {
-      const data = users.data.filter(user => 
-        user.emailId.includes('@') && 
-        user.fullName !== 'string'
-      );
-      return {
-        ...users,
-        data: data.map(user => ({
-          ...user,
-          role: user.role === '' ? 'Customer' : user.role ?? 'Admin'
-        }))
-      }
-    })
   )
 
   columns = [
