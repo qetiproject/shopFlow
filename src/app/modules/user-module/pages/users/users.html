@@ -1,6 +1,22 @@
 @let users = users$ | async;
 
-<search (searchValue)="onSearch($event)"></search>
+<ng-template #emailCell let-user>
+  <div class="flex items-center gap-3">
+    <div
+      class="h-10 w-10 rounded-full
+             bg-blue-600 text-white
+             flex items-center justify-center
+             text-sm font-semibold">
+      {{ user.emailId.charAt(0).toUpperCase() }}
+    </div>
+    <div>
+      <p class="font-medium text-gray-900 leading-tight">
+        {{ user.emailId }}
+      </p>
+    </div>
+  </div>
+</ng-template>
+
 <div class="min-h-screen  py-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-6">
@@ -8,23 +24,11 @@
         Users
       </h1>
     </div>
-    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="min-w-full text-sm">
-            <thead class="bg-gray-50 text-gray-600">
-                <tr>
-                  @for (col of columns; track col.key ) {
-                    <th class="px-6 py-4 text-left font-semibold">{{col.key}}</th>
-                  }
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-              @for (user of users?.data; track user.userId){
-                <user-item [user]="user"></user-item>
-              }
-            </tbody>
-        </table>
-      </div>
-    </div>
+    <search (searchValue)="onSearch($event)"></search>
+    <app-table
+      [columns]="columns"
+      [data]="users?.data || []"
+      [trackBy]="trackByUser">
+    </app-table>
   </div>
 </div>
