@@ -41,4 +41,7 @@ export class UserFacade {
     };
   }
   
+  private filteredUsers(users: UserViewModel[], searchText: string) {
+    
+  }
 }
