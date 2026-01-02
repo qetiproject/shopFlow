@@ -1,4 +1,7 @@
 export interface ProductsApiResponse<T> {
+  skip: number;
+  limit: number;
+  total: number;
   products: T[];
 }
 

@@ -1,1 +1,7 @@
-<p>product-module works!</p>
+@let products = products$ | async;
+
+<search (searchValue)="onSearch($event)"></search>
+@for (product of products?.products; track product.id) {
+  <h1>{{ product.title }}</h1>
+  <p>{{ product.description}}</p>
+}
