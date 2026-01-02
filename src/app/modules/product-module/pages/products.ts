@@ -2,7 +2,6 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Search } from '@features';
 import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from '@product-module';
-import { TableColumn } from '@types';
 import { BehaviorSubject, map, Observable, withLatestFrom } from 'rxjs';
 import { ProductItem } from "../components/product-item/product-item";
 
@@ -32,20 +31,11 @@ export class Products {
       })
   )
 
-  columns: TableColumn<ProductViewModel>[] = [];
-  trackByProduct = (_: number, product: ProductViewModel) => product.id;
-  
-  ngAfterViewInit(): void { 
-    this.columns = [
-      { key: 'title', label: 'Title', cell: c => c.title },
-      { key: 'description', label: 'description', cell: c => c.description },
-      { key: 'category', label: 'category', cell: c => c.category },
-      // { key: 'price', label: 'Price', cell: c => c.price },
-      // { key: 'discountPercentage', label: 'DiscountPercentage', cell: c => c.discountPercentage },
-      { key: 'thumbnail', label: 'thumbnail', cell: c => c.thumbnail }
-    ]
-  }
+ columns = 3;
 
+setColumns(count: number) {
+  this.columns = count;
+}
   onSearch(value: string): void {
     this.search$.next(value);
   }

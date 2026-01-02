@@ -4,17 +4,22 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">
-        Users
+        Products
       </h1>
     </div>
     <search (searchValue)="onSearch($event)"></search>
-    <!-- <app-table
-      [columns]="columns"
-      [data]="products?.products || []"
-      [trackBy]="trackByProduct">
-    </app-table> -->
-    @for (product of products?.products; track product.id) {
-      <product-item [product]="product"></product-item>
-    }
+    <div class="grid gap-6
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-2
+            xl:grid-cols-2">
+      @for (product of products?.products; track product.id) {
+        <div
+          class="rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+        >
+          <product-item [product]="product"></product-item>
+        </div>
+      }
+    </div>
   </div>
 </div>
