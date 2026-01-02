@@ -32,6 +32,7 @@
       "@auth-module": ["app/modules/auth-module/index.ts"],
       "@env-dev": ["environment/environment.development"],
       "@user-module": ["app/modules/user-module/index.ts"],
+      "@product-module": ["app/modules/product-module/index.ts"],
     },
   },
   "angularCompilerOptions": {

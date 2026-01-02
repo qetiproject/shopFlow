@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authRoutes } from '@auth-module';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
+import { productRoutes } from '@product-module';
 import { userRoutes } from '@user-module';
 
 export const routes: Routes = [
@@ -19,6 +20,10 @@ export const routes: Routes = [
   { path: 'users', 
     canActivate: [AuthGuard],
     children: userRoutes 
+  },
+  { path: 'products', 
+    canActivate: [AuthGuard],
+    children: productRoutes 
   },
   { 
     path: '', 
