@@ -1,7 +1,20 @@
 @let products = products$ | async;
 
-<search (searchValue)="onSearch($event)"></search>
-@for (product of products?.products; track product.id) {
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.description}}</p>
-}
+<div class="min-h-screen  py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6">
+      <h1 class="text-xl font-semibold text-gray-900">
+        Users
+      </h1>
+    </div>
+    <search (searchValue)="onSearch($event)"></search>
+    <!-- <app-table
+      [columns]="columns"
+      [data]="products?.products || []"
+      [trackBy]="trackByProduct">
+    </app-table> -->
+    @for (product of products?.products; track product.id) {
+      <product-item [product]="product"></product-item>
+    }
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { inject, Injectable } from "@angular/core";
-import { ProductApi } from "@product-module";
+import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from "@product-module";
+import { map, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -7,22 +8,24 @@ import { ProductApi } from "@product-module";
 export class ProductFacade {
     #productApi = inject(ProductApi);
 
-    // getProducts(): Observable<ProductViewModel[]> {
-    //     return this.#productApi.products().pipe(
-    //         map(result => result.products.map(product => this.mapProductsApiToView(product))
-    //         )
-    //     )
-    // }
+    getProducts(): Observable<ProductsApiResponse<ProductViewModel>> {
+        return this.#productApi.products().pipe(
+            map(result => ({
+                ...result,
+                products: result.products.map(product => this.mapProductsApiToView(product))
+            }))
+        )
+    }
 
-    // private mapProductsApiToView(product: ProductApiShape):ProductViewModel  {
-    //     return {
-    //         id: product.id,
-    //         title: product.title,
-    //         category: product.category,
-    //         description: product.description,
-    //         price: product.price,
-    //         discountPercentage: product.discountPercentage,
-    //         thumbnail: product.thumbnail
-    //     }
-    // }
+    private mapProductsApiToView(product: ProductApiShape):ProductViewModel  {
+        return {
+            id: product.id,
+            title: product.title,
+            category: product.category,
+            description: product.description,
+            price: product.price,
+            discountPercentage: product.discountPercentage,
+            thumbnail: product.thumbnail
+        }
+    }
 }

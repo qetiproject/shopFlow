@@ -1,13 +1,15 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Search } from '@features';
-import { Product, ProductApi, ProductsApiResponse } from '@product-module';
+import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from '@product-module';
+import { TableColumn } from '@types';
 import { BehaviorSubject, map, Observable, withLatestFrom } from 'rxjs';
+import { ProductItem } from "../components/product-item/product-item";
 
 @Component({
   selector: 'products',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, Search],
+  imports: [AsyncPipe, CommonModule, Search, ProductItem],
   templateUrl: './products.html',
 })
 export class Products {
@@ -15,8 +17,8 @@ export class Products {
   #productApi = inject(ProductApi);
 
   private search$ = new BehaviorSubject<string>('');
-  private readonly productSource$: Observable<ProductsApiResponse<Product>> = this.#productApi.products();
-  products$: Observable<ProductsApiResponse<Product>> = 
+  private readonly productSource$: Observable<ProductsApiResponse<ProductApiShape>> = this.#productApi.products();
+  products$: Observable<ProductsApiResponse<ProductViewModel>> = 
     this.search$.pipe(
       withLatestFrom(this.productSource$),
       map(([search, result]) => {
@@ -29,7 +31,19 @@ export class Products {
         }
       })
   )
+
+  columns: TableColumn<ProductViewModel>[] = [];
+  trackByProduct = (_: number, product: ProductViewModel) => product.id;
+  
   ngAfterViewInit(): void { 
+    this.columns = [
+      { key: 'title', label: 'Title', cell: c => c.title },
+      { key: 'description', label: 'description', cell: c => c.description },
+      { key: 'category', label: 'category', cell: c => c.category },
+      // { key: 'price', label: 'Price', cell: c => c.price },
+      // { key: 'discountPercentage', label: 'DiscountPercentage', cell: c => c.discountPercentage },
+      { key: 'thumbnail', label: 'thumbnail', cell: c => c.thumbnail }
+    ]
   }
 
   onSearch(value: string): void {

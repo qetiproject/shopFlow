@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Product, ProductsApiResponse } from '@product-module';
+import { ProductApiShape, ProductsApiResponse } from '@product-module';
 import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -12,9 +12,9 @@ export class ProductApi {
   
   private readonly baseUrl = environment.product;
 
-  products(): Observable<ProductsApiResponse<Product>> {
+  products(): Observable<ProductsApiResponse<ProductApiShape>> {
     return this.#http
-      .get<ProductsApiResponse<Product>>(
+      .get<ProductsApiResponse<ProductApiShape>>(
         `${this.baseUrl}`)
   }
 }
