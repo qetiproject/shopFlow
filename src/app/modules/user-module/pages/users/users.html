@@ -1,0 +1,34 @@
+@let users = users$ | async;
+
+<ng-template #emailCell let-user>
+  <div class="flex items-center gap-3">
+    <div
+      class="h-10 w-10 rounded-full
+             bg-blue-600 text-white
+             flex items-center justify-center
+             text-sm font-semibold">
+      {{ user.emailId.charAt(0).toUpperCase() }}
+    </div>
+    <div>
+      <p class="font-medium text-gray-900 leading-tight">
+        {{ user.emailId }}
+      </p>
+    </div>
+  </div>
+</ng-template>
+
+<div class="min-h-screen  py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6">
+      <h1 class="text-xl font-semibold text-gray-900">
+        Users
+      </h1>
+    </div>
+    <search (searchValue)="onSearch($event)"></search>
+    <app-table
+      [columns]="columns"
+      [data]="users?.data || []"
+      [trackBy]="trackByUser">
+    </app-table>
+  </div>
+</div>

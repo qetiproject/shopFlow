@@ -1,16 +1,15 @@
 <header class="bg-white shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      
       <a [routerLink]="['/dashboard']" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors">
         Shop Flow
       </a>
-
       <nav class="hidden md:flex space-x-6">
         @for (link of navLinks; track link.path) {
           <a 
             [routerLink]="link.path" 
             routerLinkActive="text-blue-600 font-semibold"
+            [routerLinkActiveOptions]="{ exact: true }"
             class="text-gray-700 hover:text-blue-600 transition-colors">
             {{ link.label }}
           </a>
@@ -40,6 +39,13 @@
             role="menu"
           >
             <button 
+              [routerLink]="['/users/profile']" 
+              routerLinkActive="text-blue-600 font-semibold"
+              (click)="toggleDropdown()" 
+              class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+              Profile
+            </button>
+             <button 
               (click)="onLogout()" 
               class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
               Logout
@@ -65,11 +71,19 @@
             [routerLink]="link.path" 
             (click)="toggleMobileMenu()" 
             routerLinkActive="bg-blue-100 text-blue-700" 
+            [routerLinkActiveOptions]="{ exact: true }"
             class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors">
             {{ link.label }}
           </a>
         }
         <div class="border-t mt-2 pt-2">
+          <button 
+              [routerLink]="['/users/profile']" 
+              routerLinkActive="text-blue-600 font-semibold"
+              (click)="toggleMobileMenu()" 
+              class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+              Profile
+            </button>
           <button (click)="onLogout()" 
                   class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
             Logout

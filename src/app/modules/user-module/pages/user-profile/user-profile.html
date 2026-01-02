@@ -1,0 +1,67 @@
+@let user = user$ | async;
+
+<div class="mt-5 max-w-2xl mx-auto bg-white/90 backdrop-blur rounded-3xl
+            shadow-[0_30px_80px_-30px_rgba(0,0,0,0.18)] p-10">
+
+  <div class="flex items-center gap-6">
+    <div
+      class="w-16 h-16 rounded-full
+             bg-gradient-to-br from-indigo-500 via-blue-500 to-sky-500
+             text-white flex items-center justify-center
+             text-xl font-semibold tracking-wide shadow-md">
+      KK
+    </div>
+    <div class="flex-1">
+      <h2 class="text-xl font-semibold text-gray-900 leading-tight">
+        {{ user?.fullName}}
+      </h2>
+      <p class="text-sm text-gray-500 mt-0.5">
+        {{ user?.emailId}}
+      </p>
+    </div>
+    <span
+      class="px-3 py-1 rounded-full text-xs font-medium
+             bg-emerald-100 text-emerald-700">
+      Active
+    </span>
+  </div>
+
+  <div class="my-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-12 text-sm">
+    <div>
+      <p class="text-[11px] uppercase tracking-widest text-gray-400 mb-1">
+        Username
+      </p>
+      <p class="text-gray-400 italic">
+        {{ user?.userName || 'Not provided' }} 
+      </p>
+    </div>
+    <div>
+      <p class="text-[11px] uppercase tracking-widest text-gray-400 mb-1">
+        Role
+      </p>
+      <p class="text-gray-400 italic">
+        {{ user?.role || 'Not assigned'}} 
+      </p>
+    </div>
+    <div>
+      <p class="text-[11px] uppercase tracking-widest text-gray-400 mb-1">
+        Project
+      </p>
+      <p class="text-gray-900 font-medium">
+        {{user?.projectName}}
+      </p>
+    </div>
+    <div>
+      <p class="text-[11px] uppercase tracking-widest text-gray-400 mb-1">
+        Account
+      </p>
+      <span
+        class="inline-flex items-center gap-1.5 text-xs font-medium
+               text-emerald-700">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        Active
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead class="bg-gray-50 text-gray-600">
+        <tr>
+          @for (col of columns; track col.key) {
+            <th class="px-6 py-4 text-left font-semibold">
+              {{ col.label }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        @for (row of data; track trackBy($index, row)) {
+          <tr class="hover:bg-blue-50/40 transition-colors">
+            @for (col of columns; track col.key ?? col.label) {
+              <td class="px-6 py-4 text-gray-500">
+                  @if (col.template) {
+                    <ng-container
+                      *ngTemplateOutlet="col.template; context: { $implicit: row }">
+                    </ng-container>
+                  } @else if (col.cell) {
+                    {{ col.cell(row) }}
+                  } @else {
+                    {{ row[col.key] }}
+                  }
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
