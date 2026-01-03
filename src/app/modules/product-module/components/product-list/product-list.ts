@@ -1,9 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, Input } from "@angular/core";
-import { Observable } from "rxjs";
-import { ProductFacade } from "../../services";
-import { ProductsApiResponse, ProductViewModel } from "../../types";
-import { ProductItem } from "../product-item/product-item";
+import { ProductFacade, ProductItem } from "@product-module";
+import { combineLatest, defer, map, Observable, of } from "rxjs";
 
 @Component({
     selector: 'product-list',
@@ -12,22 +10,28 @@ import { ProductItem } from "../product-item/product-item";
     templateUrl: './product-list.html'
 })
 export class ProductList {
-    #productFacade = inject(ProductFacade);
+  #productFacade = inject(ProductFacade);
 
-    @Input() search$ = Observable<string>;
-    private readonly productSource$: Observable<ProductsApiResponse<ProductViewModel>> = this.#productFacade.getProducts();
-    // products$: Observable<ProductsApiResponse<ProductViewModel>> = 
-    //     this.search$.pipe(
-    //     withLatestFrom(this.productSource$),
-    //     map(([search, result]) => {
-    //         return {
-    //         ...result,
-    //         products: !search
-    //         ? result.products
-    //         : result.products.filter(p => 
-    //             p.title.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
-    //         }
-    //     })
-    // )
-    products$: Observable<ProductsApiResponse<ProductViewModel>> = this.productSource$
+  @Input() search$?: Observable<string>;
+
+  private readonly productSource$ = this.#productFacade.getProducts()
+
+  private readonly safeSearch$ = defer(() =>
+    (this.search$ ?? of(''))
+  );
+
+  products$ = combineLatest([
+    this.productSource$,
+    this.safeSearch$
+  ]).pipe(
+    map(([response, search]) => ({
+      ...response,
+      products: !search
+        ? response.products
+        : response.products.filter(p =>
+            p.title.toLowerCase().includes(search) ||
+            p.description.toLowerCase().includes(search)
+          )
+    }))
+  );
 }

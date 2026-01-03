@@ -16,7 +16,8 @@ export class Users implements AfterViewInit{
   #userFacade = inject(UserFacade);
   @ViewChild('emailCell', { static: true })
   emailCell!: TemplateRef<{ $implicit: UserViewModel }>;
-
+  placeholder: string = "Search User";
+  
   private search$ = new BehaviorSubject<string>("");
   users$: Observable<UsersViewModel> = this.search$.pipe(
     switchMap(value => this.#userFacade.searchUsers(value)),

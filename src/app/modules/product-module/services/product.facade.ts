@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from "@product-module";
-import { map, Observable } from "rxjs";
+import { map, Observable, shareReplay } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,8 @@ export class ProductFacade {
             map(result => ({
                 ...result,
                 products: result.products.map(product => this.mapProductsApiToView(product))
-            }))
+            })),
+            shareReplay({ bufferSize: 1, refCount: true })
         )
     }
 

@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input } from "@angular/core";
-import { ProductViewModel } from "../../types";
+import { ProductViewModel } from "@product-module";
 
 @Component({
     selector: 'product-item',
