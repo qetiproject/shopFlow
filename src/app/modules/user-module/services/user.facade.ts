@@ -44,13 +44,14 @@ export class UserFacade {
   private usersData(users: UsersViewModel): UsersViewModel {
     const data = users.data.filter(user => 
         user.emailId.includes('@') && 
-        user.fullName !== 'string'
+        user.fullName !== 'string' &&
+        user.role != ""
       );
       return {
         ...users,
         data: data.map(user => ({
           ...user,
-          role: user.role === '' ? 'Customer' : 'Admin'
+          role: user.role === null ? 'Admin' : user.role
         }))
       }
   }
