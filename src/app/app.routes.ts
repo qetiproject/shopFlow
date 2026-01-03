@@ -21,7 +21,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: userRoutes 
   },
-  { path: 'product', 
+  { path: 'products', 
     canActivate: [AuthGuard],
     children: productRoutes 
   },

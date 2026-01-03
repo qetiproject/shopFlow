@@ -9,9 +9,9 @@ import { ProductItem } from "../components/product-item/product-item";
   selector: 'products',
   standalone: true,
   imports: [AsyncPipe, CommonModule, Search, ProductItem],
-  templateUrl: './products.html',
+  templateUrl: './products-page.html',
 })
-export class Products {
+export class ProductsPage {
 
   #productApi = inject(ProductApi);
 
