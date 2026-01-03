@@ -1,3 +1,16 @@
- <!-- @for (product of products?.products; track product.id) {
-    <product-item [product]="product"></product-item>
-} -->
+@let products = products$ | async;
+
+<div class="grid gap-6
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-2
+        xl:grid-cols-2">
+    @for (product of products?.products; track product.id) {
+    <div
+        class="rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+    >
+        <product-item [product]="product"></product-item>
+    </div>
+    }
+</div>
+
