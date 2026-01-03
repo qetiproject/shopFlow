@@ -13,7 +13,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ProductsPage {
 
   search$ = new BehaviorSubject<string>('');
-  placeholder: string = "Search product with title or description"
+  placeholder: string = "Search product with title or description";
+  
   onSearch(value: string): void {
     this.search$.next(value);
   }
