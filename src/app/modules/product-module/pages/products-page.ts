@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Search } from '@features';
 import { ProductList } from "@product-module";
@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'products',
   standalone: true,
-  imports: [CommonModule, Search, ProductList],
+  imports: [Search, ProductList],
   templateUrl: './products-page.html',
 })
 export class ProductsPage {
