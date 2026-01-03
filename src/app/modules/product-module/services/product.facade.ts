@@ -2,9 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from "@product-module";
 import { map, Observable, shareReplay } from "rxjs";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ProductFacade {
     #productApi = inject(ProductApi);
 

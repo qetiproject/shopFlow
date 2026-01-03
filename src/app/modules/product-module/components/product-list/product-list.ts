@@ -1,13 +1,15 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, Input } from "@angular/core";
-import { ProductFacade, ProductItem } from "@product-module";
+import { ProductItem } from "@product-module";
 import { combineLatest, defer, map, Observable, of } from "rxjs";
+import { ProductFacade } from "../../services/product.facade";
 
 @Component({
     selector: 'product-list',
     standalone: true,
     imports: [CommonModule, ProductItem],
-    templateUrl: './product-list.html'
+    templateUrl: './product-list.html',
+    providers: [ProductFacade]
 })
 export class ProductList {
   #productFacade = inject(ProductFacade);
