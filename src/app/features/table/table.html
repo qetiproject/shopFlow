@@ -17,7 +17,8 @@
               <td class="px-6 py-4 text-gray-500">
                   @if (col.template) {
                     <ng-container
-                      *ngTemplateOutlet="col.template; context: { $implicit: row }">
+                      [ngTemplateOutlet]="col.template"
+                      [ngTemplateOutletContext]="{ $implicit: row }">
                     </ng-container>
                   } @else if (col.cell) {
                     {{ col.cell(row) }}
