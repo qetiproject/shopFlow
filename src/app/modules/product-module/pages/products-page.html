@@ -5,7 +5,7 @@
         Products
       </h1>
     </div>
-    <search (searchValue)="onSearch($event)" [placeholder]="placeholder"></search>
+    <search (value$)="onSearch($event)" [placeholder]="placeholder"></search>
     <product-list [search$]="search$"></product-list>
   </div>
 </div>

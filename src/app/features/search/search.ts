@@ -1,32 +1,24 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from "@custom-form/index";
-import { debounceTime, distinctUntilChanged, map, startWith, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'search',
   imports: [InputComponent, ReactiveFormsModule],
   templateUrl: './search.html',
 })
-export class Search implements OnDestroy{
-  search = new FormControl<string>('');
-  @Output() searchValue = new EventEmitter<string>();
-  #destroy$ = new Subject<void>();
-  @Input() placeholder!: string;
-  
-  constructor() {
-    this.search.valueChanges
-      .pipe(
+export class Search {
+  search = new FormControl<string>('', { nonNullable: true});
+
+  @Input() placeholder: string = "Search";
+
+  @Output() 
+  readonly value$ = this.search.valueChanges
+    .pipe(
         startWith(''),
-        map(v => v?.toLowerCase()),
+        map(v => v.toLowerCase()),
         debounceTime(300),
         distinctUntilChanged(),
-        takeUntil(this.#destroy$)
-      ).subscribe(v => this.searchValue.emit(v))
-  }
-
-  ngOnDestroy(): void {
-    this.#destroy$.next();
-    this.#destroy$.complete();
-  }
+      )
 }

@@ -24,7 +24,7 @@
         Users
       </h1>
     </div>
-    <search (searchValue)="onSearch($event)" [placeholder]="placeholder"></search>
+    <search (value$)="onSearch($event)" [placeholder]="placeholder"></search>
     <app-table
       [columns]="columns"
       [data]="users?.data || []"
