@@ -1,5 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
+import { toSignal } from "@angular/core/rxjs-interop";
 import { STORAGE_KEYS } from '@core';
 import { Observable, of } from 'rxjs';
 import { UserFacade } from '../../services';
@@ -22,5 +23,7 @@ export class UserProfile {
         JSON.parse(this.#storedUser).emailId
       )
     : of(null);
+
+  userDetail: Signal<UserViewModel | null> = toSignal(this.user$,  { initialValue: null });
   
 }
