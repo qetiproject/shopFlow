@@ -1,19 +1,29 @@
-import { inject, Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { STORAGE_KEYS } from "@core";
+import { inject } from "@angular/core";
+import { ActivatedRouteSnapshot, ResolveFn, Router } from "@angular/router";
 import { UserFacade, UserViewModel } from "@user-module";
+import { firstValueFrom } from "rxjs";
 
-@Injectable({
-    providedIn: 'root'
-})
-export class UserProfileResolve implements Resolve<UserViewModel | null> {
-    #userFacade = inject(UserFacade);
-    
-    user = sessionStorage.getItem(STORAGE_KEYS.USER);
-    private email = this.user ? JSON.parse(this.user).emailId : '';
+export const UserProfileResolve: ResolveFn<UserViewModel>  = async (route: ActivatedRouteSnapshot) =>{
+    const email = route.paramMap.get("email");
+    const userFacade = inject(UserFacade);
+    const router = inject(Router);
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.#userFacade.getUserByEmail(this.email);
+    if(!email) {
+        router.navigate(['/users']);
+        return Promise.reject("No Email");
+    }
+
+    try{
+        const user = await firstValueFrom(userFacade.getUserByEmail(email));
+        if(!user) {
+            router.navigate(['/users']);
+            return Promise.reject("User not found");
+        }
+        return user;
+    }
+    catch(err) {
+        router.navigate(['/users'])
+        return Promise.reject(err);
     }
 
 }
