@@ -1,7 +1,8 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, inject, Input, TemplateRef, ViewChild } from "@angular/core";
 import { Table } from "@features";
 import { TableColumn } from "@types";
+import { formatCreatedDate } from "@utils";
 import { defer, Observable, of, switchMap } from "rxjs";
 import { UserFacade } from "../../services";
 import { UserViewModel } from "../../types";
@@ -12,10 +13,9 @@ import { UserViewModel } from "../../types";
     imports: [Table, AsyncPipe],
     templateUrl: './user-list.html'
 })
-export class UserList implements OnInit{
-    
+export class UserList implements AfterViewInit{
     #userFacade = inject(UserFacade);
-    @ViewChild('emailCell', { static: true })
+    @ViewChild('emailCell', { static: false })
     emailCell!: TemplateRef<{ $implicit: UserViewModel }>;
     
     @Input()
@@ -33,26 +33,17 @@ export class UserList implements OnInit{
     trackByUser = (_: number, user: UserViewModel) => user.userId;
     columns: TableColumn<UserViewModel>[] = [];
 
-    getColumns(): TableColumn<UserViewModel>[]{
-        return this.columns = [
+    ngAfterViewInit(): void {
+        this.columns = [
             { key: 'emailId', label: 'Email', template: this.emailCell },
             { key: 'fullName', label: 'Full name', cell: u => u.fullName || '-' },
             { key: 'role', label: 'Role', cell: u => u.role },
             { key: 'projectName', label: 'Project', cell: u => u.projectName },
             {
-            key: 'createdDate',
-            label: 'Created',
-            cell: u =>
-                new Date(u.createdDate).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric',
-                }),
-            },
+                key: 'createdDate',
+                label: 'Created',
+                cell: u => formatCreatedDate(u.createdDate),
+            }
         ];
     }
-    ngOnInit(): void {
-       this.getColumns();
-    }
-
 }
