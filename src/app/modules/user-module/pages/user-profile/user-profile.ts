@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
+import { toSignal } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from '@angular/router';
-import { UserViewModel } from '../../types';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,5 +11,9 @@ import { UserViewModel } from '../../types';
 })
 export class UserProfile {
   #route = inject(ActivatedRoute)
-  userProfile = this.#route.snapshot.data['user'] as UserViewModel;
+  userProfile = toSignal(
+    this.#route.data.pipe(map((d) => d['user'])),
+    { initialValue: null }
+  );
+  
 }

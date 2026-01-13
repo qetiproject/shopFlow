@@ -1,29 +1,26 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, ResolveFn, Router } from "@angular/router";
 import { UserFacade, UserViewModel } from "@user-module";
-import { firstValueFrom } from "rxjs";
+import { catchError, of, tap } from "rxjs";
 
-export const UserProfileResolve: ResolveFn<UserViewModel>  = async (route: ActivatedRouteSnapshot) =>{
+export const UserProfileResolve: ResolveFn<UserViewModel | null>  =  (route: ActivatedRouteSnapshot) => {
     const email = route.paramMap.get("email");
     const userFacade = inject(UserFacade);
     const router = inject(Router);
 
     if(!email) {
         router.navigate(['/users']);
-        return Promise.reject("No Email");
+        return of(null);
     }
 
-    try{
-        const user = await firstValueFrom(userFacade.getUserByEmail(email));
-        if(!user) {
+    return userFacade.getUserByEmail(email).pipe(
+        tap(user => {
+            if(!user)  router.navigate(['/users']);
+        }),
+        catchError(() => {
             router.navigate(['/users']);
-            return Promise.reject("User not found");
-        }
-        return user;
-    }
-    catch(err) {
-        router.navigate(['/users'])
-        return Promise.reject(err);
-    }
-
+            return of(null);
+        })
+    )
 }
+
