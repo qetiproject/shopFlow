@@ -1,33 +1,40 @@
-import { AsyncPipe } from "@angular/common";
-import { AfterViewInit, Component, inject, Input, TemplateRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, inject, input, TemplateRef, ViewChild } from "@angular/core";
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 import { Table } from "@features";
 import { TableColumn } from "@types";
 import { formatCreatedDate } from "@utils";
-import { defer, Observable, of, switchMap } from "rxjs";
+import { Observable } from "rxjs";
+import { switchMap } from "rxjs/operators";
 import { UserFacade } from "../../services";
-import { UserViewModel } from "../../types";
+import { UsersViewModel, UserViewModel } from "../../types";
 
 @Component({
     selector: 'user-list',
     standalone: true,
-    imports: [Table, AsyncPipe],
+    imports: [Table],
     templateUrl: './user-list.html'
 })
 export class UserList implements AfterViewInit{
     #userFacade = inject(UserFacade);
     @ViewChild('emailCell', { static: false })
     emailCell!: TemplateRef<{ $implicit: UserViewModel }>;
-    
-    @Input()
-    searchValue?: Observable<string>;
 
-    private readonly safeSearch$ = defer(() =>
-        this.searchValue ?? of('')
+    searchValue = input<string | undefined>('');
+
+    private readonly users$: Observable<UsersViewModel | undefined> = toObservable(this.searchValue).pipe(
+        switchMap(search => this.#userFacade.searchUsers(search))
     );
-
-    readonly users$ = this.safeSearch$.pipe(
-        switchMap(search => this.#userFacade.searchUsers(search)
-        )
+    
+    readonly users = toSignal(
+        this.users$,
+        { initialValue: 
+            { 
+                data: [], 
+                totalRecords: 0,
+                pageNumber: 0,
+                pageSize: 0
+            }
+        }
     );
 
     trackByUser = (_: number, user: UserViewModel) => user.userId;
