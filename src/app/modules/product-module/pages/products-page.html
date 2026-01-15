@@ -6,6 +6,6 @@
       </h1>
     </div>
     <search (value$)="onSearch($event)" [placeholder]="placeholder"></search>
-    <product-list [search$]="search$"></product-list>
+    <product-list [search]="searchToSignal()"></product-list>
   </div>
 </div>

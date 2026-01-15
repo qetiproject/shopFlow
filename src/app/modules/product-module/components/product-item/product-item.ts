@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, input } from "@angular/core";
 import { ProductViewModel } from "@product-module";
 
 @Component({
@@ -9,5 +9,5 @@ import { ProductViewModel } from "@product-module";
     templateUrl: './product-item.html'
 })
 export class ProductItem {
-    @Input({ required: true}) product!: ProductViewModel; 
+    product = input.required<ProductViewModel>();
 }

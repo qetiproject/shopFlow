@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, Input } from "@angular/core";
+import { Component, computed, inject, input } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 import { ProductItem } from "@product-module";
-import { combineLatest, defer, map, Observable, of } from "rxjs";
 import { ProductFacade } from "../../services/product.facade";
 
 @Component({
@@ -14,26 +14,24 @@ import { ProductFacade } from "../../services/product.facade";
 export class ProductList {
   #productFacade = inject(ProductFacade);
 
-  @Input() search$?: Observable<string>;
+  search = input<string>('');
 
-  private readonly productSource$ = this.#productFacade.getProducts()
-
-  private readonly safeSearch$ = defer(() =>
-    (this.search$ ?? of(''))
+   private readonly productsResponse = toSignal(
+    this.#productFacade.getProducts(),
+    {
+      initialValue: null
+    }
   );
 
-  products$ = combineLatest([
-    this.productSource$,
-    this.safeSearch$
-  ]).pipe(
-    map(([response, search]) => ({
-      ...response,
-      products: !search
-        ? response.products
-        : response.products.filter(p =>
-            p.title.toLowerCase().includes(search) ||
-            p.description.toLowerCase().includes(search)
-          )
-    }))
-  );
+  readonly products = computed(() => {
+    const search = this.search().toLowerCase();
+    const products = this.productsResponse()?.products;
+
+    if (!search) return products;
+
+    return products?.filter(p =>
+      p.title.toLowerCase().includes(search) ||
+      p.description.toLowerCase().includes(search)
+    );
+  });
 }
