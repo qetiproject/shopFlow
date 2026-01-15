@@ -1,5 +1,5 @@
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TableColumn } from '@types';
 
 @Component({
@@ -9,7 +9,9 @@ import { TableColumn } from '@types';
   templateUrl: './table.html',
 })
 export class Table<T> {
-  @Input({ required: true }) columns!: TableColumn<T>[];
-  @Input({ required: true }) data: T[] = [];
-  @Input() trackBy: (index: number, item: T) => any = (_, item) => item;
+  columns = input.required<TableColumn<T>[]>();
+  data = input<T[]>([]);
+  trackBy = input<(index: number, item: T) => any>(
+    (_, item) => item
+  );
 }
