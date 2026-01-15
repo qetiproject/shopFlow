@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, inject, input, TemplateRef, ViewChild } from "@angular/core";
+import { Component, computed, inject, input, TemplateRef, viewChild } from "@angular/core";
 import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 import { Table } from "@features";
 import { TableColumn } from "@types";
+import { UserFacade, UsersViewModel, UserViewModel } from "@user-module";
 import { formatCreatedDate } from "@utils";
-import { Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { UserFacade } from "../../services";
-import { UsersViewModel, UserViewModel } from "../../types";
+import { Observable, switchMap } from "rxjs";
 
 @Component({
     selector: 'user-list',
@@ -14,11 +12,11 @@ import { UsersViewModel, UserViewModel } from "../../types";
     imports: [Table],
     templateUrl: './user-list.html'
 })
-export class UserList implements AfterViewInit{
+export class UserList {
     #userFacade = inject(UserFacade);
-    @ViewChild('emailCell', { static: false })
-    emailCell!: TemplateRef<{ $implicit: UserViewModel }>;
 
+    emailCell = viewChild<TemplateRef<{ $implicit: UserViewModel }>>('emailCell');
+    
     searchValue = input<string | undefined>('');
 
     private readonly users$: Observable<UsersViewModel | undefined> = toObservable(this.searchValue).pipe(
@@ -38,11 +36,14 @@ export class UserList implements AfterViewInit{
     );
 
     trackByUser = (_: number, user: UserViewModel) => user.userId;
-    columns: TableColumn<UserViewModel>[] = [];
 
-    ngAfterViewInit(): void {
-        this.columns = [
-            { key: 'emailId', label: 'Email', template: this.emailCell },
+    columns = computed<TableColumn<UserViewModel>[]>(() => {
+        const emailTpl = this.emailCell();
+
+        if (!emailTpl) return [];
+
+        return [
+            { key: 'emailId', label: 'Email', template: emailTpl },
             { key: 'fullName', label: 'Full name', cell: u => u.fullName || '-' },
             { key: 'role', label: 'Role', cell: u => u.role },
             { key: 'projectName', label: 'Project', cell: u => u.projectName },
@@ -51,6 +52,7 @@ export class UserList implements AfterViewInit{
                 label: 'Created',
                 cell: u => formatCreatedDate(u.createdDate),
             }
-        ];
-    }
+        ]
+    })
+
 }

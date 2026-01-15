@@ -16,7 +16,7 @@
 </ng-template>
 
 <app-table
-    [columns]="columns"
+    [columns]="columns()"
     [data]="users()?.data || []"
     [trackBy]="trackByUser">
 </app-table>
