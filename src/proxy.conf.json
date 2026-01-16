@@ -6,5 +6,13 @@
     "pathRewrite": {
       "^/UserApp": "/UserApp"
     }
+  },
+  "/products": {
+    "target": "https://dummyjson.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/products": "/products"
+    }
   }
 }

@@ -1,26 +1,19 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { STORAGE_KEYS } from '@core';
-import { Observable, of } from 'rxjs';
-import { UserFacade } from '../../services';
-import { UserViewModel } from '../../types';
+import { toSignal } from "@angular/core/rxjs-interop";
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CommonModule, AsyncPipe],
+  imports: [],
   templateUrl: './user-profile.html',
 })
 export class UserProfile {
-
-  #userFacade = inject(UserFacade);
-  user = sessionStorage.getItem(STORAGE_KEYS.USER);
-  #storedUser: string | null = sessionStorage.getItem(STORAGE_KEYS.USER);
-  
-  user$: Observable<UserViewModel | null> = this.#storedUser
-    ? this.#userFacade.getUserByEmail(
-        JSON.parse(this.#storedUser).emailId
-      )
-    : of(null);
+  #route = inject(ActivatedRoute)
+  userProfile = toSignal(
+    this.#route.data.pipe(map((d) => d['user'])),
+    { initialValue: null }
+  );
   
 }

@@ -39,7 +39,7 @@
             role="menu"
           >
             <button 
-              [routerLink]="['/users/profile']" 
+              [routerLink]="['/users/profile', email]" 
               routerLinkActive="text-blue-600 font-semibold"
               (click)="toggleDropdown()" 
               class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
@@ -78,7 +78,7 @@
         }
         <div class="border-t mt-2 pt-2">
           <button 
-              [routerLink]="['/users/profile']" 
+              [routerLink]="['/users/profile', email]" 
               routerLinkActive="text-blue-600 font-semibold"
               (click)="toggleMobileMenu()" 
               class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">

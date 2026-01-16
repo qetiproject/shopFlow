@@ -1,44 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, TemplateRef, ViewChild } from '@angular/core';
-import { Table } from '@features';
-import { TableColumn } from '@types';
-import { UserFacade, UsersViewModel, UserViewModel } from '@user-module';
+import { Component } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Search } from 'app/features/search/search';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { UserList } from "../../components";
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, Search, Table],
+  imports: [CommonModule, Search, UserList],
   templateUrl: './users.html',
 })
-export class Users implements AfterViewInit{
-  #userFacade = inject(UserFacade);
-  @ViewChild('emailCell', { static: true })
-  emailCell!: TemplateRef<{ $implicit: UserViewModel }>;
+export class Users {
+  placeholder: string = "Search User";
+  
+  search$ = new BehaviorSubject<string>("");
 
-  private search$ = new BehaviorSubject<string>("");
-  users$: Observable<UsersViewModel> = this.search$.pipe(
-    switchMap(value => this.#userFacade.searchUsers(value)),
-  )
-  trackByUser = (_: number, user: UserViewModel) => user.userId;
-  columns: TableColumn<UserViewModel>[]  = [];
-
-  ngAfterViewInit(): void { 
-    this.columns = [
-      { key: 'emailId', label: 'Email', template: this.emailCell},
-      { key: 'fullName', label: 'Full name', cell: user => user.fullName || '-' },
-      { key: 'role', label: 'Role', cell: user => user.role },
-      { key: 'projectName', label: 'Project', cell: user => user.projectName },
-      { key: 'createdDate', label: 'Created', cell: user => 
-        new Date(user.createdDate).toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric'
-        })
-      },
-    ];
-  }
+  search = toSignal(this.search$);
   
   onSearch(value: string): void {
     this.search$.next(value);
