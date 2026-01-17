@@ -8,24 +8,27 @@ import { map, Observable } from 'rxjs';
 export class UserFacade {
   #userApi = inject(UserApiService);
 
-  searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<UsersViewModel> {
-    return this.#userApi.searchUsers(searchText, pageNumber, pageSize)
-      .pipe(
-        map(result => ({
-          data: (result.data ??[]).map(user=> this.mapApiUserToView(user)),
-          totalRecords: result.totalRecords,
-          pageNumber: result.pageNumber,
-          pageSize: result.pageSize
-        })),
-        map(result => this.usersData(result)),
-      )
+  searchUsers(
+    searchText?: string,
+    pageNumber?: number,
+    pageSize?: number,
+  ): Observable<UsersViewModel> {
+    return this.#userApi.searchUsers(searchText, pageNumber, pageSize).pipe(
+      map((result) => ({
+        data: (result.data ?? []).map((user) => this.mapApiUserToView(user)),
+        totalRecords: result.totalRecords,
+        pageNumber: result.pageNumber,
+        pageSize: result.pageSize,
+      })),
+      map((result) => this.usersData(result)),
+    );
   }
 
   getUserByEmail(email: string): Observable<UserViewModel | null> {
     return this.#userApi.userByEmail(email).pipe(
-      map(users => users.data ?? []),
-      map(users => users.find(user => user.emailId === email)),
-      map(user => user ? this.mapApiUserToView(user) : null),
+      map((users) => users.data ?? []),
+      map((users) => users.find((user) => user.emailId === email)),
+      map((user) => (user ? this.mapApiUserToView(user) : null)),
     );
   }
 
@@ -40,19 +43,17 @@ export class UserFacade {
       projectName: user.projectName,
     };
   }
-  
+
   private usersData(users: UsersViewModel): UsersViewModel {
-    const data = users.data.filter(user => 
-        user.emailId.includes('@') && 
-        user.fullName !== 'string' &&
-        user.role != ""
-      );
-      return {
-        ...users,
-        data: data.map(user => ({
-          ...user,
-          role: user.role === null ? 'Admin' : user.role
-        }))
-      }
+    const data = users.data.filter(
+      (user) => user.emailId.includes('@') && user.fullName !== 'string' && user.role != '',
+    );
+    return {
+      ...users,
+      data: data.map((user) => ({
+        ...user,
+        role: user.role === null ? 'Admin' : user.role,
+      })),
+    };
   }
 }
