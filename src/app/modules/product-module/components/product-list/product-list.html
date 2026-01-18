@@ -6,10 +6,12 @@
   }
 </div>
 
-<app-paging
-  [totalItems]="productsResponse()!.total"
-  [pageSize]="limit()"
-  [currentPage]="pageNumber()"
-  [windowSize]="windowSize()"
-  (pageNumber)="onPageNumber($event)"
-></app-paging>
+@if (productsResponse()?.total) {
+  <app-paging
+    [totalItems]="productsResponse()!.total"
+    [pageSize]="limit()"
+    [currentPage]="pageNumber()"
+    [windowSize]="windowSize()"
+    (pageNumber)="onPageNumber($event)"
+  ></app-paging>
+}

@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import {
-    ProductApi,
-    ProductApiShape,
-    ProductsApiResponse,
-    ProductViewModel,
+  ProductApi,
+  ProductApiShape,
+  ProductsApiResponse,
+  ProductViewModel,
 } from '@product-module';
 import { map, Observable, shareReplay } from 'rxjs';
 
@@ -11,8 +11,12 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class ProductFacade {
   #productApi = inject(ProductApi);
 
-  getProducts(limit: number, skip: number): Observable<ProductsApiResponse<ProductViewModel>> {
-    return this.#productApi.products(limit, skip).pipe(
+  getProducts(
+    limit: number,
+    skip: number,
+    search?: string,
+  ): Observable<ProductsApiResponse<ProductViewModel>> {
+    return this.#productApi.products(limit, skip, search).pipe(
       map((result) => ({
         ...result,
         products: result.products.map((product) => this.mapProductsApiToView(product)),

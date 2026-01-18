@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ProductFacade, ProductItem } from '@product-module';
+import { Component, computed, inject, input, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
+import { combineLatest, switchMap } from 'rxjs';
+import { ProductFacade } from '../../services/product.facade';
 
 @Component({
   selector: 'product-list',
@@ -24,20 +26,16 @@ export class ProductList {
     this.pageNumber.set(page);
   }
 
-  // skip = computed(() => this.limit() * (this.pageNumber() - 1));
-  skip = signal<number>(0);
-  readonly productsResponse = toSignal(this.#productFacade.getProducts(this.limit(), this.skip()), {
-    initialValue: null,
-  });
+  skip = computed(() => this.limit() * (this.pageNumber() - 1));
 
-  // readonly products = computed(() => {
-  //   const search = this.search().toLowerCase();
-  //   const products = this.productsResponse()?.products;
-
-  //   if (!search) return products;
-
-  //   return products?.filter(
-  //     (p) => p.title.toLowerCase().includes(search) || p.description.toLowerCase().includes(search),
-  //   );
-  // });
+  readonly productsResponse = toSignal(
+    combineLatest([
+      toObservable(this.limit),
+      toObservable(this.skip),
+      toObservable(this.search),
+    ]).pipe(
+      switchMap(([limit, skip, search]) => this.#productFacade.getProducts(limit, skip, search)),
+    ),
+    { initialValue: null },
+  );
 }

@@ -1,8 +1,7 @@
-
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Search } from '@features';
-import { ProductList } from "@product-module";
+import { ProductList } from '@product-module';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -12,12 +11,11 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './products-page.html',
 })
 export class ProductsPage {
-
   search$ = new BehaviorSubject<string>('');
-  placeholder: string = "Search product with title or description";
-  
-  searchToSignal = toSignal(this.search$, { initialValue: ''});
-  
+  placeholder: string = 'Search product with title or description';
+
+  searchToSignal = toSignal(this.search$, { initialValue: '' });
+
   onSearch(value: string): void {
     this.search$.next(value);
   }
