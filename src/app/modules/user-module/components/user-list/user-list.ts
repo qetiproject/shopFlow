@@ -1,4 +1,13 @@
-import { Component, computed, inject, input, signal, TemplateRef, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  TemplateRef,
+  viewChild,
+} from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Table } from '@features';
 import { TableColumn } from '@types';
@@ -23,18 +32,18 @@ export class UserList {
   pageSize = signal<number>(10);
   windowSize = signal<number>(5);
 
-  // private readonly users$: Observable<UsersViewModel | undefined> = toObservable(
-  //   this.searchValue,
-  // ).pipe(
-  //   switchMap((search) => this.#userFacade.searchUsers(search, this.pageNumber(), this.pageSize())),
-  // );
-
   private readonly users$: Observable<UsersViewModel | undefined> = combineLatest([
     toObservable(this.searchValue),
     toObservable(this.pageNumber),
     toObservable(this.pageSize),
   ]).pipe(switchMap(([search, page, size]) => this.#userFacade.searchUsers(search, page, size)));
 
+  constructor() {
+    effect(() => {
+      this.searchValue();
+      this.pageNumber.set(1);
+    });
+  }
   readonly users = toSignal(this.users$, {
     initialValue: {
       data: [],

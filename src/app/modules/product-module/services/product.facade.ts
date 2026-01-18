@@ -1,30 +1,35 @@
-import { inject, Injectable } from "@angular/core";
-import { ProductApi, ProductApiShape, ProductsApiResponse, ProductViewModel } from "@product-module";
-import { map, Observable, shareReplay } from "rxjs";
+import { inject, Injectable } from '@angular/core';
+import {
+    ProductApi,
+    ProductApiShape,
+    ProductsApiResponse,
+    ProductViewModel,
+} from '@product-module';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable()
 export class ProductFacade {
-    #productApi = inject(ProductApi);
+  #productApi = inject(ProductApi);
 
-    getProducts(): Observable<ProductsApiResponse<ProductViewModel>> {
-        return this.#productApi.products().pipe(
-            map(result => ({
-                ...result,
-                products: result.products.map(product => this.mapProductsApiToView(product))
-            })),
-            shareReplay({ bufferSize: 1, refCount: true })
-        )
-    }
+  getProducts(limit: number, skip: number): Observable<ProductsApiResponse<ProductViewModel>> {
+    return this.#productApi.products(limit, skip).pipe(
+      map((result) => ({
+        ...result,
+        products: result.products.map((product) => this.mapProductsApiToView(product)),
+      })),
+      shareReplay({ bufferSize: 1, refCount: true }),
+    );
+  }
 
-    private mapProductsApiToView(product: ProductApiShape):ProductViewModel  {
-        return {
-            id: product.id,
-            title: product.title,
-            category: product.category,
-            description: product.description,
-            price: product.price,
-            discountPercentage: product.discountPercentage,
-            thumbnail: product.thumbnail
-        }
-    }
+  private mapProductsApiToView(product: ProductApiShape): ProductViewModel {
+    return {
+      id: product.id,
+      title: product.title,
+      category: product.category,
+      description: product.description,
+      price: product.price,
+      discountPercentage: product.discountPercentage,
+      thumbnail: product.thumbnail,
+    };
+  }
 }

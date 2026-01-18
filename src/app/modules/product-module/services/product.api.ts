@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class ProductApi {
   #http = inject(HttpClient);
-  
+
   private readonly baseUrl = environment.product;
 
-  products(): Observable<ProductsApiResponse<ProductApiShape>> {
-    return this.#http
-      .get<ProductsApiResponse<ProductApiShape>>(
-        `${this.baseUrl}`)
+  products(limit: number, skip: number): Observable<ProductsApiResponse<ProductApiShape>> {
+    return this.#http.get<ProductsApiResponse<ProductApiShape>>(
+      `${this.baseUrl}?limit=${limit}&skip=${skip}`,
+    );
   }
 }
