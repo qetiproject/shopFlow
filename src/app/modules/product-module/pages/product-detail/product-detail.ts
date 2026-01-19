@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'product-detail',
@@ -9,9 +11,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './product-detail.html',
 })
 export class ProductDetail {
-  router = inject(ActivatedRoute);
-  constructor() {
-    const id = this.router.paramMap;
-    console.log(id, 'id');
-  }
+  #route = inject(ActivatedRoute);
+  productDetails = toSignal(this.#route.data.pipe(map((d) => d['product'])), {
+    initialValue: null,
+  });
 }

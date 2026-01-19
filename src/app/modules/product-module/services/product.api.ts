@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductApiShape, ProductsApiResponse } from '@product-module';
+import { Product, ProductApiShape, ProductsApiResponse } from '@product-module';
 import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -29,7 +29,7 @@ export class ProductApi {
     });
   }
 
-  getProductDetails(id: number) {
-    return this.#http.get<ProductsApiResponse<ProductApiShape>>(`${this.baseUrl}/${id}`);
+  getProductDetails(id: number): Observable<Product | null> {
+    return this.#http.get<Product>(`${this.baseUrl}/${id}`);
   }
 }

@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  Product,
   ProductApi,
   ProductApiShape,
   ProductsApiResponse,
@@ -7,7 +8,9 @@ import {
 } from '@product-module';
 import { map, Observable, shareReplay } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductFacade {
   #productApi = inject(ProductApi);
 
@@ -37,7 +40,7 @@ export class ProductFacade {
     };
   }
 
-  getProductDetails(id: number) {
+  getProductDetails(id: number): Observable<Product | null> {
     return this.#productApi.getProductDetails(id);
   }
 }
