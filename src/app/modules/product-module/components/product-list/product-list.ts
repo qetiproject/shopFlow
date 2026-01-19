@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, untracked } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
@@ -26,16 +26,26 @@ export class ProductList {
     this.pageNumber.set(page);
   }
 
-  skip = computed(() => this.limit() * (this.pageNumber() - 1));
+  constructor() {
+    this.resetPageOnSearchChange();
+  }
 
+  private resetPageOnSearchChange(): void {
+    effect(() => {
+      this.search();
+      untracked(() => this.pageNumber.set(1));
+    });
+  }
   readonly productsResponse = toSignal(
     combineLatest([
       toObservable(this.limit),
-      toObservable(this.skip),
+      toObservable(this.pageNumber),
       toObservable(this.search),
     ]).pipe(
-      switchMap(([limit, skip, search]) => this.#productFacade.getProducts(limit, skip, search)),
+      switchMap(([limit, page, search]) =>
+        this.#productFacade.getProducts(limit, limit * (page - 1), search),
+      ),
     ),
-    { initialValue: null },
+    { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
   );
 }
