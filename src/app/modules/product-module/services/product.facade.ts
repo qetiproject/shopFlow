@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  Category,
   Product,
   ProductApi,
   ProductApiShape,
@@ -42,5 +43,9 @@ export class ProductFacade {
 
   getProductDetails(id: number): Observable<Product | null> {
     return this.#productApi.getProductDetails(id);
+  }
+
+  getProductCategories(): Observable<Category[]> {
+    return this.#productApi.productCategories();
   }
 }

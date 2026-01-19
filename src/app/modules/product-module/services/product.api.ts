@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Product, ProductApiShape, ProductsApiResponse } from '@product-module';
+import { Category, Product, ProductApiShape, ProductsApiResponse } from '@product-module';
 import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -31,5 +31,9 @@ export class ProductApi {
 
   getProductDetails(id: number): Observable<Product | null> {
     return this.#http.get<Product>(`${this.baseUrl}/${id}`);
+  }
+
+  productCategories(): Observable<Category[]> {
+    return this.#http.get<Category[]>(`${this.baseUrl}/categories`);
   }
 }
