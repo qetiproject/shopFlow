@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'products',
   standalone: true,
   imports: [Search, ProductList],
-  templateUrl: './products-page.html',
+  templateUrl: './products.html',
 })
 export class ProductsPage {
   search$ = new BehaviorSubject<string>('');

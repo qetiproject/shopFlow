@@ -28,4 +28,8 @@ export class ProductApi {
       params,
     });
   }
+
+  getProductDetails(id: number) {
+    return this.#http.get<ProductsApiResponse<ProductApiShape>>(`${this.baseUrl}/${id}`);
+  }
 }

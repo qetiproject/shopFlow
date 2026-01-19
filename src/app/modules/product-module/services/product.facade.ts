@@ -36,4 +36,8 @@ export class ProductFacade {
       thumbnail: product.thumbnail,
     };
   }
+
+  getProductDetails(id: number) {
+    return this.#productApi.getProductDetails(id);
+  }
 }
