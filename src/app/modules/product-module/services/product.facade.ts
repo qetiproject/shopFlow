@@ -52,4 +52,13 @@ export class ProductFacade {
   getProductsByCategory(category: string, limit: number, skip: number) {
     return this.#productApi.productsByCategory(category, limit, skip);
   }
+
+  getProductsBySort(
+    sortBy: string,
+    orderBy: string,
+    limit: number,
+    skip: number,
+  ): Observable<ProductsApiResponse<Product>> {
+    return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
+  }
 }

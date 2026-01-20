@@ -22,7 +22,7 @@ export class CategoryComponent {
   });
 
   categoryOptions = computed(() => [
-    { label: 'Choose Category', value: '' },
+    { label: 'All Categories', value: '' },
     ...this.categoryList().map((c) => ({
       label: c.name,
       value: c.slug,

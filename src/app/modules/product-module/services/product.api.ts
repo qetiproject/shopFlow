@@ -42,4 +42,15 @@ export class ProductApi {
       `${this.baseUrl}/category/${category}?limit=${limit}&skip=${skip}`,
     );
   }
+
+  productsBySort(
+    sortBy: string,
+    orderBy: string,
+    limit: number,
+    skip: number,
+  ): Observable<ProductsApiResponse<Product>> {
+    return this.#http.get<ProductsApiResponse<Product>>(
+      `${this.baseUrl}?sortBy=${sortBy}&order=${orderBy}&limit=${limit}&skip=${skip}`,
+    );
+  }
 }
