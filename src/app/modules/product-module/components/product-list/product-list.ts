@@ -5,6 +5,7 @@ import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
 import { combineLatest, switchMap } from 'rxjs';
 import { ProductFacade } from '../../services/product.facade';
+import { SortOrder } from '../../types/sort';
 
 @Component({
   selector: 'product-list',
@@ -21,13 +22,8 @@ export class ProductList {
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
   windowSize = signal<number>(5);
-
-  // sortBy = signal<string>('');
-  // sortOrder = signal<'asc' | 'desc'>('asc');
-
-  // toggleSort() {
-  //   this.sortOrder.set(this.sortOrder() === 'asc' ? 'desc' : 'asc');
-  // }
+  order = input<SortOrder>();
+  sort = signal<string>('title');
 
   onPageNumber(page: number) {
     this.pageNumber.set(page);
@@ -50,16 +46,31 @@ export class ProductList {
       toObservable(this.pageNumber),
       toObservable(this.search),
       toObservable(this.category),
+      toObservable(this.sort),
+      toObservable(this.order),
     ]).pipe(
-      switchMap(
-        ([limit, page, search, category]) =>
-          category
-            ? this.#productFacade.getProductsByCategory(category, limit, limit * (page - 1))
-            : this.#productFacade.getProducts(limit, limit * (page - 1), search),
-        // this.#productFacade.getProducts(limit, limit * (page - 1), search),
-      ),
+      switchMap(([limit, page, search, category, sort, order]) => {
+        const skip = limit * (page - 1);
+
+        if (sort && order) {
+          return this.#productFacade.getProductsBySort(sort, order, limit, skip);
+        }
+
+        if (category) {
+          return this.#productFacade.getProductsByCategory(category, limit, skip);
+        }
+
+        return this.#productFacade.getProducts(limit, skip, search);
+      }),
     ),
-    { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
+    {
+      initialValue: {
+        limit: 10,
+        skip: 0,
+        products: [],
+        total: 0,
+      },
+    },
   );
 
   // readonly productsResponse = toSignal(

@@ -6,7 +6,12 @@
     <product-header
       (categoryValue)="onCategoryValue($event)"
       (searchValue)="onSearch($event)"
+      (orderValue)="onOrder($event)"
     ></product-header>
-    <product-list [search]="searchValue()" [category]="categoryValue()"></product-list>
+    <product-list
+      [search]="searchValue()"
+      [category]="categoryValue()"
+      [order]="orderValue()"
+    ></product-list>
   </div>
 </div>
