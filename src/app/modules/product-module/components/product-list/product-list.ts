@@ -17,6 +17,7 @@ export class ProductList {
   #productFacade = inject(ProductFacade);
 
   search = input<string>('');
+  category = input<string | null>(null);
 
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
@@ -48,4 +49,6 @@ export class ProductList {
     ),
     { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
   );
+
+  readonly productByCategory = 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Search } from '@features';
 import { ProductList } from '@product-module';
@@ -16,8 +16,13 @@ export class ProductsPage {
   placeholder: string = 'Search product with title or description';
 
   searchToSignal = toSignal(this.search$, { initialValue: '' });
+  categoryValue = signal<string | null>(null);
 
   onSearch(value: string): void {
     this.search$.next(value);
+  }
+
+  onCategorySelected(value: string | null): void {
+    this.categoryValue.set(value);
   }
 }
