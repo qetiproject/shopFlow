@@ -1,28 +1,21 @@
 import { Component, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { Search } from '@features';
 import { ProductList } from '@product-module';
-import { BehaviorSubject } from 'rxjs';
-import { CategoryComponent } from '../../components/category/category';
+import { ProductHeader } from '../../components/product-header/product-header';
 
 @Component({
   selector: 'products',
   standalone: true,
-  imports: [Search, ProductList, CategoryComponent],
+  imports: [ProductList, ProductHeader],
   templateUrl: './products.html',
 })
 export class ProductsPage {
-  search$ = new BehaviorSubject<string>('');
-  placeholder: string = 'Search product with title or description';
-
-  searchToSignal = toSignal(this.search$, { initialValue: '' });
   categoryValue = signal<string>('');
+  searchValue = signal<string>('');
 
   onSearch(value: string): void {
-    this.search$.next(value);
+    this.searchValue.set(value);
   }
-
-  onCategorySelected(value: string): void {
+  onCategoryValue(value: string): void {
     this.categoryValue.set(value);
   }
 }
