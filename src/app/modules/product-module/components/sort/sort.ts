@@ -1,4 +1,5 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SortFacade } from '../../services/sort.facade';
 import { SortOrder } from '../../types/sort';
 
 @Component({
@@ -6,16 +7,15 @@ import { SortOrder } from '../../types/sort';
   standalone: true,
   imports: [],
   templateUrl: './sort.html',
+  providers: [SortFacade],
 })
 export class SortComponent {
-  sortBy: string = 'title';
-  sortOrder = signal<SortOrder>(SortOrder.DESC);
-  order = output<SortOrder>();
-
+  #sortFacade = inject(SortFacade);
   SORTORDER = SortOrder;
 
+  protected readonly sortOrder = this.#sortFacade.sortOrder;
+
   toggleSort() {
-    this.sortOrder.set(this.sortOrder() === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC);
-    this.order.emit(this.sortOrder());
+    this.#sortFacade.toggleSort();
   }
 }

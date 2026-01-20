@@ -5,24 +5,25 @@ import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
 import { combineLatest, switchMap } from 'rxjs';
 import { ProductFacade } from '../../services/product.facade';
-import { SortOrder } from '../../types/sort';
+import { SortFacade } from '../../services/sort.facade';
 
 @Component({
   selector: 'product-list',
   standalone: true,
   imports: [CommonModule, ProductItem, Paging],
   templateUrl: './product-list.html',
+  providers: [SortFacade],
 })
 export class ProductList {
   #productFacade = inject(ProductFacade);
-
+  #sortFacade = inject(SortFacade);
   search = input<string>('');
   category = input<string>();
 
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
   windowSize = signal<number>(5);
-  order = input<SortOrder>();
+  order = this.#sortFacade.sortOrder;
   sort = signal<string>('title');
 
   onPageNumber(page: number) {
@@ -40,6 +41,29 @@ export class ProductList {
       untracked(() => this.pageNumber.set(1));
     });
   }
+  // readonly productsResponse = toSignal(
+  //   combineLatest([
+  //     toObservable(this.limit),
+  //     toObservable(this.pageNumber),
+  //     toObservable(this.search),
+  //     toObservable(this.category),
+  //   ]).pipe(
+  //     switchMap(([limit, page, search, category]) =>
+  //       category
+  //         ? this.#productFacade.getProductsByCategory(category, limit, limit * (page - 1))
+  //         : this.#productFacade.getProducts(limit, limit * (page - 1), search),
+  //     ),
+  //   ),
+  //   {
+  //     initialValue: {
+  //       limit: 10,
+  //       skip: 0,
+  //       products: [],
+  //       total: 0,
+  //     },
+  //   },
+  // );
+
   readonly productsResponse = toSignal(
     combineLatest([
       toObservable(this.limit),
@@ -50,7 +74,7 @@ export class ProductList {
       toObservable(this.order),
     ]).pipe(
       switchMap(([limit, page, search, category, sort, order]) => {
-        const skip = limit * (page - 1);
+        let skip = limit * (page - 1);
 
         if (sort && order) {
           return this.#productFacade.getProductsBySort(sort, order, limit, skip);
@@ -63,39 +87,6 @@ export class ProductList {
         return this.#productFacade.getProducts(limit, skip, search);
       }),
     ),
-    {
-      initialValue: {
-        limit: 10,
-        skip: 0,
-        products: [],
-        total: 0,
-      },
-    },
+    { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
   );
-
-  // readonly productsResponse = toSignal(
-  //   combineLatest([
-  //     toObservable(this.limit),
-  //     toObservable(this.pageNumber),
-  //     toObservable(this.search),
-  //     toObservable(this.category),
-  //     toObservable(this.sortBy),
-  //     toObservable(this.sortOrder),
-  //   ]).pipe(
-  //     switchMap(([limit, page, search, category, sortBy, sortOrder]) => {
-  //       let skip = limit * (page - 1);
-
-  //       if (sortBy) {
-  //         return this.#productFacade.getProductsBySort(sortBy, sortOrder, limit, skip);
-  //       }
-
-  //       if (category) {
-  //         return this.#productFacade.getProductsByCategory(category, limit, skip);
-  //       }
-
-  //       return this.#productFacade.getProducts(limit, skip, search);
-  //     }),
-  //   ),
-  //   { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
-  // );
 }

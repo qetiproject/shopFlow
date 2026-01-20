@@ -13,7 +13,6 @@ import { SortComponent } from '../sort/sort';
 export class ProductHeader {
   @ViewChild(Search) searchComponent!: Search;
   @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
-  @ViewChild(SortComponent) sortComponent!: SortComponent;
 
   placeholder: string = 'Search products...';
   categoryValue = output<string>();
