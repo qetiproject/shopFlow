@@ -4,7 +4,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '@components';
 import { ProductFacade } from '@product-module';
-import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'category-list',
@@ -29,15 +28,13 @@ export class CategoryComponent {
     })),
   ]);
 
-  categoryValue = toSignal(this.control.valueChanges.pipe(distinctUntilChanged()), {
+  categoryValue = toSignal(this.control.valueChanges, {
     initialValue: '',
   });
 
   constructor() {
     effect(() => {
-      const value = this.categoryValue();
-      if (!value) return;
-      this.categorySelected.emit(value);
+      this.categorySelected.emit(this.categoryValue());
     });
   }
 }
