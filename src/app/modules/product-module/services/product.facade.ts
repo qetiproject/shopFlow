@@ -49,7 +49,7 @@ export class ProductFacade {
     return this.#productApi.productCategories();
   }
 
-  getProductsByCategory(category: string) {
-    return this.#productApi.productsByCategory(category);
+  getProductsByCategory(category: string, limit: number, skip: number) {
+    return this.#productApi.productsByCategory(category, limit, skip);
   }
 }

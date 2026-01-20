@@ -11,7 +11,6 @@ import { ProductFacade } from '../../services/product.facade';
   standalone: true,
   imports: [CommonModule, ProductItem, Paging],
   templateUrl: './product-list.html',
-  providers: [ProductFacade],
 })
 export class ProductList {
   #productFacade = inject(ProductFacade);
@@ -34,6 +33,7 @@ export class ProductList {
   private resetPageOnSearchChange(): void {
     effect(() => {
       this.search();
+      this.category();
       untracked(() => this.pageNumber.set(1));
     });
   }
@@ -46,7 +46,7 @@ export class ProductList {
     ]).pipe(
       switchMap(([limit, page, search, category]) =>
         category
-          ? this.#productFacade.getProductsByCategory(category)
+          ? this.#productFacade.getProductsByCategory(category, limit, limit * (page - 1))
           : this.#productFacade.getProducts(limit, limit * (page - 1), search),
       ),
     ),

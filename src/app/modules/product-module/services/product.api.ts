@@ -37,9 +37,9 @@ export class ProductApi {
     return this.#http.get<Category[]>(`${this.baseUrl}/categories`);
   }
 
-  productsByCategory(category: string) {
+  productsByCategory(category: string, limit: number, skip: number) {
     return this.#http.get<ProductsApiResponse<ProductApiShape>>(
-      `${this.baseUrl}/category/${category}`,
+      `${this.baseUrl}/category/${category}?limit=${limit}&skip=${skip}`,
     );
   }
 }

@@ -4,18 +4,16 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '@components';
 import { ProductFacade } from '@product-module';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'category-list',
   standalone: true,
   imports: [CommonModule, SelectComponent, ReactiveFormsModule],
-  template: `
-    <app-select [options]="categoryOptions()" [label]="label" [formControl]="control"></app-select>
-  `,
+  template: ` <app-select [options]="categoryOptions()" [formControl]="control"></app-select> `,
 })
 export class CategoryComponent {
   #productFacade = inject(ProductFacade);
-  label: string = 'Choose Category';
   categorySelected = output<string>();
   control = new FormControl<string>('', { nonNullable: true });
 
@@ -23,14 +21,15 @@ export class CategoryComponent {
     initialValue: [],
   });
 
-  categoryOptions = computed(() =>
-    this.categoryList().map((c) => ({
+  categoryOptions = computed(() => [
+    { label: 'Choose Category', value: '' },
+    ...this.categoryList().map((c) => ({
       label: c.name,
       value: c.slug,
     })),
-  );
+  ]);
 
-  categoryValue = toSignal(this.control.valueChanges, {
+  categoryValue = toSignal(this.control.valueChanges.pipe(distinctUntilChanged()), {
     initialValue: '',
   });
 
