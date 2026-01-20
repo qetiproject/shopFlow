@@ -36,4 +36,10 @@ export class ProductApi {
   productCategories(): Observable<Category[]> {
     return this.#http.get<Category[]>(`${this.baseUrl}/categories`);
   }
+
+  productsByCategory(category: string) {
+    return this.#http.get<ProductsApiResponse<ProductApiShape>>(
+      `${this.baseUrl}/category/${category}`,
+    );
+  }
 }

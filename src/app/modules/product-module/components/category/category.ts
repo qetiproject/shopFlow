@@ -10,14 +10,14 @@ import { ProductFacade } from '@product-module';
   standalone: true,
   imports: [CommonModule, SelectComponent, ReactiveFormsModule],
   template: `
-    <app-select [options]="categoryOptions()" [label]="label" [formControl]="category"></app-select>
+    <app-select [options]="categoryOptions()" [label]="label" [formControl]="control"></app-select>
   `,
 })
 export class CategoryComponent {
   #productFacade = inject(ProductFacade);
   label: string = 'Choose Category';
-  categorySelected = output<string | null>();
-  category = new FormControl<string | null>(null);
+  categorySelected = output<string>();
+  control = new FormControl<string>('', { nonNullable: true });
 
   categoryList = toSignal(this.#productFacade.getProductCategories(), {
     initialValue: [],
@@ -30,13 +30,15 @@ export class CategoryComponent {
     })),
   );
 
-  categoryValue = toSignal(this.category.valueChanges, {
-    initialValue: null,
+  categoryValue = toSignal(this.control.valueChanges, {
+    initialValue: '',
   });
 
   constructor() {
     effect(() => {
-      this.categorySelected.emit(this.categoryValue());
+      const value = this.categoryValue();
+      if (!value) return;
+      this.categorySelected.emit(value);
     });
   }
 }

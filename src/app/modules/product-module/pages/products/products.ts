@@ -16,13 +16,13 @@ export class ProductsPage {
   placeholder: string = 'Search product with title or description';
 
   searchToSignal = toSignal(this.search$, { initialValue: '' });
-  categoryValue = signal<string | null>(null);
+  categoryValue = signal<string>('');
 
   onSearch(value: string): void {
     this.search$.next(value);
   }
 
-  onCategorySelected(value: string | null): void {
+  onCategorySelected(value: string): void {
     this.categoryValue.set(value);
   }
 }

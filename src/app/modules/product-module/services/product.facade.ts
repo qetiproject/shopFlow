@@ -48,4 +48,8 @@ export class ProductFacade {
   getProductCategories(): Observable<Category[]> {
     return this.#productApi.productCategories();
   }
+
+  getProductsByCategory(category: string) {
+    return this.#productApi.productsByCategory(category);
+  }
 }

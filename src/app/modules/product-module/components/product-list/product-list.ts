@@ -17,7 +17,7 @@ export class ProductList {
   #productFacade = inject(ProductFacade);
 
   search = input<string>('');
-  category = input<string | null>(null);
+  category = input<string>();
 
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
@@ -42,13 +42,14 @@ export class ProductList {
       toObservable(this.limit),
       toObservable(this.pageNumber),
       toObservable(this.search),
+      toObservable(this.category),
     ]).pipe(
-      switchMap(([limit, page, search]) =>
-        this.#productFacade.getProducts(limit, limit * (page - 1), search),
+      switchMap(([limit, page, search, category]) =>
+        category
+          ? this.#productFacade.getProductsByCategory(category)
+          : this.#productFacade.getProducts(limit, limit * (page - 1), search),
       ),
     ),
     { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
   );
-
-  readonly productByCategory = 
 }
