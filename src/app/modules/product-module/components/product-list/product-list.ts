@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, input, signal, untracked } from '@angular/core';
+import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
-import { combineLatest, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { ProductFacade } from '../../services/product.facade';
 import { SortFacade } from '../../services/sort.facade';
+
+export enum ProductMode {
+  SEARCH = 'search',
+  CATEGORY = 'category',
+  ORDER = 'order',
+}
 
 @Component({
   selector: 'product-list',
   standalone: true,
   imports: [CommonModule, ProductItem, Paging],
   templateUrl: './product-list.html',
-  providers: [SortFacade],
 })
 export class ProductList {
   #productFacade = inject(ProductFacade);
@@ -38,55 +43,53 @@ export class ProductList {
     effect(() => {
       this.search();
       this.category();
+      this.sort();
+      this.order();
       untracked(() => this.pageNumber.set(1));
     });
   }
-  // readonly productsResponse = toSignal(
-  //   combineLatest([
-  //     toObservable(this.limit),
-  //     toObservable(this.pageNumber),
-  //     toObservable(this.search),
-  //     toObservable(this.category),
-  //   ]).pipe(
-  //     switchMap(([limit, page, search, category]) =>
-  //       category
-  //         ? this.#productFacade.getProductsByCategory(category, limit, limit * (page - 1))
-  //         : this.#productFacade.getProducts(limit, limit * (page - 1), search),
-  //     ),
-  //   ),
-  //   {
-  //     initialValue: {
-  //       limit: 10,
-  //       skip: 0,
-  //       products: [],
-  //       total: 0,
-  //     },
-  //   },
-  // );
+
+  private params = computed(() => {
+    return {
+      mode: this.#sortFacade.mode(),
+      search: this.search(),
+      category: this.category(),
+      limit: this.limit(),
+      page: this.pageNumber(),
+      sort: this.sort(),
+      order: this.order(),
+      skip: this.limit() * (this.pageNumber() - 1),
+    };
+  });
+
+  private resolveRequest(
+    params: ReturnType<typeof this.params>,
+  ): ReturnType<ProductFacade['getProducts']> {
+    const { mode, category, sort, order, limit, skip, search } = params;
+
+    console.log(params, 'params');
+    if (mode === ProductMode.CATEGORY && !category) {
+      return this.#productFacade.getProducts(limit, skip, search);
+    }
+    switch (mode) {
+      case ProductMode.CATEGORY:
+        return this.#productFacade.getProductsByCategory(category!, limit, skip);
+      case ProductMode.ORDER:
+        return this.#productFacade.getProductsBySort(sort!, order!, limit, skip);
+      default:
+        return this.#productFacade.getProducts(limit, skip, search);
+    }
+  }
 
   readonly productsResponse = toSignal(
-    combineLatest([
-      toObservable(this.limit),
-      toObservable(this.pageNumber),
-      toObservable(this.search),
-      toObservable(this.category),
-      toObservable(this.sort),
-      toObservable(this.order),
-    ]).pipe(
-      switchMap(([limit, page, search, category, sort, order]) => {
-        let skip = limit * (page - 1);
-
-        if (sort && order) {
-          return this.#productFacade.getProductsBySort(sort, order, limit, skip);
-        }
-
-        if (category) {
-          return this.#productFacade.getProductsByCategory(category, limit, skip);
-        }
-
-        return this.#productFacade.getProducts(limit, skip, search);
-      }),
-    ),
-    { initialValue: { limit: 10, skip: 0, products: [], total: 0 } },
+    toObservable(this.params).pipe(switchMap((params) => this.resolveRequest(params))),
+    {
+      initialValue: {
+        products: [],
+        total: 0,
+        limit: 10,
+        skip: 0,
+      },
+    },
   );
 }
