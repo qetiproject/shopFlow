@@ -1,14 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Paging } from '@components';
 import { ProductItem } from '@product-module';
-import { Paging } from 'app/components/paging/paging';
 import { ProductlistFacade } from './product-list.facade';
-
-export enum ProductMode {
-  SEARCH = 'search',
-  CATEGORY = 'category',
-  ORDER = 'order',
-}
 
 @Component({
   selector: 'product-list',

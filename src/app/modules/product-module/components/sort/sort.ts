@@ -1,6 +1,5 @@
 import { Component, inject, output } from '@angular/core';
-import { SortFacade } from '../../services/sort.facade';
-import { SortOrder } from '../../types/sort';
+import { SortFacade, SortOrder } from '@product-module';
 
 @Component({
   selector: 'app-sort',
