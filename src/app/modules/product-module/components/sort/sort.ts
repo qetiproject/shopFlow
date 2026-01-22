@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ProductMode } from '@product-module';
 import { SortFacade } from '../../services/sort.facade';
 import { SortOrder } from '../../types/sort';
 import { ProductHeaderFacade } from '../product-header/product-header.facade';
@@ -18,6 +19,8 @@ export class SortComponent {
 
   toggleSort() {
     this.#sortFacade.toggleSort();
-    this.#productHeaderFacade.resetFilters();
+    this.#productHeaderFacade.categoryValue.set('');
+    this.#productHeaderFacade.searchValue.set('');
+    this.#productHeaderFacade.mode.set(ProductMode.ORDER);
   }
 }

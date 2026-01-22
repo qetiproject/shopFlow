@@ -7,9 +7,9 @@ export class ProductHeaderFacade {
   searchValue = signal<string>('');
   mode = signal<ProductMode>(ProductMode.SEARCH);
 
-  resetFilters() {
-    this.categoryValue.set('');
-    this.searchValue.set('');
-    this.mode.set(ProductMode.ORDER);
-  }
+  // // resetFilters() {
+  // //   this.categoryValue.set('');
+  // //   this.searchValue.set('');
+  // //   this.mode.set(ProductMode.SEARCH);
+  // // }
 }

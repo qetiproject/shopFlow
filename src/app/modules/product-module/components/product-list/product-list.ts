@@ -54,7 +54,7 @@ export class ProductList {
 
   private params = computed(() => {
     return {
-      mode: this.#sortFacade.mode(),
+      mode: this.#productHeaderFacade.mode(),
       search: this.search(),
       category: this.category(),
       limit: this.limit(),
@@ -71,17 +71,15 @@ export class ProductList {
     const { mode, category, sort, order, limit, skip, search } = params;
 
     console.log(params, 'params');
-    if (mode === ProductMode.CATEGORY && category) {
-      return this.#productFacade.getProducts(limit, skip, search);
-    }
-    switch (mode) {
-      case ProductMode.CATEGORY:
-        return this.#productFacade.getProductsByCategory(category!, limit, skip);
-      case ProductMode.ORDER:
-        return this.#productFacade.getProductsBySort(sort!, order!, limit, skip);
-      default:
-        return this.#productFacade.getProducts(limit, skip, search);
-    }
+    return this.#productFacade.getProducts(limit, skip, search);
+    // switch (mode) {
+    //   case ProductMode.CATEGORY:
+    //     return this.#productFacade.getProductsByCategory(category!, limit, skip);
+    //   case ProductMode.ORDER:
+    //     return this.#productFacade.getProductsBySort(sort!, order!, limit, skip);
+    //   default:
+    //     return this.#productFacade.getProducts(limit, skip, search);
+    // }
   }
 
   readonly productsResponse = toSignal(
