@@ -1,13 +1,14 @@
-import { CommonModule } from "@angular/common";
-import { Component, input } from "@angular/core";
-import { ProductViewModel } from "@product-module";
+import { CommonModule } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ProductViewModel } from '@product-module';
 
 @Component({
-    selector: 'product-item',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './product-item.html'
+  selector: 'product-item',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  templateUrl: './product-item.html',
 })
 export class ProductItem {
-    product = input.required<ProductViewModel>();
+  product = input.required<ProductViewModel>();
 }

@@ -1,10 +1,8 @@
 <ng-template #emailCell let-user>
   <div class="flex items-center gap-3">
     <div
-      class="h-10 w-10 rounded-full
-             bg-blue-600 text-white
-             flex items-center justify-center
-             text-sm font-semibold">
+      class="h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold"
+    >
       {{ user.emailId.charAt(0).toUpperCase() }}
     </div>
     <div>
@@ -15,8 +13,12 @@
   </div>
 </ng-template>
 
-<app-table
-    [columns]="columns()"
-    [data]="users()?.data || []"
-    [trackBy]="trackByUser">
-</app-table>
+<app-table [columns]="columns()" [data]="users()?.data || []" [trackBy]="trackByUser"> </app-table>
+
+<app-paging
+  [totalItems]="users()!.totalRecords"
+  [pageSize]="pageSize()"
+  [currentPage]="pageNumber()"
+  [windowSize]="windowSize()"
+  (pageNumber)="onPageNumber($event)"
+></app-paging>

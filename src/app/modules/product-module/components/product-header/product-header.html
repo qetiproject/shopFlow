@@ -1,0 +1,9 @@
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-4 w-full mt-5 mb-5">
+  <search
+    (value$)="onSearch($event)"
+    [placeholder]="placeholder"
+    class="flex-1 sm:flex-auto"
+  ></search>
+  <category-list (categorySelected)="onCategorySelected($event)" />
+  <app-sort (sortedVale)="onOrdered($event)"></app-sort>
+</div>
