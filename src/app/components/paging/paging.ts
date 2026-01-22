@@ -11,7 +11,7 @@ export class Paging {
   totalItems = input.required<number>();
   currentPage = input.required<number>();
   pageSize = input.required<number>();
-  windowSize = input.required<number>();
+  windowSize = input<number>(5);
   pageNumber = output<number>();
 
   maxPage = computed(() => {

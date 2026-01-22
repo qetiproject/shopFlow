@@ -21,7 +21,6 @@ export class ProductList {
 
   limit = this.#productListFacade.limit;
   pageNumber = this.#productListFacade.pageNumber;
-  windowSize = this.#productListFacade.windowSize;
 
   readonly productsResponse = this.#productListFacade.productsResponse;
 

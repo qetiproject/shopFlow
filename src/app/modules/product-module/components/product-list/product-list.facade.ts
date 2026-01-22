@@ -16,16 +16,10 @@ export class ProductlistFacade {
 
   search = this.#productHeaderFacade.searchValue;
   category = this.#productHeaderFacade.categoryValue;
-
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
-  windowSize = signal<number>(5);
   order = this.#sortFacade.sortOrder;
   sort = signal<string>('title');
-
-  onPageNumber(page: number) {
-    this.pageNumber.set(page);
-  }
 
   constructor() {
     this.resetPageOnSearchChange();

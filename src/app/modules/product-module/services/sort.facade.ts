@@ -7,7 +7,13 @@ import { SortOrder } from '../types/sort';
 export class SortFacade {
   sortOrder = signal<SortOrder>(SortOrder.DESC);
 
-  toggleSort() {
-    this.sortOrder.set(this.sortOrder() === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC);
+  set(order: SortOrder): void {
+    this.sortOrder.set(order);
+  }
+
+  toggleSort(): SortOrder {
+    const next = this.sortOrder() === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
+    this.sortOrder.set(next);
+    return next;
   }
 }

@@ -1,8 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { ProductMode } from '@product-module';
+import { Component, inject, output } from '@angular/core';
 import { SortFacade } from '../../services/sort.facade';
 import { SortOrder } from '../../types/sort';
-import { ProductHeaderFacade } from '../product-header/product-header.facade';
 
 @Component({
   selector: 'app-sort',
@@ -13,14 +11,12 @@ import { ProductHeaderFacade } from '../product-header/product-header.facade';
 export class SortComponent {
   #sortFacade = inject(SortFacade);
   SORTORDER = SortOrder;
-  #productHeaderFacade = inject(ProductHeaderFacade);
+  sortedVale = output<SortOrder>();
 
   protected readonly sortOrder = this.#sortFacade.sortOrder;
 
-  toggleSort() {
-    this.#sortFacade.toggleSort();
-    this.#productHeaderFacade.categoryValue.set('');
-    this.#productHeaderFacade.searchValue.set('');
-    this.#productHeaderFacade.mode.set(ProductMode.ORDER);
+  toggleSort(): void {
+    let order = this.#sortFacade.toggleSort();
+    this.sortedVale.emit(order);
   }
 }
