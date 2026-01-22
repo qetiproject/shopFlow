@@ -1,8 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { Search } from '@features';
-import { CategoryComponent, ProductMode } from '@product-module';
-import { SortFacade } from '../../services/sort.facade';
-import { SortComponent } from '../sort/sort';
+import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
+import { SortComponent } from '../index';
 import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
@@ -12,7 +11,6 @@ import { ProductHeaderFacade } from './product-header.facade';
   templateUrl: './product-header.html',
 })
 export class ProductHeader {
-  #sortFacade = inject(SortFacade);
   #productHeaderFacade = inject(ProductHeaderFacade);
   placeholder: string = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;
@@ -36,13 +34,17 @@ export class ProductHeader {
     }
   }
 
-  onOrdered(value: any): void {
+  onOrdered(value: SortOrder): void {
     if (value) {
-      this.#productHeaderFacade.categoryValue.set('');
-      this.#productHeaderFacade.searchValue.set('');
       this.#productHeaderFacade.mode.set(ProductMode.ORDER);
-      this.searchComponent.search.setValue('', { emitEvent: false });
-      this.categoryComponent.control.setValue('', { emitEvent: false });
+      this.resetFilters();
     }
+  }
+
+  private resetFilters(): void {
+    this.#productHeaderFacade.categoryValue.set('');
+    this.#productHeaderFacade.searchValue.set('');
+    this.searchComponent.search.setValue('', { emitEvent: false });
+    this.categoryComponent.control.setValue('', { emitEvent: false });
   }
 }
