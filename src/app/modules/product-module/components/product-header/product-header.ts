@@ -1,7 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { Search } from '@features';
 import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
-import { SortComponent } from '../index';
+import { SortComponent } from '../sort/sort';
 import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
