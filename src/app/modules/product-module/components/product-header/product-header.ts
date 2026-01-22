@@ -19,7 +19,6 @@ export class ProductHeader {
 
   onCategorySelected(value: string) {
     this.#productHeaderFacade.categoryValue.set(value);
-    console.log(this.#productHeaderFacade.categoryValue(), 'value');
     this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
     this.#productHeaderFacade.searchValue.set('');
     this.#sortFacade.sortOrder.set(SortOrder.DESC);

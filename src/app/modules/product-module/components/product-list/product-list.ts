@@ -25,8 +25,8 @@ export class ProductList {
   #sortFacade = inject(SortFacade);
   #productHeaderFacade = inject(ProductHeaderFacade);
 
-  search = signal<string>(this.#productHeaderFacade.searchValue());
-  category = signal<string>(this.#productHeaderFacade.categoryValue());
+  search = this.#productHeaderFacade.searchValue;
+  category = this.#productHeaderFacade.categoryValue;
 
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
@@ -70,16 +70,20 @@ export class ProductList {
   ): ReturnType<ProductFacade['getProducts']> {
     const { mode, category, sort, order, limit, skip, search } = params;
 
+    console.log(mode, 'mode');
     console.log(params, 'params');
-    return this.#productFacade.getProducts(limit, skip, search);
-    // switch (mode) {
-    //   case ProductMode.CATEGORY:
-    //     return this.#productFacade.getProductsByCategory(category!, limit, skip);
-    //   case ProductMode.ORDER:
-    //     return this.#productFacade.getProductsBySort(sort!, order!, limit, skip);
-    //   default:
-    //     return this.#productFacade.getProducts(limit, skip, search);
-    // }
+
+    switch (mode) {
+      case ProductMode.CATEGORY:
+        if (!category) {
+          return this.#productFacade.getProducts(limit, skip, search);
+        }
+        return this.#productFacade.getProductsByCategory(category!, limit, skip);
+      case ProductMode.ORDER:
+        return this.#productFacade.getProductsBySort(sort, order, limit, skip);
+      default:
+        return this.#productFacade.getProducts(limit, skip, search);
+    }
   }
 
   readonly productsResponse = toSignal(

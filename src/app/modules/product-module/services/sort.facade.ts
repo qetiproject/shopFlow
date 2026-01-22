@@ -5,7 +5,6 @@ import { SortOrder } from '../types/sort';
   providedIn: 'root',
 })
 export class SortFacade {
-  sortBy: string = 'title';
   sortOrder = signal<SortOrder>(SortOrder.DESC);
 
   toggleSort() {

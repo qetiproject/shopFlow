@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
+import { Search } from '@features';
 import { ProductMode } from '@product-module';
 import { SortFacade } from '../../services/sort.facade';
 import { SortOrder } from '../../types/sort';
@@ -17,10 +18,13 @@ export class SortComponent {
 
   protected readonly sortOrder = this.#sortFacade.sortOrder;
 
+  @ViewChild(Search) searchComponent!: Search;
+
   toggleSort() {
     this.#sortFacade.toggleSort();
     this.#productHeaderFacade.categoryValue.set('');
     this.#productHeaderFacade.searchValue.set('');
     this.#productHeaderFacade.mode.set(ProductMode.ORDER);
+    this.searchComponent.search.setValue('');
   }
 }
