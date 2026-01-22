@@ -2,7 +2,6 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { Search } from '@features';
 import { CategoryComponent, ProductMode } from '@product-module';
 import { SortFacade } from '../../services/sort.facade';
-import { SortOrder } from '../../types/sort';
 import { SortComponent } from '../sort/sort';
 import { ProductHeaderFacade } from './product-header.facade';
 
@@ -24,7 +23,6 @@ export class ProductHeader {
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
       this.#productHeaderFacade.searchValue.set('');
-      this.#sortFacade.sortOrder.set(SortOrder.DESC);
       this.searchComponent.search.setValue('', { emitEvent: false });
     }
   }
@@ -34,7 +32,6 @@ export class ProductHeader {
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.SEARCH);
       this.#productHeaderFacade.categoryValue.set('');
-      this.#sortFacade.sortOrder.set(SortOrder.DESC);
       this.categoryComponent.control.setValue('', { emitEvent: false });
     }
   }
