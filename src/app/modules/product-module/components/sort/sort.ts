@@ -1,7 +1,7 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SortFacade } from '../../services/sort.facade';
 import { SortOrder } from '../../types/sort';
-import { ProductHeader } from '../product-header/product-header';
+import { ProductHeaderFacade } from '../product-header/product-header.facade';
 
 @Component({
   selector: 'app-sort',
@@ -12,11 +12,12 @@ import { ProductHeader } from '../product-header/product-header';
 export class SortComponent {
   #sortFacade = inject(SortFacade);
   SORTORDER = SortOrder;
-  @ViewChild(ProductHeader) productHeader!: ProductHeader;
+  #productHeaderFacade = inject(ProductHeaderFacade);
 
   protected readonly sortOrder = this.#sortFacade.sortOrder;
 
   toggleSort() {
     this.#sortFacade.toggleSort();
+    this.#productHeaderFacade.resetFilters();
   }
 }

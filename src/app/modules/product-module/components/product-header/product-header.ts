@@ -1,8 +1,9 @@
-import { Component, inject, output, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Search } from '@features';
 import { CategoryComponent, ProductMode } from '@product-module';
 import { SortFacade } from '../../services/sort.facade';
 import { SortComponent } from '../sort/sort';
+import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
   selector: 'product-header',
@@ -11,31 +12,31 @@ import { SortComponent } from '../sort/sort';
   templateUrl: './product-header.html',
 })
 export class ProductHeader {
-  @ViewChild(Search) searchComponent!: Search;
-  @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
   #sortFacade = inject(SortFacade);
-
+  #productHeaderFacade = inject(ProductHeaderFacade);
   placeholder: string = 'Search products...';
-  categoryValue = output<string>();
-  searchValue = output<string>();
+
+  get categoryValue() {
+    return this.#productHeaderFacade.categoryValue;
+  }
+
+  get searchValue() {
+    return this.#productHeaderFacade.searchValue;
+  }
+
   get mode() {
     return this.#sortFacade.mode;
   }
-  onSearch(value: string): void {
-    this.searchValue.emit(value);
-    this.#sortFacade.setMode(ProductMode.SEARCH);
-    if (value) {
-      this.categoryValue.emit('');
-      this.categoryComponent.control.setValue('', { emitEvent: false });
-    }
+
+  onCategorySelected(value: string) {
+    this.#productHeaderFacade.categoryValue.set(value);
+    this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
+    this.#productHeaderFacade.searchValue.set('');
   }
 
-  onCategorySelected(value: string): void {
-    this.categoryValue.emit(value);
-    this.#sortFacade.setMode(ProductMode.CATEGORY);
-    if (value) {
-      this.searchValue.emit('');
-      this.searchComponent.search.setValue('', { emitEvent: false });
-    }
+  onSearch(value: string) {
+    this.#productHeaderFacade.searchValue.set(value);
+    this.#productHeaderFacade.mode.set(ProductMode.SEARCH);
+    this.#productHeaderFacade.categoryValue.set('');
   }
 }

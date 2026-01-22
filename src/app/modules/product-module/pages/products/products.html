@@ -3,10 +3,7 @@
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">Products</h1>
     </div>
-    <product-header
-      (categoryValue)="onCategoryValue($event)"
-      (searchValue)="onSearch($event)"
-    ></product-header>
-    <product-list [search]="searchValue()" [category]="categoryValue()"></product-list>
+    <product-header></product-header>
+    <product-list></product-list>
   </div>
 </div>

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ProductItem } from '@product-module';
 import { Paging } from 'app/components/paging/paging';
 import { switchMap } from 'rxjs';
 import { ProductFacade } from '../../services/product.facade';
 import { SortFacade } from '../../services/sort.facade';
+import { ProductHeaderFacade } from '../product-header/product-header.facade';
 
 export enum ProductMode {
   SEARCH = 'search',
@@ -22,8 +23,10 @@ export enum ProductMode {
 export class ProductList {
   #productFacade = inject(ProductFacade);
   #sortFacade = inject(SortFacade);
-  search = input<string>('');
-  category = input<string>();
+  #productHeaderFacade = inject(ProductHeaderFacade);
+
+  search = signal<string>(this.#productHeaderFacade.searchValue());
+  category = signal<string>(this.#productHeaderFacade.categoryValue());
 
   limit = signal<number>(10);
   pageNumber = signal<number>(1);
@@ -68,7 +71,7 @@ export class ProductList {
     const { mode, category, sort, order, limit, skip, search } = params;
 
     console.log(params, 'params');
-    if (mode === ProductMode.CATEGORY && !category) {
+    if (mode === ProductMode.CATEGORY && category) {
       return this.#productFacade.getProducts(limit, skip, search);
     }
     switch (mode) {
