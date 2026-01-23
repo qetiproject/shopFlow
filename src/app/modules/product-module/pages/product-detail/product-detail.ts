@@ -15,4 +15,12 @@ export class ProductDetail {
   productDetails = toSignal(this.#route.data.pipe(map((d) => d['product'])), {
     initialValue: null,
   });
+
+  get averageRating(): number {
+    const reviews = this.productDetails().reviews;
+    if (!reviews?.length) return 0;
+
+    const sum = reviews.reduce((acc: number, curr: any) => acc + curr.rating, 0);
+    return Math.round((sum / reviews.length) * 10) / 10;
+  }
 }
