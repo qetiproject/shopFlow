@@ -1,84 +1,90 @@
-<div class="max-w-6xl mx-auto p-6 bg-white rounded-3xl shadow-xl">
-  <div class="flex flex-col md:flex-row gap-12">
-    <div class="flex flex-col items-center">
-      <img
-        [src]="productDetails().thumbnail"
-        alt="Essence Mascara Lash Princess"
-        class="w-72 h-96 object-contain rounded-2xl shadow-lg mb-4"
-      />
-
-      <div class="flex gap-3">
-        @for (img of productDetails().images; track img) {
+@if (productDetails(); as product) {
+  <div class="max-w-7xl mx-auto p-6 lg:p-10 bg-white rounded-3xl shadow-2xl">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14">
+      <div>
+        <div class="bg-gray-50 rounded-3xl p-6 flex justify-center shadow-inner">
           <img
-            [src]="img"
-            class="w-16 h-20 object-contain rounded-xl border-2 border-pink-400 cursor-pointer"
+            [src]="product.thumbnail"
+            [alt]="product.title + ' thumbnail'"
+            class="h-[420px] object-contain transition-transform duration-300 hover:scale-105"
           />
-        }
-      </div>
-    </div>
-
-    <div class="flex-1 flex flex-col justify-between">
-      <div>
-        <h1 class="text-3xl font-bold mb-2">{{ productDetails().title }}</h1>
-        <p class="text-gray-600 mb-4">{{ productDetails().description }}</p>
-        <div class="flex items-center gap-4 mb-4">
-          <div class="text-2xl font-bold text-gray-900">
-            {{ productDetails().price }}
-          </div>
-          <span class="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded"
-            >{{ productDetails().discountPercentage }}% OFF</span
-          >
         </div>
-
-        <div class="flex items-center gap-2 mb-4">
-          <div class="flex text-yellow-400">
-            {{ '★'.repeat(averageRating) }}{{ '☆'.repeat(5 - averageRating) }}
-          </div>
-          <span class="text-gray-500 text-sm">({{ productDetails().reviews.length }} Reviews)</span>
-        </div>
-
-        <div class="space-y-1 mb-4">
-          <p class="text-green-600 font-semibold">In Stock</p>
-          <p>{{ productDetails().shippingInformation }}</p>
-          <p>{{ productDetails().warrantyInformation }}</p>
-        </div>
-
-        <div class="flex gap-4 mb-6">
-          <button
-            class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-md transition"
-          >
-            Add to Cart
-          </button>
-          <button
-            class="bg-white border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold px-6 py-3 rounded-2xl shadow-md transition"
-          >
-            Buy Now
-          </button>
-        </div>
-
-        <div class="flex gap-2 mb-4">
-          @for (tag of productDetails().tags; track tag) {
-            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">{{ tag }}</span>
+        <div class="flex gap-3 justify-center mt-6">
+          @for (img of product.images; track img) {
+            <img
+              [src]="img"
+              [alt]="product.title + ' img'"
+              class="w-20 h-24 object-contain rounded-2xl border hover:border-pink-500 cursor-pointer transition shadow-sm"
+            />
           }
         </div>
       </div>
 
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Customer Reviews</h2>
-        <div class="space-y-4">
-          @for (review of productDetails().reviews; track review) {
-            <div class="border-b pb-2">
-              <p class="font-semibold">
-                {{ review.reviewerName }}
-                <span class="text-yellow-400">
-                  {{ '★'.repeat(review.rating) }}{{ '☆'.repeat(5 - review.rating) }}
-                </span>
-              </p>
-              <p class="text-gray-600 text-sm">{{ review.comment }}</p>
+      <div class="flex flex-col justify-between">
+        <div>
+          <span
+            class="inline-block text-xs uppercase tracking-wide text-pink-500 font-semibold mb-2"
+          >
+            Beauty Product
+          </span>
+
+          <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-3">
+            {{ product.title }}
+          </h1>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {{ product.description }}
+          </p>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="flex text-yellow-400 text-lg">
+              {{ '★'.repeat(averageRating) }}{{ '☆'.repeat(5 - averageRating) }}
             </div>
-          }
+          </div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-3xl font-extrabold text-gray-900">
+              ${{ product.price }}
+              <span class="text-sm text-gray-400 line-through">
+                {{ startPrice | currency: 'USD' : 'symbol' : '1.0-0' }}
+              </span>
+            </div>
+            <span class="bg-pink-500/10 text-pink-600 text-sm font-semibold px-3 py-1 rounded-full">
+              -{{ product.discountPercentage | number: '1.0-0' }}%
+            </span>
+          </div>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            <p class="text-green-600 font-medium">In stock & ready to ship</p>
+          </div>
+          <div class="space-y-1 text-sm text-gray-600 mb-8">
+            <p>🚚 {{ product.shippingInformation }}</p>
+            <p>🛡 {{ product.warrantyInformation }}</p>
+          </div>
+          <div class="flex gap-4 mb-10">
+            <button
+              class="flex-1 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-4 rounded-2xl shadow-lg transition active:scale-95"
+            >
+              Add to Cart
+            </button>
+
+            <button
+              class="flex-1 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold py-4 rounded-2xl transition active:scale-95"
+            >
+              Buy Now
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            @for (tag of product.tags; track tag) {
+              <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">
+                #{{ tag }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="mt-14">
+          <h2 class="text-2xl font-bold mb-6">Customer Reviews</h2>
+          <product-reviews [reviews]="product.reviews"></product-reviews>
         </div>
       </div>
     </div>
   </div>
-</div>
+}
