@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductViewModel } from '@product-module';
+import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
   selector: 'product-item',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, CartIcon],
   templateUrl: './product-item.html',
 })
 export class ProductItem {
