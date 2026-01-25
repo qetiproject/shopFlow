@@ -1,5 +1,5 @@
- @if( data().length) {
-  <div class="bg-white rounded-xl shadow-md overflow-hidden">
+@if (data().length) {
+  <div class="bg-white rounded-xl shadow-md overflow-hidden mt-5">
     <div class="overflow-x-auto">
       <table class="min-w-full text-sm">
         <thead class="bg-gray-50 text-gray-600">
@@ -13,27 +13,28 @@
         </thead>
         <tbody class="divide-y divide-gray-100">
           @for (row of data(); track trackBy()) {
-              <tr class="hover:bg-blue-50/40 transition-colors">
-                @for (col of columns(); track col.key ?? col.label) {
-                  <td class="px-6 py-4 text-gray-500">
-                      @if (col.template) {
-                        <ng-container
-                          [ngTemplateOutlet]="col.template"
-                          [ngTemplateOutletContext]="{ $implicit: row }">
-                        </ng-container>
-                      } @else if (col.cell) {
-                        {{ col.cell(row) }}
-                      } @else {
-                        {{ row[col.key] }}
-                      }
-                  </td>
-                }
-              </tr>
-            }
+            <tr class="hover:bg-blue-50/40 transition-colors">
+              @for (col of columns(); track col.key ?? col.label) {
+                <td class="px-6 py-4 text-gray-500">
+                  @if (col.template) {
+                    <ng-container
+                      [ngTemplateOutlet]="col.template"
+                      [ngTemplateOutletContext]="{ $implicit: row }"
+                    >
+                    </ng-container>
+                  } @else if (col.cell) {
+                    {{ col.cell(row) }}
+                  } @else {
+                    {{ row[col.key] }}
+                  }
+                </td>
+              }
+            </tr>
+          }
         </tbody>
       </table>
     </div>
   </div>
-}@else {
+} @else {
   <p>No Data</p>
 }

@@ -1,0 +1,17 @@
+<div class="space-y-6">
+  @for (review of reviews(); track review) {
+    <div class="bg-gray-50 rounded-2xl p-5 shadow-sm">
+      <div class="flex justify-between items-center mb-2">
+        <p class="font-semibold text-gray-900">
+          {{ review.reviewerName }}
+        </p>
+        <span class="text-yellow-400 text-sm">
+          {{ '★'.repeat(review.rating) }}{{ '☆'.repeat(5 - review.rating) }}
+        </span>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        {{ review.comment }}
+      </p>
+    </div>
+  }
+</div>
