@@ -1,5 +1,5 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
 import { SortComponent } from '../sort/sort';
@@ -8,7 +8,7 @@ import { ProductHeaderFacade } from './product-header.facade';
 @Component({
   selector: 'product-header',
   standalone: true,
-  imports: [CategoryComponent, Search, SortComponent],
+  imports: [CategoryComponent, Search, SortComponent, RouterOutlet],
   templateUrl: './product-header.html',
 })
 export class ProductHeader {
@@ -52,17 +52,18 @@ export class ProductHeader {
   }
 
   onAddProduct(): void {
-    this.router.navigate(
-      [
-        {
-          outlets: {
-            popup: ['add-product'],
-          },
-        },
-      ],
-      {
-        relativeTo: this.route.parent,
-      },
-    );
+    // this.router.navigate(
+    //   [
+    //     {
+    //       outlets: {
+    //         popup: ['add-product'],
+    //       },
+    //     },
+    //   ],
+    //   {
+    //     relativeTo: this.route.parent,
+    //   },
+    // );
+    this.router.navigate(['product/add-product']);
   }
 }

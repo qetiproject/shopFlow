@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './add-product-modal.html',
 })
-export class AddProductModal {}
+export class AddProductModal {
+  close(): void {}
+}
