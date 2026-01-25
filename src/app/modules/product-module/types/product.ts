@@ -63,3 +63,18 @@ export enum ProductMode {
   CATEGORY = 'category',
   ORDER = 'order',
 }
+
+export interface AddProductModel {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  thumbnail: string;
+  images?: string[];
+  stock?: number;
+  sku?: string;
+  isActive?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}

@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  AddProductModel,
   Category,
   Product,
   ProductApi,
@@ -60,5 +61,9 @@ export class ProductFacade {
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
     return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
+  }
+
+  addProduct(product: AddProductModel): Observable<AddProductModel> {
+    return this.#productApi.addProduct(product);
   }
 }

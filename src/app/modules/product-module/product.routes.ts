@@ -15,4 +15,9 @@ export const productRoutes: Routes = [
     },
     data: {} as Product,
   },
+  {
+    path: 'add-product',
+    loadComponent: () => import('@product-module').then((c) => c.AddProductModal),
+    outlet: 'popup',
+  },
 ];
