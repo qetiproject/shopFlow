@@ -1,5 +1,5 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
 import { SortComponent } from '../sort/sort';
@@ -8,7 +8,7 @@ import { ProductHeaderFacade } from './product-header.facade';
 @Component({
   selector: 'product-header',
   standalone: true,
-  imports: [CategoryComponent, Search, SortComponent, RouterOutlet],
+  imports: [CategoryComponent, Search, SortComponent],
   templateUrl: './product-header.html',
 })
 export class ProductHeader {

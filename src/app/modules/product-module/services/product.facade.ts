@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { MessagesService } from '@core';
 import {
   AddProductModel,
   Category,
@@ -8,13 +9,15 @@ import {
   ProductsApiResponse,
   ProductViewModel,
 } from '@product-module';
-import { map, Observable, shareReplay } from 'rxjs';
+import { MessageSeverity } from '@types';
+import { map, Observable, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductFacade {
   #productApi = inject(ProductApi);
+  #messages = inject(MessagesService);
 
   getProducts(
     limit: number,
@@ -63,7 +66,17 @@ export class ProductFacade {
     return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
   }
 
-  addProduct(product: AddProductModel): Observable<AddProductModel> {
-    return this.#productApi.addProduct(product);
+  addProduct(product: AddProductModel): void {
+    this.#productApi
+      .addProduct(product)
+      .pipe(
+        tap(() => {
+          this.#messages.showMessage({
+            text: 'Successfully Added',
+            severity: MessageSeverity.Success,
+          });
+        }),
+      )
+      .subscribe();
   }
 }
