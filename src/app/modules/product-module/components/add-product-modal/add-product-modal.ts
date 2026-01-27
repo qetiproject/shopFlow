@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SelectComponent } from '@components';
 import { InputComponent } from '@features';
+import { AddProductForm, AddProductModel, ProductFacade } from '@product-module';
 import { INPUT_TYPES } from '@types';
-import { ProductFacade } from '../../services';
-import { AddProductModel } from '../../types';
-import { AddProductForm } from '../../utils/add-product-form';
 
 @Component({
   selector: 'add-product-modal',
   standalone: true,
-  imports: [InputComponent, ReactiveFormsModule, CommonModule],
+  imports: [InputComponent, ReactiveFormsModule, CommonModule, SelectComponent],
   templateUrl: './add-product-modal.html',
 })
 export class AddProductModal {
@@ -21,9 +21,22 @@ export class AddProductModal {
   INPUT_TYPES = INPUT_TYPES;
   route = inject(ActivatedRoute);
 
+  categoryList = toSignal(this.#productFacade.getProductCategories(), {
+    initialValue: [],
+  });
+
+  categoryOptions = computed(() => [
+    { label: 'All Categories', value: '' },
+    ...this.categoryList().map((c) => ({
+      label: c.name,
+      value: c.slug,
+    })),
+  ]);
+
   onSubmit(): void {
     if (this.form.invalid) return;
     const credentials: AddProductModel = this.form.getRawValue() as AddProductModel;
+    console.log(credentials, 'credentials');
     this.#productFacade.addProduct(credentials);
   }
 

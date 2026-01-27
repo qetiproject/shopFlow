@@ -10,7 +10,7 @@
         formControlName="description"
         [type]="INPUT_TYPES.TEXT"
       ></app-input>
-      <app-input label="Category" formControlName="category" [type]="INPUT_TYPES.TEXT"></app-input>
+      <app-select [options]="categoryOptions()" formControlName="category"></app-select>
       <app-input label="Price" formControlName="price" [type]="INPUT_TYPES.NUMBER"></app-input>
       <div class="flex justify-end gap-3 mt-4">
         <button
