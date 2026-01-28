@@ -9,7 +9,7 @@ import { AddProductForm, AddProductModel, ProductFacade } from '@product-module'
 import { INPUT_TYPES } from '@types';
 
 @Component({
-  selector: 'add-product-modal',
+  selector: 'app-add-product-modal',
   standalone: true,
   imports: [InputComponent, ReactiveFormsModule, CommonModule, SelectComponent],
   templateUrl: './add-product-modal.html',
@@ -36,7 +36,6 @@ export class AddProductModal {
   onSubmit(): void {
     if (this.form.invalid) return;
     const credentials: AddProductModel = this.form.getRawValue() as AddProductModel;
-    console.log(credentials, 'credentials');
     this.#productFacade.addProduct(credentials);
   }
 
