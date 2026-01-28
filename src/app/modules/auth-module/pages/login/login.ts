@@ -9,21 +9,14 @@ import {
 import { RouterModule } from '@angular/router';
 import * as AuthActions from '@auth-module';
 import { loginForm, LoginRequest } from '@auth-module';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import { InputComponent } from '@features';
 import { Store } from '@ngrx/store';
 import { INPUT_TYPES } from '@types';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    InputComponent,
-    FormsModule,
-    DynamicValidatorMessage,
-    RouterModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, FormsModule, RouterModule],
   templateUrl: './login.html',
 })
 export class Login {
@@ -31,7 +24,7 @@ export class Login {
   #store = inject(Store);
 
   INPUT_TYPES = INPUT_TYPES;
-  @ViewChild(FormGroupDirective, { static: false }) private formDir!: FormGroupDirective;
+  @ViewChild(FormGroupDirective, { static: false }) formDir!: FormGroupDirective;
 
   form = loginForm(this.#fb);
 

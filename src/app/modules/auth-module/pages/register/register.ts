@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
-import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroupDirective,
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import * as AuthActions from '@auth-module';
 import { CreateUserRequest, registerForm } from '@auth-module';
@@ -18,17 +23,16 @@ export class Register {
   #fb = inject(NonNullableFormBuilder);
   #store = inject(Store);
 
-  @ViewChild(FormGroupDirective, { static: false}) private formDir!: FormGroupDirective;
-  INPUT_TYPES = INPUT_TYPES
+  @ViewChild(FormGroupDirective, { static: false }) formDir!: FormGroupDirective;
+  INPUT_TYPES = INPUT_TYPES;
 
   form = registerForm(this.#fb);
 
   onSubmit(): void {
     const credentials: CreateUserRequest = this.form.getRawValue() as CreateUserRequest;
 
-    this.#store.dispatch(AuthActions.registerUser({ payload: credentials}));
-    
+    this.#store.dispatch(AuthActions.registerUser({ payload: credentials }));
+
     this.formDir.resetForm(this.form.value);
   }
-
 }

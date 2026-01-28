@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import * as AuthActions from '@auth-module';
 import { Login, LoginRequest } from '@auth-module';
@@ -66,9 +67,9 @@ describe('Login ', () => {
 
     component.form.setValue(credentials);
 
-    (component as any).formDir = {
+    component.formDir = {
       resetForm: jasmine.createSpy('resetForm'),
-    };
+    } as Partial<FormGroupDirective> as FormGroupDirective;
 
     component.onSubmit();
 

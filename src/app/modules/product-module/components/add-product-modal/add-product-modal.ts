@@ -38,6 +38,4 @@ export class AddProductModal {
     const credentials: AddProductModel = this.form.getRawValue() as AddProductModel;
     this.#productFacade.addProduct(credentials);
   }
-
-  onCancel(): void {}
 }

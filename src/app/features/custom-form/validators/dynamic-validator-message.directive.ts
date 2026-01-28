@@ -14,11 +14,11 @@ import { ErrorStateMatcher, InputErrorComponent } from '.';
 
 @Directive({
   selector: `
-    [ngModel]:not([withoutValidationErrors]),
-    [formControl]:not([withoutValidationErrors]),
-    [formControlName]:not([withoutValidationErrors]),
-    [formGroupName]:not([withoutValidationErrors]),
-    [ngModelGroup]:not([withoutValidationErrors])
+    [appWithoutValidationErrors][ngModel],
+    [appWithoutValidationErrors][formControl],
+    [appWithoutValidationErrors][formControlName],
+    [appWithoutValidationErrors][formGroupName],
+    [appWithoutValidationErrors][ngModelGroup]
   `,
   standalone: true,
 })
