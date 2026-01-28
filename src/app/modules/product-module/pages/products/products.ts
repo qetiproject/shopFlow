@@ -3,7 +3,7 @@ import { ProductList } from '@product-module';
 import { ProductHeader } from '../../components/product-header/product-header';
 
 @Component({
-  selector: 'products',
+  selector: 'app-products',
   standalone: true,
   imports: [ProductList, ProductHeader],
   templateUrl: './products.html',

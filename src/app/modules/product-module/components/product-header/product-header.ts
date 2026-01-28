@@ -6,7 +6,7 @@ import { SortComponent } from '../sort/sort';
 import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
-  selector: 'product-header',
+  selector: 'app-product-header',
   standalone: true,
   imports: [CategoryComponent, Search, SortComponent],
   templateUrl: './product-header.html',

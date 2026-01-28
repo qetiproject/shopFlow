@@ -5,7 +5,7 @@ import { ProductViewModel } from '@product-module';
 import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
-  selector: 'product-item',
+  selector: 'app-product-item',
   standalone: true,
   imports: [CommonModule, RouterLink, CartIcon],
   templateUrl: './product-item.html',

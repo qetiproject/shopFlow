@@ -7,7 +7,7 @@ import { Reviews } from '../../components/reviews/reviews';
 import { Product } from '../../types';
 
 @Component({
-  selector: 'product-detail',
+  selector: 'app-product-detail',
   standalone: true,
   imports: [CommonModule, Reviews],
   templateUrl: './product-detail.html',

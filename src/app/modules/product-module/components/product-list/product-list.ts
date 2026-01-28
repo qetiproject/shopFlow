@@ -5,7 +5,7 @@ import { ProductItem } from '@product-module';
 import { ProductlistFacade } from './product-list.facade';
 
 @Component({
-  selector: 'product-list',
+  selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, ProductItem, Paging],
   templateUrl: './product-list.html',

@@ -1,11 +1,11 @@
 <div class="flex flex-col sm:flex-row sm:items-center w-full mt-5 mb-5 justify-between">
   <div class="flex items-center space-x-2">
-    <search
+    <app-search
       (value$)="onSearch($event)"
       [placeholder]="placeholder"
       class="flex-1 sm:flex-auto"
-    ></search>
-    <category-list (categorySelected)="onCategorySelected($event)" />
+    ></app-search>
+    <app-category-list (categorySelected)="onCategorySelected($event)" />
     <app-sort (sortedVale)="onOrdered($event)"></app-sort>
   </div>
   <button
@@ -25,4 +25,3 @@
     Add Product
   </button>
 </div>
-<!-- <router-outlet name="popup"></router-outlet> -->
