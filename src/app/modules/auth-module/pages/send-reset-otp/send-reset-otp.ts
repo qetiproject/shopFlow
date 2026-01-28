@@ -3,20 +3,13 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthFacade } from '@auth-module';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import { InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 
 @Component({
   selector: 'app-send-reset-otp',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputComponent,
-    DynamicValidatorMessage,
-  ],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, InputComponent],
   templateUrl: './send-reset-otp.html',
 })
 export class SendResetOtp {

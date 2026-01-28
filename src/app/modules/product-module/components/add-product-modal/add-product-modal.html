@@ -1,7 +1,7 @@
 <div class="fixed inset-0 bg-black/40 z-40"></div>
 
 <div class="fixed inset-0 z-50 flex items-center justify-center">
-  <div class="bg-white p-6 rounded-xl" (click)="$event.stopPropagation()">
+  <div class="bg-white p-6 rounded-xl" (mousedown)="$event.stopPropagation()">
     <h2 class="text-lg font-semibold mb-4">Add Product</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
       <app-input label="Title" formControlName="title" [type]="INPUT_TYPES.TEXT"></app-input>

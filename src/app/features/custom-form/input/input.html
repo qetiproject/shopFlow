@@ -1,7 +1,8 @@
 <div class="relative">
-  <label class="block text-sm font-medium text-gray-700 mb-1">{{ label }}</label>
+  <label [for]="label" class="block text-sm font-medium text-gray-700 mb-1">{{ label }}</label>
   <div class="relative">
     <input
+      [id]="label"
       [type]="inputType"
       [placeholder]="placeholder || 'Enter ' + label"
       [value]="value"

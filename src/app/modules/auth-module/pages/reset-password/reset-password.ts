@@ -3,20 +3,13 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthFacade, resetPasswordForm } from '@auth-module';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import { InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputComponent,
-    DynamicValidatorMessage,
-  ],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, InputComponent],
   templateUrl: './reset-password.html',
 })
 export class ResetPassword {
