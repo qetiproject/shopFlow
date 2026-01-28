@@ -13,7 +13,7 @@ import { ProductHeaderFacade } from './product-header.facade';
 })
 export class ProductHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
-  placeholder: string = 'Search products...';
+  placeholder = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;
   @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
   router = inject(Router);

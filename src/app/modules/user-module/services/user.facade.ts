@@ -46,7 +46,7 @@ export class UserFacade {
 
   private usersData(users: UsersViewModel): UsersViewModel {
     const data = users.data.filter(
-      (user) => user.emailId.includes('@') && user.fullName !== 'string' && user.role != '',
+      (user) => user.emailId.includes('@') && user.fullName !== 'string' && user.role !== '',
     );
     return {
       ...users,

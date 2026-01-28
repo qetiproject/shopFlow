@@ -11,7 +11,5 @@ import { TableColumn } from '@types';
 export class Table<T> {
   columns = input.required<TableColumn<T>[]>();
   data = input<T[]>([]);
-  trackBy = input<(index: number, item: T) => any>(
-    (_, item) => item
-  );
+  trackBy = input<(index: number, item: T) => unknown>((_, item) => item);
 }

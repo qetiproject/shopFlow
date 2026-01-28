@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { Review } from '../../types';
 
 @Component({
-  selector: 'product-reviews',
+  selector: 'app-product-reviews',
   standalone: true,
   imports: [],
   templateUrl: './reviews.html',

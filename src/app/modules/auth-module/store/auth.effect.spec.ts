@@ -7,7 +7,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable, of, throwError } from 'rxjs';
 
 describe('AuthEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<unknown>;
   let effects: AuthEffects;
   let authFacade: jasmine.SpyObj<AuthFacade>;
   let messages: jasmine.SpyObj<MessagesService>;
@@ -39,56 +39,59 @@ describe('AuthEffects', () => {
 
   it('dispatches loginUserSuccess on success', (done) => {
     const response = {
-        message: 'Success',
-        result: true,
-        data: { 
-            token: 'token', 
-            userId: 1, 
-            emailId: 'keti@gmail.com',
-            refreshToken: 'refreshToken'
-        }
+      message: 'Success',
+      result: true,
+      data: {
+        token: 'token',
+        userId: 1,
+        emailId: 'keti@gmail.com',
+        refreshToken: 'refreshToken',
+      },
     };
 
     authFacade.loginUser.and.returnValue(of(response));
     userStorage.getUser.and.returnValue(null);
 
-    actions$ = of(AuthActions.loginUser({ payload: {
-        emailId: 'keti@gmail.com',
-        password: '12345678', 
-    } }));
+    actions$ = of(
+      AuthActions.loginUser({
+        payload: {
+          emailId: 'keti@gmail.com',
+          password: '12345678',
+        },
+      }),
+    );
 
-    effects.loginUser$.subscribe(action => {
-        expect(tokenService.saveToken).toHaveBeenCalledWith('token');
-        expect(userStorage.saveUser).toHaveBeenCalled();
-        expect(action).toEqual(
+    effects.loginUser$.subscribe((action) => {
+      expect(tokenService.saveToken).toHaveBeenCalledWith('token');
+      expect(userStorage.saveUser).toHaveBeenCalled();
+      expect(action).toEqual(
         AuthActions.loginUserSuccess({
-            data: {
+          data: {
             message: 'Success',
             result: true,
-            data: { userId: 1, emailId: 'keti@gmail.com' }
-            }
-        })
-        );
-        done();
+            data: { userId: 1, emailId: 'keti@gmail.com' },
+          },
+        }),
+      );
+      done();
     });
   });
 
   it('dispatches loginUserFailure on error', (done) => {
-    authFacade.loginUser.and.returnValue(
-        throwError(() => 'Invalid credentials')
+    authFacade.loginUser.and.returnValue(throwError(() => 'Invalid credentials'));
+
+    actions$ = of(
+      AuthActions.loginUser({
+        payload: {
+          emailId: 'keti@gmail.com',
+          password: '12345678',
+        },
+      }),
     );
 
-    actions$ = of(AuthActions.loginUser({ payload: {
-        emailId: 'keti@gmail.com',
-        password: '12345678', 
-    } }));
-
-    effects.loginUser$.subscribe(action => {
-        expect(action).toEqual(
-        AuthActions.loginUserFailure({ error: 'Invalid credentials' })
-        );
-        done();
+    effects.loginUser$.subscribe((action) => {
+      expect(action).toEqual(AuthActions.loginUserFailure({ error: 'Invalid credentials' }));
+      done();
     });
-    });
-
+  });
 });

@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
 export class Search {
   search = new FormControl<string>('', { nonNullable: true });
 
-  @Input() placeholder: string = 'Search';
+  @Input() placeholder = 'Search';
 
   @Output()
   readonly value$ = this.search.valueChanges.pipe(

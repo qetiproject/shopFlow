@@ -34,6 +34,7 @@ module.exports = tseslint.config(
       '@angular-eslint/use-lifecycle-interface': 'error',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'error',
+      eqeqeq: ['error', 'always'],
     },
   },
   {

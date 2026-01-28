@@ -1,5 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { Router, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  GuardResult,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@test-utils';
 import { firstValueFrom, isObservable, of } from 'rxjs';
@@ -20,10 +26,10 @@ describe('AuthGuard', () => {
     const store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
     store.select.and.returnValue(of(true));
 
-    const route = {} as any;
-    const state = {} as any;
+    const route = {} as ActivatedRouteSnapshot;
+    const state = {} as RouterStateSnapshot;
 
-    let result: any;
+    let result: GuardResult | Promise<GuardResult> | unknown;
 
     await TestBed.runInInjectionContext(async () => {
       const guardResult = AuthGuard(route, state);
@@ -40,9 +46,9 @@ describe('AuthGuard', () => {
     store.select.and.returnValue(of(false));
     router.parseUrl.and.returnValue(urlTree);
 
-    const route = {} as any;
-    const state = {} as any;
-    let result: any;
+    const route = {} as ActivatedRouteSnapshot;
+    const state = {} as RouterStateSnapshot;
+    let result: GuardResult | Promise<GuardResult> | unknown;
 
     await TestBed.runInInjectionContext(async () => {
       const guardResult = AuthGuard(route, state);
