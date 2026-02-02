@@ -1,7 +1,7 @@
 <div class="fixed inset-0 bg-black/40 z-40"></div>
 
 <div class="fixed inset-0 z-50 flex items-center justify-center">
-  <div class="bg-white p-6 rounded-xl" (click)="$event.stopPropagation()">
+  <div class="bg-white p-6 rounded-xl">
     <h2 class="text-lg font-semibold mb-4">Add Product</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
       <app-input label="Title" formControlName="title" [type]="INPUT_TYPES.TEXT"></app-input>
@@ -15,7 +15,6 @@
       <div class="flex justify-end gap-3 mt-4">
         <button
           type="button"
-          (click)="onCancel()"
           class="w-full mt-3 bg-gray-200 text-gray-700 px-4 py-2 text-sm font-medium rounded-lg transition shadow"
         >
           Cancel
