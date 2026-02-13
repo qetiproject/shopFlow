@@ -31,20 +31,22 @@ export class InputComponent implements ControlValueAccessor {
       : this.type();
   }
 
-  onChange = (_: string) => {};
-  onTouched = () => {};
+  private onChange: (_: string | null) => void = (() => void 0) as (_: string | null) => void;
+  private onTouched: () => void = () => void 0;
 
   writeValue(value: string): void {
     this.value = value;
   }
-  registerOnChange(fn: any): void {
+
+  registerOnChange(fn: (value: string | null) => void): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: any): void {
+
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
 
