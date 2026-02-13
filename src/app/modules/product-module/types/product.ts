@@ -65,12 +65,11 @@ export enum ProductMode {
 }
 
 export interface AddProductModel {
-  id: number;
   title: string;
   description: string;
   category: string;
   price: number;
-  thumbnail: string;
+  thumbnail: string | null;
   images?: string[];
   stock?: number;
   sku?: string;

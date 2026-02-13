@@ -17,4 +17,9 @@
 
 <div>
   <p>{{ products()!.products | json }}</p>
+  <img
+    [src]="products()!.products[0].thumbnail"
+    alt="Product Thumbnail"
+    class="w-32 h-32 object-cover rounded-md"
+  />
 </div>

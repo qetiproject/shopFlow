@@ -8,7 +8,7 @@ import { MessagesService } from '@core';
 import { InputComponent } from '@features';
 import { AddProductForm, AddProductModel, ProductFacade } from '@product-module';
 import { INPUT_TYPES, MessageSeverity } from '@types';
-import { UploadFileComponent } from 'app/features/upload-file/upload-file.component';
+import { FileUploadComponent } from 'app/features/upload-file/upload-file.component';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -18,7 +18,7 @@ import { UploadFileComponent } from 'app/features/upload-file/upload-file.compon
     ReactiveFormsModule,
     CommonModule,
     SelectComponent,
-    UploadFileComponent,
+    FileUploadComponent,
   ],
   templateUrl: './add-product-modal.html',
 })
@@ -50,7 +50,11 @@ export class AddProductModal {
 
   onSubmit(): void {
     if (this.form.invalid) return;
-    const credentials: AddProductModel = this.form.getRawValue() as AddProductModel;
+    const formValue = this.form.getRawValue();
+    const credentials: AddProductModel = {
+      ...formValue,
+      thumbnail: formValue.thumbnail?.name ?? null,
+    };
     this.#productFacade.addProduct(credentials).subscribe({
       next: () => {
         this.#messages.showMessage({

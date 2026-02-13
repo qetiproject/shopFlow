@@ -5,7 +5,7 @@ export interface AddProductForm {
   description: FormControl<string>;
   category: FormControl<string>;
   price: FormControl<number>;
-  thumbnail: FormControl<string>;
+  thumbnail: FormControl<File | null>;
 }
 
 export function AddProductForm(fb: NonNullableFormBuilder) {
@@ -14,6 +14,6 @@ export function AddProductForm(fb: NonNullableFormBuilder) {
     description: fb.control('', [Validators.required]),
     category: fb.control('', [Validators.required]),
     price: fb.control(0, [Validators.required]),
-    thumbnail: fb.control(''),
+    thumbnail: fb.control(null),
   });
 }

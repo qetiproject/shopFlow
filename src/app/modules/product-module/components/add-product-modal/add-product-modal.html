@@ -13,10 +13,10 @@
       <app-select [options]="categoryOptions()" formControlName="category"></app-select>
       <app-input label="Price" formControlName="price" [type]="INPUT_TYPES.NUMBER"></app-input>
       <app-upload-file
-        formControlName="thumbnail"
         [label]="label()"
         [accept]="acceptType()"
         [multiple]="multiple()"
+        formControlName="thumbnail"
       ></app-upload-file>
       <div class="flex justify-end gap-3 mt-4">
         <button
