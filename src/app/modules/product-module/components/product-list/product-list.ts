@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Paging } from '@components';
-import { ProductItem } from '@product-module';
-import { ProductlistFacade } from './product-list.facade';
+import { ProductItem, ProductlistFacade } from '@product-module';
 
 @Component({
   selector: 'app-product-list',

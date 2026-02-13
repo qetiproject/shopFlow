@@ -14,7 +14,7 @@ export class SortComponent {
   protected readonly sortOrder = this.#sortFacade.sortOrder;
 
   toggleSort(): void {
-    let order = this.#sortFacade.toggleSort();
+    const order = this.#sortFacade.toggleSort();
     this.sortedVale.emit(order);
   }
 

@@ -2,7 +2,7 @@ import { computed, effect, inject, Injectable, signal, untracked } from '@angula
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ProductFacade, ProductMode, SortFacade } from '@product-module';
 import { switchMap } from 'rxjs';
-import { ProductHeaderFacade } from '../product-header/product-header.facade';
+import { ProductHeaderFacade } from './product-header.facade';
 
 @Injectable({
   providedIn: 'root',

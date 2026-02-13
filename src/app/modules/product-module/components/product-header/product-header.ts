@@ -1,9 +1,8 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
-import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
+import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
 import { SortComponent } from '../sort/sort';
-import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
   selector: 'app-product-header',
@@ -13,7 +12,7 @@ import { ProductHeaderFacade } from './product-header.facade';
 })
 export class ProductHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
-  placeholder: string = 'Search products...';
+  placeholder = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;
   @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
   router = inject(Router);
