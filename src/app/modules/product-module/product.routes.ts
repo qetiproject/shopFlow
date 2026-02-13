@@ -6,6 +6,13 @@ export const productRoutes: Routes = [
   {
     path: 'list',
     loadComponent: () => import('@product-module').then((c) => c.ProductsPage),
+    children: [
+      {
+        path: 'add-product',
+        outlet: 'modal',
+        loadComponent: () => import('@product-module').then((c) => c.AddProductModal),
+      },
+    ],
   },
   {
     path: 'details/:id',
@@ -14,10 +21,5 @@ export const productRoutes: Routes = [
       product: ProductDetailResolve,
     },
     data: {} as Product,
-  },
-  {
-    path: 'add-product',
-    loadComponent: () => import('@product-module').then((c) => c.AddProductModal),
-    // outlet: 'popup',
   },
 ];

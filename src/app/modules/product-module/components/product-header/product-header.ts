@@ -51,18 +51,6 @@ export class ProductHeader {
   }
 
   onAddProduct(): void {
-    // this.router.navigate(
-    //   [
-    //     {
-    //       outlets: {
-    //         popup: ['add-product'],
-    //       },
-    //     },
-    //   ],
-    //   {
-    //     relativeTo: this.route.parent,
-    //   },
-    // );
-    this.router.navigate(['product/add-product']);
+    this.router.navigate([{ outlets: { modal: ['add-product'] } }], { relativeTo: this.route });
   }
 }
