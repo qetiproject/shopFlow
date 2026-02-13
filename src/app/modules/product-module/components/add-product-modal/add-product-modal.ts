@@ -1,25 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectComponent } from '@components';
+import { MessagesService } from '@core';
 import { InputComponent } from '@features';
 import { AddProductForm, AddProductModel, ProductFacade } from '@product-module';
-import { INPUT_TYPES } from '@types';
+import { INPUT_TYPES, MessageSeverity } from '@types';
+import { UploadFileComponent } from 'app/features/upload-file/upload-file.component';
 
 @Component({
   selector: 'app-add-product-modal',
   standalone: true,
-  imports: [InputComponent, ReactiveFormsModule, CommonModule, SelectComponent],
+  imports: [
+    InputComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    SelectComponent,
+    UploadFileComponent,
+  ],
   templateUrl: './add-product-modal.html',
 })
 export class AddProductModal {
   #productFacade = inject(ProductFacade);
+  #messages = inject(MessagesService);
   #fb = inject(NonNullableFormBuilder);
+
   form = AddProductForm(this.#fb);
   INPUT_TYPES = INPUT_TYPES;
   route = inject(ActivatedRoute);
+  router = inject(Router);
+
+  label = signal<string>('Upload Image');
+  acceptType = signal<string>('image/*');
+  multiple = signal<boolean>(false);
 
   categoryList = toSignal(this.#productFacade.getProductCategories(), {
     initialValue: [],
@@ -36,6 +51,18 @@ export class AddProductModal {
   onSubmit(): void {
     if (this.form.invalid) return;
     const credentials: AddProductModel = this.form.getRawValue() as AddProductModel;
-    this.#productFacade.addProduct(credentials);
+    this.#productFacade.addProduct(credentials).subscribe({
+      next: () => {
+        this.#messages.showMessage({
+          text: 'Successfully Added',
+          severity: MessageSeverity.Success,
+        });
+        this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent });
+      },
+    });
+  }
+
+  onCancel(): void {
+    this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent });
   }
 }

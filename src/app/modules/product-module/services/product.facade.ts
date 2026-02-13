@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { MessagesService } from '@core';
 import {
   AddProductModel,
   Category,
@@ -9,15 +8,17 @@ import {
   ProductsApiResponse,
   ProductViewModel,
 } from '@product-module';
-import { MessageSeverity } from '@types';
-import { map, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductFacade {
   #productApi = inject(ProductApi);
-  #messages = inject(MessagesService);
+  private productsSubject = new BehaviorSubject<ProductsApiResponse<ProductViewModel>>(
+    {} as ProductsApiResponse<ProductViewModel>,
+  );
+  products$ = this.productsSubject.asObservable();
 
   getProducts(
     limit: number,
@@ -29,7 +30,21 @@ export class ProductFacade {
         ...result,
         products: result.products.map((product) => this.mapProductsApiToView(product)),
       })),
+      tap((mapped) => this.productsSubject.next(mapped)),
       shareReplay({ bufferSize: 1, refCount: true }),
+    );
+  }
+
+  addProduct(product: AddProductModel) {
+    return this.#productApi.addProduct(product).pipe(
+      map((p: AddProductModel) => this.mapProductsApiToView(p as ProductApiShape)),
+      tap((newProduct: ProductViewModel) => {
+        const current = this.productsSubject.getValue();
+        this.productsSubject.next({
+          ...current,
+          products: [newProduct, ...current.products],
+        });
+      }),
     );
   }
 
@@ -64,19 +79,5 @@ export class ProductFacade {
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
     return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
-  }
-
-  addProduct(product: AddProductModel): void {
-    this.#productApi
-      .addProduct(product)
-      .pipe(
-        tap(() => {
-          this.#messages.showMessage({
-            text: 'Successfully Added',
-            severity: MessageSeverity.Success,
-          });
-        }),
-      )
-      .subscribe();
   }
 }

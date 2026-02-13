@@ -1,0 +1,34 @@
+<div
+  class="border-dashed border-2 border-gray-300 rounded p-4 flex flex-col items-center justify-center cursor-pointer"
+  [class.border-blue-400]="dragging"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+>
+  @if (!previewUrl()) {
+    <ng-container>
+      <p class="text-gray-500 text-center">{{ label() }}</p>
+      <p class="text-sm text-gray-400">Drag & drop or click to select</p>
+      <input
+        type="file"
+        [accept]="accept()"
+        [multiple]="multiple()"
+        (change)="onFileSelected($event)"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+      />
+    </ng-container>
+  }
+
+  @if (previewUrl()) {
+    <ng-container>
+      <img [src]="previewUrl()" alt="Preview" class="max-h-40 object-contain rounded" />
+      <button
+        type="button"
+        class="mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-400"
+        (click)="clear()"
+      >
+        Remove
+      </button>
+    </ng-container>
+  }
+</div>

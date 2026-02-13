@@ -12,9 +12,16 @@
       ></app-input>
       <app-select [options]="categoryOptions()" formControlName="category"></app-select>
       <app-input label="Price" formControlName="price" [type]="INPUT_TYPES.NUMBER"></app-input>
+      <app-upload-file
+        formControlName="thumbnail"
+        [label]="label()"
+        [accept]="acceptType()"
+        [multiple]="multiple()"
+      ></app-upload-file>
       <div class="flex justify-end gap-3 mt-4">
         <button
           type="button"
+          (click)="onCancel()"
           class="w-full mt-3 bg-gray-200 text-gray-700 px-4 py-2 text-sm font-medium rounded-lg transition shadow"
         >
           Cancel
