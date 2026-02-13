@@ -34,8 +34,8 @@ export class FileUploadComponent implements ControlValueAccessor {
   value: File | null = null;
   previewUrl = signal<string | null>(null);
 
-  private onChange = (_: File | null) => {};
-  private onTouched = () => {};
+  private onChange: (_: File | null) => void = (() => void 0) as (_: File | null) => void;
+  private onTouched: () => void = () => void 0;
 
   writeValue(file: File | null): void {
     this.value = file;
@@ -47,11 +47,11 @@ export class FileUploadComponent implements ControlValueAccessor {
     }
   }
 
-  registerOnChange(fn: any) {
+  registerOnChange(fn: (value: File | null) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any) {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
@@ -64,12 +64,8 @@ export class FileUploadComponent implements ControlValueAccessor {
     if (!input.files?.length) return;
 
     const file = input.files[0];
-
-    this.value = file;
-    this.onChange(file);
-    this.onTouched();
-
-    this.createPreview(file);
+    this.setFile(file);
+    input.value = '';
   }
 
   onDrop(event: DragEvent) {
@@ -77,20 +73,8 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.dragging = false;
 
     if (!event.dataTransfer?.files?.length) return;
-
     const file = event.dataTransfer.files[0];
-
-    this.value = file;
-    this.onChange(file);
-    this.onTouched();
-
-    this.createPreview(file);
-  }
-
-  clearFile() {
-    this.value = null;
-    this.previewUrl.set(null);
-    this.onChange(null);
+    this.setFile(file);
   }
 
   onDragOver(event: DragEvent) {
@@ -100,6 +84,26 @@ export class FileUploadComponent implements ControlValueAccessor {
 
   onDragLeave() {
     this.dragging = false;
+  }
+
+  clearFile() {
+    if (this.previewUrl()) {
+      // Clean up memory if blob URL
+      if (this.previewUrl()!.startsWith('blob:')) {
+        URL.revokeObjectURL(this.previewUrl()!);
+      }
+    }
+
+    this.value = null;
+    this.previewUrl.set(null);
+    this.onChange(null);
+  }
+
+  private setFile(file: File) {
+    this.value = file;
+    this.onChange(file);
+    this.onTouched();
+    this.createPreview(file);
   }
 
   private createPreview(file: File) {
