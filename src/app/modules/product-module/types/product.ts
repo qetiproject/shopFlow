@@ -68,7 +68,7 @@ export interface AddProductModel {
   title: string;
   description: string;
   category: string;
-  price: number;
+  price: number | null;
   thumbnail: string | null;
   images?: string[];
   stock?: number;

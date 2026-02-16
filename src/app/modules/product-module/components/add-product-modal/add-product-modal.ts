@@ -5,7 +5,7 @@ import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectComponent } from '@components';
 import { MessagesService } from '@core';
-import { InputComponent } from '@features';
+import { DynamicValidatorMessage, InputComponent } from '@features';
 import { AddProductForm, AddProductModel, ProductFacade } from '@product-module';
 import { INPUT_TYPES, MessageSeverity } from '@types';
 import { FileUploadComponent } from 'app/features/upload-file/upload-file.component';
@@ -19,6 +19,7 @@ import { FileUploadComponent } from 'app/features/upload-file/upload-file.compon
     CommonModule,
     SelectComponent,
     FileUploadComponent,
+    DynamicValidatorMessage,
   ],
   templateUrl: './add-product-modal.html',
 })
