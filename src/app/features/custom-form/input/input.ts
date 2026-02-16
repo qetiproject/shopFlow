@@ -32,7 +32,7 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   private onChange: (_: string | null) => void = (() => void 0) as (_: string | null) => void;
-  private onTouched: () => void = () => void 0;
+  onTouched: () => void = () => void 0;
 
   writeValue(value: string): void {
     this.value = value;
