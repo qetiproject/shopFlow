@@ -4,7 +4,7 @@
   <button
     type="button"
     aria-label="Remove {{ p().title }}"
-    (click)="removeProduct(p())"
+    (click)="showModal.set(true)"
     class="absolute top-3 right-3 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 shadow hover:bg-red-600 hover:text-white transition"
   >
     <svg
@@ -72,3 +72,10 @@
     </div>
   </div>
 </article>
+<app-confirm-modal
+  [visible]="showModal()"
+  [title]="modalTitle()"
+  [message]="modalMessage()"
+  (confirmed)="onConfirmed()"
+  (canceled)="showModal.set(false)"
+></app-confirm-modal>
