@@ -6,6 +6,7 @@ import {
   Product,
   ProductApiShape,
   ProductsApiResponse,
+  ResponseProductDelete,
 } from '@product-module';
 import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
@@ -62,5 +63,9 @@ export class ProductApi {
 
   addProduct(product: AddProductModel): Observable<AddProductModel> {
     return this.#http.post<AddProductModel>(`${this.baseUrl}/add`, product);
+  }
+
+  deleteProduct(id: number): Observable<ResponseProductDelete> {
+    return this.#http.delete<ResponseProductDelete>(`${this.baseUrl}/${id}`);
   }
 }

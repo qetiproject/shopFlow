@@ -77,3 +77,8 @@ export interface AddProductModel {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface ResponseProductDelete extends Product {
+  isDeleted: boolean;
+  deletedOn: Date;
+}

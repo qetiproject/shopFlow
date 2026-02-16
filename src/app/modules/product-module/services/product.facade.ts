@@ -7,6 +7,7 @@ import {
   ProductApiShape,
   ProductsApiResponse,
   ProductViewModel,
+  ResponseProductDelete,
 } from '@product-module';
 import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 
@@ -79,5 +80,17 @@ export class ProductFacade {
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
     return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
+  }
+
+  deleteProduct(id: number): Observable<ResponseProductDelete> {
+    return this.#productApi.deleteProduct(id).pipe(
+      tap((deletedProduct: ResponseProductDelete) => {
+        const current = this.productsSubject.getValue();
+        this.productsSubject.next({
+          ...current,
+          products: current.products.filter((p) => p.id !== deletedProduct.id),
+        });
+      }),
+    );
   }
 }

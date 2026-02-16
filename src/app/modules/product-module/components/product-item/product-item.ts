@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProductViewModel } from '@product-module';
+import { ProductFacade, ProductViewModel } from '@product-module';
 import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
@@ -12,6 +12,7 @@ import { CartIcon } from 'app/icons/cart/cart';
 })
 export class ProductItem {
   product = input.required<ProductViewModel>();
+  productFacade = inject(ProductFacade);
 
   p = computed(() => {
     const p = this.product();
@@ -31,4 +32,12 @@ export class ProductItem {
 
     return Math.round(p.price / (1 - p.discountPercentage / 100));
   });
+
+  removeProduct(product: ProductViewModel) {
+    this.productFacade.deleteProduct(product.id).subscribe({
+      next: () => {
+        void 0;
+      },
+    });
+  }
 }
