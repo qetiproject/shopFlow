@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ConfirmModal } from '@components';
 import { ProductFacade, ProductViewModel } from '@product-module';
+import { ConfirmModalService } from 'app/components/confirm-modal/confirm-modal.service';
 import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [CommonModule, RouterLink, CartIcon, ConfirmModal],
+  imports: [CommonModule, RouterLink, CartIcon],
   templateUrl: './product-item.html',
 })
 export class ProductItem {
   product = input.required<ProductViewModel>();
   productFacade = inject(ProductFacade);
+  confirmModal = inject(ConfirmModalService);
 
   p = computed(() => {
     const p = this.product();
@@ -34,26 +35,21 @@ export class ProductItem {
     return Math.round(p.price / (1 - p.discountPercentage / 100));
   });
 
-  showModal = signal(false);
-  modalTitle = signal('Delete Product');
-  modalMessage = computed(() => {
-    const product = this.product();
-    return `Do you really want to delete ${product.title}?`;
-  });
-
-  onConfirmed() {
-    const { id } = this.product();
-    this.productFacade.deleteProduct(id).subscribe({
-      next: () => {
-        this.showModal.set(false);
-      },
-      error: () => {
-        this.showModal.set(false);
-      },
+  async onOpenModal() {
+    const { id, title } = this.product();
+    const confirmed = await this.confirmModal.open({
+      title: 'Delete Product',
+      message: `Are you sure you want to delete ${title}?`,
+      variant: 'danger',
+      confirmLabel: 'Delete',
+      cancelLabel: 'Cancel',
     });
-  }
 
-  onCanceled() {
-    console.log('Canceled via signal!');
+    if (confirmed) {
+      this.productFacade.deleteProduct(id).subscribe({
+        next: () => console.log('Product deleted'),
+        error: () => console.log('Error deleting product'),
+      });
+    }
   }
 }
