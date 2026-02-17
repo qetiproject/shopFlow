@@ -10,7 +10,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ConfirmModalRef } from './confirm-modal.ref';
+import { ConfirmModalRef } from '@features';
 
 export type ConfirmVariant = 'danger' | 'warning' | 'success';
 

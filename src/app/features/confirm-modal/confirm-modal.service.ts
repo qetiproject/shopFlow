@@ -1,6 +1,5 @@
 import { createComponent, EnvironmentInjector, inject, Injectable, Injector } from '@angular/core';
-import { ConfirmModal } from './confirm-modal';
-import { ConfirmModalData, ConfirmModalRef } from './confirm-modal.ref';
+import { ConfirmModal, ConfirmModalData, ConfirmModalRef } from '@features';
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmModalService {

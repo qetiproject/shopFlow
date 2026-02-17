@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
-import { ConfirmModalService } from 'app/components/confirm-modal/confirm-modal.service';
 import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
