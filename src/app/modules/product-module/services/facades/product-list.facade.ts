@@ -52,14 +52,14 @@ export class ProductlistFacade {
       switch (params.mode) {
         case ProductMode.CATEGORY:
           if (!params.category) {
-            this.#productFacade.getProducts(params.limit, params.skip, params.search);
+            this.#productFacade.loadProducts(params.limit, params.skip, params.search);
           } else {
-            this.#productFacade.getProductsByCategory(params.category, params.limit, params.skip);
+            this.#productFacade.loadProductsByCategory(params.category, params.limit, params.skip);
           }
           break;
 
         case ProductMode.ORDER:
-          this.#productFacade.getProductsBySort(
+          this.#productFacade.loadProductsBySort(
             params.sort,
             params.order,
             params.limit,
@@ -68,7 +68,7 @@ export class ProductlistFacade {
           break;
 
         default:
-          this.#productFacade.getProducts(params.limit, params.skip, params.search);
+          this.#productFacade.loadProducts(params.limit, params.skip, params.search);
       }
     });
   }
