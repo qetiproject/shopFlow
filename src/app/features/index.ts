@@ -8,4 +8,5 @@ export * from './loading/loading.component';
 export * from './loading/skip-loading.component';
 export * from './search/search';
 export * from './table/table';
+export * from './upload-file/upload-file.component';
 

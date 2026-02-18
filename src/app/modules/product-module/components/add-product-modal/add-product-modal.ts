@@ -5,10 +5,9 @@ import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectComponent } from '@components';
 import { MessagesService } from '@core';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import { DynamicValidatorMessage, FileUploadComponent, InputComponent } from '@features';
 import { AddProductForm, AddProductModel, ProductFacade } from '@product-module';
 import { INPUT_TYPES, MessageSeverity } from '@types';
-import { FileUploadComponent } from 'app/features/upload-file/upload-file.component';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -54,8 +53,9 @@ export class AddProductModal {
     const formValue = this.form.getRawValue();
     const credentials: AddProductModel = {
       ...formValue,
-      thumbnail: formValue.thumbnail?.name ?? null,
+      thumbnail: `assets/products/${formValue.thumbnail?.name}`,
     };
+
     this.#productFacade.addProduct(credentials).subscribe({
       next: () => {
         this.#messages.showMessage({
