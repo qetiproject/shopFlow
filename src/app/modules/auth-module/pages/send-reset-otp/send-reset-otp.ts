@@ -7,7 +7,7 @@ import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 
 @Component({
-  selector: 'send-reset-otp',
+  selector: 'app-send-reset-otp',
   standalone: true,
   imports: [
     CommonModule,
@@ -15,12 +15,12 @@ import { INPUT_TYPES } from '@types';
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
-    DynamicValidatorMessage
+    DynamicValidatorMessage,
   ],
   templateUrl: './send-reset-otp.html',
 })
 export class SendResetOtp {
-  INPUT_TYPES = INPUT_TYPES
+  INPUT_TYPES = INPUT_TYPES;
   #authFacade = inject(AuthFacade);
 
   email = new FormControl('', [Validators.required, Validators.email]);

@@ -6,7 +6,7 @@ import { SelectComponent } from '@components';
 import { ProductFacade } from '@product-module';
 
 @Component({
-  selector: 'category-list',
+  selector: 'app-category-list',
   standalone: true,
   imports: [CommonModule, SelectComponent, ReactiveFormsModule],
   template: ` <app-select [options]="categoryOptions()" [formControl]="control"></app-select> `,

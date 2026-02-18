@@ -7,7 +7,7 @@ import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 
 @Component({
-  selector: 'reset-password',
+  selector: 'app-reset-password',
   standalone: true,
   imports: [
     CommonModule,
@@ -15,13 +15,13 @@ import { INPUT_TYPES } from '@types';
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
-    DynamicValidatorMessage
+    DynamicValidatorMessage,
   ],
   templateUrl: './reset-password.html',
 })
 export class ResetPassword {
   #fb = inject(NonNullableFormBuilder);
-  INPUT_TYPES = INPUT_TYPES
+  INPUT_TYPES = INPUT_TYPES;
   #authFacade = inject(AuthFacade);
 
   form = resetPasswordForm(this.#fb);

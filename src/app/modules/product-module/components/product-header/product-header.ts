@@ -1,20 +1,22 @@
 import { Component, inject, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
-import { CategoryComponent, ProductMode, SortOrder } from '@product-module';
+import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
 import { SortComponent } from '../sort/sort';
-import { ProductHeaderFacade } from './product-header.facade';
 
 @Component({
-  selector: 'product-header',
+  selector: 'app-product-header',
   standalone: true,
   imports: [CategoryComponent, Search, SortComponent],
   templateUrl: './product-header.html',
 })
 export class ProductHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
-  placeholder: string = 'Search products...';
+  placeholder = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;
   @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
   onCategorySelected(value: string) {
     this.#productHeaderFacade.categoryValue.set(value);
@@ -46,5 +48,9 @@ export class ProductHeader {
     this.#productHeaderFacade.searchValue.set('');
     this.searchComponent.search.setValue('', { emitEvent: false });
     this.categoryComponent.control.setValue('', { emitEvent: false });
+  }
+
+  onAddProduct(): void {
+    this.router.navigate([{ outlets: { modal: ['add-product'] } }], { relativeTo: this.route });
   }
 }

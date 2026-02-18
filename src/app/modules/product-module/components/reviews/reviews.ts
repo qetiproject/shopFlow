@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
-import { Review } from '../../types';
+import { Review } from '@product-module';
 
 @Component({
-  selector: 'product-reviews',
+  selector: 'app-product-reviews',
   standalone: true,
   imports: [],
   templateUrl: './reviews.html',

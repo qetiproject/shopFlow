@@ -1,8 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
-import { Product } from '@product-module';
+import { Product, ProductFacade } from '@product-module';
 import { catchError, of, tap } from 'rxjs';
-import { ProductFacade } from '../../services/product.facade';
 
 export const ProductDetailResolve: ResolveFn<Product | null> = (route: ActivatedRouteSnapshot) => {
   const id = Number(route.paramMap.get('id'));

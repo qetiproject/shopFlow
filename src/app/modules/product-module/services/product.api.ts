@@ -1,6 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Category, Product, ProductApiShape, ProductsApiResponse } from '@product-module';
+import {
+  AddProductModel,
+  Category,
+  Product,
+  ProductApiShape,
+  ProductsApiResponse,
+  ResponseProductDelete,
+} from '@product-module';
 import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -52,5 +59,13 @@ export class ProductApi {
     return this.#http.get<ProductsApiResponse<Product>>(
       `${this.baseUrl}?sortBy=${sortBy}&order=${orderBy}&limit=${limit}&skip=${skip}`,
     );
+  }
+
+  addProduct(product: AddProductModel): Observable<AddProductModel> {
+    return this.#http.post<AddProductModel>(`${this.baseUrl}/add`, product);
+  }
+
+  deleteProduct(id: number): Observable<ResponseProductDelete> {
+    return this.#http.delete<ResponseProductDelete>(`${this.baseUrl}/${id}`);
   }
 }
