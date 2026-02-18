@@ -17,7 +17,7 @@ import { Paging } from 'app/components/paging/paging';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'user-list',
+  selector: 'app-user-list',
   standalone: true,
   imports: [Table, Paging],
   templateUrl: './user-list.html',

@@ -27,8 +27,8 @@ export class SelectComponent<T = unknown> implements ControlValueAccessor {
   value = signal<T | null>(null);
   disabled = false;
 
-  onChange = (_: T | null) => {};
-  onTouched = () => {};
+  private onChange: (_: T | null) => void = (() => void 0) as (_: T | null) => void;
+  private onTouched: () => void = () => void 0;
 
   writeValue(value: T | null): void {
     this.value.set(value);

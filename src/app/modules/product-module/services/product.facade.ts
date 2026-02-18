@@ -1,19 +1,25 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  AddProductModel,
   Category,
   Product,
   ProductApi,
   ProductApiShape,
   ProductsApiResponse,
   ProductViewModel,
+  ResponseProductDelete,
 } from '@product-module';
-import { map, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductFacade {
   #productApi = inject(ProductApi);
+  private productsSubject = new BehaviorSubject<ProductsApiResponse<ProductViewModel>>(
+    {} as ProductsApiResponse<ProductViewModel>,
+  );
+  products$ = this.productsSubject.asObservable();
 
   getProducts(
     limit: number,
@@ -25,7 +31,21 @@ export class ProductFacade {
         ...result,
         products: result.products.map((product) => this.mapProductsApiToView(product)),
       })),
+      tap((mapped) => this.productsSubject.next(mapped)),
       shareReplay({ bufferSize: 1, refCount: true }),
+    );
+  }
+
+  addProduct(product: AddProductModel) {
+    return this.#productApi.addProduct(product).pipe(
+      map((p: AddProductModel) => this.mapProductsApiToView(p as ProductApiShape)),
+      tap((newProduct: ProductViewModel) => {
+        const current = this.productsSubject.getValue();
+        this.productsSubject.next({
+          ...current,
+          products: [newProduct, ...current.products],
+        });
+      }),
     );
   }
 
@@ -60,5 +80,17 @@ export class ProductFacade {
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
     return this.#productApi.productsBySort(sortBy, orderBy, limit, skip);
+  }
+
+  deleteProduct(id: number): Observable<ResponseProductDelete> {
+    return this.#productApi.deleteProduct(id).pipe(
+      tap((deletedProduct: ResponseProductDelete) => {
+        const current = this.productsSubject.getValue();
+        this.productsSubject.next({
+          ...current,
+          products: current.products.filter((p) => p.id !== deletedProduct.id),
+        });
+      }),
+    );
   }
 }

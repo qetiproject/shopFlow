@@ -63,3 +63,22 @@ export enum ProductMode {
   CATEGORY = 'category',
   ORDER = 'order',
 }
+
+export interface AddProductModel {
+  title: string;
+  description: string;
+  category: string;
+  price: number | null;
+  thumbnail: string | null;
+  images?: string[];
+  stock?: number;
+  sku?: string;
+  isActive?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface ResponseProductDelete extends Product {
+  isDeleted: boolean;
+  deletedOn: Date;
+}

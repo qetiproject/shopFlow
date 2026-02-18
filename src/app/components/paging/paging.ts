@@ -22,8 +22,8 @@ export class Paging {
     const max = this.maxPage();
     const current = this.currentPage();
 
-    let start = Math.floor((current - 1) / this.windowSize()) * this.windowSize() + 1;
-    let end = Math.min(start + this.windowSize() - 1, max);
+    const start = Math.floor((current - 1) / this.windowSize()) * this.windowSize() + 1;
+    const end = Math.min(start + this.windowSize() - 1, max);
 
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   });

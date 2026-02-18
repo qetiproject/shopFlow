@@ -1,7 +1,7 @@
 <div class="grid gap-4 grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
   @for (product of productsResponse().products; track product.id) {
     <div class="rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
-      <product-item [product]="product"></product-item>
+      <app-product-item [product]="product"></app-product-item>
     </div>
   }
 </div>
@@ -14,3 +14,12 @@
     (pageNumber)="onPageNumber($event)"
   ></app-paging>
 }
+
+<!-- <div>
+  <p>{{ products()!.products | json }}</p>
+  <img
+    [src]="products()!.products[0].thumbnail"
+    alt="Product Thumbnail"
+    class="w-32 h-32 object-cover rounded-md"
+  />
+</div> -->

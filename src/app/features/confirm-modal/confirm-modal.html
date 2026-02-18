@@ -1,0 +1,36 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div class="fixed inset-0 z-50 flex items-center justify-center" (click)="backdropClick($event)">
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-fadeIn"
+  ></div>
+
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-96 max-w-full p-6 z-10 transform transition-all animate-scaleIn"
+  >
+    <h2 id="modal-title" class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">
+      {{ title() }}
+    </h2>
+
+    <p class="text-gray-600 dark:text-gray-300 mb-6">
+      {{ message() }}
+    </p>
+
+    <div class="flex justify-end gap-3">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-2 focus:ring-gray-400"
+      >
+        {{ cancelLabel() }}
+      </button>
+
+      <button type="button" (click)="confirm()" [class]="confirmButtonClasses">
+        {{ confirmLabel() }}
+      </button>
+    </div>
+  </div>
+</div>
