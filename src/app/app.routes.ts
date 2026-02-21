@@ -9,26 +9,24 @@ export const routes: Routes = [
     path: '',
     canActivate: [InitialRedirectGuard],
     pathMatch: 'full',
-    loadComponent: () => 
-      import('@auth-module').then(c => c.Login),
+    loadComponent: () => import('@auth-module').then((c) => c.Login),
   },
-  { path: 'dashboard', 
+  {
+    path: 'dashboard',
     canActivate: [AuthGuard],
-    loadComponent: () => 
-          import('./pages/dashboard/dashboard').then(c => c.Dashboard), 
+    loadComponent: () => import('./pages/dashboard/dashboard').then((c) => c.Dashboard),
   },
-  { path: 'users', 
-    canActivate: [AuthGuard],
-    children: userRoutes 
+  { path: 'users', canActivate: [AuthGuard], children: userRoutes },
+  { path: 'product', canActivate: [AuthGuard], children: productRoutes },
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./modules/cart-module/pages/cart/cart.component').then((c) => c.CartComponent),
   },
-  { path: 'product', 
-    canActivate: [AuthGuard],
-    children: productRoutes 
+  {
+    path: '',
+    canActivate: [GuestGuard],
+    children: authRoutes,
   },
-  { 
-    path: '', 
-    canActivate: [GuestGuard], 
-    children: authRoutes
-  },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];

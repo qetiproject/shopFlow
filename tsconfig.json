@@ -33,7 +33,8 @@
       "@env-dev": ["environment/environment.development"],
       "@user-module": ["app/modules/user-module/index.ts"],
       "@product-module": ["app/modules/product-module/index.ts"],
-    },
+      "@cart-module": ["app/modules/cart-module/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,5 @@
+@for (cart of store.carts(); track cart.id) {
+  @for (product of cart.products; track product.id) {
+    <div>{{ product.title }}</div>
+  }
+}
