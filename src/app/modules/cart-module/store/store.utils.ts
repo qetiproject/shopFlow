@@ -1,18 +1,17 @@
 import { CartProduct } from '@cart-module';
 
 export const addOrUpdateProduct = (products: CartProduct[], incoming: CartProduct) => {
-  let found = false;
-
-  const updatedProducts = products.map((p) => {
+  const updatedProducts = products.reduce<CartProduct[]>((acc, p) => {
     if (p.id === incoming.id) {
-      found = true;
-      const newQuantity = p.quantity + incoming.quantity;
-      return { ...p, quantity: newQuantity, total: newQuantity * p.price };
+      const quantity = p.quantity + incoming.quantity;
+      acc.push({ ...p, quantity, total: quantity * p.price });
+    } else {
+      acc.push(p);
     }
-    return p;
-  });
+    return acc;
+  }, []);
 
-  if (!found) {
+  if (!updatedProducts.find((p) => p.id === incoming.id)) {
     updatedProducts.push({ ...incoming, total: incoming.quantity * incoming.price });
   }
 
@@ -20,16 +19,17 @@ export const addOrUpdateProduct = (products: CartProduct[], incoming: CartProduc
 };
 
 export const updateQuantity = (products: CartProduct[], id: number, delta: number) => {
-  const updatedProducts = products.map((p) => {
-    if (p.id === id) {
-      const newQuantity = Math.max(p.quantity + delta, 1);
-      return { ...p, quantity: newQuantity, total: newQuantity * p.price };
-    }
-    return p;
-  });
+  const updatedProducts = products.map((p) =>
+    p.id === id
+      ? {
+          ...p,
+          quantity: Math.max(p.quantity + delta, 1),
+          total: Math.max(p.quantity + delta, 1) * p.price,
+        }
+      : p,
+  );
 
-  const total = updatedProducts.reduce((sum, p) => sum + p.total, 0);
-  const totalQuantity = updatedProducts.reduce((sum, p) => sum + p.quantity, 0);
+  const { total, totalQuantity } = calculateTotals(updatedProducts);
 
   return { updatedProducts, total, totalQuantity };
 };

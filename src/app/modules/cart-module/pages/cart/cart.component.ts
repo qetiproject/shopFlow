@@ -1,11 +1,11 @@
-import { CurrencyPipe, JsonPipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { CartStore } from '../../store/cart.store';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CurrencyPipe, JsonPipe],
+  imports: [CurrencyPipe],
   templateUrl: './cart.component.html',
 })
 export class CartComponent {

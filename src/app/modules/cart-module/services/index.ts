@@ -1,3 +1,2 @@
-export * from './cart.api';
-export * from './cart.facade';
+export * from './cart.storage';
 
