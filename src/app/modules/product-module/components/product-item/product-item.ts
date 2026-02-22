@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AddToCartRequest } from '@cart-module';
 import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
 import { CartIcon } from 'app/icons/cart/cart';
+import { CartStore } from 'app/modules/cart-module/store/cart.store';
 
 @Component({
   selector: 'app-product-item',
@@ -15,6 +17,8 @@ export class ProductItem {
   product = input.required<ProductViewModel>();
   productFacade = inject(ProductFacade);
   confirmModal = inject(ConfirmModalService);
+  store = inject(CartStore);
+  router = inject(Router);
 
   p = computed(() => {
     const p = this.product();
@@ -51,5 +55,20 @@ export class ProductItem {
         error: () => console.log('Error deleting product'),
       });
     }
+  }
+
+  addToCart(product: ProductViewModel, quantity?: number) {
+    const newProduct: AddToCartRequest = {
+      id: product.id,
+      product: {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        thumbnail: product.thumbnail,
+        quantity: quantity ?? 1,
+        total: product.price * (quantity ?? 1),
+      },
+    };
+    this.store.addCProductToCart(newProduct);
   }
 }

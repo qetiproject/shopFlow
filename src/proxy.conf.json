@@ -14,5 +14,13 @@
     "pathRewrite": {
       "^/products": "/products"
     }
+  },
+  "/carts": {
+    "target": "https://dummyjson.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/carts": "/carts"
+    }
   }
 }
