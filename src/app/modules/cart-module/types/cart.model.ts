@@ -17,8 +17,6 @@ export interface Cart {
 
 export interface CartResponse {
   total: number;
-  skip: number;
-  limit: number;
   cart: Cart;
 }
 

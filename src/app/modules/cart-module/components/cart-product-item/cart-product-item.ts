@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, input, output } from '@angular/core';
+import { CartProduct } from '../../types/cart.model';
 
 @Component({
   selector: 'app-cart-product-item',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './cart-product-item.html',
 })
-export class CartProductItem {}
+export class CartProductItem {
+  product = input.required<CartProduct>();
+  decreaseQuantity = output<void>();
+  increaseQuantity = output<void>();
+  removeItem = output<void>();
+}
