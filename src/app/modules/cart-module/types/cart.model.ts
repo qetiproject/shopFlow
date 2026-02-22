@@ -1,39 +1,32 @@
-export interface Product {
+export interface CartProduct {
   id: number;
   title: string;
   price: number;
   quantity: number;
   total: number;
-  discountPercentage: number;
   discountedTotal: number;
   thumbnail: string;
 }
 
 export interface Cart {
   id: number;
-  products: Product[];
+  products: CartProduct[];
+  total: number;
+  userId: number;
+  totalProducts: number;
+  totalQuantity: number;
 }
 
 export interface CartResponse {
   total: number;
   skip: number;
   limit: number;
-  carts: Cart[];
+  cart: Cart;
 }
 
 export interface AddToCartRequest {
-  products: Product[];
+  id: number;
+  product: CartProduct;
   total: number;
-  discountedTotal: number;
-  userId: number;
   totalProducts: number;
-  totalQuantity: number;
 }
-
-// export interface ICart {
-//   products: Product[];
-//   isLoading: boolean;
-//   error: string | null;
-//   total: number;
-//   userId: number;
-// }

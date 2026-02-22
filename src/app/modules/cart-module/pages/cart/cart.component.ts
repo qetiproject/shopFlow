@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CartStore } from '../../store/cart.store';
 
 @Component({
@@ -7,7 +7,14 @@ import { CartStore } from '../../store/cart.store';
   templateUrl: './cart.component.html',
   providers: [CartStore],
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   store = inject(CartStore);
-  carts = this.store.carts;
+
+  cartProducts = () => this.store.cart();
+  total = () => this.store.cart().total;
+  totalQuantity = () => this.store.cart().totalQuantity;
+
+  ngOnInit(): void {
+    console.log(this.cartProducts());
+  }
 }
