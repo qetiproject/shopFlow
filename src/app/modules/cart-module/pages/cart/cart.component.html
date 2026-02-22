@@ -1,6 +1,75 @@
-@for (product of cartProducts().products; track product.id) {
-  <div>{{ product.title }}</div>
-  <button (click)="removeProductFromCart(product.id)">remove</button>
-}
+<div class="max-w-6xl mx-auto px-4 md:px-6 py-8">
+  <h1 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">Cart</h1>
 
-<p>Total Carts: {{ totalQuantity() }}</p>
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div
+      class="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 text-sm font-medium text-gray-600 border-b"
+    >
+      <div class="col-span-5">Title</div>
+      <div class="col-span-2 text-center">Price</div>
+      <div class="col-span-3 text-center">Quentity</div>
+      <div class="col-span-2 text-right">Total</div>
+    </div>
+
+    @for (product of cartProducts().products; track product.id) {
+      <div
+        class="hidden md:grid grid-cols-12 gap-4 px-6 py-6 items-center border-b last:border-b-0 hover:bg-gray-50 transition"
+      >
+        <div class="col-span-5 flex items-center gap-4">
+          <div class="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden">
+            <img [src]="product.thumbnail" class="w-full h-full object-cover" alt="img" />
+          </div>
+
+          <div>
+            <p class="font-medium text-gray-800">
+              {{ product.title }}
+            </p>
+            <button
+              (click)="removeProductFromCart(product.id)"
+              class="text-sm text-red-500 hover:underline mt-1"
+            >
+              remove
+            </button>
+          </div>
+        </div>
+
+        <div class="col-span-2 text-center font-medium text-gray-700">
+          {{ product.price | currency: 'GEL' }}
+        </div>
+
+        <div class="col-span-3 flex justify-center">
+          <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+            <button (click)="decrease(product.id)" class="px-3 py-1 hover:bg-gray-100">−</button>
+
+            <span class="px-4 text-sm font-medium">
+              {{ product.quantity }}
+            </span>
+
+            <button (click)="increase(product.id)" class="px-3 py-1 hover:bg-gray-100">+</button>
+          </div>
+        </div>
+
+        <div class="col-span-2 text-right font-semibold text-gray-900">
+          {{ product.total | currency: 'GEL' }}
+        </div>
+      </div>
+    }
+
+    <div class="px-4 md:px-6 py-6 bg-gray-50">
+      <div class="flex justify-end">
+        <div class="w-full md:max-w-sm space-y-3 text-sm">
+          <div class="flex justify-between text-lg font-semibold text-gray-900 border-t pt-3">
+            <span>Total</span>
+            <span>{{ total() | currency: 'GEL' }}</span>
+          </div>
+
+          <button
+            class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-medium transition shadow-sm mt-3"
+          >
+            Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

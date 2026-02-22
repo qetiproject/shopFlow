@@ -73,5 +73,61 @@ export const CartStore = signalStore(
         };
       });
     },
+    decrease: (id: number) => {
+      patchState(store, (state) => {
+        const updatedProducts = state.cart.products.map((p) => {
+          if (p.id === id) {
+            const newQuantity = p.quantity - 1 > 0 ? p.quantity - 1 : 1;
+            return {
+              ...p,
+              quantity: newQuantity,
+              total: newQuantity * p.price,
+            };
+          }
+          return p;
+        });
+
+        const total = updatedProducts.reduce((sum, p) => sum + p.total, 0);
+        const totalQuantity = updatedProducts.reduce((sum, p) => sum + p.quantity, 0);
+
+        return {
+          ...state,
+          cart: {
+            ...state.cart,
+            products: updatedProducts,
+            total,
+            totalQuantity,
+          },
+        };
+      });
+    },
+    increase: (id: number) => {
+      patchState(store, (state) => {
+        const updatedProducts = state.cart.products.map((p) => {
+          if (p.id === id) {
+            const newQuantity = p.quantity + 1;
+            return {
+              ...p,
+              quantity: newQuantity,
+              total: newQuantity * p.price,
+            };
+          }
+          return p;
+        });
+
+        const total = updatedProducts.reduce((sum, p) => sum + p.total, 0);
+        const totalQuantity = updatedProducts.reduce((sum, p) => sum + p.quantity, 0);
+
+        return {
+          ...state,
+          cart: {
+            ...state.cart,
+            products: updatedProducts,
+            total,
+            totalQuantity,
+          },
+        };
+      });
+    },
   })),
 );

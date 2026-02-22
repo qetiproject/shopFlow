@@ -1,9 +1,11 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { CartStore } from '../../store/cart.store';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
+  standalone: true,
+  imports: [CurrencyPipe],
   templateUrl: './cart.component.html',
 })
 export class CartComponent {
@@ -15,5 +17,13 @@ export class CartComponent {
 
   removeProductFromCart(id: number): void {
     this.store.removeProductFromCart(id);
+  }
+
+  decrease(id: number): void {
+    this.store.decrease(id);
+  }
+
+  increase(id: number): void {
+    this.store.increase(id);
   }
 }
