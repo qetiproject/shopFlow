@@ -1,12 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
-import { CartProductItem } from '../../components/cart-product-item/cart-product-item';
-import { CartSummary } from '../../components/cart-summary/cart-summary';
-import { CartStore } from '../../store/cart.store';
+import { RouterLink } from '@angular/router';
+import { CartProductItem, CartStore, CartSummary } from '@cart-module';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartProductItem, CartSummary],
+  imports: [CartProductItem, CartSummary, RouterLink],
   templateUrl: './cart.component.html',
 })
 export class CartComponent {

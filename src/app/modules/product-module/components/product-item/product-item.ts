@@ -70,6 +70,5 @@ export class ProductItem {
       },
     };
     this.store.addCProductToCart(newProduct);
-    this.router.navigate(['/cart']);
   }
 }

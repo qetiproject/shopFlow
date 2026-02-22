@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { CartProduct } from '../../types/cart.model';
+import { CartProduct } from '@cart-module';
 
 @Component({
   selector: 'app-cart-product-item',
