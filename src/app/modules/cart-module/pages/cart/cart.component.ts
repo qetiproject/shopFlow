@@ -1,20 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CartStore } from '../../store/cart.store';
 
 @Component({
   selector: 'app-cart',
   imports: [],
   templateUrl: './cart.component.html',
-  providers: [CartStore],
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
   store = inject(CartStore);
 
-  cartProducts = () => this.store.cart();
-  total = () => this.store.cart().total;
-  totalQuantity = () => this.store.cart().totalQuantity;
+  cartProducts = this.store.cart;
+  total = computed(() => this.store.cart().total);
+  totalQuantity = computed(() => this.store.cart().totalQuantity);
 
-  ngOnInit(): void {
-    console.log(this.cartProducts());
+  removeProductFromCart(id: number): void {
+    this.store.removeProductFromCart(id);
   }
 }

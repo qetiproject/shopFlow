@@ -1,5 +1,6 @@
-<!-- @for (cart of cartProducts(); track cart.id) {
-  <div>{{ cart.title }} sdsdsd</div>
+@for (product of cartProducts().products; track product.id) {
+  <div>{{ product.title }}</div>
+  <button (click)="removeProductFromCart(product.id)">remove</button>
 }
 
-<p>Total Carts: {{ totalQuantity() }}</p> -->
+<p>Total Carts: {{ totalQuantity() }}</p>

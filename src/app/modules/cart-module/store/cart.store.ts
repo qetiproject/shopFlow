@@ -2,6 +2,7 @@ import { AddToCartRequest, CartProduct, CartResponse } from '@cart-module';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
 export const CartStore = signalStore(
+  { providedIn: 'root' },
   withState<CartResponse>({
     total: 0,
     skip: 0,
@@ -11,56 +12,65 @@ export const CartStore = signalStore(
       products: [],
       total: 0,
       userId: 0,
-      totalProducts: 0,
       totalQuantity: 0,
     },
   }),
 
   withMethods((store) => ({
     addCProductToCart: (request: AddToCartRequest) => {
-      const state = store.cart();
-
+      const cart = store.cart();
       const incomingProduct = request.product;
 
-      const existingIndex = state.products.findIndex((p) => p.id === incomingProduct.id);
+      const existingIndex = cart.products.findIndex((p) => p.id === incomingProduct.id);
 
       let updatedProducts: CartProduct[];
 
       if (existingIndex > -1) {
-        // უკვე არსებობს → quantity გავზარდოთ
-        updatedProducts = state.products.map((p, i) =>
+        updatedProducts = cart.products.map((p, i) =>
           i === existingIndex
             ? {
                 ...p,
                 quantity: p.quantity + incomingProduct.quantity,
                 total: (p.quantity + incomingProduct.quantity) * p.price,
-                discountedTotal:
-                  (p.quantity + incomingProduct.quantity) * (p.price - (p.price * 0) / 100), // თუ discount არ გაქვს
               }
             : p,
         );
       } else {
-        // ახალი პროდუქტი
         updatedProducts = [
-          ...state.products,
+          ...cart.products,
           {
             ...incomingProduct,
-            total: incomingProduct.price * incomingProduct.quantity,
+            total: incomingProduct.quantity * incomingProduct.price,
           },
         ];
       }
 
-      // ჯამები თავიდან ვითვლით
       const total = updatedProducts.reduce((sum, p) => sum + p.total, 0);
+      const totalQuantity = updatedProducts.reduce((sum, p) => sum + p.quantity, 0);
 
-      console.log(updatedProducts, 'updated cart products');
-      patchState(store, {
+      patchState(store, (state) => ({
+        ...state,
         cart: {
-          ...state,
+          ...state.cart,
           products: updatedProducts,
           total,
-          totalProducts: updatedProducts.length,
+          totalQuantity,
         },
+      }));
+    },
+    removeProductFromCart: (id: number) => {
+      patchState(store, (state) => {
+        const updateProducts = state.cart.products.filter((p) => p.id !== id);
+
+        return {
+          ...state,
+          cart: {
+            ...state.cart,
+            products: updateProducts,
+            total: updateProducts.reduce((sum, p) => sum + p.total, 0),
+            totalQuantity: updateProducts.reduce((q, p) => q + p.quantity, 0),
+          },
+        };
       });
     },
   })),

@@ -4,7 +4,6 @@ export interface CartProduct {
   price: number;
   quantity: number;
   total: number;
-  discountedTotal: number;
   thumbnail: string;
 }
 
@@ -13,7 +12,6 @@ export interface Cart {
   products: CartProduct[];
   total: number;
   userId: number;
-  totalProducts: number;
   totalQuantity: number;
 }
 
@@ -27,6 +25,4 @@ export interface CartResponse {
 export interface AddToCartRequest {
   id: number;
   product: CartProduct;
-  total: number;
-  totalProducts: number;
 }
