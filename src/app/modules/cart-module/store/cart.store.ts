@@ -1,3 +1,5 @@
+import { inject } from '@angular/core';
+import { UserStorage } from '@auth-module';
 import {
   addOrUpdateProduct,
   AddToCartRequest,
@@ -22,53 +24,58 @@ export const CartStore = signalStore(
     },
   }),
 
-  withMethods((store) => ({
-    addCProductToCart: (request: AddToCartRequest) => {
-      const updatedProducts = addOrUpdateProduct(store.cart().products, request.product);
-      const { total, totalQuantity } = calculateTotals(updatedProducts);
+  withMethods((store) => {
+    const userStorage = inject(UserStorage);
 
+    const user = userStorage.getUser();
+    if (user!.userId) {
       patchState(store, (state) => ({
         ...state,
-        cart: { ...state.cart, products: updatedProducts, total, totalQuantity },
+        cart: { ...state.cart, userId: user!.userId },
       }));
-    },
-    removeProductFromCart: (id: number) => {
-      patchState(store, (state) => {
-        const updateProducts = state.cart.products.filter((p) => p.id !== id);
-        const { total, totalQuantity } = calculateTotals(updateProducts);
+    }
 
-        return {
-          ...state,
-          cart: { ...state.cart, products: updateProducts, total, totalQuantity },
-        };
-      });
-    },
-    increase: (id: number) => {
+    const changeQuantity = (id: number, delta: number) => {
       patchState(store, (state) => {
         const { updatedProducts, total, totalQuantity } = updateQuantity(
           state.cart.products,
           id,
-          1,
+          delta,
         );
+
         return {
           ...state,
           cart: { ...state.cart, products: updatedProducts, total, totalQuantity },
         };
       });
-    },
+    };
 
-    decrease: (id: number) => {
-      patchState(store, (state) => {
-        const { updatedProducts, total, totalQuantity } = updateQuantity(
-          state.cart.products,
-          id,
-          -1,
-        );
-        return {
+    return {
+      addCProductToCart: (request: AddToCartRequest) => {
+        const updatedProducts = addOrUpdateProduct(store.cart().products, request.product);
+        const { total, totalQuantity } = calculateTotals(updatedProducts);
+
+        patchState(store, (state) => ({
           ...state,
           cart: { ...state.cart, products: updatedProducts, total, totalQuantity },
-        };
-      });
-    },
-  })),
+        }));
+      },
+
+      removeProductFromCart: (id: number) => {
+        patchState(store, (state) => {
+          const updatedProducts = state.cart.products.filter((p) => p.id !== id);
+          const { total, totalQuantity } = calculateTotals(updatedProducts);
+
+          return {
+            ...state,
+            cart: { ...state.cart, products: updatedProducts, total, totalQuantity },
+          };
+        });
+      },
+
+      changeQuantity,
+      increase: (id: number) => changeQuantity(id, 1),
+      decrease: (id: number) => changeQuantity(id, -1),
+    };
+  }),
 );

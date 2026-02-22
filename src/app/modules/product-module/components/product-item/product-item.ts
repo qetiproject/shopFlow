@@ -71,7 +71,5 @@ export class ProductItem {
     };
     this.store.addCProductToCart(newProduct);
     this.router.navigate(['/cart']);
-
-    console.log(newProduct, 'added to cart');
   }
 }

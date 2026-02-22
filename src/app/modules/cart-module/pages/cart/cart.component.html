@@ -25,7 +25,7 @@
               {{ product.title }}
             </p>
             <button
-              (click)="removeProductFromCart(product.id)"
+              (click)="store.removeProductFromCart(product.id)"
               class="text-sm text-red-500 hover:underline mt-1"
             >
               remove
@@ -39,13 +39,17 @@
 
         <div class="col-span-3 flex justify-center">
           <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
-            <button (click)="decrease(product.id)" class="px-3 py-1 hover:bg-gray-100">−</button>
+            <button (click)="store.decrease(product.id)" class="px-3 py-1 hover:bg-gray-100">
+              −
+            </button>
 
             <span class="px-4 text-sm font-medium">
               {{ product.quantity }}
             </span>
 
-            <button (click)="increase(product.id)" class="px-3 py-1 hover:bg-gray-100">+</button>
+            <button (click)="store.increase(product.id)" class="px-3 py-1 hover:bg-gray-100">
+              +
+            </button>
           </div>
         </div>
 
