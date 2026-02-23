@@ -24,7 +24,7 @@ export class BackButtonComponent {
     if (window.history.length > 1) {
       this.location.back();
     } else {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['product/list']);
     }
   }
 }
