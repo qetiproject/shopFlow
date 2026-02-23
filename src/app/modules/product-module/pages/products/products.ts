@@ -5,7 +5,7 @@ import { ProducsPagetHeader, ProductList } from '@product-module';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductList, ProducsPagetHeader, RouterOutlet],
+  imports: [ProductList, RouterOutlet, ProducsPagetHeader],
   templateUrl: './products.html',
 })
 export class ProductsPage {}
