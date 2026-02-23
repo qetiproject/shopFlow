@@ -5,8 +5,8 @@ import { Review } from '@product-module';
   selector: 'app-product-reviews',
   standalone: true,
   imports: [],
-  templateUrl: './reviews.html',
+  templateUrl: './product-reviews.html',
 })
-export class Reviews {
+export class ProductReviews {
   reviews = input.required<Review[]>();
 }

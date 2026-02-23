@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductHeader, ProductList } from '@product-module';
+import { ProducsPagetHeader, ProductList } from '@product-module';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductList, ProductHeader, RouterOutlet],
+  imports: [ProductList, RouterOutlet, ProducsPagetHeader],
   templateUrl: './products.html',
 })
 export class ProductsPage {}

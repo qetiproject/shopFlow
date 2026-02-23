@@ -1,11 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { RemoveSVG } from 'app/icons';
 
 @Component({
   selector: 'app-cart-summary',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, RemoveSVG],
   templateUrl: './cart-summary.html',
 })
 export class CartSummary {

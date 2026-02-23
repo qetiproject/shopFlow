@@ -25,6 +25,7 @@ export const CartStore = signalStore(
   withComputed((store) => ({
     products: computed(() => store.cart().products),
     total: computed(() => store.cart().products.reduce((sum, p) => sum + p.price * p.quantity, 0)),
+    totalItems: computed(() => store.cart().products.reduce((sum, p) => sum + p.quantity, 0)),
   })),
 
   withMethods((store) => {
@@ -59,15 +60,22 @@ export const CartStore = signalStore(
       });
     };
 
-    const addCProductToCart = (request: AddToCartRequest) => {
+    const addCProductToCart = (request: AddToCartRequest): boolean => {
+      let success = false;
+
       patchState(store, (state) => {
         const updatedProducts = addOrUpdateProduct(state.cart.products, request.product);
-        const { total, totalQuantity } = calculateTotals(updatedProducts);
 
+        const { total, totalQuantity } = calculateTotals(updatedProducts);
         const newCart = { ...state.cart, products: updatedProducts, total, totalQuantity };
+
         persist(newCart);
+        success = true;
+
         return { ...state, cart: newCart };
       });
+
+      return success;
     };
 
     const removeProductFromCart = (id: number) => {

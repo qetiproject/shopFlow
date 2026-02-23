@@ -17,8 +17,6 @@ import { Observable } from 'rxjs';
 export class ProductApi {
   #http = inject(HttpClient);
 
-  private readonly baseUrl = environment.product;
-
   products(
     limit: number,
     skip: number,
@@ -31,22 +29,22 @@ export class ProductApi {
     params = params.set('limit', limit.toString());
     params = params.set('skip', skip.toString());
 
-    return this.#http.get<ProductsApiResponse<ProductApiShape>>(`${this.baseUrl}/search`, {
+    return this.#http.get<ProductsApiResponse<ProductApiShape>>(`${environment.product}/search`, {
       params,
     });
   }
 
   getProductDetails(id: number): Observable<Product | null> {
-    return this.#http.get<Product>(`${this.baseUrl}/${id}`);
+    return this.#http.get<Product>(`${environment.product}/${id}`);
   }
 
   productCategories(): Observable<Category[]> {
-    return this.#http.get<Category[]>(`${this.baseUrl}/categories`);
+    return this.#http.get<Category[]>(`${environment.product}/categories`);
   }
 
   productsByCategory(category: string, limit: number, skip: number) {
     return this.#http.get<ProductsApiResponse<ProductApiShape>>(
-      `${this.baseUrl}/category/${category}?limit=${limit}&skip=${skip}`,
+      `${environment.product}/category/${category}?limit=${limit}&skip=${skip}`,
     );
   }
 
@@ -57,15 +55,15 @@ export class ProductApi {
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
     return this.#http.get<ProductsApiResponse<Product>>(
-      `${this.baseUrl}?sortBy=${sortBy}&order=${orderBy}&limit=${limit}&skip=${skip}`,
+      `${environment.product}?sortBy=${sortBy}&order=${orderBy}&limit=${limit}&skip=${skip}`,
     );
   }
 
   addProduct(product: AddProductModel): Observable<AddProductModel> {
-    return this.#http.post<AddProductModel>(`${this.baseUrl}/add`, product);
+    return this.#http.post<AddProductModel>(`${environment.product}/add`, product);
   }
 
   deleteProduct(id: number): Observable<ResponseProductDelete> {
-    return this.#http.delete<ResponseProductDelete>(`${this.baseUrl}/${id}`);
+    return this.#http.delete<ResponseProductDelete>(`${environment.product}/${id}`);
   }
 }

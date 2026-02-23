@@ -1,5 +1,6 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ArrowDownSVG } from 'app/icons';
 
 export interface SelectOption<T = unknown> {
   label: string;
@@ -10,7 +11,7 @@ export interface SelectOption<T = unknown> {
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [],
+  imports: [ArrowDownSVG],
   templateUrl: './select.html',
   providers: [
     {

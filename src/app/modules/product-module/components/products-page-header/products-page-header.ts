@@ -2,15 +2,16 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
+import { PlusSVG } from 'app/icons';
 import { SortComponent } from '../sort/sort';
 
 @Component({
-  selector: 'app-product-header',
+  selector: 'app-products-page-header',
   standalone: true,
-  imports: [CategoryComponent, Search, SortComponent],
-  templateUrl: './product-header.html',
+  imports: [CategoryComponent, Search, SortComponent, PlusSVG],
+  templateUrl: './products-page-header.html',
 })
-export class ProductHeader {
+export class ProducsPagetHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
   placeholder = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;

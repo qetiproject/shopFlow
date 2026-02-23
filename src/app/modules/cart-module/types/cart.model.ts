@@ -1,12 +1,3 @@
-export interface CartProduct {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  total: number;
-  thumbnail: string;
-}
-
 export interface Cart {
   id: number;
   products: CartProduct[];
@@ -15,12 +6,14 @@ export interface Cart {
   totalQuantity: number;
 }
 
-export interface CartResponse {
-  total: number;
-  cart: Cart;
+export interface Cartable {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
 }
 
-export interface AddToCartRequest {
-  id: number;
-  product: CartProduct;
-}
+export type CartProduct = Cartable & {
+  quantity: number;
+  total: number;
+};
