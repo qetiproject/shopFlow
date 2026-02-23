@@ -6,12 +6,13 @@ import { MessagesService } from '@core';
 import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
 import { MessageSeverity } from '@types';
+import { RemoveSVG } from 'app/icons';
 import { CartIcon } from 'app/icons/cart/cart';
 
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [CommonModule, RouterLink, CartIcon],
+  imports: [CommonModule, RouterLink, CartIcon, RemoveSVG],
   templateUrl: './product-item.html',
 })
 export class ProductItem {

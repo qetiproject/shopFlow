@@ -2,12 +2,13 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
+import { PlusSVG } from 'app/icons';
 import { SortComponent } from '../sort/sort';
 
 @Component({
   selector: 'app-products-page-header',
   standalone: true,
-  imports: [CategoryComponent, Search, SortComponent],
+  imports: [CategoryComponent, Search, SortComponent, PlusSVG],
   templateUrl: './products-page-header.html',
 })
 export class ProducsPagetHeader {
