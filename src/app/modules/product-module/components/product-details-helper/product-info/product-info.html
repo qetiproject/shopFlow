@@ -1,67 +1,17 @@
 <article class="space-y-6" aria-label="Product Information">
-  <header>
-    <span class="inline-block text-xs uppercase tracking-wide text-pink-500 font-semibold mb-2">
-      Beauty Product
-    </span>
-    <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-3">
-      {{ product().title }}
-    </h1>
-  </header>
-
-  <p class="text-gray-600 leading-relaxed mb-6">
-    {{ product().description }}
-  </p>
-
-  <section aria-label="Product rating" class="flex items-center gap-3 mb-6">
-    <div class="flex text-yellow-400 text-lg" aria-hidden="true">
-      {{ '★'.repeat(averageRating) }}{{ '☆'.repeat(5 - averageRating) }}
-    </div>
-    <span class="sr-only">{{ averageRating }} out of 5 stars</span>
-  </section>
-
-  <section class="flex items-center gap-4 mb-6" aria-label="Product price and discount">
-    <div class="text-3xl font-extrabold text-gray-900">
-      ${{ product().price }}
-      <span class="text-sm text-gray-400 line-through">
-        {{ startPrice | currency: 'USD' : 'symbol' : '1.0-0' }}
-      </span>
-    </div>
-    <span class="bg-pink-100 text-pink-600 text-sm font-semibold px-3 py-1 rounded-full">
-      -{{ product().discountPercentage | number: '1.0-0' }}%
-    </span>
-  </section>
-
-  <section class="flex items-center gap-2 mb-6" aria-label="Stock status">
-    <span class="w-2 h-2 rounded-full bg-green-500" aria-hidden="true"></span>
-    <p class="text-green-600 font-medium">In stock & ready to ship</p>
-  </section>
-
-  <section
-    class="space-y-1 text-sm text-gray-600 mb-8"
-    aria-label="Shipping and warranty information"
-  >
-    <p>🚚 {{ product().shippingInformation }}</p>
-    <p>🛡 {{ product().warrantyInformation }}</p>
-  </section>
-
-  <section class="flex gap-4 mb-10" aria-label="Product actions">
-    <button
-      (click)="addToCart.emit()"
-      class="flex-1 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-4 rounded-2xl shadow-lg transition active:scale-95"
-    >
-      Add to Cart
-    </button>
-
-    <button
-      class="flex-1 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold py-4 rounded-2xl transition active:scale-95"
-    >
-      Buy Now
-    </button>
-  </section>
-
-  <section class="flex flex-wrap gap-2" aria-label="Product tags">
-    @for (tag of product().tags; track tag) {
-      <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full"> #{{ tag }} </span>
-    }
-  </section>
+  <app-product-header [title]="product().title"></app-product-header>
+  <p class="text-gray-600 leading-relaxed mb-6">{{ product().description }}</p>
+  <app-product-rating [rating]="averageRating"></app-product-rating>
+  <app-product-price
+    [price]="product().price"
+    [discount]="product().discountPercentage"
+    [originalPrice]="startPrice"
+  ></app-product-price>
+  <app-product-stock></app-product-stock>
+  <app-product-shipping
+    [shippingInfo]="product().shippingInformation"
+    [warrantyInfo]="product().warrantyInformation"
+  ></app-product-shipping>
+  <app-product-actions (addToCart)="addToCart.emit()"></app-product-actions>
+  <app-product-tags [tags]="product().tags"></app-product-tags>
 </article>

@@ -1,11 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { Product, Review } from 'app/modules/product-module/types';
+import {
+  Product,
+  ProductActions,
+  ProductHeader,
+  ProductPrice,
+  ProductRating,
+  ProductShipping,
+  ProductStock,
+  ProductTags,
+  Review,
+} from '@product-module';
 
 @Component({
   selector: 'app-product-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ProductRating,
+    ProductPrice,
+    ProductStock,
+    ProductShipping,
+    ProductActions,
+    ProductTags,
+    ProductHeader,
+  ],
   templateUrl: './product-info.html',
 })
 export class ProductInfo {

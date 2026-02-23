@@ -5,12 +5,12 @@ import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '
 import { SortComponent } from '../sort/sort';
 
 @Component({
-  selector: 'app-product-header',
+  selector: 'app-products-page-header',
   standalone: true,
   imports: [CategoryComponent, Search, SortComponent],
-  templateUrl: './product-header.html',
+  templateUrl: './products-page-header.html',
 })
-export class ProductHeader {
+export class ProducsPagetHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
   placeholder = 'Search products...';
   @ViewChild(Search) searchComponent!: Search;
