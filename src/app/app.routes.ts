@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authRoutes } from '@auth-module';
 import { cartRoutes } from '@cart-module';
+import { checkoutRoutes } from '@checkout-module';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
 import { productRoutes } from '@product-module';
 import { userRoutes } from '@user-module';
@@ -24,17 +25,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: cartRoutes,
   },
+
   {
-    path: 'payment',
-    loadComponent: () =>
-      import('./modules/checkout-module/pages/payment/payment').then((c) => c.PaymentComponent),
-  },
-  {
-    path: 'shipping-info',
-    loadComponent: () =>
-      import('./modules/checkout-module/pages/shipping-info/shipping-info').then(
-        (c) => c.ShippingInfo,
-      ),
+    path: 'checkout',
+    canActivate: [AuthGuard],
+    children: checkoutRoutes,
   },
   {
     path: '',
