@@ -25,6 +25,18 @@ export const routes: Routes = [
     children: cartRoutes,
   },
   {
+    path: 'payment',
+    loadComponent: () =>
+      import('./modules/checkout-module/pages/payment/payment').then((c) => c.PaymentComponent),
+  },
+  {
+    path: 'shipping-info',
+    loadComponent: () =>
+      import('./modules/checkout-module/pages/shipping-info/shipping-info').then(
+        (c) => c.ShippingInfo,
+      ),
+  },
+  {
     path: '',
     canActivate: [GuestGuard],
     children: authRoutes,
