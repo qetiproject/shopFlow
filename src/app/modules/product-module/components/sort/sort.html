@@ -3,19 +3,5 @@
   class="flex items-center px-3 py-2 bg-white/80 text-gray-800 font-medium rounded-lg border border-gray-200 shadow-sm hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-1"
 >
   <span class="mr-2">Sort by Title</span>
-  <svg
-    class="w-4 h-4"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 10 14"
-  >
-    <path
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      [attr.d]="sortIconPath"
-    />
-  </svg>
+  <app-sort-svg [path]="sortIconPath" />
 </button>
