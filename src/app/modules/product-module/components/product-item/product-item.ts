@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AddToCartRequest } from '@cart-module';
+import { AddToCartRequest, CartStore } from '@cart-module';
+import { MessagesService } from '@core';
 import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
+import { MessageSeverity } from '@types';
 import { CartIcon } from 'app/icons/cart/cart';
-import { CartStore } from 'app/modules/cart-module/store/cart.store';
 
 @Component({
   selector: 'app-product-item',
@@ -19,6 +20,7 @@ export class ProductItem {
   confirmModal = inject(ConfirmModalService);
   store = inject(CartStore);
   router = inject(Router);
+  #messages = inject(MessagesService);
 
   p = computed(() => {
     const p = this.product();
@@ -57,7 +59,7 @@ export class ProductItem {
     }
   }
 
-  addToCart(product: ProductViewModel, quantity?: number) {
+  addToCart(product: ProductViewModel) {
     const newProduct: AddToCartRequest = {
       id: product.id,
       product: {
@@ -65,10 +67,16 @@ export class ProductItem {
         title: product.title,
         price: product.price,
         thumbnail: product.thumbnail,
-        quantity: quantity ?? 1,
-        total: product.price * (quantity ?? 1),
+        quantity: 1,
+        total: product.price,
       },
     };
-    this.store.addCProductToCart(newProduct);
+    const success = this.store.addCProductToCart(newProduct);
+    if (success) {
+      this.#messages.showMessage({
+        text: 'Product added successfully into the cart',
+        severity: MessageSeverity.Success,
+      });
+    }
   }
 }

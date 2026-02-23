@@ -9,9 +9,12 @@
     </div>
 
     <div>
-      <p class="font-medium text-gray-800">
+      <h3
+        class="font-medium text-gray-800 cursor-pointer"
+        [routerLink]="['/product/details/', item.id]"
+      >
         {{ item.title }}
-      </p>
+      </h3>
       <button
         (click)="removeItem.emit()"
         aria-label="Remove {{ item.title }} from cart"

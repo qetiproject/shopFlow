@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { logoutUser, UserStorage } from '@auth-module';
+import { CartStore } from '@cart-module';
 import { STORAGE_KEYS } from '@core';
 import { Store } from '@ngrx/store';
 import { CartIcon } from 'app/icons/cart/cart';
@@ -16,6 +17,10 @@ export class HeaderComponent {
   isOpen = signal(false);
   isMobileMenu = signal(false);
   userStorage = inject(UserStorage);
+
+  private readonly cartStore = inject(CartStore);
+
+  readonly totalItems = this.cartStore.totalItems;
 
   user = sessionStorage.getItem(STORAGE_KEYS.USER);
   email: string | null = this.user ? JSON.parse(this.user).emailId : null;
