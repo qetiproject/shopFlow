@@ -1,12 +1,11 @@
-import { Injectable, inject } from '@angular/core';
-import { AddToCartRequest, CartStore } from '@cart-module';
-import { Product, ProductViewModel } from '@product-module';
+import { inject, Injectable } from '@angular/core';
+import { AddToCartRequest, Cartable, CartStore } from '@cart-module';
 
 @Injectable({ providedIn: 'root' })
 export class CartFacade {
   readonly #cartStore = inject(CartStore);
 
-  addProductInCart(product: Product | ProductViewModel, quantity = 1): boolean {
+  addProductInCart<T extends Cartable>(product: T, quantity = 1): boolean {
     const newProduct: AddToCartRequest = {
       id: product.id,
       product: {
