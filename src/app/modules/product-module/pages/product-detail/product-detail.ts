@@ -6,12 +6,13 @@ import { CartFacade } from '@cart-module';
 import { MessagesService } from '@core';
 import { Product, Review, Reviews } from '@product-module';
 import { MessageSeverity } from '@types';
+import { BackButtonComponent } from 'app/components/back-button/back-button.component';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, Reviews],
+  imports: [CommonModule, Reviews, BackButtonComponent],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail {
