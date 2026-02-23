@@ -10,8 +10,6 @@ import { Observable } from 'rxjs';
 export class UserApiService {
   #http = inject(HttpClient);
 
-  private readonly baseUrl = environment.userApp;
-
   searchUsers(
     searchText?: string,
     pageNumber?: number,
@@ -31,10 +29,10 @@ export class UserApiService {
       params = params.set('pageSize', pageSize);
     }
 
-    return this.#http.get<IUsers>(`${this.baseUrl}/searchUsers`, { params });
+    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
   }
 
   userByEmail(searchText: string): Observable<UsersViewModel> {
-    return this.#http.get<IUsers>(`${this.baseUrl}/searchUsers?searchText=${searchText}`);
+    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers?searchText=${searchText}`);
   }
 }

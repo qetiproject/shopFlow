@@ -9,9 +9,12 @@
     </div>
 
     <div>
-      <p class="font-medium text-gray-800">
+      <h3
+        class="font-medium text-gray-800 cursor-pointer"
+        [routerLink]="['/product/details/', item.id]"
+      >
         {{ item.title }}
-      </p>
+      </h3>
       <button
         (click)="removeItem.emit()"
         aria-label="Remove {{ item.title }} from cart"
@@ -23,7 +26,7 @@
   </div>
 
   <div class="col-span-2 text-center font-medium text-gray-700">
-    {{ item.price | currency: 'GEL' }}
+    {{ item.price | currency: 'USD' }}
   </div>
 
   <div class="col-span-3 flex justify-center">
@@ -51,6 +54,6 @@
   </div>
 
   <div class="col-span-2 text-right font-semibold text-gray-900">
-    {{ item.total | currency: 'GEL' }}
+    {{ item.total | currency: 'USD' }}
   </div>
 </div>
