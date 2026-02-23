@@ -24,3 +24,11 @@ export interface AddToCartRequest {
   id: number;
   product: CartProduct;
 }
+
+export interface CartProduct {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+  total: number;
+}

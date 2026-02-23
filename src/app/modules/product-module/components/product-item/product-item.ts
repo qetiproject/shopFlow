@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AddToCartRequest, CartStore } from '@cart-module';
+import { CartFacade, CartStore } from '@cart-module';
 import { MessagesService } from '@core';
 import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
@@ -20,6 +20,7 @@ export class ProductItem {
   confirmModal = inject(ConfirmModalService);
   store = inject(CartStore);
   router = inject(Router);
+  #cartFacade = inject(CartFacade);
   #messages = inject(MessagesService);
 
   p = computed(() => {
@@ -60,18 +61,8 @@ export class ProductItem {
   }
 
   addToCart(product: ProductViewModel) {
-    const newProduct: AddToCartRequest = {
-      id: product.id,
-      product: {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        thumbnail: product.thumbnail,
-        quantity: 1,
-        total: product.price,
-      },
-    };
-    const success = this.store.addCProductToCart(newProduct);
+    const success = this.#cartFacade.addProductInCart(product, 1);
+
     if (success) {
       this.#messages.showMessage({
         text: 'Product added successfully into the cart',
