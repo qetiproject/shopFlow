@@ -3,18 +3,16 @@ import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { CartFacade } from '@cart-module';
+import { BackButtonComponent } from '@components';
 import { MessagesService } from '@core';
-import { Product } from '@product-module';
+import { Product, ProductImages, ProductInfo, ProductReviews } from '@product-module';
 import { MessageSeverity } from '@types';
-import { BackButtonComponent } from 'app/components/back-button/back-button.component';
 import { map } from 'rxjs';
-import { ProductImages } from '../../components/product-details-helper/product-images/product-images';
-import { ProductReviews } from '../../components/product-details-helper/product-reviews/product-reviews';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, BackButtonComponent, ProductImages, ProductReviews],
+  imports: [CommonModule, BackButtonComponent, ProductImages, ProductReviews, ProductInfo],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail {
