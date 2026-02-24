@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
+import { CartStore } from '@cart-module';
 import { environment } from '@env-dev';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutApi {
   #http = inject(HttpClient);
+  #cartStore = inject(CartStore);
 
-  checkout(items: any[]) {
+  readonly vm = computed(() => ({
+    cart: this.#cartStore.cart(),
+  }));
+
+  checkout(items: any) {
     return this.#http.post<{ url: string }>(environment.checkout, { items });
   }
 }
