@@ -2,7 +2,7 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
-import { PlusSVG } from 'app/icons';
+import { PlusSVG } from 'assets/icons';
 import { SortComponent } from '../sort/sort';
 
 @Component({

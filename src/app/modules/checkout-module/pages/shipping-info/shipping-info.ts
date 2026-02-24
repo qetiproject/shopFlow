@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '@env-dev';
 import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 import { firstValueFrom } from 'rxjs';
@@ -49,7 +50,7 @@ export class ShippingInfo {
   async onCheckout(): Promise<void> {
     try {
       const res: any = await firstValueFrom(
-        this.http.post('http://localhost:4242/checkout', { items: this.cart.items }),
+        this.http.post(environment.checkout, { items: this.cart.items }),
       );
 
       window.location.href = res.url;
