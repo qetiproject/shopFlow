@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { environment } from '@env-dev';
 import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 import { firstValueFrom } from 'rxjs';
+import { CheckoutApi } from '../../services';
 
 @Component({
   selector: 'app-shipping-info',
@@ -15,7 +14,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ShippingInfo {
   INPUT_TYPES = INPUT_TYPES;
-  http = inject(HttpClient);
+  #checkoutApi = inject(CheckoutApi);
 
   form = new FormGroup({
     firstName: new FormControl(''),
@@ -49,10 +48,7 @@ export class ShippingInfo {
 
   async onCheckout(): Promise<void> {
     try {
-      const res: any = await firstValueFrom(
-        this.http.post(environment.checkout, { items: this.cart.items }),
-      );
-
+      const res = await firstValueFrom(this.#checkoutApi.checkout(this.cart.items));
       window.location.href = res.url;
     } catch (err) {
       console.error(err);
