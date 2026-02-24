@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
 import { CartStore } from '@cart-module';
 import { environment } from '@env-dev';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutApi {
@@ -12,7 +13,7 @@ export class CheckoutApi {
     cart: this.#cartStore.cart(),
   }));
 
-  checkout(items: any) {
-    return this.#http.post<{ url: string }>(environment.checkout, { items });
+  checkout(): Observable<{ url: string }> {
+    return this.#http.post<{ url: string }>(environment.checkout, { items: this.vm().cart });
   }
 }
