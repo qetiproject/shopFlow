@@ -30,7 +30,6 @@ export class UserList {
   searchValue = input<string | undefined>('');
   pageNumber = signal<number>(1);
   pageSize = signal<number>(10);
-  windowSize = signal<number>(5);
 
   private readonly users$: Observable<UsersViewModel | undefined> = combineLatest([
     toObservable(this.searchValue),

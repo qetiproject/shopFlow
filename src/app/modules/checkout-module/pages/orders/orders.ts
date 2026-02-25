@@ -16,14 +16,13 @@ export class Orders {
   #orderStorage = inject(OrderStorage);
   orders = this.#orderStorage.getOrders();
   pageNumber = signal<number>(1);
-  pageSize = signal<number>(2);
-  windowSize = signal<number>(5);
+  pageSize = signal<number>(10);
 
   trackByOrder = (_: number, order: Order) => order.id;
 
   columns = computed<TableColumn<Order>[]>(() => {
     return [
-      { key: 'id', label: 'id', cell: (o) => o.id },
+      { key: 'id', label: '#', cell: (o) => o.id },
       {
         key: 'createdAt',
         label: 'Created',
@@ -46,5 +45,11 @@ export class Orders {
 
   onPageNumber(page: number) {
     this.pageNumber.set(page);
+  }
+
+  get pagedOrders(): Order[] {
+    const start = (this.pageNumber() - 1) * this.pageSize();
+    const end = start + this.pageSize();
+    return this.orders.order.slice(start, end);
   }
 }

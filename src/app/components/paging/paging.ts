@@ -10,7 +10,7 @@ import { Component, computed, input, output } from '@angular/core';
 export class Paging {
   totalItems = input.required<number>();
   currentPage = input.required<number>();
-  pageSize = input.required<number>();
+  pageSize = input<number>(10);
   windowSize = input<number>(5);
   pageNumber = output<number>();
 
