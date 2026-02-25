@@ -31,19 +31,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: checkoutRoutes,
   },
-  // {
-  //   path: 'canceled',
-  //   loadComponent: () => import('@checkout-module').then((c) => c.CheckoutCanceled),
-  // },
-  // {
-  //   path: 'success',
-  //   loadComponent: () => import('@checkout-module').then((c) => c.CheckoutSuccess),
-  // },
-  // {
-  //   path: 'checkout/orders',
-  //   loadComponent: () => import('@checkout-module').then((c) => c.Orders),
-  // },
-
   {
     path: '',
     canActivate: [GuestGuard],

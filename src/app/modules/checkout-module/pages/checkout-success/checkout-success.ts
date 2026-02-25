@@ -1,11 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CartStore } from '@cart-module';
 import { BillingStorage, Order, OrderStorage } from '@checkout-module';
+import { SuccessSVG } from 'assets/icons';
 
 @Component({
   selector: 'app-checkout-success',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, SuccessSVG],
   templateUrl: './checkout-success.html',
 })
 export class CheckoutSuccess implements OnInit {
