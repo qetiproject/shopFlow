@@ -6,8 +6,7 @@ import { MessagesService } from '@core';
 import { ConfirmModalService } from '@features';
 import { ProductFacade, ProductViewModel } from '@product-module';
 import { MessageSeverity } from '@types';
-import { RemoveSVG } from 'app/icons';
-import { CartIcon } from 'app/icons/cart/cart';
+import { CartIcon, RemoveSVG } from 'assets/icons';
 
 @Component({
   selector: 'app-product-item',

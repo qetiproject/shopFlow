@@ -1,7 +1,7 @@
 import { Component, computed, forwardRef, Input, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { INPUT_TYPES, InputType } from '@types';
-import { EyeSVG, NotEyeSVG } from 'app/icons';
+import { EyeSVG, NotEyeSVG } from 'assets/icons';
 
 @Component({
   selector: 'app-input',
