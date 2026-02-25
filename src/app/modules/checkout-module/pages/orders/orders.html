@@ -1,1 +1,9 @@
-<p>pages works!</p>
+<app-table [columns]="columns()" [data]="orders.order" [trackBy]="trackByOrder"> </app-table>
+
+<app-paging
+  [totalItems]="orders.totalRecords"
+  [pageSize]="pageSize()"
+  [currentPage]="pageNumber()"
+  [windowSize]="windowSize()"
+  (pageNumber)="onPageNumber($event)"
+></app-paging>

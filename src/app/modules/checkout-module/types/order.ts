@@ -9,3 +9,8 @@ export interface Order {
   status: string;
   createdAt: Date;
 }
+
+export interface OrderList {
+  order: Order[];
+  totalRecords: number;
+}

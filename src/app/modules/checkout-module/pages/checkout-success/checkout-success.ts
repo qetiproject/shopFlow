@@ -19,6 +19,7 @@ export class CheckoutSuccess implements OnInit {
     const billing = this.#billingStorage.getBillingInfo();
     const products = this.#cartStore.products();
     const total = this.#cartStore.total();
+
     const order: Order = {
       id: crypto.randomUUID(),
       billing: billing!,
