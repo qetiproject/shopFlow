@@ -14,6 +14,8 @@ export class CheckoutApi {
   }));
 
   checkout(): Observable<{ url: string }> {
-    return this.#http.post<{ url: string }>(environment.checkout, { items: this.vm().cart });
+    return this.#http.post<{ url: string }>(`${environment.api}/checkout`, {
+      items: this.vm().cart,
+    });
   }
 }

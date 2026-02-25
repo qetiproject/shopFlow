@@ -7,5 +7,5 @@ export const environment = {
     publicKey:
       'pk_test_51LAqxvIkjbUYZrPqgjebGNlXN5002Zbv5ndAwODB2g22C3IIHm39IhanjV81vnvXuKBOxznLLroQNwUJmWz9sICH00hjanaBYT',
   },
-  checkout: 'http://localhost:4242/checkout',
+  api: 'http://localhost:4242/api',
 };

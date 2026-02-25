@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
-app.post('/checkout', async (req, res, next) => {
+app.post('/api/checkout', async (req, res, next) => {
   try {
     const { items } = req.body;
 
@@ -30,8 +30,8 @@ app.post('/checkout', async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/success`,
-      cancel_url: `${process.env.CLIENT_URL}/canceled`,
+      success_url: `${process.env.CLIENT_URL}/checkout/success`,
+      cancel_url: `${process.env.CLIENT_URL}/checkout/canceled`,
     });
 
     res.json({ url: session.url });

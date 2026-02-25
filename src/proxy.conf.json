@@ -24,12 +24,9 @@
     }
   },
 
-  "/checkout": {
+  "/api": {
     "target": "http://localhost:4242",
     "secure": true,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "checkout": "/checkout"
-    }
+    "changeOrigin": true
   }
 }
