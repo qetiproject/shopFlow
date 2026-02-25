@@ -25,13 +25,13 @@ app.post('/checkout', async (req, res, next) => {
             name: item.title,
             images: [item.thumbnail],
           },
-          unit_amount: item.price * 100,
+          unit_amount: Math.round(item.price * 100),
         },
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CLIENT_URL}/checkout/canceled`,
+      success_url: `${process.env.CLIENT_URL}/success`,
+      cancel_url: `${process.env.CLIENT_URL}/canceled`,
     });
 
     res.json({ url: session.url });
