@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authRoutes } from '@auth-module';
 import { cartRoutes } from '@cart-module';
+import { checkoutRoutes } from '@checkout-module';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
 import { productRoutes } from '@product-module';
 import { userRoutes } from '@user-module';
@@ -23,6 +24,12 @@ export const routes: Routes = [
     path: 'cart',
     canActivate: [AuthGuard],
     children: cartRoutes,
+  },
+
+  {
+    path: 'checkout',
+    canActivate: [AuthGuard],
+    children: checkoutRoutes,
   },
   {
     path: '',

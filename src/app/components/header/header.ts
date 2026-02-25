@@ -4,7 +4,7 @@ import { logoutUser, UserStorage } from '@auth-module';
 import { CartStore } from '@cart-module';
 import { STORAGE_KEYS } from '@core';
 import { Store } from '@ngrx/store';
-import { CartIcon } from 'app/icons/cart/cart';
+import { CartIcon } from 'assets/icons';
 
 @Component({
   selector: 'app-header',

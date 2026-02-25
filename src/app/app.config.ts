@@ -6,11 +6,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AuthEffects, AuthReducer } from '@auth-module';
-import {
-  AuthInterceptor,
-  GlobalHttpErrorInterceptor,
-  LoadingInterceptor
-} from '@core';
+import { AuthInterceptor, GlobalHttpErrorInterceptor, LoadingInterceptor } from '@core';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';

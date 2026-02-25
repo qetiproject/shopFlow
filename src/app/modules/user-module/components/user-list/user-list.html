@@ -17,8 +17,6 @@
 
 <app-paging
   [totalItems]="users()!.totalRecords"
-  [pageSize]="pageSize()"
   [currentPage]="pageNumber()"
-  [windowSize]="windowSize()"
   (pageNumber)="onPageNumber($event)"
 ></app-paging>

@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { RemoveSVG } from 'app/icons';
+import { RemoveSVG } from 'assets/icons';
 
 @Component({
   selector: 'app-cart-summary',

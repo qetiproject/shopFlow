@@ -1,6 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { SortFacade, SortOrder } from '@product-module';
-import { SortSVG } from 'app/icons';
+import { SortSVG } from 'assets/icons';
 
 @Component({
   selector: 'app-sort',

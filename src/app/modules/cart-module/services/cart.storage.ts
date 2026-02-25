@@ -7,15 +7,15 @@ import { STORAGE_KEYS } from '@core';
 })
 export class CartStorage {
   saveCart(cart: Cart): void {
-    sessionStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
+    localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
   }
 
   getCart(): Cart | null {
-    const cart = sessionStorage.getItem(STORAGE_KEYS.CART);
+    const cart = localStorage.getItem(STORAGE_KEYS.CART);
     return cart ? JSON.parse(cart) : null;
   }
 
   clear(): void {
-    sessionStorage.removeItem(STORAGE_KEYS.CART);
+    localStorage.removeItem(STORAGE_KEYS.CART);
   }
 }
