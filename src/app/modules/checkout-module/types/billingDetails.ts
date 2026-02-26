@@ -4,5 +4,7 @@ export interface BillingDetails {
   lastName: string;
   address: string;
   city: string;
+  fullAddress: string;
+  fullName: string;
   zip: number;
 }

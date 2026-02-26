@@ -37,6 +37,8 @@ export class ShippingInfo {
         address: formValue.address!,
         city: formValue.city!,
         zip: formValue.zip!,
+        fullName: `${formValue.firstName} ${formValue.lastName}`,
+        fullAddress: `${formValue.address} ${formValue.city}`,
       };
       this.#billingStorage.savebillingInfo(billingDetails);
       window.location.href = res.url;
