@@ -33,12 +33,12 @@ export class Orders {
       {
         key: 'fullName',
         label: 'Full Name',
-        cell: (o) => `${o.billing.firstName} ${o.billing.lastName}`,
+        cell: (o) => o.billing.fullName,
       },
       {
         key: 'address',
         label: 'Address',
-        cell: (o) => `${o.billing.address}, ${o.billing.city}`,
+        cell: (o) => o.billing.fullAddress,
       },
     ];
   });
