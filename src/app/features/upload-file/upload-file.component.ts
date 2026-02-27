@@ -88,7 +88,6 @@ export class FileUploadComponent implements ControlValueAccessor {
 
   clearFile() {
     if (this.previewUrl()) {
-      // Clean up memory if blob URL
       if (this.previewUrl()!.startsWith('blob:')) {
         URL.revokeObjectURL(this.previewUrl()!);
       }

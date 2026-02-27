@@ -1,2 +1,2 @@
-export * from './dashboard/dashboard';
+export * from './not-found';
 

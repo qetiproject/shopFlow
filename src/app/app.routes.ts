@@ -13,11 +13,6 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () => import('@auth-module').then((c) => c.Login),
   },
-  // {
-  //   path: 'dashboard',
-  //   canActivate: [AuthGuard],
-  //   loadComponent: () => import('./pages/dashboard/dashboard').then((c) => c.Dashboard),
-  // },
   { path: 'users', canActivate: [AuthGuard], children: userRoutes },
   { path: 'product', canActivate: [AuthGuard], children: productRoutes },
   {
@@ -25,16 +20,21 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: cartRoutes,
   },
-
   {
     path: 'checkout',
     canActivate: [AuthGuard],
     children: checkoutRoutes,
   },
   {
+    path: 'chat',
+    outlet: 'chat',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
+  },
+  {
     path: '',
     canActivate: [GuestGuard],
     children: authRoutes,
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', loadComponent: () => import('@pages').then((c) => c.NotFoundComponent) },
 ];

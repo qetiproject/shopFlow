@@ -5,7 +5,7 @@
 >
   <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md text-center">
     <header>
-      <app-remove-svg customClasses="mx-auto h-16 w-16 text-red-500 mb-4" />
+      <app-remove-svg [customClasses]="customClasses()" />
       <h1 id="payment-canceled-title" class="text-2xl font-bold text-gray-800 mb-2">
         Payment Canceled
       </h1>

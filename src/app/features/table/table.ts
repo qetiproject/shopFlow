@@ -1,6 +1,6 @@
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { TableColumn } from '@types';
+import { TableColumn, TableId } from '@types';
 
 @Component({
   selector: 'app-table',
@@ -8,9 +8,17 @@ import { TableColumn } from '@types';
   imports: [CommonModule, NgTemplateOutlet],
   templateUrl: './table.html',
 })
-export class Table<T> {
+export class Table<T extends TableId> {
   columns = input.required<TableColumn<T>[]>();
   data = input<T[]>([]);
 
-  trackBy = input<(index: number, item: T) => string | number>((_, item) => (item as any).id ?? _);
+  trackBy = input<(index: number, item: T) => string | number>((_, item) => {
+    if (item.id != null) return item.id;
+    if (item.userId != null) return item.userId;
+    return _;
+  });
+
+  getCell<K extends keyof T>(row: T, key: K): T[K] {
+    return row[key];
+  }
 }
