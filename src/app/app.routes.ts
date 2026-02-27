@@ -34,7 +34,7 @@ export const routes: Routes = [
   {
     path: 'chat',
     outlet: 'chat',
-    loadComponent: () => import('@chat-module').then((c) => c.Chat),
+    loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
   },
 
   {
