@@ -15,3 +15,8 @@ interface TableColumnFlexible<T> {
 }
 
 export type TableColumn<T> = TableColumnStrict<T> | TableColumnFlexible<T>;
+
+export interface TableId {
+  id?: string | number;
+  userId?: string | number;
+}

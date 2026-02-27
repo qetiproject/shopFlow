@@ -1,4 +1,4 @@
-<!-- @if (data().length) {
+@if (data().length) {
   <div class="bg-white rounded-xl shadow-md overflow-hidden mt-5">
     <div class="overflow-x-auto">
       <table class="min-w-full text-sm">
@@ -25,7 +25,7 @@
                   } @else if (col.cell) {
                     {{ col.cell(row) }}
                   } @else {
-                    {{ row[col.key] }}
+                    getCell(row, col.key)
                   }
                 </td>
               }
@@ -35,4 +35,4 @@
       </table>
     </div>
   </div>
-} -->
+}

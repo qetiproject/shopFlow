@@ -3,7 +3,7 @@
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">My Orders</h1>
     </div>
-    <!-- <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder"> </app-table> -->
+    <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder"> </app-table>
 
     <app-paging
       [totalItems]="orders.totalRecords"
