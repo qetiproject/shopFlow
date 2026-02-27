@@ -1,10 +1,10 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { ChatMessage, ChatStorage } from './chat.storage';
+import { ChatStorage, IChatMessage } from '@chat-module';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   #chatStorage = inject(ChatStorage);
-  messages = signal<ChatMessage[]>(this.#chatStorage.getChatMessages());
+  messages = signal<IChatMessage[]>(this.#chatStorage.getChatMessages());
 
   sendMessage(text: string) {
     this.messages.update((m) => [...m, { text, mine: true }]);

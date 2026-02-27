@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RemoveSVG } from 'assets/icons';
-import { ChatService } from '../../services/chat.service';
+import { ChatHeader, ChatInput, ChatMessage, ChatService } from '@chat-module';
 
 @Component({
   standalone: true,
   selector: 'app-chat',
-  imports: [ReactiveFormsModule, CommonModule, RemoveSVG],
+  imports: [ReactiveFormsModule, CommonModule, ChatMessage, ChatHeader, ChatInput],
   templateUrl: './chat.html',
 })
 export class ChatComponent {
