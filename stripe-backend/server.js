@@ -16,19 +16,31 @@ function handleError(res, error, message = 'Internal server error') {
   res.status(500).json({ message });
 }
 
-app.post('/api/checkout', async (req, res) => {
+app.post('/api/checkout', async (req, res, next) => {
   try {
     const { items } = req.body;
 
-    const session = await checkoutService.createSession(
-      items.products,
-      `${process.env.CLIENT_URL}/checkout/success`,
-      `${process.env.CLIENT_URL}/checkout/canceled`,
-    );
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: items.products.map((item) => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.title,
+            images: [item.thumbnail],
+          },
+          unit_amount: Math.round(item.price * 100),
+        },
+        quantity: item.quantity,
+      })),
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL}/checkout/success`,
+      cancel_url: `${process.env.CLIENT_URL}/checkout/canceled`,
+    });
 
     res.json({ url: session.url });
   } catch (error) {
-    handleError(res, error, 'Failed to create Stripe checkout session');
+    next(error);
   }
 });
 
