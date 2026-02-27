@@ -3,7 +3,7 @@
     class="bg-gray-50 rounded-2xl p-4 flex justify-center shadow-inner ring-1 ring-gray-100 transition-transform duration-300 hover:scale-[1.02]"
   >
     <img
-      [src]="product().thumbnail"
+      [src]="mainImage()"
       [alt]="product().title + ' main image'"
       class="h-[420px] object-contain"
     />
@@ -16,11 +16,13 @@
   >
     @for (img of product().images; track img) {
       <li>
-        <img
-          [src]="img"
-          [alt]="product().title + ' thumbnail ' + img"
-          class="w-20 h-24 object-contain rounded-2xl border border-gray-200 hover:border-pink-500 cursor-pointer transition-shadow duration-200 shadow-sm hover:shadow-md"
-        />
+        <button (click)="selectImage(img)">
+          <img
+            [src]="img"
+            [alt]="product().title + ' thumbnail ' + img"
+            class="w-20 h-24 object-contain rounded-2xl border border-gray-200 hover:border-pink-500 cursor-pointer transition-shadow duration-200 shadow-sm hover:shadow-md"
+          />
+        </button>
       </li>
     }
   </ul>
