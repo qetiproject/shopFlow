@@ -36,5 +36,5 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
     children: authRoutes,
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', loadComponent: () => import('@pages').then((c) => c.NotFoundComponent) },
 ];
