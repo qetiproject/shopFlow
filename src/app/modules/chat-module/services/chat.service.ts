@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { ChatSenderRoles, ChatStorage, IChatMessage } from '@chat-module';
-import { environment } from '@env-dev';
+import { ChatApi } from './chat.api';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   #chatStorage = inject(ChatStorage);
   messages = signal<IChatMessage[]>([]);
-  #http = inject(HttpClient);
+  #chatApi = inject(ChatApi);
   welcomeMessage = 'Hello 👋 How can I help you?';
   fallbackMessage = '';
 
@@ -42,7 +41,7 @@ export class ChatService {
   }
 
   private askAI(text: string) {
-    this.#http.post<{ reply: string }>(`${environment.api}/ai-chat`, { message: text }).subscribe({
+    this.#chatApi.aiChat(text).subscribe({
       next: (res) => {
         const botMessage: IChatMessage = {
           id: crypto.randomUUID(),
@@ -55,6 +54,7 @@ export class ChatService {
         this.persist();
       },
       error: (res) => {
+        console.log(res, 'res');
         const fallback: IChatMessage = {
           id: crypto.randomUUID(),
           text: res.error.message,

@@ -44,19 +44,31 @@ app.post('/api/checkout', async (req, res, next) => {
   }
 });
 
+const { getProductByName } = require('./services/ai.service');
+
 app.post('/api/ai-chat', async (req, res) => {
   const fallbackMessage =
     'Unfortunately, I am unable to answer at this stage. Please leave your number and a manager will contact you.';
 
   try {
-    const { message } = req.body;
-    if (!message) return res.status(400).json({ message: 'Message is required' });
-
-    const reply = await askAI(message);
-
-    res.json({ reply });
-  } catch (error) {
-    handleError(res, error, fallbackMessage);
+    const body = req.body;
+    if (!body.message) return res.status(400).json({ message: 'Message is required' });
+    const product = await getProductByName(body.message);
+    if (!product) {
+      return res.json({ message: fallbackMessage });
+    }
+    const context = { product };
+    const message = await askAI(body.message, context);
+    console.log(message, 'message');
+    res.json({ message });
+  } catch (err) {
+    if (err.name === 'RateLimitError') {
+      console.error('OpenAI rate limit exceeded');
+      res.status(429).json({ message: 'API limit reached, please try later.' });
+    } else {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error.' });
+    }
   }
 });
 

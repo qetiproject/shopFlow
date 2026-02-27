@@ -7,6 +7,6 @@ export class ChatApi {
   #http = inject(HttpClient);
 
   aiChat(text: string) {
-    return this.#http.post<{ reply: string }>(`${environment.api}/api/ai-chat`, { message: text });
+    return this.#http.post<{ reply: string }>(`${environment.api}/ai-chat`, { message: text });
   }
 }
