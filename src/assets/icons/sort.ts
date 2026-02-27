@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-sort-svg',
@@ -16,10 +16,11 @@ import { Component, Input } from '@angular/core';
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
-      [attr.d]="path"
+      [attr.d]="path()"
     />
   </svg>`,
 })
 export class SortSVG {
-  @Input() path!: string;
+  // @Input() path!: string;
+  path = input<string>();
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RemoveSVG } from 'assets/icons';
 
@@ -8,4 +8,6 @@ import { RemoveSVG } from 'assets/icons';
   imports: [RouterLink, RemoveSVG],
   templateUrl: './checkout-canceled.html',
 })
-export class CheckoutCanceled {}
+export class CheckoutCanceled {
+  customClasses = signal<string>('mx-auto h-16 w-16 text-red-500 mb-4');
+}
