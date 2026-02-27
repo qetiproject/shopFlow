@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BillingDetails, BillingStorage, CheckoutApi } from '@checkout-module';
+import { BackButtonComponent } from '@components';
 import { DynamicValidatorMessage, InputComponent } from '@features';
 import { INPUT_TYPES } from '@types';
 import { firstValueFrom } from 'rxjs';
@@ -10,7 +11,14 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-shipping-info',
   standalone: true,
-  imports: [CommonModule, InputComponent, ReactiveFormsModule, DynamicValidatorMessage, RouterLink],
+  imports: [
+    CommonModule,
+    InputComponent,
+    ReactiveFormsModule,
+    DynamicValidatorMessage,
+    RouterLink,
+    BackButtonComponent,
+  ],
   templateUrl: './shipping-info.html',
 })
 export class ShippingInfo {

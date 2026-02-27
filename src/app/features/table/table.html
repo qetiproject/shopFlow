@@ -25,7 +25,7 @@
                   } @else if (col.cell) {
                     {{ col.cell(row) }}
                   } @else {
-                    {{ row[col.key] }}
+                    getCell(row, col.key)
                   }
                 </td>
               }

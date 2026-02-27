@@ -9,7 +9,7 @@ import { BackButtonSVG } from 'assets/icons';
   standalone: true,
   imports: [BackButtonDirective, BackButtonSVG],
   template: `
-    <div class="pt-4 pl-4">
+    <div class="pt-4 pl-4 mb-4">
       <button (click)="goBack()" appBackBtnClass>
         <app-back-button-svg />
       </button>

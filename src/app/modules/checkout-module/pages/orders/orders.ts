@@ -9,7 +9,7 @@ import { Order } from '../../types';
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [Table, Paging],
+  imports: [Paging, Table],
   templateUrl: './orders.html',
 })
 export class Orders {

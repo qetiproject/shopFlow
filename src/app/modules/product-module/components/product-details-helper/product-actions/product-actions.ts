@@ -1,9 +1,10 @@
 import { Component, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-actions',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   template: `
     <section class="flex gap-4 mb-10" aria-label="Product actions">
       <button
@@ -14,6 +15,7 @@ import { Component, output } from '@angular/core';
       </button>
 
       <button
+        [routerLink]="['/checkout/shipping-info']"
         class="flex-1 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold py-4 rounded-2xl transition active:scale-95"
       >
         Buy Now
