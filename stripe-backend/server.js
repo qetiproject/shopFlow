@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Stripe = require('stripe');
+const { askAI } = require('./ai.service');
 
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -37,6 +38,22 @@ app.post('/api/checkout', async (req, res, next) => {
     res.json({ url: session.url });
   } catch (error) {
     next(error);
+  }
+});
+
+app.post('/api/ai-chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    const reply = await askAI(message);
+
+    res.json({ reply });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      reply:
+        'სამწუხაროდ ამ ეტაპზე პასუხი ვერ გავეცი. გთხოვთ დატოვოთ თქვენი ნომერი და მენეჯერი დაგიკავშირდებათ.',
+    });
   }
 });
 
