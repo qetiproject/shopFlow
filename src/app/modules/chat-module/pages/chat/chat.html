@@ -3,7 +3,7 @@
     class="w-[380px] h-[560px] m-6 bg-white/80 backdrop-blur-xl border border-white/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden"
   >
     <div class="px-5 py-4 flex items-center justify-between border-b border-gray-100 bg-white/70">
-      <h3 class="text-sm font-semibold text-gray-800">Support</h3>
+      <h3 class="text-sm font-semibold text-gray-800">Shop Flow</h3>
       <button
         (click)="close()"
         class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition text-gray-500"
@@ -13,7 +13,7 @@
     </div>
 
     <div class="flex-1 px-5 py-4 overflow-y-auto space-y-4 bg-gradient-to-b from-gray-50 to-white">
-      @for (msg of messages(); track $index) {
+      @for (msg of messages; track $index) {
         <div class="flex" [class.justify-end]="msg.mine">
           <div
             class="px-4 py-2.5 text-sm max-w-[75%]"

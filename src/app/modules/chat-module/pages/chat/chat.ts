@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RemoveSVG } from 'assets/icons';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   standalone: true,
@@ -12,8 +13,9 @@ import { RemoveSVG } from 'assets/icons';
 })
 export class ChatComponent {
   #router = inject(Router);
+  #chatService = inject(ChatService);
 
-  messages = signal<{ text: string; mine: boolean }[]>([]);
+  messages = this.#chatService.messages();
 
   messageControl = new FormControl('', {
     nonNullable: true,
@@ -21,17 +23,10 @@ export class ChatComponent {
   });
 
   send() {
-    if (this.messageControl.invalid) return;
-
     const value = this.messageControl.value.trim();
     if (!value) return;
-
-    this.messages.update((m) => [...m, { text: value, mine: true }]);
+    this.#chatService.sendMessage(value);
     this.messageControl.reset();
-
-    setTimeout(() => {
-      this.messages.update((m) => [...m, { text: 'Thanks for your message 👋', mine: false }]);
-    }, 600);
   }
 
   close() {
