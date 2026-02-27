@@ -1,3 +1,4 @@
+export * from './chat-button/chat-button';
 export * from './confirm-modal/confirm-modal';
 export * from './confirm-modal/confirm-modal.ref';
 export * from './confirm-modal/confirm-modal.service';

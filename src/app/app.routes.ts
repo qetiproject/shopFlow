@@ -32,6 +32,12 @@ export const routes: Routes = [
     children: checkoutRoutes,
   },
   {
+    path: 'chat',
+    outlet: 'chat',
+    loadComponent: () => import('@chat-module').then((c) => c.Chat),
+  },
+
+  {
     path: '',
     canActivate: [GuestGuard],
     children: authRoutes,

@@ -1,11 +1,11 @@
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { TableColumn } from '@types';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, NgTemplateOutlet],
+  imports: [CommonModule],
   templateUrl: './table.html',
 })
 export class Table<T> {

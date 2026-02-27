@@ -1,6 +1,7 @@
 export * from './arrow-down';
 export * from './back-button';
 export * from './cart';
+export * from './chat';
 export * from './eye';
 export * from './not-eye';
 export * from './plus';
