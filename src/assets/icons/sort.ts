@@ -21,6 +21,5 @@ import { Component, input } from '@angular/core';
   </svg>`,
 })
 export class SortSVG {
-  // @Input() path!: string;
   path = input<string>();
 }

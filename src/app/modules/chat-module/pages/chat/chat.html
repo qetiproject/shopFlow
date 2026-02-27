@@ -4,7 +4,7 @@
   >
     <app-chat-header
       [title]="'Shop Flow'"
-      (close)="close()"
+      (closeIcon)="close()"
       closeIconSize="h-6 w-6"
       class="bg-linear-to-r from-blue-500 to-indigo-600 text-white"
     ></app-chat-header>
@@ -12,9 +12,12 @@
     <div
       class="chat-messages flex-1 px-5 py-4 overflow-y-auto space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent bg-linear-to-b from-gray-50 to-white"
     >
-      @for (msg of messages; track $index) {
-        <app-chat-message [message]="msg"></app-chat-message>
-      }
+      <p>
+        {{ messages | json }}
+        @for (msg of messages(); track $index) {
+          <app-chat-message [message]="msg"></app-chat-message>
+        }
+      </p>
     </div>
 
     <app-chat-input [control]="messageControl" (send)="send()"></app-chat-input>

@@ -23,6 +23,5 @@ import { Component, input } from '@angular/core';
   `,
 })
 export class SendSVG {
-  // @Input() customClasses = 'w-5 h-5';
   customClasses = input<string>('w-5 h-5');
 }

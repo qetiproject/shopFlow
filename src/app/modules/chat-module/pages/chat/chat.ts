@@ -14,7 +14,7 @@ export class ChatComponent {
   #router = inject(Router);
   #chatService = inject(ChatService);
 
-  messages = this.#chatService.messages();
+  messages = this.#chatService.messages;
 
   messageControl = new FormControl('', {
     nonNullable: true,

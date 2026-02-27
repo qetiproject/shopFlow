@@ -13,11 +13,6 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () => import('@auth-module').then((c) => c.Login),
   },
-  // {
-  //   path: 'dashboard',
-  //   canActivate: [AuthGuard],
-  //   loadComponent: () => import('./pages/dashboard/dashboard').then((c) => c.Dashboard),
-  // },
   { path: 'users', canActivate: [AuthGuard], children: userRoutes },
   { path: 'product', canActivate: [AuthGuard], children: productRoutes },
   {

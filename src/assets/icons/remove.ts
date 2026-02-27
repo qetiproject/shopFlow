@@ -22,6 +22,5 @@ import { Component, input } from '@angular/core';
   </svg>`,
 })
 export class RemoveSVG {
-  // @Input() customClasses = '';
   customClasses = input<string>('');
 }

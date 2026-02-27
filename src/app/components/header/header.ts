@@ -26,7 +26,6 @@ export class HeaderComponent {
   email: string | null = this.user ? JSON.parse(this.user).emailId : null;
 
   navLinks = [
-    // { path: 'dashboard', label: 'Dashboard' },
     { path: '/users', label: 'Users' },
     { path: '/product/list', label: 'Products' },
   ];
