@@ -9,8 +9,7 @@ export class ChatService {
   messages = signal<IChatMessage[]>([]);
   #http = inject(HttpClient);
   welcomeMessage = 'Hello 👋 How can I help you?';
-  fallbackMessage =
-    'Unfortunately, I am unable to answer at this stage. Please leave your number and a manager will contact you.';
+  fallbackMessage = '';
 
   constructor() {
     const saved = this.#chatStorage.getChatMessages();
@@ -43,32 +42,30 @@ export class ChatService {
   }
 
   private askAI(text: string) {
-    this.#http
-      .post<{ reply: string }>(`${environment.api}/api/ai-chat`, { message: text })
-      .subscribe({
-        next: (res) => {
-          const botMessage: IChatMessage = {
-            id: crypto.randomUUID(),
-            text: res.reply,
-            role: ChatSenderRoles.ASSISTANT,
-            createdAt: new Date(),
-          };
+    this.#http.post<{ reply: string }>(`${environment.api}/ai-chat`, { message: text }).subscribe({
+      next: (res) => {
+        const botMessage: IChatMessage = {
+          id: crypto.randomUUID(),
+          text: res.reply,
+          role: ChatSenderRoles.ASSISTANT,
+          createdAt: new Date(),
+        };
 
-          this.messages.update((m) => [...m, botMessage]);
-          this.persist();
-        },
-        error: () => {
-          const fallback: IChatMessage = {
-            id: crypto.randomUUID(),
-            text: this.fallbackMessage,
-            role: ChatSenderRoles.ASSISTANT,
-            createdAt: new Date(),
-          };
+        this.messages.update((m) => [...m, botMessage]);
+        this.persist();
+      },
+      error: (res) => {
+        const fallback: IChatMessage = {
+          id: crypto.randomUUID(),
+          text: res.error.message,
+          role: ChatSenderRoles.ASSISTANT,
+          createdAt: new Date(),
+        };
 
-          this.messages.update((m) => [...m, fallback]);
-          this.persist();
-        },
-      });
+        this.messages.update((m) => [...m, fallback]);
+        this.persist();
+      },
+    });
   }
 
   private persist() {

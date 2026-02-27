@@ -16,7 +16,7 @@ import { ChatSenderRoles, IChatMessage } from '@chat-module';
             : 'bg-white text-gray-700 rounded-2xl rounded-bl-sm shadow-sm border border-gray-100'
         "
       >
-        {{ message()!.text }}
+        <p>{{ message()!.text }}</p>
       </div>
     </div>
   `,
