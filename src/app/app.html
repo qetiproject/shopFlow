@@ -1,8 +1,8 @@
 @if (isLoggedIn) {
   <app-header />
+  <app-chat-button />
+  <router-outlet name="chat"></router-outlet>
 }
 <app-loading />
 <app-messages />
-<app-chat-button />
-<router-outlet name="chat"></router-outlet>
 <router-outlet />
