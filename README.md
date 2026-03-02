@@ -1,45 +1,58 @@
 # 🛒 Shop Flow App
 
-Shop Flow App is an ongoing, scalable, and interactive web application built with Angular 20.3, designed for browsing and managing products.
-The project demonstrates modern Angular best practices with a strong focus on clean architecture, performance, testability, and long-term maintainability. It is developed as a production-like application and continues to evolve with new features and architectural improvements.
+Shop Flow App is a **scalable, modular and production-like web application** built with **Angular 21**.  
+It allows users to browse, manage and purchase products while demonstrating **modern Angular best practices**, **advanced TypeScript patterns** and **clean architecture principles**.
+
+The project is fully dynamic, continuously evolving and designed for maintainability, testability and long-term scalability.
 
 ---
 
 ## ✨ Features
 
-- User authentication: Register, Login, Forgot Password, and Email OTP verification
-- Secure routing using route guards
-- Reactive state management with NgRx, Angular Signals, and RxJS
-- Fully responsive UI built with Tailwind CSS
-- Modular, lazy-loaded feature-based architecture
+- **User Authentication:** Register, Login, Forgot Password, Email OTP verification
+- **Secure Routing:** Route guards and second router outlet for nested layouts
+- **State Management:** NgRx and Signal Store with advanced Angular Signals (`signal`, `computed`, `linkedSignal`, `untracked`, `resource`)
+- **Checkout & Payments:** Stripe integration with backend Node.js API
+- **Add Product & File Upload:** Users can add products with dynamic forms and upload images/files
+- **Cart & Orders Module:** Full shopping flow with cart management, order tracking and checkout
+- **Product Module:** Filtering, sorting, select filtering, pagination, dynamic tables and product search
+- **Dynamic Reactive Forms:** Custom controls, centralized validation schemas and dynamic error messages
+- **Local & Session Storage:** Cart, user session and temporary form data persisted for better UX
+- **Responsive UI:** Fully responsive layouts with Tailwind CSS
+- **Lazy Loading & Modular Architecture:** Feature-based lazy-loaded modules for scalability
+- **Advanced TypeScript:** Union types, generics, mapped types and type-safe patterns
 
 ---
 
 ## 🛠️ Technologies
 
-- Framework: Angular 21
-- Languages: TypeScript, JavaScript (ES6+)
-- State Management: NgRx, Signals, RxJS
-- Unit Testing: Jasmine 
-- Styling: Tailwind CSS
-- Architecture: Modular, lazy-loaded structure following Clean Architecture principles
+- **Framework:** Angular 21
+- **Languages:** TypeScript, JavaScript (ES6+)
+- **State Management:** NgRx, Signal Store, RxJS
+- **Unit Testing:** Jasmine to Jest
+- **Styling:** Tailwind CSS
+- **Backend:** Node.js REST API (Checkout & Orders)
+- **Architecture:** Modular, lazy-loaded, clean architecture
 
 ---
 
 ## 🧱 Architecture
 
-The application follows a modular and lazy-loaded architecture inspired by clean architecture principles.
-Responsibilities are clearly separated between presentation components, business logic services, state management using NgRx and routing with guards. This structure improves scalability, maintainability, and testability.
+- Modular, feature-based, lazy-loaded structure
+- Clear separation of responsibilities:
+  - Presentation components
+  - Business logic services
+  - State management via NgRx and Signal Store
+  - Routing with guards and nested outlets
+- **Form & File Handling:** Dynamic reactive forms with reusable custom controls and validation schemas; file uploads handled with type-safe Angular services
+- **State Persistence:** Cart, user session and temporary form data persisted in `localStorage` and `sessionStorage`
+- **Add Product Flow:** Uses reactive signals and centralized services to ensure type-safety, form validation and smooth integration with product and cart modules
+- Advanced reactive patterns using Angular Signals and computed/linked/untracked signals
+- Centralized, reusable form schemas for maintainability and type safety
 
 ---
 
-## 🧪 Testing
+## ⚡ Summary
 
-The application includes comprehensive unit tests covering components, services, and NgRx state management.
-Unit tests are written following the **AAA (Arrange, Act, Assert) pattern**, ensuring a clear separation of setup, action, and assertion for improved readability and maintainability.
-
-Testing focuses on:
-- Component behavior and template interactions
-- NgRx actions, reducers and selectors
-
----
+This project demonstrates **modern Angular development** at a senior-level standard, combining **advanced TypeScript**, **reactive forms**, **Signal Store**, dynamic modules, file upload and clean, maintainable architecture.  
+It is production-ready and continues to evolve with new features and improvements.
