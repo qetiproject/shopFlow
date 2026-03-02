@@ -1,20 +1,20 @@
-@if (productsResponse().products.length) {
+@let response = productsResponse();
+
+@if (response.products.length === 0) {
+  <p>No products available.</p>
+} @else {
   <div class="grid gap-4 grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
-    @for (product of productsResponse().products; track product.id) {
+    @for (product of response.products; track product.id) {
       <div class="rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
         <app-product-item [product]="product"></app-product-item>
       </div>
     }
   </div>
-} @else {
-  <p>No products available</p>
-}
 
-@if (productsResponse().total) {
   <app-paging
-    [totalItems]="productsResponse()!.total"
+    [totalItems]="response.total"
     [pageSize]="limit()"
     [currentPage]="pageNumber()"
     (pageNumber)="onPageNumber($event)"
-  ></app-paging>
+  />
 }
