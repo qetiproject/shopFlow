@@ -31,7 +31,7 @@ The project is fully dynamic, continuously evolving and designed for maintainabi
 - **State Management:** NgRx, Signal Store, RxJS
 - **Unit Testing:** Jasmine to Jest
 - **Styling:** Tailwind CSS
-- **Backend:** Node.js REST API (Checkout & Orders)
+- **Backend:** Node.js REST API (Stripe Checkout)
 - **Architecture:** Modular, lazy-loaded, clean architecture
 
 ---
@@ -49,10 +49,3 @@ The project is fully dynamic, continuously evolving and designed for maintainabi
 - **Add Product Flow:** Uses reactive signals and centralized services to ensure type-safety, form validation and smooth integration with product and cart modules
 - Advanced reactive patterns using Angular Signals and computed/linked/untracked signals
 - Centralized, reusable form schemas for maintainability and type safety
-
----
-
-## ⚡ Summary
-
-This project demonstrates **modern Angular development** at a senior-level standard, combining **advanced TypeScript**, **reactive forms**, **Signal Store**, dynamic modules, file upload and clean, maintainable architecture.  
-It is production-ready and continues to evolve with new features and improvements.
