@@ -1,6 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
+a:focus-visible {
+  outline: none !important;
+}

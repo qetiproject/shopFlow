@@ -7,48 +7,46 @@
       <p class="text-sm text-gray-500 mt-1">Please enter your shipping and billing information</p>
     </div>
 
-    <form
-      [formGroup]="form"
-      (ngSubmit)="onCheckout()"
-      class="grid grid-cols-1 md:grid-cols-2 gap-6"
-    >
+    <form (submit)="onCheckout($event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="flex flex-col gap-5">
-        <app-input
+        <app-field-input
           label="First Name"
-          formControlName="firstName"
+          [formField]="billingForm.firstName"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
+        />
 
-        <app-input
+        <app-field-input
           label="Last Name"
-          formControlName="lastName"
+          [formField]="billingForm.lastName"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
+        />
 
-        <app-input
+        <app-field-input
           label="Address"
-          formControlName="address"
+          [formField]="billingForm.address"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
+        />
       </div>
 
       <div class="flex flex-col gap-5">
-        <app-input
-          label="City"
-          formControlName="city"
-          [type]="INPUT_TYPES.TEXT"
-          class="w-full"
-        ></app-input>
+        <div class="flex flex-col gap-5">
+          <app-field-input
+            label="City"
+            [formField]="billingForm.city"
+            [type]="INPUT_TYPES.TEXT"
+            class="w-full"
+          />
+        </div>
 
-        <app-input
+        <app-field-input
           label="Zip Code"
-          formControlName="zip"
+          [formField]="billingForm.zip"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
+        />
       </div>
 
       <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-4 mt-10 justify-end">
@@ -61,12 +59,11 @@
         </button>
 
         <button
-          type="submit"
-          [disabled]="form.invalid"
+          [disabled]="billingForm().invalid()"
           class="flex-1 md:flex-none px-6 py-3 text-sm font-semibold rounded-xl transition duration-200 shadow-md"
           [ngClass]="{
-            'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-200': form.valid,
-            'bg-gray-200 text-gray-400 cursor-not-allowed': form.invalid,
+            'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-200': billingForm().valid(),
+            'bg-gray-200 text-gray-400 cursor-not-allowed': billingForm().invalid(),
           }"
         >
           Save

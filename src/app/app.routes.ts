@@ -25,12 +25,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: checkoutRoutes,
   },
-  {
-    path: 'chat',
-    outlet: 'chat',
-    canActivate: [AuthGuard],
-    loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
-  },
+  // {
+  //   path: 'chat',
+  //   outlet: 'chat',
+  //   canActivate: [AuthGuard],
+  //   loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
+  // },
   {
     path: '',
     canActivate: [GuestGuard],

@@ -3,13 +3,21 @@
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">My Orders</h1>
     </div>
-    <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder"> </app-table>
+    @defer {
+      @if (pagedOrders.length === 0) {
+        <p>You have no orders.</p>
+      } @else {
+        <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder"> </app-table>
 
-    <app-paging
-      [totalItems]="orders.totalRecords"
-      [pageSize]="pageSize()"
-      [currentPage]="pageNumber()"
-      (pageNumber)="onPageNumber($event)"
-    ></app-paging>
+        <app-paging
+          [totalItems]="orders.totalRecords"
+          [pageSize]="pageSize()"
+          [currentPage]="pageNumber()"
+          (pageNumber)="onPageNumber($event)"
+        ></app-paging>
+      }
+    } @placeholder {
+      <p>loading...</p>
+    }
   </div>
 </div>
