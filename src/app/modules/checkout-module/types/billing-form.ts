@@ -3,5 +3,5 @@ export interface BillingForm {
   lastName: string;
   address: string;
   city: string;
-  zip?: number;
+  zip: string;
 }

@@ -10,7 +10,7 @@ export const createBillingModel = () =>
     lastName: '',
     address: '',
     city: '',
-    zip: 0,
+    zip: '',
   });
 
 export const createBillingForm = (model: ReturnType<typeof createBillingModel>) =>
@@ -19,4 +19,5 @@ export const createBillingForm = (model: ReturnType<typeof createBillingModel>) 
     apply(path.lastName, createNameSchema('Last Name'));
     apply(path.address, createNameSchema('Address'));
     apply(path.city, createNameSchema('City'));
+    apply(path.zip, createNameSchema('Zip Code'));
   });

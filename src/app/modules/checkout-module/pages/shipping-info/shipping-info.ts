@@ -40,7 +40,7 @@ export class ShippingInfo {
         lastName: formValue.lastName!,
         address: formValue.address!,
         city: formValue.city!,
-        zip: 1231,
+        zip: +formValue.zip,
         fullName: `${formValue.firstName} ${formValue.lastName}`,
         fullAddress: `${formValue.address} ${formValue.city}`,
       };

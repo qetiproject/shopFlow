@@ -28,14 +28,14 @@ import { INPUT_TYPES, InputType } from '@types';
           [placeholder]="placeholder() || 'Enter ' + label()"
         />
         @if (invalid() && (touched() || dirty())) {
-          <div class="error-messages" role="alert">
+          <div class="text-red-600 text-sm mt-1" role="alert">
             @for (error of errors(); track error.fieldTree) {
               <span class="error">{{ error.message }}</span>
             }
           </div>
         }
         @if (disabled() && disabledReasons().length > 0) {
-          <div class="disabled-reasons">
+          <div class="text-yellow-600 text-sm mt-1" role="alert">
             @for (reason of disabledReasons(); track reason.fieldTree) {
               <span>{{ reason.message }}</span>
             }
