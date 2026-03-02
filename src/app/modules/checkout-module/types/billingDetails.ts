@@ -6,5 +6,5 @@ export interface BillingDetails {
   city: string;
   fullAddress: string;
   fullName: string;
-  // zip: number;
+  zip: number;
 }

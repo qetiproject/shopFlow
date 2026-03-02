@@ -90,7 +90,6 @@
         <app-field-input
           label="First Name"
           [formField]="billingForm.firstName"
-          placeholder="Enter Your Name"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
@@ -105,7 +104,6 @@
         <app-field-input
           label="Address"
           [formField]="billingForm.address"
-          placeholder="Enter Your Address"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
@@ -115,11 +113,19 @@
         <app-field-input
           label="City"
           [formField]="billingForm.city"
-          placeholder="Enter Your City"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
       </div>
+
+      <!-- <div class="flex flex-col gap-5">
+        <app-field-input
+          label="City"
+          [formField]="billingForm.zip"
+          [type]="INPUT_TYPES.NUMBER"
+          class="w-full"
+        />
+      </div> -->
 
       <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-4 mt-10 justify-end">
         <button
