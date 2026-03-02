@@ -6,12 +6,13 @@ export type ValidationMessageFn = (error: ValidationErrors[string], field?: stri
 export type ValidationMessageMap = Record<string, ValidationMessageFn>;
 
 export const ERROR_MESSAGE: ValidationMessageMap = {
-  required: () => `This field is required`,
-  requiredTrue: () => `This field is required`,
-  minlength: ({ requiredLength }) => `The length should be at least ${requiredLength} characters`,
+  required: (_, field) => `${field} is required`,
+  minlength: ({ requiredLength }, field) =>
+    `${field} must be at least ${requiredLength} characters`,
+  requiredTrue: (_, field) => `${field} is required`,
   pattern: () => `Wrong format`,
-  email: () => `Email should have a valid email format`,
-  uniqueEmail: () => `Email Already Present`,
+  email: (_, field) => `${field} should have a valid ${field} format`,
+  uniqueEmail: (_, field) => `${field} Already Present`,
 };
 
 export const VALIDATION_ERROR_MESSAGES = new InjectionToken('Validation Messages', {
