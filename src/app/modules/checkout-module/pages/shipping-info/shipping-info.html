@@ -87,36 +87,36 @@
 
     <form (submit)="onCheckout($event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="flex flex-col gap-5">
-        <app-stateful-input
+        <app-field-input
           label="First Name"
           [formField]="billingForm.firstName"
           placeholder="Enter Your Name"
-          type="text"
+          [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
 
-        <app-stateful-input
+        <app-field-input
           label="Last Name"
           [formField]="billingForm.lastName"
-          type="text"
+          [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
 
-        <app-stateful-input
+        <app-field-input
           label="Address"
           [formField]="billingForm.address"
           placeholder="Enter Your Address"
-          type="text"
+          [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
       </div>
 
       <div class="flex flex-col gap-5">
-        <app-stateful-input
+        <app-field-input
           label="City"
           [formField]="billingForm.city"
           placeholder="Enter Your City"
-          type="text"
+          [type]="INPUT_TYPES.TEXT"
           class="w-full"
         />
       </div>

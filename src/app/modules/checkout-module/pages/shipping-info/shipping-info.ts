@@ -1,22 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { apply, form, FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { BillingForm } from '@checkout-module';
+import { BillingDetails, BillingForm, BillingStorage, CheckoutApi } from '@checkout-module';
 import { BackButtonComponent } from '@components';
 import { createNameSchema } from '@custom-form/custom-signal-form/custom-error-message';
-import { StatefulInput } from '@custom-form/custom-signal-form/stateful-input';
+import { FieldInput } from '@custom-form/custom-signal-form/field-input';
+import { INPUT_TYPES } from '@types';
 
 @Component({
   selector: 'app-shipping-info',
   standalone: true,
-  imports: [CommonModule, RouterLink, BackButtonComponent, StatefulInput, FormField],
+  imports: [CommonModule, RouterLink, BackButtonComponent, FieldInput, FormField],
   templateUrl: './shipping-info.html',
 })
 export class ShippingInfo {
-  // INPUT_TYPES = INPUT_TYPES;
-  // #checkoutApi = inject(CheckoutApi);
-  // #billingStorage = inject(BillingStorage);
+  INPUT_TYPES = INPUT_TYPES;
+  #checkoutApi = inject(CheckoutApi);
+  #billingStorage = inject(BillingStorage);
   // form = new FormGroup({
   //   firstName: new FormControl(''),
   //   lastName: new FormControl(''),
@@ -24,26 +25,6 @@ export class ShippingInfo {
   //   address: new FormControl(''),
   //   city: new FormControl(''),
   // });
-  // async onCheckout(): Promise<void> {
-  //   try {
-  //     const res = await firstValueFrom(this.#checkoutApi.checkout());
-  //     const formValue = this.form.getRawValue();
-  //     const billingDetails: BillingDetails = {
-  //       id: crypto.randomUUID(),
-  //       firstName: formValue.firstName!,
-  //       lastName: formValue.lastName!,
-  //       address: formValue.address!,
-  //       city: formValue.city!,
-  //       zip: formValue.zip!,
-  //       fullName: `${formValue.firstName} ${formValue.lastName}`,
-  //       fullAddress: `${formValue.address} ${formValue.city}`,
-  //     };
-  //     this.#billingStorage.savebillingInfo(billingDetails);
-  //     window.location.href = res.url;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
 
   protected readonly billingModel = signal<BillingForm>({
     firstName: '',
@@ -59,8 +40,27 @@ export class ShippingInfo {
     apply(path.address, createNameSchema('Address'));
   });
 
-  onCheckout(event: Event): void {
+  async onCheckout(event: Event): Promise<void> {
     event.preventDefault();
-    console.log(this.billingForm().value(), 'value');
+    try {
+      // const res = await firstValueFrom(this.#checkoutApi.checkout());
+      const formValue = this.billingForm().value();
+      const billingDetails: BillingDetails = {
+        id: crypto.randomUUID(),
+        firstName: formValue.firstName!,
+        lastName: formValue.lastName!,
+        address: formValue.address!,
+        city: formValue.city!,
+        // zip: formValue.zip!,
+        fullName: `${formValue.firstName} ${formValue.lastName}`,
+        fullAddress: `${formValue.address} ${formValue.city}`,
+      };
+
+      console.log(billingDetails, 'billingDetails');
+      // this.#billingStorage.savebillingInfo(billingDetails);
+      // window.location.href = res.url;
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

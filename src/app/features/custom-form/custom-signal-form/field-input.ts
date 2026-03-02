@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import {
-    DisabledReason,
-    FormValueControl,
-    ValidationError,
-    WithOptionalFieldTree,
+  DisabledReason,
+  FormValueControl,
+  ValidationError,
+  WithOptionalFieldTree,
 } from '@angular/forms/signals';
+import { INPUT_TYPES, InputType } from '@types';
 @Component({
-  selector: 'app-stateful-input',
+  selector: 'app-field-input',
   template: `
     @if (!hidden()) {
       <div class="input-container">
@@ -15,7 +16,7 @@ import {
         }}</label>
         <input
           class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-xl bg-white shadow-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors duration-150"
-          type="text"
+          [type]="type()"
           [value]="value()"
           (input)="value.set($event.target.value)"
           [disabled]="disabled()"
@@ -45,7 +46,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatefulInput implements FormValueControl<string> {
+export class FieldInput implements FormValueControl<string> {
   value = model<string>('');
   touched = model<boolean>(false);
   dirty = model<boolean>(false);
@@ -57,4 +58,6 @@ export class StatefulInput implements FormValueControl<string> {
   errors = input<readonly WithOptionalFieldTree<ValidationError>[]>([]);
   label = input<string>();
   placeholder = input<string>();
+  INPUT_TYPES = INPUT_TYPES;
+  type = input<InputType>(INPUT_TYPES.TEXT);
 }
