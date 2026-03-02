@@ -28,8 +28,8 @@ export class Orders {
         label: 'Created',
         cell: (o) => formatCreatedDate(o.createdAt),
       },
-      { key: 'total', label: 'total', cell: (o) => o.total.toFixed(2) },
-      { key: 'status', label: 'status', cell: (o) => o.status },
+      { key: 'total', label: 'Total', cell: (o) => o.total.toFixed(2) },
+      { key: 'status', label: 'Status', cell: (o) => o.status },
       {
         key: 'fullName',
         label: 'Full Name',

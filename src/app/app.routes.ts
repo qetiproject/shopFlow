@@ -32,11 +32,6 @@ export const routes: Routes = [
   //   loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
   // },
   {
-    path: 'signal-form',
-    loadComponent: () =>
-      import('../app/signal-form/signal-form.component').then((c) => c.SignalFormComponent),
-  },
-  {
     path: '',
     canActivate: [GuestGuard],
     children: authRoutes,
