@@ -1,18 +1,23 @@
-<div class="flex flex-col sm:flex-row sm:items-center w-full mt-5 mb-5 justify-between">
-  <div class="flex items-center space-x-2">
-    <app-search
-      (value$)="onSearch($event)"
-      [placeholder]="placeholder"
-      class="flex-1 sm:flex-auto"
-    ></app-search>
-    <app-category-list (categorySelected)="onCategorySelected($event)" />
-    <app-sort (sortedVale)="onOrdered($event)"></app-sort>
+<div class="flex flex-col lg:flex-row justify-between w-full mb-5">
+  <div class="flex flex-wrap lg:flex-nowrap gap-4">
+    <div class="w-full sm:w-auto">
+      <app-search (value$)="onSearch($event)" [placeholder]="placeholder" class=""></app-search>
+    </div>
+    <div class="w-full sm:w-auto">
+      <app-category-list (categorySelected)="onCategorySelected($event)"></app-category-list>
+    </div>
+    <div class="w-full sm:w-auto">
+      <app-sort (sortedVale)="onOrdered($event)"></app-sort>
+    </div>
   </div>
-  <button
-    (click)="onAddProduct()"
-    class="flex items-center px-4 py-2 bg-blue-400 text-white rounded-lg shadow hover:bg-blue-300 transition sm:mt-0 mt-2"
-  >
-    <app-plus-svg />
-    Add Product
-  </button>
+
+  <div class="mt-4 lg:mt-0">
+    <button
+      (click)="onAddProduct()"
+      class="flex items-center justify-center px-4 py-2 bg-blue-400 text-white rounded-lg shadow hover:bg-blue-300 transition w-full sm:w-auto flex-shrink-0"
+    >
+      <app-plus-svg class="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+      Add Product
+    </button>
+  </div>
 </div>
