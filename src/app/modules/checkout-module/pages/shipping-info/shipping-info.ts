@@ -4,7 +4,7 @@ import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { CheckoutFacade, createBillingForm, createBillingModel } from '@checkout-module';
 import { BackButtonComponent } from '@components';
-import { FieldInput } from '@custom-form/custom-signal-form/field-input';
+import { FieldInput } from '@features';
 import { INPUT_TYPES } from '@types';
 
 @Component({
