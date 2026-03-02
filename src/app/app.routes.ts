@@ -5,6 +5,7 @@ import { checkoutRoutes } from '@checkout-module';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
 import { productRoutes } from '@product-module';
 import { userRoutes } from '@user-module';
+import { SignalFormComponent } from './pages/signal-form/signal-form.component';
 
 export const routes: Routes = [
   {
@@ -32,9 +33,8 @@ export const routes: Routes = [
   //   loadComponent: () => import('@chat-module').then((c) => c.ChatComponent),
   // },
   {
-    path: 'signal-form',
-    loadComponent: () =>
-      import('../app/signal-form/signal-form.component').then((c) => c.SignalFormComponent),
+    path: 'test',
+    component: SignalFormComponent,
   },
   {
     path: '',
