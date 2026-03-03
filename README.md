@@ -29,7 +29,6 @@ The project is fully dynamic, continuously evolving and designed for maintainabi
 - **Framework:** Angular 21
 - **Languages:** TypeScript, JavaScript (ES6+)
 - **State Management:** NgRx, Signal Store, RxJS
-- **Unit Testing:** Jasmine to Jest
 - **Styling:** Tailwind CSS
 - **Backend:** Node.js REST API (Stripe Checkout)
 - **Architecture:** Modular, lazy-loaded, clean architecture
