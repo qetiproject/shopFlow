@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-upload-file',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './upload-file.component.html',
   styles: [
     `

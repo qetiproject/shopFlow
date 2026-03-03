@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { map } from 'rxjs';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, BackButtonComponent, ProductImages, ProductReviews, ProductInfo],
+  imports: [BackButtonComponent, ProductImages, ProductReviews, ProductInfo],
   templateUrl: './product-detail.html',
 })
 export class ProductDetail {

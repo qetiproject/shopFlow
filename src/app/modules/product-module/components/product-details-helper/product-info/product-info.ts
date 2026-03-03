@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, input, output } from '@angular/core';
 import {
   Product,
@@ -16,15 +16,14 @@ import {
   selector: 'app-product-info',
   standalone: true,
   imports: [
-    CommonModule,
     ProductRating,
     ProductPrice,
     ProductStock,
     ProductShipping,
     ProductActions,
     ProductTags,
-    ProductHeader,
-  ],
+    ProductHeader
+],
   templateUrl: './product-info.html',
 })
 export class ProductInfo {
