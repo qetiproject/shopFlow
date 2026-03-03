@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { selectCheckAuth } from '@auth-module';
 import { HeaderComponent, Messages } from '@components';
-import { ChatButton, LoadingComponent } from '@features';
+import { LoadingComponent } from '@features';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -14,8 +14,7 @@ import { Store } from '@ngrx/store';
     LoadingComponent,
     HeaderComponent,
     Messages,
-    ChatButton,
-  ],
+    ],
   templateUrl: './app.html',
 })
 export class AppComponent {
