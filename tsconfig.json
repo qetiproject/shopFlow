@@ -34,8 +34,7 @@
       "@user-module": ["app/modules/user-module/index.ts"],
       "@product-module": ["app/modules/product-module/index.ts"],
       "@cart-module": ["app/modules/cart-module/index.ts"],
-      "@checkout-module": ["app/modules/checkout-module/index.ts"],
-      "@chat-module": ["app/modules/chat-module/index.ts"]
+      "@checkout-module": ["app/modules/checkout-module/index.ts"]
     }
   },
   "angularCompilerOptions": {
