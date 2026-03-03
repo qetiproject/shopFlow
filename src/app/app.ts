@@ -8,13 +8,7 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    ReactiveFormsModule,
-    LoadingComponent,
-    HeaderComponent,
-    Messages,
-    ],
+  imports: [RouterOutlet, ReactiveFormsModule, LoadingComponent, HeaderComponent, Messages],
   templateUrl: './app.html',
 })
 export class AppComponent {
