@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+
 import { Component, inject, ViewChild } from '@angular/core';
 import {
   FormGroupDirective,
@@ -21,8 +21,7 @@ import { INPUT_TYPES } from '@types';
     InputComponent,
     FormsModule,
     DynamicValidatorMessage,
-    RouterModule,
-    NgClass
+    RouterModule
 ],
   templateUrl: './login.html',
 })

@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -17,8 +17,7 @@ import { INPUT_TYPES, MessageSeverity } from '@types';
     ReactiveFormsModule,
     SelectComponent,
     FileUploadComponent,
-    DynamicValidatorMessage,
-    NgClass
+    DynamicValidatorMessage
 ],
   templateUrl: './add-product-modal.html',
 })

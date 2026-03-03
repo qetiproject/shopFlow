@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -14,8 +14,7 @@ import { INPUT_TYPES } from '@types';
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
-    DynamicValidatorMessage,
-    NgClass
+    DynamicValidatorMessage
 ],
   templateUrl: './send-reset-otp.html',
 })

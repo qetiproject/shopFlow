@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
@@ -10,7 +10,7 @@ import { INPUT_TYPES } from '@types';
 @Component({
   selector: 'app-shipping-info',
   standalone: true,
-  imports: [RouterLink, BackButtonComponent, FieldInput, FormField, NgClass],
+  imports: [RouterLink, BackButtonComponent, FieldInput, FormField],
   templateUrl: './shipping-info.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
