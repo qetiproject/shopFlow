@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features';
 import { CategoryComponent, ProductHeaderFacade, ProductMode, SortOrder } from '@product-module';
@@ -14,8 +14,8 @@ import { SortComponent } from '../sort/sort';
 export class ProducsPagetHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);
   placeholder = 'Search products...';
-  @ViewChild(Search) searchComponent!: Search;
-  @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent;
+  readonly searchComponent = viewChild.required(Search);
+  readonly categoryComponent = viewChild.required(CategoryComponent);
   router = inject(Router);
   route = inject(ActivatedRoute);
 
@@ -24,7 +24,7 @@ export class ProducsPagetHeader {
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
       this.#productHeaderFacade.searchValue.set('');
-      this.searchComponent.search.setValue('', { emitEvent: false });
+      this.searchComponent().search.setValue('', { emitEvent: false });
     }
   }
 
@@ -33,7 +33,7 @@ export class ProducsPagetHeader {
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.SEARCH);
       this.#productHeaderFacade.categoryValue.set('');
-      this.categoryComponent.control.setValue('', { emitEvent: false });
+      this.categoryComponent().control.setValue('', { emitEvent: false });
     }
   }
 
@@ -47,8 +47,8 @@ export class ProducsPagetHeader {
   private resetFilters(): void {
     this.#productHeaderFacade.categoryValue.set('');
     this.#productHeaderFacade.searchValue.set('');
-    this.searchComponent.search.setValue('', { emitEvent: false });
-    this.categoryComponent.control.setValue('', { emitEvent: false });
+    this.searchComponent().search.setValue('', { emitEvent: false });
+    this.categoryComponent().control.setValue('', { emitEvent: false });
   }
 
   onAddProduct(): void {
