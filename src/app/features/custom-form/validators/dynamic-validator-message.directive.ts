@@ -1,4 +1,4 @@
-import { ComponentRef, Directive, ElementRef, inject, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, inject, OnDestroy, OnInit, ViewContainerRef, input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, NgControl, NgForm, NgModel } from '@angular/forms';
 import { EMPTY, fromEvent, iif, merge, skip, startWith, Subscription } from 'rxjs';
 import { ErrorStateMatcher, InputErrorComponent } from '.';
@@ -21,11 +21,9 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
     return this.parentContainer?.formDirective as NgForm | FormGroupDirective | null;
   }
   
-  @Input()
-  errorStateMatcher = inject(ErrorStateMatcher);
+  readonly errorStateMatcher = input(inject(ErrorStateMatcher));
 
-  @Input()
-  container = inject(ViewContainerRef);
+  readonly container = input(inject(ViewContainerRef));
 
   private componentRef: ComponentRef<InputErrorComponent> | null = null;
   private errorMessageTrigger!: Subscription;
@@ -44,11 +42,11 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
         skip(this.ngControl instanceof NgModel ? 1 : 0),
       ).subscribe(() => {
         const control = this.ngControl.control!;
-        const showError = this.errorStateMatcher.isErrorVisible(control, this.form) 
+        const showError = this.errorStateMatcher().isErrorVisible(control, this.form) 
                         && (control.touched || control.dirty);
         if (showError) {
           if (!this.componentRef) {
-            this.componentRef = this.container.createComponent(InputErrorComponent);
+            this.componentRef = this.container().createComponent(InputErrorComponent);
             this.componentRef.changeDetectorRef.markForCheck();
           }
           this.componentRef.setInput('errors', this.ngControl.errors);

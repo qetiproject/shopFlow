@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   imports: [],
   template: `
     <div>
-      <label [for]="label" class="block text-sm font-medium text-slate-700 mb-1">{{ label }}</label>
+      <label [for]="label()" class="block text-sm font-medium text-slate-700 mb-1">{{ label() }}</label>
       <textarea
-        [id]="label"
-        [placeholder]="placeholder || 'Enter ' + label"
+        [id]="label()"
+        [placeholder]="placeholder() || 'Enter ' + label()"
         [value]="value"
         (input)="handleInput($event)"
         type="text"
@@ -28,8 +28,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class TextareaComponent implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() placeholder = '';
+  readonly label = input('');
+  readonly placeholder = input('');
 
   value = '';
 

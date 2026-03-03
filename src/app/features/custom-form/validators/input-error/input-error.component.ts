@@ -1,5 +1,5 @@
 import { KeyValue, KeyValuePipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { ValidationErrors } from "@angular/forms";
 import { ErrorMessagePipe } from "..";
 
@@ -9,7 +9,7 @@ import { ErrorMessagePipe } from "..";
     imports: [ErrorMessagePipe, KeyValuePipe],
     template: `
        <ul class="mt-1 text-sm text-red-600 list-disc list-inside">
-         @for (error of errors | keyvalue; track trackByFn($index, error)) {
+         @for (error of errors() | keyvalue; track trackByFn($index, error)) {
            <li>
              {{ error.key | errorMessage: error.value }}
            </li>
@@ -27,7 +27,7 @@ import { ErrorMessagePipe } from "..";
 })
 export class InputErrorComponent{
 
-    @Input() errors: ValidationErrors | null | undefined = null;
+    readonly errors = input<ValidationErrors | null | undefined>(null);
 
     trackByFn(index: number, item: KeyValue<string, any>) {
         return item.key
