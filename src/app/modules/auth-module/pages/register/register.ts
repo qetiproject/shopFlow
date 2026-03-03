@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
+
+import { Component, inject, viewChild } from '@angular/core';
 import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import * as AuthActions from '@auth-module';
@@ -11,14 +11,14 @@ import { InputComponent } from 'app/features/custom-form/input/input';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, InputComponent, FormsModule],
+  imports: [RouterModule, ReactiveFormsModule, InputComponent, FormsModule],
   templateUrl: './register.html',
 })
 export class Register {
   #fb = inject(NonNullableFormBuilder);
   #store = inject(Store);
 
-  @ViewChild(FormGroupDirective, { static: false}) private formDir!: FormGroupDirective;
+  private readonly formDir = viewChild.required(FormGroupDirective);
   INPUT_TYPES = INPUT_TYPES
 
   form = registerForm(this.#fb);
@@ -28,7 +28,7 @@ export class Register {
 
     this.#store.dispatch(AuthActions.registerUser({ payload: credentials}));
     
-    this.formDir.resetForm(this.form.value);
+    this.formDir().resetForm(this.form.value);
   }
 
 }

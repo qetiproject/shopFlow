@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-paging',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './paging.html',
 })
 export class Paging {

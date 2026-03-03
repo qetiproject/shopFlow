@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserList } from '@user-module';
@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, Search, UserList],
+  imports: [Search, UserList],
   templateUrl: './users.html',
 })
 export class Users {

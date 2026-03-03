@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
+
+import { Component, inject, viewChild } from '@angular/core';
 import {
   FormGroupDirective,
   FormsModule,
@@ -17,13 +17,12 @@ import { INPUT_TYPES } from '@types';
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     InputComponent,
     FormsModule,
     DynamicValidatorMessage,
-    RouterModule,
-  ],
+    RouterModule
+],
   templateUrl: './login.html',
 })
 export class Login {
@@ -31,7 +30,7 @@ export class Login {
   #store = inject(Store);
 
   INPUT_TYPES = INPUT_TYPES;
-  @ViewChild(FormGroupDirective, { static: false }) private formDir!: FormGroupDirective;
+  private readonly formDir = viewChild.required(FormGroupDirective);
 
   form = loginForm(this.#fb);
 
@@ -40,6 +39,6 @@ export class Login {
 
     this.#store.dispatch(AuthActions.loginUser({ payload: credentials }));
 
-    this.formDir.resetForm(this.form.value);
+    this.formDir().resetForm(this.form.value);
   }
 }

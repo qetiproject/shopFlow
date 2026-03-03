@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Output, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@custom-form/index';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
 export class Search {
   search = new FormControl<string>('', { nonNullable: true });
 
-  @Input() placeholder: string = 'Search';
+  readonly placeholder = input<string>('Search');
 
   @Output()
   readonly value$ = this.search.valueChanges.pipe(

@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-remove-svg',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgClass],
   template: `<svg
     [ngClass]="customClasses()"
     xmlns="http://www.w3.org/2000/svg"
