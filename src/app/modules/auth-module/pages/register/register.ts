@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { InputComponent } from 'app/features/custom-form/input/input';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, InputComponent, FormsModule],
+  imports: [RouterModule, ReactiveFormsModule, InputComponent, FormsModule, NgClass],
   templateUrl: './register.html',
 })
 export class Register {

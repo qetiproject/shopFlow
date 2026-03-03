@@ -1,4 +1,4 @@
-import { CommonModule, KeyValue } from "@angular/common";
+import { KeyValue, KeyValuePipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { ValidationErrors } from "@angular/forms";
 import { ErrorMessagePipe } from "..";
@@ -6,7 +6,7 @@ import { ErrorMessagePipe } from "..";
 @Component({
     selector: 'app-input-error',
     standalone: true,
-    imports: [CommonModule, ErrorMessagePipe],
+    imports: [ErrorMessagePipe, KeyValuePipe],
     template: `
        <ul class="mt-1 text-sm text-red-600 list-disc list-inside">
          @for (error of errors | keyvalue; track trackByFn($index, error)) {

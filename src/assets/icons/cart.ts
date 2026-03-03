@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-cart-icon',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgClass],
   template: `
     <svg
       [ngClass]="size()"

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CartFacade, CartStore } from '@cart-module';
@@ -11,7 +11,7 @@ import { CartIcon, RemoveSVG } from 'assets/icons';
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [CommonModule, RouterLink, CartIcon, RemoveSVG],
+  imports: [RouterLink, CartIcon, RemoveSVG, CurrencyPipe, DecimalPipe],
   templateUrl: './product-item.html',
 })
 export class ProductItem {

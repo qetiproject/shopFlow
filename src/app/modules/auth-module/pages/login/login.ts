@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
 import {
   FormGroupDirective,
@@ -17,13 +17,13 @@ import { INPUT_TYPES } from '@types';
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     InputComponent,
     FormsModule,
     DynamicValidatorMessage,
     RouterModule,
-  ],
+    NgClass
+],
   templateUrl: './login.html',
 })
 export class Login {
