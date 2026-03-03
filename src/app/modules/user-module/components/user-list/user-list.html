@@ -14,14 +14,12 @@
     </div>
   </ng-template>
 
-  <app-table [columns]="columns()" [data]="users()?.data || []" [trackBy]="trackByUser">
-  </app-table>
+  <app-table [columns]="columns()" [data]="users()?.data || []" [trackBy]="trackByUser" />
 
-  <app-paging
-    [totalItems]="users()!.totalRecords"
+  <app-paging [totalItems]="users()!.totalRecords"
     [currentPage]="pageNumber()"
     (pageNumber)="onPageNumber($event)"
-  ></app-paging>
+   />
 } @else {
   <p>You have no user data.</p>
 }

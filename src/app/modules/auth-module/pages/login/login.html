@@ -10,16 +10,14 @@
       (ngSubmit)="onSubmit()"
       class="space-y-4"
     >
-      <app-input
-        label="Email"
+      <app-input label="Email"
         [type]="INPUT_TYPES.TEXT"
         formControlName="emailId"
-      ></app-input>
-      <app-input
-        label="Password"
+       />
+      <app-input label="Password"
         [type]="INPUT_TYPES.PASSWORD"
         formControlName="password"
-      ></app-input>
+       />
       <button type="submit" [disabled]="!form.valid"
         [class]="{
           'bg-blue-600 hover:bg-blue-700 text-white': form.valid,

@@ -1,13 +1,13 @@
 <div class="flex flex-col lg:flex-row justify-between w-full mb-5">
   <div class="flex flex-wrap lg:flex-nowrap gap-4">
     <div class="w-full sm:w-auto">
-      <app-search (value$)="onSearch($event)" [placeholder]="placeholder" class=""></app-search>
+      <app-search (value$)="onSearch($event)" [placeholder]="placeholder" class="" />
     </div>
     <div class="w-full sm:w-auto">
-      <app-category-list (categorySelected)="onCategorySelected($event)"></app-category-list>
+      <app-category-list (categorySelected)="onCategorySelected($event)" />
     </div>
     <div class="w-full sm:w-auto">
-      <app-sort (sortedVale)="onOrdered($event)"></app-sort>
+      <app-sort (sortedVale)="onOrdered($event)" />
     </div>
   </div>
 

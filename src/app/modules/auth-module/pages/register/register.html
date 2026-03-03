@@ -7,26 +7,23 @@
     </h2>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-      <app-input
-        name="email"
+      <app-input name="email"
         label="Email"
         [type]="INPUT_TYPES.EMAIL"
         formControlName="emailId"
-      ></app-input>
+       />
 
-      <app-input
-        name="fullName"
+      <app-input name="fullName"
         label="Full Name"
         [type]="INPUT_TYPES.TEXT"
         formControlName="fullName"
-      ></app-input>
+       />
 
-      <app-input
-        name="password"
+      <app-input name="password"
         label="Password"
         [type]="INPUT_TYPES.PASSWORD"
         formControlName="password"
-      ></app-input>
+       />
 
       <button
         type="submit"

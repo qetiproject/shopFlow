@@ -6,41 +6,36 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="flex flex-col gap-4">
-        <app-input
-          label="Title"
+        <app-input label="Title"
           formControlName="title"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
-        <app-input
-          label="Description"
+         />
+        <app-input label="Description"
           formControlName="description"
           [type]="INPUT_TYPES.TEXT"
           class="w-full"
-        ></app-input>
-        <app-input
-          label="Price"
+         />
+        <app-input label="Price"
           formControlName="price"
           [type]="INPUT_TYPES.NUMBER"
           class="w-full"
-        ></app-input>
+         />
       </div>
 
       <div class="flex flex-col gap-4">
-        <app-select
-          label="Choose Category"
+        <app-select label="Choose Category"
           [options]="categoryOptions()"
           formControlName="category"
           class="w-full"
-        ></app-select>
+         />
 
-        <app-upload-file
-          [label]="label()"
+        <app-upload-file [label]="label()"
           [accept]="acceptType()"
           [multiple]="multiple()"
           formControlName="thumbnail"
           class="w-full"
-        ></app-upload-file>
+         />
       </div>
 
       <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-3 mt-6 justify-end">

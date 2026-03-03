@@ -7,11 +7,10 @@
     </h2>
 
     <form (ngSubmit)="onSubmit()" class="space-y-4">
-      <app-input
-        label="Email"
+      <app-input label="Email"
         [type]="INPUT_TYPES.EMAIL"
         [formControl]="email"
-      ></app-input>
+       />
       <button
           type="submit"
           [disabled]="!email.valid"

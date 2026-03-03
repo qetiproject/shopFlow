@@ -7,14 +7,13 @@
       @if (pagedOrders.length === 0) {
         <p>You have no orders.</p>
       } @else {
-        <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder"> </app-table>
+        <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder" />
 
-        <app-paging
-          [totalItems]="orders.totalRecords"
+        <app-paging [totalItems]="orders.totalRecords"
           [pageSize]="pageSize()"
           [currentPage]="pageNumber()"
           (pageNumber)="onPageNumber($event)"
-        ></app-paging>
+         />
       }
     } @placeholder {
       <p>loading...</p>
