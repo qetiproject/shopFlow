@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, effect, inject, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -8,8 +8,8 @@ import { ProductFacade } from '@product-module';
 @Component({
   selector: 'app-category-list',
   standalone: true,
-  imports: [CommonModule, SelectComponent, ReactiveFormsModule],
-  template: ` <app-select [options]="categoryOptions()" [formControl]="control"></app-select> `,
+  imports: [SelectComponent, ReactiveFormsModule],
+  template: ` <app-select [options]="categoryOptions()" [formControl]="control" /> `,
 })
 export class CategoryComponent {
   #productFacade = inject(ProductFacade);

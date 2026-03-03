@@ -1,17 +1,15 @@
 <article class="space-y-6" aria-label="Product Information">
-  <app-product-header [title]="product().title"></app-product-header>
+  <app-product-header [title]="product().title" />
   <p class="text-gray-600 leading-relaxed mb-6">{{ product().description }}</p>
-  <app-product-rating [rating]="averageRating"></app-product-rating>
-  <app-product-price
-    [price]="product().price"
+  <app-product-rating [rating]="averageRating" />
+  <app-product-price [price]="product().price"
     [discount]="product().discountPercentage"
     [originalPrice]="startPrice"
-  ></app-product-price>
-  <app-product-stock></app-product-stock>
-  <app-product-shipping
-    [shippingInfo]="product().shippingInformation"
+   />
+  <app-product-stock />
+  <app-product-shipping [shippingInfo]="product().shippingInformation"
     [warrantyInfo]="product().warrantyInformation"
-  ></app-product-shipping>
-  <app-product-actions (addToCart)="addToCart.emit()"></app-product-actions>
-  <app-product-tags [tags]="product().tags"></app-product-tags>
+   />
+  <app-product-actions (addToCart)="addToCart.emit()" />
+  <app-product-tags [tags]="product().tags" />
 </article>

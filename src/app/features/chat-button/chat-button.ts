@@ -16,7 +16,7 @@ import { filter } from 'rxjs';
         aria-label="Open chat"
         (click)="openChat()"
       >
-        <app-chat-svg></app-chat-svg>
+        <app-chat-svg />
       </button>
     }
   `,

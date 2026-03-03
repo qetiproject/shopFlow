@@ -27,15 +27,14 @@
       </div>
 
       @for (product of view.products; track product.id) {
-        <app-cart-product-item
-          [product]="product"
+        <app-cart-product-item [product]="product"
           (decreaseQuantity)="view.decrease(product.id)"
           (increaseQuantity)="view.increase(product.id)"
           (removeItem)="view.remove(product.id)"
-        ></app-cart-product-item>
+         />
       }
 
-      <app-cart-summary [total]="view.total" (clearList)="view.clearList()"></app-cart-summary>
+      <app-cart-summary [total]="view.total" (clearList)="view.clearList()" />
     </div>
   }
 </div>

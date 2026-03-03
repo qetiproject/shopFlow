@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,13 +10,12 @@ import { INPUT_TYPES } from '@types';
   selector: 'app-reset-password',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
-    DynamicValidatorMessage,
-  ],
+    DynamicValidatorMessage
+],
   templateUrl: './reset-password.html',
 })
 export class ResetPassword {

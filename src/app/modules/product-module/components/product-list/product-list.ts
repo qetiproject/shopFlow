@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Paging } from '@components';
@@ -7,7 +7,7 @@ import { ProductFacade, ProductItem, ProductlistFacade } from '@product-module';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, ProductItem, Paging],
+  imports: [ProductItem, Paging],
   templateUrl: './product-list.html',
 })
 export class ProductList {

@@ -1,5 +1,5 @@
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +17,7 @@ export type ConfirmVariant = 'danger' | 'warning' | 'success';
 @Component({
   selector: 'app-confirm-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './confirm-modal.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
