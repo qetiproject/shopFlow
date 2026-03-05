@@ -28,5 +28,13 @@
     "target": "http://localhost:4242",
     "secure": true,
     "changeOrigin": true
+  },
+  "prod_api": {
+    "target": "https://shop-flow-nu.vercel.app",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "/api"
+    }
   }
 }
