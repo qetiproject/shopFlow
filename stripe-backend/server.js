@@ -7,7 +7,7 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors({ origin: 'https://qetiproject.github.io/shopFlow', credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
