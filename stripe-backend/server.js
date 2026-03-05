@@ -7,7 +7,23 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-app.use(cors({ origin: 'https://qetiproject.github.io/shopFlow', credentials: true }));
+const allowedOrigins = [
+  'https://qetiproject.github.io',
+  'http://localhost:4200',
+];
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+  }),
+);
+app.options('*', cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
