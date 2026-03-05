@@ -11,7 +11,7 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running!' });
 });
 
