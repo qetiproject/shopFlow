@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '@env-dev';
 import {
-  AddProductModel,
-  Category,
-  Product,
-  ProductApiShape,
-  ProductsApiResponse,
-  ResponseProductDelete,
+    AddProductModel,
+    Category,
+    Product,
+    ProductApiShape,
+    ProductsApiResponse,
+    ResponseProductDelete,
 } from '@product-module';
-import { environment } from 'environment/environment.prod';
 import { Observable } from 'rxjs';
 
 @Injectable({

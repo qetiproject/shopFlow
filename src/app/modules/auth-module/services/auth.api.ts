@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  CreateUserRequest,
-  CreateUserResponse,
-  LoginRequest,
-  LoginResponse,
-  ResetPasswordRequest,
-  TokenService,
+    CreateUserRequest,
+    CreateUserResponse,
+    LoginRequest,
+    LoginResponse,
+    ResetPasswordRequest,
+    TokenService,
 } from '@auth-module';
-import { environment } from 'environment/environment.prod';
+import { environment } from '@env-dev';
 import { Observable } from 'rxjs';
 
 @Injectable({
