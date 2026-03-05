@@ -11,6 +11,10 @@ app.use(cors({ origin: process.env.LOCAL_CLIENT_URL, credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Server is running!' });
+});
+
 app.post('/api/checkout', async (req, res, next) => {
   try {
     const { items } = req.body;
