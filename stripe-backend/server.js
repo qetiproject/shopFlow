@@ -7,7 +7,7 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-app.use(cors({ origin: process.env.LOCAL_CLIENT_URL, credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -33,8 +33,8 @@ app.post('/api/checkout', async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.LOCAL_CLIENT_URL}/checkout/success`,
-      cancel_url: `${process.env.LOCAL_CLIENT_URL}/checkout/canceled`,
+      success_url: `${process.env.CLIENT_URL}/checkout/success`,
+      cancel_url: `${process.env.CLIENT_URL}/checkout/canceled`,
     });
 
     res.json({ url: session.url });
@@ -46,4 +46,4 @@ app.post('/api/checkout', async (req, res, next) => {
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Server running on ${process.env.PROD_API_URL}`));
