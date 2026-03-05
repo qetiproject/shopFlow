@@ -29,12 +29,12 @@
     "secure": true,
     "changeOrigin": true
   },
-  "prod_api": {
+  "/prod_api": {
     "target": "https://stripe-backend-theta-puce.vercel.app",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/api": "/api"
+      "^/prod_api": "/api"
     }
   }
 }
