@@ -1,3 +1,13 @@
+<ng-template #totalCell let-order>
+  <div class="flex items-center gap-3">
+    <div>
+      <p class="font-medium text-gray-900 leading-tight">
+        {{ order.total.toFixed(2) | currency: 'USD' }}
+      </p>
+    </div>
+  </div>
+</ng-template>
+
 <div class="min-h-screen py-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-6">
@@ -9,11 +19,12 @@
       } @else {
         <app-table [columns]="columns()" [data]="pagedOrders" [trackBy]="trackByOrder" />
 
-        <app-paging [totalItems]="orders.totalRecords"
+        <app-paging
+          [totalItems]="orders.totalRecords"
           [pageSize]="pageSize()"
           [currentPage]="pageNumber()"
           (pageNumber)="onPageNumber($event)"
-         />
+        />
       }
     } @placeholder {
       <p>loading...</p>

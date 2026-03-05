@@ -1,15 +1,15 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
+import { Order, OrderStorage } from '@checkout-module';
 import { Paging } from '@components';
 import { Table } from '@features';
 import { TableColumn } from '@types';
 import { formatCreatedDate } from '@utils';
-import { OrderStorage } from '../../services';
-import { Order } from '../../types';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [Paging, Table],
+  imports: [Paging, Table, CurrencyPipe],
   templateUrl: './orders.html',
 })
 export class Orders {
@@ -18,9 +18,15 @@ export class Orders {
   pageNumber = signal<number>(1);
   pageSize = signal<number>(10);
 
+  totalCell = viewChild<TemplateRef<{ $implicit: Order }>>('totalCell');
+
   trackByOrder = (_: number, order: Order) => order.id;
 
   columns = computed<TableColumn<Order>[]>(() => {
+    const totalCell = this.totalCell();
+
+    if (!totalCell) return [];
+
     return [
       { key: 'id', label: '#', cell: (o) => o.id },
       {
@@ -28,7 +34,7 @@ export class Orders {
         label: 'Created',
         cell: (o) => formatCreatedDate(o.createdAt),
       },
-      { key: 'total', label: 'Total', cell: (o) => o.total.toFixed(2) },
+      { key: 'total', label: 'Total', template: totalCell },
       { key: 'status', label: 'Status', cell: (o) => o.status },
       {
         key: 'fullName',
