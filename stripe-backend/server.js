@@ -11,6 +11,10 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Server is running!' });
+});
+
 app.post('/api/checkout', async (req, res, next) => {
   try {
     const { items } = req.body;
