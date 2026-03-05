@@ -61,5 +61,12 @@ app.post('/api/checkout', async (req, res, next) => {
 
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on ${process.env.PROD_API_URL}`));
+// Only start the server when running locally (e.g. `node server.js`)
+// On Vercel, the Express app is exported instead and handled by the platform.
+if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+}
+
+// Export the Express app for Vercel's Node.js runtime
+module.exports = app;
