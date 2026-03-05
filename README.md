@@ -3,7 +3,7 @@
 Shop Flow App is a **scalable, modular and production-like web application** built with **Angular 21**.  
 It allows users to browse, manage and purchase products while demonstrating **modern Angular best practices**, **advanced TypeScript patterns** and **clean architecture principles**.
 
-The project is fully dynamic, continuously evolving and designed for maintainability, testability and long-term scalability.
+The project is fully dynamic, continuously evolving and designed for maintainability and long-term scalability.
 
 ---
 
@@ -29,7 +29,6 @@ The project is fully dynamic, continuously evolving and designed for maintainabi
 - **Framework:** Angular 21
 - **Languages:** TypeScript, JavaScript (ES6+)
 - **State Management:** NgRx, Signal Store, RxJS
-- **Unit Testing:** Jasmine to Jest
 - **Styling:** Tailwind CSS
 - **Backend:** Node.js REST API (Stripe Checkout)
 - **Architecture:** Modular, lazy-loaded, clean architecture
