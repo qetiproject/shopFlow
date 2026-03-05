@@ -7,23 +7,7 @@ const Stripe = require('stripe');
 const app = express();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-const allowedOrigins = [
-  'https://qetiproject.github.io',
-  'http://localhost:4200',
-];
-
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error('Not allowed by CORS'));
-    },
-    credentials: true,
-  }),
-);
-app.options('*', cors());
+app.use(cors({ origin: 'https://qetiproject.github.io', credentials: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -61,12 +45,5 @@ app.post('/api/checkout', async (req, res, next) => {
 
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
-// Only start the server when running locally (e.g. `node server.js`)
-// On Vercel, the Express app is exported instead and handled by the platform.
-if (require.main === module) {
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => console.log(`Server running on port ${port}`));
-}
-
-// Export the Express app for Vercel's Node.js runtime
-module.exports = app;
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on ${process.env.PROD_API_URL}`));
