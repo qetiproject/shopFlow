@@ -30,7 +30,7 @@
     "changeOrigin": true
   },
   "prod_api": {
-    "target": "https://shop-flow-nu.vercel.app",
+    "target": "https://stripe-backend-theta-puce.vercel.app",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
