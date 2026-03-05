@@ -22,12 +22,6 @@ The project is fully dynamic, continuously evolving and designed for maintainabi
 - **Lazy Loading & Modular Architecture:** Feature-based lazy-loaded modules for scalability
 - **Advanced TypeScript:** Union types, generics, mapped types and type-safe patterns
 
-Deployment:
-
-Backend / Stripe API: Hosted on Vercel
-
-Client Side: Hosted on GitHub Pages
-
 ---
 
 ## 🛠️ Technologies
