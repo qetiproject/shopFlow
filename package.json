@@ -41,7 +41,7 @@
     "ngx-stripe": "^21.8.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.16.1"
   },
   "devDependencies": {
     "@angular/build": "^21.2.0",
@@ -52,10 +52,10 @@
     "@types/node": "^20.17.19",
     "angular-eslint": "21.2.0",
     "baseline-browser-mapping": "^2.9.11",
-    "eslint": "^9.39.1",
+    "eslint": "^10.0.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.16",
     "typescript": "~5.9.2",
-    "typescript-eslint": "8.47.0"
+    "typescript-eslint": "8.56.1"
   }
 }

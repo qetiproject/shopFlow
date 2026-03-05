@@ -1,8 +1,8 @@
 import { inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { checkAuth } from '@auth-module';
-import { environment } from '@env-dev';
 import { Store } from '@ngrx/store';
+import { environment } from 'environment/environment.prod';
 import { provideNgxStripe } from 'ngx-stripe';
 import { AppComponent } from './app/app';
 import { appConfig } from './app/app.config';
