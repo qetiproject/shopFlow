@@ -14,10 +14,7 @@
     <img
       class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
       [src]="p().thumbnail"
-      [alt]="
-        p().title + ' thumbnail' ||
-        'upload image with name image.png - it is saved in assets/products folder'
-      "
+      [alt]="p().title + ' thumbnail'"
     />
     @if (p().discountPercentage) {
       <div
