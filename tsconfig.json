@@ -22,7 +22,9 @@
     "paths": {
       "@components": ["app/components/index.ts"],
       "@core": ["app/core/index.ts"],
+      "@core/*": ["app/core/*"],
       "@features": ["app/features/index.ts"],
+      "@features/*": ["app/features/*"],
       "@types": ["app/types/index.ts"],
       "@pages": ["app/pages/index.ts"],
       "@utils": ["app/utils/index.ts"],
@@ -30,11 +32,16 @@
       "@custom-form/*": ["app/features/custom-form/*"],
       "@custom-form-validators": ["app/features/custom-form-validators/index.ts"],
       "@auth-module": ["app/modules/auth-module/index.ts"],
+      "@auth-module/*": ["app/modules/auth-module/*"],
       "@env": ["environment/environment"],
       "@user-module": ["app/modules/user-module/index.ts"],
+      "@user-module/*": ["app/modules/user-module/*"],
       "@product-module": ["app/modules/product-module/index.ts"],
+      "@product-module/*": ["app/modules/product-module/*"],
       "@cart-module": ["app/modules/cart-module/index.ts"],
-      "@checkout-module": ["app/modules/checkout-module/index.ts"]
+      "@cart-module/*": ["app/modules/cart-module/*"],
+      "@checkout-module": ["app/modules/checkout-module/index.ts"],
+      "@checkout-module/*": ["app/modules/checkout-module/*"]
     }
   },
   "angularCompilerOptions": {

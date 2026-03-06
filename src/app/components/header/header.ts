@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { logoutUser, UserStorage } from '@auth-module';
-import { CartStore } from '@cart-module';
+import { logoutUser } from '@auth-module/store/auth.actions';
+import { UserStorage } from '@auth-module/services/user.storage';
+import { CartStore } from '@cart-module/store/cart.store';
 import { STORAGE_KEYS } from '@core';
 import { Store } from '@ngrx/store';
 import { CartIcon } from 'assets/icons';

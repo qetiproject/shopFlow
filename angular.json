@@ -40,13 +40,18 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "600kb",
+                  "maximumWarning": "620kb",
                   "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
+                },
+                {
+                  "type": "anyScript",
+                  "maximumWarning": "250kb",
+                  "maximumError": "400kb"
                 }
               ],
               "outputHashing": "all"
@@ -55,6 +60,17 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "analyze": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environment/environment.ts",
+                  "with": "src/environment/environment.prod.ts"
+                }
+              ],
+              "sourceMap": true,
+              "optimization": true,
+              "outputHashing": "none"
             }
           },
           "defaultConfiguration": "production"

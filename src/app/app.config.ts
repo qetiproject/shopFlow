@@ -5,7 +5,8 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { AuthEffects, AuthReducer } from '@auth-module';
+import { AuthEffects } from '@auth-module/store/auth.effect';
+import { AuthReducer } from '@auth-module/store/auth.reducer';
 import { environment } from '@env';
 import { AuthInterceptor, GlobalHttpErrorInterceptor, LoadingInterceptor } from '@core';
 import { provideEffects } from '@ngrx/effects';

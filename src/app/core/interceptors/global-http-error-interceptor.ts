@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { MessagesService, toErrorMessage } from '@core';
+import { MessagesService } from '@core/services/messages.service';
+import { toErrorMessage } from '@core/http/http-utils';
 import { MessageSeverity } from '@types';
 import { catchError, throwError } from 'rxjs';
 
