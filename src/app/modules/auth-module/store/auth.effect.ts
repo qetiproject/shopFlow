@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AuthActions from '@auth-module';
 import { AuthFacade, LoginStoreResponse, TokenService, UserStorage } from '@auth-module';
-import { MessagesService } from '@core';
+import { MessagesService, toErrorMessage } from '@core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageSeverity } from '@types';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
@@ -34,7 +34,7 @@ export class AuthEffects {
               });
               return AuthActions.registerUserSuccess({ data: response });
             }),
-            catchError((error) => of(AuthActions.registerUserFailure({ error }))),
+            catchError((error) => of(AuthActions.registerUserFailure({ error: toErrorMessage(error) }))),
           ),
       ),
     ),
@@ -106,7 +106,7 @@ export class AuthEffects {
             };
             return AuthActions.loginUserSuccess({ data });
           }),
-          catchError((error) => of(AuthActions.loginUserFailure({ error }))),
+          catchError((error) => of(AuthActions.loginUserFailure({ error: toErrorMessage(error) }))),
         ),
       ),
     ),
