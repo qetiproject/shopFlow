@@ -1,5 +1,5 @@
 
-import { Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import {
   FormGroupDirective,
   FormsModule,
@@ -26,6 +26,7 @@ import { INPUT_TYPES } from '@types';
     RouterModule
 ],
   templateUrl: './login.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
   #fb = inject(NonNullableFormBuilder);

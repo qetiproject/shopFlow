@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
   selector: 'app-root',
   imports: [RouterOutlet, ReactiveFormsModule, LoadingComponent, HeaderComponent, Messages],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   #store = inject(Store);

@@ -1,5 +1,5 @@
 
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthFacade } from '@auth-module/services/auth.facade';
@@ -18,6 +18,7 @@ import { INPUT_TYPES } from '@types';
     DynamicValidatorMessage
 ],
   templateUrl: './send-reset-otp.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SendResetOtp {
   INPUT_TYPES = INPUT_TYPES;

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackButtonDirective } from '@features/directives/back-button.directive';
 import { BackButtonSVG } from 'assets/icons';
@@ -8,6 +8,7 @@ import { BackButtonSVG } from 'assets/icons';
   selector: 'app-back-button',
   standalone: true,
   imports: [BackButtonDirective, BackButtonSVG],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="pt-4 pl-4 mb-4">
       <button (click)="goBack()" appBackBtnClass>

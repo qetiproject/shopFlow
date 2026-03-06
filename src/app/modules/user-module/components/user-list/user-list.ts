@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -22,6 +23,7 @@ import { combineLatest, Observable, switchMap } from 'rxjs';
   standalone: true,
   imports: [Table, Paging],
   templateUrl: './user-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserList {
   #userFacade = inject(UserFacade);

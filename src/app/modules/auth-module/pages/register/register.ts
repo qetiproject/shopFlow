@@ -1,5 +1,5 @@
 
-import { Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import * as AuthActions from '@auth-module/store/auth.actions';
@@ -14,6 +14,7 @@ import { InputComponent } from '@features/custom-form/input/input';
   standalone: true,
   imports: [RouterModule, ReactiveFormsModule, InputComponent, FormsModule],
   templateUrl: './register.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
   #fb = inject(NonNullableFormBuilder);

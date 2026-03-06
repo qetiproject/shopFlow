@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { logoutUser } from '@auth-module/store/auth.actions';
 import { UserStorage } from '@auth-module/services/user.storage';
@@ -12,6 +12,7 @@ import { CartIcon } from 'assets/icons';
   standalone: true,
   imports: [RouterModule, CartIcon],
   templateUrl: './header.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   #store = inject(Store);

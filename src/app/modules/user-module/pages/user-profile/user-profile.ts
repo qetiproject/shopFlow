@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
@@ -8,6 +8,7 @@ import { map } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: './user-profile.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfile {
   #route = inject(ActivatedRoute);

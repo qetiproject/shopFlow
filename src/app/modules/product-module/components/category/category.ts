@@ -10,6 +10,7 @@ import { ProductFacade } from '@product-module/services/product.facade';
   standalone: true,
   imports: [SelectComponent, ReactiveFormsModule],
   template: ` <app-select [options]="categoryOptions()" [formControl]="control" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryComponent {
   #productFacade = inject(ProductFacade);

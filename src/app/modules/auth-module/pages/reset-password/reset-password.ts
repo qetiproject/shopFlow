@@ -1,5 +1,5 @@
 
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthFacade } from '@auth-module/services/auth.facade';
@@ -19,6 +19,7 @@ import { INPUT_TYPES } from '@types';
     DynamicValidatorMessage
 ],
   templateUrl: './reset-password.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPassword {
   #fb = inject(NonNullableFormBuilder);
