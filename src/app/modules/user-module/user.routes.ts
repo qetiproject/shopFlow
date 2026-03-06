@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import type { LoginResponse } from '../auth-module/types/login/login.response';
-import { UserProfileResolve } from './pages/user-profile/user-profile.resolve';
+import { UserProfileResolve } from './pages/user-profile/user-profile.resolver';
 
 export const userRoutes: Routes = [
   {
