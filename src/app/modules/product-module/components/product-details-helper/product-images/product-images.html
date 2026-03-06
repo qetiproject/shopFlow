@@ -6,6 +6,7 @@
       [src]="mainImage()"
       [alt]="product().title + ' main image'"
       class="h-[420px] object-contain"
+      loading="lazy"
     />
     <figcaption class="sr-only">{{ product().title }} main image</figcaption>
   </figure>
@@ -21,6 +22,7 @@
             [src]="img"
             [alt]="product().title + ' thumbnail ' + img"
             class="w-20 h-24 object-contain rounded-2xl border border-gray-200 hover:border-pink-500 cursor-pointer transition-shadow duration-200 shadow-sm hover:shadow-md"
+            loading="lazy"
           />
         </button>
       </li>
