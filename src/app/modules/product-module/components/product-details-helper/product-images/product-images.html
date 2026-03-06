@@ -14,7 +14,7 @@
     class="flex gap-3 justify-center mt-4 overflow-x-auto py-2"
     aria-label="Product thumbnail images"
   >
-    @for (img of product().images; track img) {
+    @for (img of product().images; track $index) {
       <li>
         <button (click)="selectImage(img)">
           <img

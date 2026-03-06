@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100">
-        @for (row of data(); track trackBy()) {
+        @for (row of data(); track trackBy()($index, row)) {
           <tr class="hover:bg-blue-50/40 transition-colors">
             @for (col of columns(); track col.key ?? col.label) {
               <td class="px-6 py-4 text-gray-500">
