@@ -6,7 +6,7 @@ import { ProductHeaderFacade } from '@product-module/services/facades/product-he
 import { ProductMode } from '@product-module/types/product';
 import { SortOrder } from '@product-module/types/sort';
 import { PlusSVG } from 'assets/icons';
-import { SortComponent } from '../sort/sort';
+import { SortComponent } from '@product-module/components/sort/sort';
 
 @Component({
   selector: 'app-products-page-header',

@@ -14,7 +14,7 @@ import { TableColumn } from '@types';
 import { UserFacade } from '@user-module/services/user.facade';
 import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
 import { formatCreatedDate } from '@utils';
-import { Paging } from 'app/components/paging/paging';
+import { Paging } from '@components/paging/paging';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 
 @Component({

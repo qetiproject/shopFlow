@@ -1,5 +1,24 @@
 # Bundle & perf profiling
 
+## Path aliases და bundle size
+
+იმისთვის, რომ ფაილები იტვირთებოდეს მხოლოდ საჭიროების მიხედვით (როგორც URL-ით), და ზედმეტი კოდი არ მოხვდეს initial bundle-ში:
+
+1. **მხოლოდ ღრმა იმპორტი (deep imports)**  
+   არ იყენებოთ barrel: `from '@auth-module'`, `from '@product-module'` და ა.შ.  
+   ყოველთვის: `from '@auth-module/store/auth.actions'`, `from '@product-module/types/product'` — რომ bundler-მა მხოლოდ იმ ფაილის კოდი ჩაიყვანოს.
+
+2. **Lazy routes — ერთი ჩანკი ერთ route-ზე**  
+   `loadComponent` / `loadChildren` მხოლოდ dynamic `import()`-ით და ერთი entry path-ით:
+   - `import('@auth-module/pages/login/login')` → login-ის chunk
+   - `import('@product-module/pages/product-detail/product-detail')` → product-detail-ის chunk  
+   ასე ყოველი route იტვირთება მხოლოდ მაშინ, როცა მომხმარებელი იმ URL-ზე მიდის.
+
+3. **Route config-ის სტატიკური იმპორტი**  
+   `app.routes.ts` იმპორტებს `authRoutes`, `productRoutes` და ა.შ. — მხოლოდ route ობიექტებს, კომპონენტების კოდს არა. კომპონენტები იტვირთება მხოლოდ `loadComponent: () => import('...')`-ის მეშვეობით.
+
+ამ წესების დაცვა ნორმალურია პროექტში: barrel იმპორტები მოხსნილია, lazy routes ყველგან dynamic import + alias-ით არის.
+
 ## Budgets (angular.json)
 
 - **initial**: main bundle — warning 620kb, error 1mb.
