@@ -1,13 +1,12 @@
-
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectComponent } from '@components/select/select';
 import { MessagesService } from '@core/services/messages.service';
+import { InputComponent } from '@features/custom-form/input/input';
 import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
 import { FileUploadComponent } from '@features/upload-file/upload-file.component';
-import { InputComponent } from '@features/custom-form/input/input';
 import { ProductFacade } from '@product-module/services/product.facade';
 import { AddProductModel } from '@product-module/types/product';
 import { AddProductForm } from '@product-module/utils/add-product-form';
@@ -21,9 +20,10 @@ import { INPUT_TYPES, MessageSeverity } from '@types';
     ReactiveFormsModule,
     SelectComponent,
     FileUploadComponent,
-    DynamicValidatorMessage
-],
+    DynamicValidatorMessage,
+  ],
   templateUrl: './add-product-modal.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddProductModal {
   #productFacade = inject(ProductFacade);
