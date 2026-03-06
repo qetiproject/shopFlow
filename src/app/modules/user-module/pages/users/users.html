@@ -3,7 +3,7 @@
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">Users</h1>
     </div>
-    <app-search (value$)="onSearch($event)" [placeholder]="placeholder" />
+    <app-search (valueChange)="onSearch($event)" [placeholder]="placeholder" />
     <app-user-list [searchValue]="search()" />
   </div>
 </div>

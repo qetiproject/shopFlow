@@ -2,11 +2,11 @@ import { Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features/search/search';
 import { CategoryComponent } from '@product-module/components/category/category';
+import { SortComponent } from '@product-module/components/sort/sort';
 import { ProductHeaderFacade } from '@product-module/services/facades/product-header.facade';
 import { ProductMode } from '@product-module/types/product';
 import { SortOrder } from '@product-module/types/sort';
 import { PlusSVG } from 'assets/icons';
-import { SortComponent } from '@product-module/components/sort/sort';
 
 @Component({
   selector: 'app-products-page-header',
