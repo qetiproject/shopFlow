@@ -4,7 +4,7 @@
   </header>
 
   <div class="space-y-6">
-    @for (review of reviews(); track review.reviewerEmail) {
+    @for (review of reviews(); track review.date + review.reviewerEmail) {
       <article
         class="bg-gray-50 rounded-2xl p-5 shadow-sm"
         aria-label="Review by {{ review.reviewerName }}"

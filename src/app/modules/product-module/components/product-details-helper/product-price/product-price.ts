@@ -1,10 +1,11 @@
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-product-price',
   standalone: true,
   imports: [CurrencyPipe, DecimalPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="flex items-center gap-4 mb-6" aria-label="Product price and discount">
       <div class="text-3xl font-extrabold text-gray-900">
