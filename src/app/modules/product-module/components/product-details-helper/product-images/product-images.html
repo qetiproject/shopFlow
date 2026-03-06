@@ -17,7 +17,7 @@
   >
     @for (img of product().images; track $index) {
       <li>
-        <button (click)="selectImage(img)">
+        <button (click)="selectImage(img)" [attr.aria-label]="'Select image ' + ($index + 1) + ' for ' + product().title">
           <img
             [src]="img"
             [alt]="product().title + ' thumbnail ' + img"

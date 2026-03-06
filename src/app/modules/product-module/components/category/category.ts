@@ -15,7 +15,7 @@ import { ProductFacade } from '@product-module/services/product.facade';
   selector: 'app-category-list',
   standalone: true,
   imports: [SelectComponent, ReactiveFormsModule],
-  template: ` <app-select [options]="categoryOptions()" [formControl]="control" /> `,
+  template: ` <app-select label="Category" [options]="categoryOptions()" [formControl]="control" /> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryComponent {
