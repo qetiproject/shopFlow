@@ -5,7 +5,7 @@
     type="button"
     aria-label="Remove {{ p().title }}"
     (click)="onOpenModal()"
-    class="absolute top-3 right-3 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 shadow hover:bg-red-600 hover:text-white transition"
+    class="absolute top-3 right-3 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-500 shadow hover:bg-red-600 hover:text-white transition"
   >
     <app-remove-svg />
   </button>
@@ -26,9 +26,9 @@
     }
   </div>
   <div class="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
-    <h3 class="truncate text-base font-semibold text-gray-900 sm:text-lg">
+    <h2 class="truncate text-base font-semibold text-gray-900 sm:text-lg">
       {{ p().title }}
-    </h3>
+    </h2>
     <p class="mt-2 line-clamp-2 text-sm leading-6 text-gray-600 sm:line-clamp-3">
       {{ p().description }}
     </p>
@@ -41,7 +41,7 @@
           </span>
 
           @if (originalPrice()) {
-            <span class="text-sm text-gray-400 line-through">
+            <span class="text-sm text-gray-500 line-through">
               {{ originalPrice() | currency: 'USD' : 'symbol' : '1.0-0' }}
             </span>
           }

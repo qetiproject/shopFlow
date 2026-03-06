@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         {{ price() | currency: 'USD' : 'symbol' : '1.0-0' }}
 
         @if (originalPrice() > price()) {
-          <span class="text-sm text-gray-400 line-through ml-2">
+          <span class="text-sm text-gray-500 line-through ml-2">
             {{ originalPrice() | currency: 'USD' : 'symbol' : '1.0-0' }}
           </span>
         }
