@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
 import { authRoutes } from './modules/auth-module/auth.routes';
 import { cartRoutes } from './modules/cart-module/cart.routes';
-import { checkoutRoutes } from './modules/checkout-module/checkout.routes';
 import { productRoutes } from './modules/product-module/product.routes';
 import { userRoutes } from './modules/user-module/user.routes';
 
@@ -23,7 +22,8 @@ export const routes: Routes = [
   {
     path: 'checkout',
     canActivate: [AuthGuard],
-    children: checkoutRoutes,
+    loadChildren: () =>
+      import('./modules/checkout-module/checkout.routes').then((m) => m.checkoutRoutesWithProviders),
   },
   {
     path: '',
