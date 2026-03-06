@@ -1,19 +1,18 @@
 import { computed, inject } from '@angular/core';
-import { UserStorage } from '@auth-module';
+import { UserStorage } from '@auth-module/services/user.storage';
+import { CartStorage } from '@cart-module/services/cart.storage';
 import {
   addOrUpdateProduct,
-  AddToCartRequest,
   calculateTotals,
-  CartResponse,
-  CartStorage,
   updateQuantity,
-} from '@cart-module';
+} from '@cart-module/store/store.utils';
+import { Cart } from '@cart-module/types/cart.model';
+import { AddToCartRequest } from '@cart-module/types/cart.request';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 export const CartStore = signalStore(
   { providedIn: 'root' },
-  withState<CartResponse>({
-    total: 0,
+  withState<{ cart: Cart }>({
     cart: {
       id: 0,
       products: [],
@@ -44,7 +43,7 @@ export const CartStore = signalStore(
       },
     }));
 
-    const persist = (cart: CartResponse['cart']) => cartStorage.saveCart(cart);
+    const persist = (cart: Cart) => cartStorage.saveCart(cart);
 
     const changeQuantity = (id: number, delta: number) => {
       patchState(store, (state) => {

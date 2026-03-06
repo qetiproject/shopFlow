@@ -1,8 +1,17 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
-import { Order, OrderStorage } from '@checkout-module';
-import { Paging } from '@components';
-import { Table } from '@features';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+  TemplateRef,
+  viewChild,
+} from '@angular/core';
+import { OrderStorage } from '@checkout-module/services/orders.storage';
+import { Order } from '@checkout-module/types/order';
+import { Paging } from '@components/paging/paging';
+import { Table } from '@features/table/table';
 import { TableColumn } from '@types';
 import { formatCreatedDate } from '@utils';
 
@@ -11,6 +20,7 @@ import { formatCreatedDate } from '@utils';
   standalone: true,
   imports: [Paging, Table, CurrencyPipe],
   templateUrl: './orders.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Orders {
   #orderStorage = inject(OrderStorage);

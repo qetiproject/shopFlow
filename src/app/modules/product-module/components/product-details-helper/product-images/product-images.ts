@@ -1,11 +1,12 @@
-import { Component, effect, input, signal } from '@angular/core';
-import { Product } from '@product-module';
+import { ChangeDetectionStrategy, Component, effect, input, signal } from '@angular/core';
+import { Product } from '@product-module/types/product';
 
 @Component({
   selector: 'app-product-images',
   standalone: true,
   imports: [],
   templateUrl: './product-images.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductImages {
   product = input.required<Product>();

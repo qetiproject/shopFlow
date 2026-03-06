@@ -1,4 +1,4 @@
-import { CreateUserRequest } from "./create-user.request";
+import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
 
 export interface CreateUserResponse {
   message: string,

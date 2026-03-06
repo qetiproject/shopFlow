@@ -1,6 +1,8 @@
-@if (isLoggedIn) {
+@if (isLoggedIn()) {
   <app-header />
 }
 <app-loading />
 <app-messages />
-<router-outlet />
+<main>
+  <router-outlet />
+</main>

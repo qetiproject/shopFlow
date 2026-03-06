@@ -5,8 +5,12 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { AuthEffects, AuthReducer } from '@auth-module';
-import { AuthInterceptor, GlobalHttpErrorInterceptor, LoadingInterceptor } from '@core';
+import { AuthEffects } from '@auth-module/store/auth.effect';
+import { AuthReducer } from '@auth-module/store/auth.reducer';
+import { environment } from '@env';
+import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
+import { GlobalHttpErrorInterceptor } from '@core/interceptors/global-http-error-interceptor';
+import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -26,9 +30,13 @@ export const appConfig: ApplicationConfig = {
       auth: AuthReducer,
     }),
     provideEffects([AuthEffects]),
-    provideStoreDevtools({
-      maxAge: 25,
-      logOnly: false,
-    }),
+    ...(!environment.production
+      ? [
+          provideStoreDevtools({
+            maxAge: 25,
+            logOnly: environment.production,
+          }),
+        ]
+      : []),
   ],
 };

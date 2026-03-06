@@ -1,5 +1,6 @@
 export * from './constants';
 export * from './guards/auth.guard';
+export * from './http/http-utils';
 export * from './guards/guest.guard';
 export * from './guards/initial-redirect.guard';
 export * from './interceptors/auth.interceptor';

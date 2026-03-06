@@ -1,7 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartStore } from '@cart-module';
-import { BillingStorage, Order, OrderStorage } from '@checkout-module';
+import { CartStore } from '@cart-module/store/cart.store';
+import { BillingStorage } from '@checkout-module/services/billing.storage';
+import { OrderStorage } from '@checkout-module/services/orders.storage';
+import { Order } from '@checkout-module/types/order';
 import { SuccessSVG } from 'assets/icons';
 
 @Component({
@@ -9,6 +11,7 @@ import { SuccessSVG } from 'assets/icons';
   standalone: true,
   imports: [RouterLink, SuccessSVG],
   templateUrl: './checkout-success.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutSuccess implements OnInit {
   #cartStore = inject(CartStore);

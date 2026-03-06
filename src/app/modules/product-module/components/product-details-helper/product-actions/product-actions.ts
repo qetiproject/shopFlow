@@ -1,10 +1,11 @@
-import { Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-actions',
   standalone: true,
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="flex gap-4 mb-10" aria-label="Product actions">
       <button

@@ -3,7 +3,8 @@
     class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
     [disabled]="currentPage() <= 1"
     (click)="prevPage()"
-    >
+    aria-label="Previous page"
+  >
     Prev
   </button>
 
@@ -23,7 +24,8 @@
     class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
     [disabled]="currentPage() >= maxPage()"
     (click)="nextPage()"
-    >
+    aria-label="Next page"
+  >
     Next
   </button>
 </div>

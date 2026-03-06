@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '@env-dev';
-import { IUsers, UsersViewModel } from '@user-module';
+import { environment } from '@env';
+import { IUsers } from '@user-module/types/user.api.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,11 +10,7 @@ import { Observable } from 'rxjs';
 export class UserApiService {
   #http = inject(HttpClient);
 
-  searchUsers(
-    searchText?: string,
-    pageNumber?: number,
-    pageSize?: number,
-  ): Observable<UsersViewModel> {
+  searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<IUsers> {
     let params = new HttpParams();
 
     if (searchText) {
@@ -32,7 +28,8 @@ export class UserApiService {
     return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
   }
 
-  userByEmail(searchText: string): Observable<UsersViewModel> {
-    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers?searchText=${searchText}`);
+  userByEmail(searchText: string): Observable<IUsers> {
+    const params = new HttpParams().set('searchText', searchText);
+    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
   }
 }

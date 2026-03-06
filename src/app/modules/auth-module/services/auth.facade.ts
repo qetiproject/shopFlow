@@ -1,52 +1,35 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthApiService, CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest } from '@auth-module';
-import { MessagesService } from '@core';
-import { MessageSeverity } from '@types';
-import { Observable, tap } from 'rxjs';
+import { AuthApiService } from '@auth-module/services/auth.api';
+import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
+import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
+import { LoginRequest } from '@auth-module/types/login/login.request';
+import { LoginResponse } from '@auth-module/types/login/login.response';
+import { ResetPasswordRequest } from '@auth-module/types/reset-password.request';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacade {
   #authApi = inject(AuthApiService);
-  #messages = inject(MessagesService);
-  #router = inject(Router);
-  
+
   registerUser(data: CreateUserRequest): Observable<CreateUserResponse> {
-    return this.#authApi.createUser(data)
+    return this.#authApi.createUser(data);
   }
-  
+
   loginUser(data: LoginRequest): Observable<LoginResponse> {
-    return this.#authApi.login(data)
+    return this.#authApi.login(data);
   }
 
-  sendPasswordResetOtp(emailId: string): void {
-    this.#authApi.sendResetOtp(emailId).pipe(
-      tap((response) => {
-         this.#messages.showMessage({
-          text: response.message,
-          severity: MessageSeverity.Success,
-        });
-        this.#router.navigate(['/reset-password'])
-      })
-    ).subscribe()
+  sendPasswordResetOtp(emailId: string): Observable<{ message: string }> {
+    return this.#authApi.sendResetOtp(emailId);
   }
 
-  resetPassword(data: ResetPasswordRequest): void {
-    this.#authApi.resetPassword(data).pipe(
-      tap((response) => {
-         this.#messages.showMessage({
-          text: response,
-          severity: MessageSeverity.Success,
-        });
-        this.#router.navigate(['/login'])
-      })
-    ).subscribe();
+  resetPassword(data: ResetPasswordRequest): Observable<string> {
+    return this.#authApi.resetPassword(data);
   }
 
   logoutUser() {
-    return this.#authApi.logout()
+    return this.#authApi.logout();
   }
-  
 }

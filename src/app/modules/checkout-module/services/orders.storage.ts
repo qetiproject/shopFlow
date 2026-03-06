@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { STORAGE_KEYS } from '@core';
-import { Order, OrderList } from '../types';
+import { STORAGE_KEYS } from '@core/constants';
+import { Order, OrderList } from '@checkout-module/types/order';
 
 @Injectable({
   providedIn: 'root',

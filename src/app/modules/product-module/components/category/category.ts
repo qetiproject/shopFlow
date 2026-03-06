@@ -1,15 +1,22 @@
-
-import { Component, computed, effect, inject, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  output,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { SelectComponent } from '@components';
-import { ProductFacade } from '@product-module';
+import { SelectComponent } from '@components/select/select';
+import { ProductFacade } from '@product-module/services/product.facade';
 
 @Component({
   selector: 'app-category-list',
   standalone: true,
   imports: [SelectComponent, ReactiveFormsModule],
   template: ` <app-select [options]="categoryOptions()" [formControl]="control" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryComponent {
   #productFacade = inject(ProductFacade);

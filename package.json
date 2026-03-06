@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:analyze": "ng build --configuration=analyze",
+    "analyze": "npm run build:analyze && npx source-map-explorer dist/shopFlow/browser/*.js --html dist/shopFlow/bundle-stats.html --no-open",
     "watch": "ng build --watch --configuration development",
     "serve:ssr:ssr": "node dist/ssr/server/server.mjs",
     "lint": "ng lint"
@@ -52,8 +54,9 @@
     "@types/node": "^20.17.19",
     "angular-eslint": "21.2.0",
     "baseline-browser-mapping": "^2.9.11",
-    "eslint": "^10.0.2",
+    "eslint": "9.0.0",
     "postcss": "^8.5.3",
+    "source-map-explorer": "^2.5.3",
     "tailwindcss": "^4.1.16",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.56.1"

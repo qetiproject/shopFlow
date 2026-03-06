@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Cart } from '@cart-module';
-import { STORAGE_KEYS } from '@core';
+import { Cart } from '@cart-module/types/cart.model';
+import { STORAGE_KEYS } from '@core/constants';
 
 @Injectable({
   providedIn: 'root',

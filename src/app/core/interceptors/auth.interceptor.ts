@@ -1,6 +1,6 @@
 import { HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { TokenService } from "@auth-module";
+import { TokenService } from '@auth-module/services/token.service';
 
 export const AuthInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const tokenService = inject(TokenService);

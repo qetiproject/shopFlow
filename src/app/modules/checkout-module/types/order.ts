@@ -1,5 +1,5 @@
-import { CartProduct } from '@cart-module';
-import { BillingDetails } from './billingDetails';
+import { CartProduct } from '@cart-module/types/cart.model';
+import { BillingDetails } from '@checkout-module/types/billingDetails';
 
 export interface Order {
   id: string;
