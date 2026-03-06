@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { UserApiService, UsersViewModel, UserViewModel } from '@user-module';
+import { IUser, UserApiService, UsersViewModel, UserViewModel } from '@user-module';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -14,25 +14,25 @@ export class UserFacade {
     pageSize?: number,
   ): Observable<UsersViewModel> {
     return this.#userApi.searchUsers(searchText, pageNumber, pageSize).pipe(
-      map((result) => ({
-        data: (result.data ?? []).map((user) => this.mapApiUserToView(user)),
-        totalRecords: result.totalRecords,
-        pageNumber: result.pageNumber,
-        pageSize: result.pageSize,
+      map((api) => ({
+        data: (api.data ?? []).map((user) => this.mapApiUserToView(user)),
+        totalRecords: api.totalRecords,
+        pageNumber: api.pageNumber,
+        pageSize: api.pageSize,
       })),
-      map((result) => this.usersData(result)),
+      map((result) => this.normalizeUsersData(result)),
     );
   }
 
   getUserByEmail(email: string): Observable<UserViewModel | null> {
     return this.#userApi.userByEmail(email).pipe(
-      map((users) => users.data ?? []),
+      map((api) => api.data ?? []),
       map((users) => users.find((user) => user.emailId === email)),
       map((user) => (user ? this.mapApiUserToView(user) : null)),
     );
   }
 
-  private mapApiUserToView(user: UserViewModel): UserViewModel {
+  private mapApiUserToView(user: IUser): UserViewModel {
     return {
       userId: user.userId,
       userName: user.userName,
@@ -44,7 +44,7 @@ export class UserFacade {
     };
   }
 
-  private usersData(users: UsersViewModel): UsersViewModel {
+  private normalizeUsersData(users: UsersViewModel): UsersViewModel {
     const data = users.data.filter(
       (user) => user.emailId.includes('@') && user.fullName !== 'string' && user.role != '',
     );

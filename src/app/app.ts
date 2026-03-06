@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { selectCheckAuth } from '@auth-module';
+import { selectCheckAuth } from '@auth-module/store/auth.selector';
 import { HeaderComponent, Messages } from '@components';
 import { LoadingComponent } from '@features';
 import { Store } from '@ngrx/store';
@@ -12,12 +13,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './app.html',
 })
 export class AppComponent {
-  isLoggedIn = false;
   #store = inject(Store);
 
-  constructor() {
-    this.#store.select(selectCheckAuth).subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
-  }
+  readonly isLoggedIn = toSignal(this.#store.select(selectCheckAuth), { initialValue: false });
 }

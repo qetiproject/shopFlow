@@ -1,9 +1,7 @@
 import { inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { checkAuth } from '@auth-module';
-import { environment } from '@env-dev';
+import { checkAuth } from '@auth-module/store/auth.actions';
 import { Store } from '@ngrx/store';
-import { provideNgxStripe } from 'ngx-stripe';
 import { AppComponent } from './app/app';
 import { appConfig } from './app/app.config';
 
@@ -16,6 +14,5 @@ bootstrapApplication(AppComponent, {
       const store = inject(Store);
       store.dispatch(checkAuth());
     }),
-    provideNgxStripe(environment.stripe.publicKey),
   ],
 }).catch((err) => console.error(err));

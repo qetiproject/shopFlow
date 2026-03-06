@@ -9,7 +9,7 @@ import {
     ResetPasswordRequest,
     TokenService,
 } from '@auth-module';
-import { environment } from '@env-dev';
+import { environment } from '@env';
 import { Observable } from 'rxjs';
 
 @Injectable({
