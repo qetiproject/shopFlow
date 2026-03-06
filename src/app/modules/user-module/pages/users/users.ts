@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { UserList } from '@user-module';
+import { UserList } from '@user-module/components/user-list/user-list';
 import { Search } from 'app/features/search/search';
 import { BehaviorSubject } from 'rxjs';
 

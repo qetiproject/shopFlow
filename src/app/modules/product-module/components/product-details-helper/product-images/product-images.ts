@@ -1,5 +1,5 @@
 import { Component, effect, input, signal } from '@angular/core';
-import { Product } from '@product-module';
+import { Product } from '@product-module/types/product';
 
 @Component({
   selector: 'app-product-images',

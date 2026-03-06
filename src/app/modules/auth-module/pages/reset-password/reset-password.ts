@@ -2,8 +2,10 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthFacade, resetPasswordForm } from '@auth-module';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import { AuthFacade } from '@auth-module/services/auth.facade';
+import { resetPasswordForm } from '@auth-module/utils/reset-password.form';
+import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
+import { InputComponent } from '@features/custom-form/input/input';
 import { INPUT_TYPES } from '@types';
 
 @Component({

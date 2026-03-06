@@ -1,8 +1,10 @@
 
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Paging } from '@components';
-import { ProductFacade, ProductItem, ProductlistFacade } from '@product-module';
+import { Paging } from '@components/paging/paging';
+import { ProductFacade } from '@product-module/services/product.facade';
+import { ProductlistFacade } from '@product-module/services/facades/product-list.facade';
+import { ProductItem } from '@product-module/components/product-item/product-item';
 
 @Component({
   selector: 'app-product-list',

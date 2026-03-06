@@ -1,4 +1,4 @@
-import { CartProduct } from '@cart-module';
+import { CartProduct } from '@cart-module/types/cart.model';
 import { BillingDetails } from './billingDetails';
 
 export interface Order {

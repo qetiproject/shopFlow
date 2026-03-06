@@ -7,9 +7,11 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import * as AuthActions from '@auth-module';
-import { loginForm, LoginRequest } from '@auth-module';
-import { DynamicValidatorMessage, InputComponent } from '@features';
+import * as AuthActions from '@auth-module/store/auth.actions';
+import { loginForm } from '@auth-module/utils/login.form';
+import { LoginRequest } from '@auth-module/types/login/login.request';
+import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
+import { InputComponent } from '@features/custom-form/input/input';
 import { Store } from '@ngrx/store';
 import { INPUT_TYPES } from '@types';
 

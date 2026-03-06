@@ -1,4 +1,4 @@
-import { Cart } from '@cart-module';
+import { Cart } from '@cart-module/types/cart.model';
 
 export interface CartResponse {
   total: number;

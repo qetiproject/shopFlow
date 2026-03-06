@@ -1,16 +1,13 @@
 
 import { Component, input, output } from '@angular/core';
-import {
-  Product,
-  ProductActions,
-  ProductHeader,
-  ProductPrice,
-  ProductRating,
-  ProductShipping,
-  ProductStock,
-  ProductTags,
-  Review,
-} from '@product-module';
+import { Product, Review } from '@product-module/types/product';
+import { ProductActions } from '@product-module/components/product-details-helper/product-actions/product-actions';
+import { ProductHeader } from '@product-module/components/product-details-helper/product-header/product-header';
+import { ProductPrice } from '@product-module/components/product-details-helper/product-price/product-price';
+import { ProductRating } from '@product-module/components/product-details-helper/product-rating/product-rating';
+import { ProductShipping } from '@product-module/components/product-details-helper/product-shipping/product-shipping';
+import { ProductStock } from '@product-module/components/product-details-helper/product-stock/product-stock';
+import { ProductTags } from '@product-module/components/product-details-helper/product-tags/product-tags';
 
 @Component({
   selector: 'app-product-info',
