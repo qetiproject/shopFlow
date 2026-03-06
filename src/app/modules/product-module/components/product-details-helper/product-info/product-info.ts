@@ -1,12 +1,16 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { ProductActions } from '@product-module/components/product-details-helper/product-actions/product-actions';
-import { ProductHeader } from '@product-module/components/product-details-helper/product-header/product-header';
-import { ProductPrice } from '@product-module/components/product-details-helper/product-price/product-price';
-import { ProductRating } from '@product-module/components/product-details-helper/product-rating/product-rating';
-import { ProductShipping } from '@product-module/components/product-details-helper/product-shipping/product-shipping';
-import { ProductStock } from '@product-module/components/product-details-helper/product-stock/product-stock';
-import { ProductTags } from '@product-module/components/product-details-helper/product-tags/product-tags';
-import { Product, Review } from '@product-module/types/product';
+
+import { Component, input, output } from '@angular/core';
+import {
+  Product,
+  ProductActions,
+  ProductHeader,
+  ProductPrice,
+  ProductRating,
+  ProductShipping,
+  ProductStock,
+  ProductTags,
+  Review,
+} from '@product-module';
 
 @Component({
   selector: 'app-product-info',
@@ -18,10 +22,9 @@ import { Product, Review } from '@product-module/types/product';
     ProductShipping,
     ProductActions,
     ProductTags,
-    ProductHeader,
-  ],
+    ProductHeader
+],
   templateUrl: './product-info.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductInfo {
   product = input.required<Product>();

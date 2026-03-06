@@ -1,15 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartProductItem } from '@cart-module/components/cart-product-item/cart-product-item';
-import { CartSummary } from '@cart-module/components/cart-summary/cart-summary';
-import { CartStore } from '@cart-module/store/cart.store';
+import { CartProductItem, CartStore, CartSummary } from '@cart-module';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [CartProductItem, CartSummary, RouterLink],
   templateUrl: './cart.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent {
   private readonly store = inject(CartStore);

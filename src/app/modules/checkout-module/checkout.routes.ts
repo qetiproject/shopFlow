@@ -5,21 +5,21 @@ import { provideNgxStripe } from 'ngx-stripe';
 const checkoutChildRoutes: Routes = [
   {
     path: 'shipping-info',
-    loadComponent: () => import('@checkout-module/pages/shipping-info/shipping-info').then((m) => m.ShippingInfo),
+    loadComponent: () => import('./pages/shipping-info/shipping-info').then((m) => m.ShippingInfo),
   },
   {
     path: 'canceled',
     loadComponent: () =>
-      import('@checkout-module/pages/checkout-canceled/checkout-canceled').then((m) => m.CheckoutCanceled),
+      import('./pages/checkout-canceled/checkout-canceled').then((m) => m.CheckoutCanceled),
   },
   {
     path: 'success',
     loadComponent: () =>
-      import('@checkout-module/pages/checkout-success/checkout-success').then((m) => m.CheckoutSuccess),
+      import('./pages/checkout-success/checkout-success').then((m) => m.CheckoutSuccess),
   },
   {
     path: 'orders',
-    loadComponent: () => import('@checkout-module/pages/orders/orders').then((m) => m.Orders),
+    loadComponent: () => import('./pages/orders/orders').then((m) => m.Orders),
   },
 ];
 

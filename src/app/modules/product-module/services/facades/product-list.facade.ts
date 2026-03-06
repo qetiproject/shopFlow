@@ -1,9 +1,6 @@
 import { computed, effect, inject, Injectable, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProductFacade } from '@product-module/services/product.facade';
-import { ProductHeaderFacade } from '@product-module/services/facades/product-header.facade';
-import { ProductMode } from '@product-module/types/product';
-import { SortFacade } from '@product-module/services/sort.facade';
+import { ProductFacade, ProductHeaderFacade, ProductMode, SortFacade } from '@product-module';
 
 @Injectable({
   providedIn: 'root',

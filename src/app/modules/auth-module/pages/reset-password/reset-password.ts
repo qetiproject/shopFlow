@@ -21,7 +21,6 @@ import { tap } from 'rxjs';
     DynamicValidatorMessage,
   ],
   templateUrl: './reset-password.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPassword {
   readonly #fb = inject(NonNullableFormBuilder);

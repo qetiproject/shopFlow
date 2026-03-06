@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
-import { ProductFacade } from '@product-module/services/product.facade';
-import { Product } from '@product-module/types/product';
+import { Product, ProductFacade } from '@product-module';
 import { catchError, of, tap } from 'rxjs';
 
 export const ProductDetailResolve: ResolveFn<Product | null> = (route: ActivatedRouteSnapshot) => {

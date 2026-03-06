@@ -1,8 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CheckoutApi } from '@checkout-module/services/checkout.api';
-import { BillingStorage } from '@checkout-module/services/billing.storage';
-import { BillingDetails } from '@checkout-module/types/billingDetails';
-import { BillingForm } from '@checkout-module/types/billing-form';
+import { BillingDetails, BillingForm, BillingStorage, CheckoutApi } from '@checkout-module';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

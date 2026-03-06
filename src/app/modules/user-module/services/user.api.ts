@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env';
-import { IUsers } from '@user-module/types/user.api.model';
+import { IUsers } from '@user-module';
 import { Observable } from 'rxjs';
 
 @Injectable({

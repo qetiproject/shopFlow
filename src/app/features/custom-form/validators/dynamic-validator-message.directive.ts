@@ -1,7 +1,6 @@
-import { ComponentRef, DestroyRef, Directive, ElementRef, inject, OnInit, ViewContainerRef, input } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ComponentRef, Directive, ElementRef, inject, OnDestroy, OnInit, ViewContainerRef, input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, NgControl, NgForm, NgModel } from '@angular/forms';
-import { EMPTY, fromEvent, iif, merge, skip, startWith } from 'rxjs';
+import { EMPTY, fromEvent, iif, merge, skip, startWith, Subscription } from 'rxjs';
 import { ErrorStateMatcher, InputErrorComponent } from '.';
 
 @Directive({
@@ -14,37 +13,37 @@ import { ErrorStateMatcher, InputErrorComponent } from '.';
   `,
   standalone: true
 })
-export class DynamicValidatorMessage implements OnInit {
-  private readonly destroyRef = inject(DestroyRef);
+export class DynamicValidatorMessage implements OnInit, OnDestroy {
   ngControl = inject(NgControl, { self: true, optional: true }) || inject(ControlContainer, { self: true });
   elementRef = inject(ElementRef);
 
   get form() {
     return this.parentContainer?.formDirective as NgForm | FormGroupDirective | null;
   }
-
+  
   readonly errorStateMatcher = input(inject(ErrorStateMatcher));
+
   readonly container = input(inject(ViewContainerRef));
 
   private componentRef: ComponentRef<InputErrorComponent> | null = null;
+  private errorMessageTrigger!: Subscription;
   private parentContainer = inject(ControlContainer, { optional: true });
 
   ngOnInit() {
     queueMicrotask(() => {
       if (!this.ngControl.control)
         throw Error(`No control model for ${this.ngControl.name} control...`);
-      merge(
+      this.errorMessageTrigger = merge(
         this.ngControl.control.statusChanges,
         fromEvent(this.elementRef.nativeElement, 'blur'),
         iif(() => !!this.form, this.form!.ngSubmit, EMPTY)
       ).pipe(
         startWith(this.ngControl.control.status),
         skip(this.ngControl instanceof NgModel ? 1 : 0),
-        takeUntilDestroyed(this.destroyRef),
       ).subscribe(() => {
         const control = this.ngControl.control!;
-        const showError = this.errorStateMatcher().isErrorVisible(control, this.form)
-          && (control.touched || control.dirty);
+        const showError = this.errorStateMatcher().isErrorVisible(control, this.form) 
+                        && (control.touched || control.dirty);
         if (showError) {
           if (!this.componentRef) {
             this.componentRef = this.container().createComponent(InputErrorComponent);
@@ -55,7 +54,11 @@ export class DynamicValidatorMessage implements OnInit {
           this.componentRef?.destroy();
           this.componentRef = null;
         }
-      });
-    });
+      })
+
+    })
+  }
+  ngOnDestroy() {
+    this.errorMessageTrigger.unsubscribe();
   }
 }

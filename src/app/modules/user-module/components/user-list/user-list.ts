@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -10,12 +9,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { Table } from '@features/table/table';
+import { Table } from '@features';
 import { TableColumn } from '@types';
-import { UserFacade } from '@user-module/services/user.facade';
-import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
+import { UserFacade, UsersViewModel, UserViewModel } from '@user-module';
 import { formatCreatedDate } from '@utils';
-import { Paging } from '@components/paging/paging';
+import { Paging } from 'app/components/paging/paging';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 
 @Component({
@@ -23,7 +21,6 @@ import { combineLatest, Observable, switchMap } from 'rxjs';
   standalone: true,
   imports: [Table, Paging],
   templateUrl: './user-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserList {
   #userFacade = inject(UserFacade);

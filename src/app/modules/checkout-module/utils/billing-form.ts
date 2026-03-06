@@ -1,8 +1,8 @@
 // Component field initializer
 import { signal } from '@angular/core';
 import { apply, form } from '@angular/forms/signals';
-import { BillingForm } from '@checkout-module/types/billing-form';
-import { createNameSchema } from '@features/custom-form/custom-signal-form/custom-error-message';
+import { BillingForm } from '@checkout-module';
+import { createNameSchema } from '@features';
 
 export const createBillingModel = () =>
   signal<BillingForm>({

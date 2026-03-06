@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { UserAfterLogin } from '@auth-module/types/user-login';
-import { STORAGE_KEYS } from '@core/constants';
+import { UserAfterLogin } from "@auth-module";
+import { STORAGE_KEYS } from "@core";
 
 @Injectable({
     providedIn: 'root'

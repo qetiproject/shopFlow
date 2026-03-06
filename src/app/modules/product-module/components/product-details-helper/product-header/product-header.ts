@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-product-header',
   standalone: true,
   imports: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header>
       <span class="inline-block text-xs uppercase tracking-wide text-pink-500 font-semibold mb-2">

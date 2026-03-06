@@ -20,7 +20,6 @@ import { tap } from 'rxjs';
     DynamicValidatorMessage,
   ],
   templateUrl: './send-reset-otp.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SendResetOtp {
   readonly INPUT_TYPES = INPUT_TYPES;

@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
-import { UserFacade } from '@user-module/services/user.facade';
-import { UserViewModel } from '@user-module/types/user.view.model';
+import { UserFacade, UserViewModel } from '@user-module';
 import { catchError, of, tap } from 'rxjs';
 
 export const UserProfileResolve: ResolveFn<UserViewModel | null> = (

@@ -1,14 +1,11 @@
 
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { CartFacade } from '@cart-module/services/cart.facade';
-import { BackButtonComponent } from '@components/back-button/back-button.component';
-import { MessagesService } from '@core/services/messages.service';
-import { Product } from '@product-module/types/product';
-import { ProductImages } from '@product-module/components/product-details-helper/product-images/product-images';
-import { ProductInfo } from '@product-module/components/product-details-helper/product-info/product-info';
-import { ProductReviews } from '@product-module/components/product-details-helper/product-reviews/product-reviews';
+import { CartFacade } from '@cart-module';
+import { BackButtonComponent } from '@components';
+import { MessagesService } from '@core';
+import { Product, ProductImages, ProductInfo, ProductReviews } from '@product-module';
 import { MessageSeverity } from '@types';
 import { map } from 'rxjs';
 
@@ -17,7 +14,6 @@ import { map } from 'rxjs';
   standalone: true,
   imports: [BackButtonComponent, ProductImages, ProductReviews, ProductInfo],
   templateUrl: './product-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetail {
   #route = inject(ActivatedRoute);

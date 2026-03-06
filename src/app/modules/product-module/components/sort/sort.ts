@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
-import { SortFacade } from '@product-module/services/sort.facade';
-import { SortOrder } from '@product-module/types/sort';
+import { Component, inject, output } from '@angular/core';
+import { SortFacade, SortOrder } from '@product-module';
 import { SortSVG } from 'assets/icons';
 
 @Component({
@@ -8,7 +7,6 @@ import { SortSVG } from 'assets/icons';
   standalone: true,
   imports: [SortSVG],
   templateUrl: './sort.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortComponent {
   #sortFacade = inject(SortFacade);

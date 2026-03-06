@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { logoutUser } from '@auth-module/store/auth.actions';
 import { UserStorage } from '@auth-module/services/user.storage';
 import { CartStore } from '@cart-module/store/cart.store';
-import { STORAGE_KEYS } from '@core/constants';
+import { STORAGE_KEYS } from '@core';
 import { Store } from '@ngrx/store';
 import { CartIcon } from 'assets/icons';
 
@@ -12,7 +12,6 @@ import { CartIcon } from 'assets/icons';
   standalone: true,
   imports: [RouterModule, CartIcon],
   templateUrl: './header.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   #store = inject(Store);

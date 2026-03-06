@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoadingService } from '@core/services/loading.service';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if(loading()) {
       <div class="fixed inset-0 flex items-center justify-center bg-white/60 z-[1000]">

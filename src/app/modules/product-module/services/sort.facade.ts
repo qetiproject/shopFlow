@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { SortOrder } from '@product-module/types/sort';
+import { SortOrder } from '@product-module';
 
 @Injectable({
   providedIn: 'root',

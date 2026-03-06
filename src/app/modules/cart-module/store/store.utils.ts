@@ -1,4 +1,4 @@
-import { CartProduct } from '@cart-module/types/cart.model';
+import { CartProduct } from '@cart-module';
 
 export const addOrUpdateProduct = (products: CartProduct[], incoming: CartProduct) => {
   const updatedProducts = products.reduce<CartProduct[]>((acc, p) => {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { STORAGE_KEYS } from '@core/constants';
+import { STORAGE_KEYS } from "@core";
 
 @Injectable({
     providedIn: 'root'

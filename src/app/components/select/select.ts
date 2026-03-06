@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
+import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ArrowDownSVG } from 'assets/icons';
 
@@ -13,7 +13,6 @@ export interface SelectOption<T = unknown> {
   standalone: true,
   imports: [ArrowDownSVG],
   templateUrl: './select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,9 +22,6 @@ export interface SelectOption<T = unknown> {
   ],
 })
 export class SelectComponent<T = unknown> implements ControlValueAccessor {
-  private static nextId = 0;
-  readonly selectId = `select-${SelectComponent.nextId++}`;
-
   options = input<SelectOption<T>[]>([]);
   label = input<string>('');
 

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TableColumn, TableId } from '@types';
 
 @Component({
@@ -7,7 +7,6 @@ import { TableColumn, TableId } from '@types';
   standalone: true,
   imports: [NgTemplateOutlet],
   templateUrl: './table.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Table<T extends TableId> {
   columns = input.required<TableColumn<T>[]>();

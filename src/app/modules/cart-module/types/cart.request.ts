@@ -1,4 +1,4 @@
-import { CartProduct } from '@cart-module/types/cart.model';
+import { CartProduct } from '@cart-module';
 
 export interface AddToCartRequest {
   id: number;
