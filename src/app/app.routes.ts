@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { authRoutes } from '@auth-module';
-import { cartRoutes } from '@cart-module';
-import { checkoutRoutes } from '@checkout-module';
 import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
-import { productRoutes } from '@product-module';
-import { userRoutes } from '@user-module';
+import { authRoutes } from './modules/auth-module/auth.routes';
+import { cartRoutes } from './modules/cart-module/cart.router';
+import { checkoutRoutes } from './modules/checkout-module/checkout-routes';
+import { productRoutes } from './modules/product-module/product.routes';
+import { userRoutes } from './modules/user-module/user.routes';
 
 export const routes: Routes = [
   {
     path: '',
     canActivate: [InitialRedirectGuard],
     pathMatch: 'full',
-    loadComponent: () => import('@auth-module').then((c) => c.Login),
+    loadComponent: () => import('./modules/auth-module/pages/login/login').then((m) => m.Login),
   },
   { path: 'users', canActivate: [AuthGuard], children: userRoutes },
   { path: 'product', canActivate: [AuthGuard], children: productRoutes },
@@ -30,5 +30,5 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
     children: authRoutes,
   },
-  { path: '**', loadComponent: () => import('@pages').then((c) => c.NotFoundComponent) },
+  { path: '**', loadComponent: () => import('./pages/not-found').then((m) => m.NotFoundComponent) },
 ];
