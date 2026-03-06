@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { AuthEffects, AuthReducer } from '@auth-module';
+import { environment } from '@env';
 import { AuthInterceptor, GlobalHttpErrorInterceptor, LoadingInterceptor } from '@core';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -26,9 +27,13 @@ export const appConfig: ApplicationConfig = {
       auth: AuthReducer,
     }),
     provideEffects([AuthEffects]),
-    provideStoreDevtools({
-      maxAge: 25,
-      logOnly: false,
-    }),
+    ...(!environment.production
+      ? [
+          provideStoreDevtools({
+            maxAge: 25,
+            logOnly: environment.production,
+          }),
+        ]
+      : []),
   ],
 };
