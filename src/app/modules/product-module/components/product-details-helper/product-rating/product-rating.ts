@@ -1,9 +1,10 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-product-rating',
   standalone: true,
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <section aria-label="Product rating" class="flex items-center gap-3 mb-6">
     <div class="flex text-yellow-400 text-lg" aria-hidden="true">
       {{ '★'.repeat(rating()) }}{{ '☆'.repeat(5 - rating()) }}

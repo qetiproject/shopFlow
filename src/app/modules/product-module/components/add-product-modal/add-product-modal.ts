@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +24,7 @@ import { AddProductForm } from '@product-module/utils/add-product-form';
     DynamicValidatorMessage,
   ],
   templateUrl: './add-product-modal.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddProductModal {
   #productFacade = inject(ProductFacade);

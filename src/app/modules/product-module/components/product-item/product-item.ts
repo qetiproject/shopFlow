@@ -1,5 +1,5 @@
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MessageSeverity } from '@app-types/message';
 import { CartFacade } from '@cart-module/services/cart.facade';
@@ -15,6 +15,7 @@ import { CartIcon, RemoveSVG } from 'assets/icons';
   standalone: true,
   imports: [RouterLink, CartIcon, RemoveSVG, CurrencyPipe, DecimalPipe],
   templateUrl: './product-item.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItem {
   product = input.required<ProductViewModel>();

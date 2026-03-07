@@ -1,11 +1,12 @@
 
-import { Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-paging',
   standalone: true,
   imports: [],
   templateUrl: './paging.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Paging {
   totalItems = input.required<number>();

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -21,6 +21,7 @@ import { tap } from 'rxjs';
     DynamicValidatorMessage,
   ],
   templateUrl: './send-reset-otp.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SendResetOtp {
   readonly INPUT_TYPES = INPUT_TYPES;

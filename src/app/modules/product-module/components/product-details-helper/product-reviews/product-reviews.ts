@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Review } from '@product-module/types/product';
 
 @Component({
@@ -6,6 +6,7 @@ import { Review } from '@product-module/types/product';
   standalone: true,
   imports: [],
   templateUrl: './product-reviews.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductReviews {
   reviews = input.required<Review[]>();

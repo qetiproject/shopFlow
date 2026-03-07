@@ -1,5 +1,5 @@
 
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MessagesService } from '@core/services/messages.service';
 import { MessageDirective } from '@features/directives/message.directive';
 
@@ -8,6 +8,7 @@ import { MessageDirective } from '@features/directives/message.directive';
   standalone: true,
   imports: [MessageDirective],
   templateUrl: './messages.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
     @keyframes slide-in {
       0% { transform: translateX(100%); opacity: 0; }

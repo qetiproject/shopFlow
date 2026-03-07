@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { INPUT_TYPES, InputType } from '@app-types/input';
 import { EyeSVG, NotEyeSVG } from 'assets/icons';
@@ -8,6 +8,7 @@ import { EyeSVG, NotEyeSVG } from 'assets/icons';
   standalone: true,
   imports: [ReactiveFormsModule, EyeSVG, NotEyeSVG],
   templateUrl: './input.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

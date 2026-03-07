@@ -1,4 +1,4 @@
-import { Component, Output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@custom-form/index';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
   selector: 'app-search',
   imports: [InputComponent, ReactiveFormsModule],
   templateUrl: './search.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Search {
   search = new FormControl<string>('', { nonNullable: true });

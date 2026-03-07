@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackButtonDirective } from '@features/directives/back-button.directive';
 import { BackButtonSVG } from 'assets/icons';
@@ -15,6 +15,7 @@ import { BackButtonSVG } from 'assets/icons';
       </button>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackButtonComponent {
   private location = inject(Location);

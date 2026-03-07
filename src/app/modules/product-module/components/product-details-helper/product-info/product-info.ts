@@ -1,5 +1,5 @@
 
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { Product, Review } from '@product-module/types/product';
 import { ProductActions } from '@product-module/components/product-details-helper/product-actions/product-actions';
 import { ProductHeader } from '@product-module/components/product-details-helper/product-header/product-header';
@@ -22,6 +22,7 @@ import { ProductTags } from '@product-module/components/product-details-helper/p
     ProductHeader
 ],
   templateUrl: './product-info.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductInfo {
   product = input.required<Product>();

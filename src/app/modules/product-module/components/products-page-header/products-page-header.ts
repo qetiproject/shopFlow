@@ -1,4 +1,4 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Search } from '@features/search/search';
 import { CategoryComponent } from '@product-module/components/category/category';
@@ -13,6 +13,7 @@ import { SortComponent } from '../sort/sort';
   standalone: true,
   imports: [CategoryComponent, Search, SortComponent, PlusSVG],
   templateUrl: './products-page-header.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProducsPagetHeader {
   #productHeaderFacade = inject(ProductHeaderFacade);

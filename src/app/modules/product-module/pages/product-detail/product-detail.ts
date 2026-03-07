@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { MessageSeverity } from '@app-types/message';
@@ -16,6 +16,7 @@ import { map } from 'rxjs';
   standalone: true,
   imports: [BackButtonComponent, ProductImages, ProductReviews, ProductInfo],
   templateUrl: './product-detail.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetail {
   #route = inject(ActivatedRoute);
