@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-    CreateUserRequest,
-    CreateUserResponse,
-    LoginRequest,
-    LoginResponse,
-    ResetPasswordRequest,
-    TokenService,
-} from '@auth-module';
+import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
+import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
+import { LoginRequest } from '@auth-module/types/login/login.request';
+import { LoginResponse } from '@auth-module/types/login/login.response';
+import { ResetPasswordRequest } from '@auth-module/types/reset-password.request';
+import { TokenService } from '@auth-module/services/token.service';
 import { environment } from '@env';
 import { Observable } from 'rxjs';
 

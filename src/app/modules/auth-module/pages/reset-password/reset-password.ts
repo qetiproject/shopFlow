@@ -4,11 +4,12 @@ import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angul
 import { Router, RouterModule } from '@angular/router';
 import { AuthFacade } from '@auth-module/services/auth.facade';
 import { resetPasswordForm } from '@auth-module/utils/reset-password.form';
-import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
-import { InputComponent } from '@features/custom-form/input/input';
 import { MessagesService } from '@core/services/messages.service';
-import { INPUT_TYPES, MessageSeverity } from '@types';
+import { InputComponent } from '@features/custom-form/input/input';
+import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
 import { tap } from 'rxjs';
+import { INPUT_TYPES } from '../../../../types/input';
+import { MessageSeverity } from '../../../../types/message';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,6 +22,7 @@ import { tap } from 'rxjs';
     DynamicValidatorMessage,
   ],
   templateUrl: './reset-password.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPassword {
   readonly #fb = inject(NonNullableFormBuilder);

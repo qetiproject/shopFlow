@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthFacade } from '@auth-module/services/auth.facade';
-import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
-import { InputComponent } from '@features/custom-form/input/input';
 import { MessagesService } from '@core/services/messages.service';
-import { INPUT_TYPES, MessageSeverity } from '@types';
+import { InputComponent } from '@features/custom-form/input/input';
+import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
 import { tap } from 'rxjs';
+import { INPUT_TYPES } from '../../../../types/input';
+import { MessageSeverity } from '../../../../types/message';
 
 @Component({
   selector: 'app-send-reset-otp',

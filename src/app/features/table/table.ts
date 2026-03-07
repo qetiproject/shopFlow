@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { TableColumn, TableId } from '@types';
+import { TableColumn, TableId } from '../../types/table';
 
 @Component({
   selector: 'app-table',

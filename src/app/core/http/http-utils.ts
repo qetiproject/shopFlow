@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorMessages } from '@types';
+import { ErrorMessages } from '../../types/error.messages';
 
 export function toErrorMessage(error: unknown): string {
   if (typeof error === 'string' && error.trim()) return error.trim();

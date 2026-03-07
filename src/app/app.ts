@@ -3,8 +3,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { selectCheckAuth } from '@auth-module/store/auth.selector';
-import { HeaderComponent, Messages } from '@components';
-import { LoadingComponent } from '@features';
+import { HeaderComponent } from '@components/header/header';
+import { Messages } from '@components/messages/messages';
+import { LoadingComponent } from '@features/loading/loading.component';
 import { Store } from '@ngrx/store';
 
 @Component({

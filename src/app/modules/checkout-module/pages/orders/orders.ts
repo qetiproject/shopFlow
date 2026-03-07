@@ -1,10 +1,11 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
-import { Order, OrderStorage } from '@checkout-module';
-import { Paging } from '@components';
-import { Table } from '@features';
-import { TableColumn } from '@types';
-import { formatCreatedDate } from '@utils';
+import { OrderStorage } from '@checkout-module/services/orders.storage';
+import { Order } from '@checkout-module/types/order';
+import { Paging } from '@components/paging/paging';
+import { Table } from '@features/table/table';
+import { formatCreatedDate } from '@utils/date';
+import { TableColumn } from '../../../../types/table';
 
 @Component({
   selector: 'app-orders',

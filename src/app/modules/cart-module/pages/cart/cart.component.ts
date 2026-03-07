@@ -1,6 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartProductItem, CartStore, CartSummary } from '@cart-module';
+import { CartProductItem } from '@cart-module/components/cart-product-item/cart-product-item';
+import { CartStore } from '@cart-module/store/cart.store';
+import { CartSummary } from '@cart-module/components/cart-summary/cart-summary';
 
 @Component({
   selector: 'app-cart',

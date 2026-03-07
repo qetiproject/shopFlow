@@ -5,7 +5,7 @@ import {
   ValidationError,
   WithOptionalFieldTree,
 } from '@angular/forms/signals';
-import { INPUT_TYPES, InputType } from '@types';
+import { INPUT_TYPES, InputType } from '../../../types/input';
 @Component({
   selector: 'app-field-input',
   template: `

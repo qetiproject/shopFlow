@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { IUser, UserApiService, UsersViewModel, UserViewModel } from '@user-module';
+import { IUser } from '@user-module/types/user.api.model';
+import { UserApiService } from '@user-module/services/user.api';
+import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

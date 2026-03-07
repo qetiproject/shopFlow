@@ -1,4 +1,7 @@
-import { CreateUserRequest, CreateUserResponse, LoginRequest, LoginStoreResponse } from "@auth-module";
+import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
+import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
+import { LoginRequest } from '@auth-module/types/login/login.request';
+import { LoginStoreResponse } from '@auth-module/store/auth.store';
 import { createAction, props } from "@ngrx/store";
 
 export const registerUser = createAction(

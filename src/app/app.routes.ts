@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-import { AuthGuard, GuestGuard, InitialRedirectGuard } from '@core';
+import { AuthGuard } from '@core/guards/auth.guard';
+import { GuestGuard } from '@core/guards/guest.guard';
+import { InitialRedirectGuard } from '@core/guards/initial-redirect.guard';
 import { authRoutes } from './modules/auth-module/auth.routes';
 import { cartRoutes } from './modules/cart-module/cart.routes';
 import { productRoutes } from './modules/product-module/product.routes';

@@ -1,9 +1,9 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { MessagesService } from '@core/services/messages.service';
 import { toErrorMessage } from '@core/http/http-utils';
-import { MessageSeverity } from '@types';
+import { MessagesService } from '@core/services/messages.service';
 import { catchError, throwError } from 'rxjs';
+import { MessageSeverity } from '../../types/message';
 
 export const GlobalHttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const messages = inject(MessagesService);

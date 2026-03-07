@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProducsPagetHeader, ProductList } from '@product-module';
+import { ProductList } from '@product-module/components/product-list/product-list';
+import { ProducsPagetHeader } from '@product-module/components/products-page-header/products-page-header';
 
 @Component({
   selector: 'app-products',
