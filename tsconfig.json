@@ -23,7 +23,7 @@
       "@components/*": ["app/components/*"],
       "@core/*": ["app/core/*"],
       "@features/*": ["app/features/*"],
-      "@types/*": ["app/types/*"],
+      "@app-types/*": ["app/types/*"],
       "@pages/*": ["app/pages/*"],
       "@utils/*": ["app/utils/*"],
       "@test-utils/*": ["app/test-utils/*"],

@@ -1,6 +1,6 @@
 import { Directive, HostBinding, inject } from '@angular/core';
+import { MessagePosition, MessageSeverity } from '@app-types/message';
 import { MessagesService } from '@core/services/messages.service';
-import { MessagePosition, MessageSeverity } from '../../types/message';
 
 @Directive({
   selector: '[appMessageClass]',

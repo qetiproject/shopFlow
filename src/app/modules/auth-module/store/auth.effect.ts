@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageSeverity } from '@app-types/message';
 import { AuthFacade } from '@auth-module/services/auth.facade';
 import { TokenService } from '@auth-module/services/token.service';
 import { UserStorage } from '@auth-module/services/user.storage';
@@ -8,7 +9,6 @@ import { toErrorMessage } from '@core/http/http-utils';
 import { MessagesService } from '@core/services/messages.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { MessageSeverity } from '../../../types/message';
 import { LoginStoreResponse } from './auth.store';
 
 @Injectable()

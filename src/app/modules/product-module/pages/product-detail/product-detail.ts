@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { MessageSeverity } from '@app-types/message';
 import { CartFacade } from '@cart-module/services/cart.facade';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
 import { MessagesService } from '@core/services/messages.service';
@@ -9,7 +10,6 @@ import { ProductInfo } from '@product-module/components/product-details-helper/p
 import { ProductReviews } from '@product-module/components/product-details-helper/product-reviews/product-reviews';
 import { Product } from '@product-module/types/product';
 import { map } from 'rxjs';
-import { MessageSeverity } from '../../../../types/message';
 
 @Component({
   selector: 'app-product-detail',

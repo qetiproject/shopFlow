@@ -6,12 +6,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { INPUT_TYPES } from '@app-types/input';
 import * as AuthActions from '@auth-module/store/auth.actions';
 import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
 import { registerForm } from '@auth-module/utils/register.form';
 import { Store } from '@ngrx/store';
 import { InputComponent } from 'app/features/custom-form/input/input';
-import { INPUT_TYPES } from '../../../../types/input';
 
 @Component({
   selector: 'app-register',

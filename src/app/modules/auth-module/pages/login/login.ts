@@ -6,13 +6,13 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { INPUT_TYPES } from '@app-types/input';
 import * as AuthActions from '@auth-module/store/auth.actions';
 import { LoginRequest } from '@auth-module/types/login/login.request';
 import { loginForm } from '@auth-module/utils/login.form';
 import { InputComponent } from '@features/custom-form/input/input';
 import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
 import { Store } from '@ngrx/store';
-import { INPUT_TYPES } from '../../../../types/input';
 
 @Component({
   selector: 'app-login',

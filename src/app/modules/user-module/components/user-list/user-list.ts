@@ -9,12 +9,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { TableColumn } from '@app-types/table';
+import { Paging } from '@components/paging/paging';
 import { Table } from '@features/table/table';
-import { TableColumn } from '../../../../types/table';
 import { UserFacade } from '@user-module/services/user.facade';
 import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
 import { formatCreatedDate } from '@utils/date';
-import { Paging } from '@components/paging/paging';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 
 @Component({

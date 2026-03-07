@@ -7,10 +7,10 @@ import {
 import { provideRouter } from '@angular/router';
 import { AuthEffects } from '@auth-module/store/auth.effect';
 import { AuthReducer } from '@auth-module/store/auth.reducer';
-import { environment } from '@env';
 import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
 import { GlobalHttpErrorInterceptor } from '@core/interceptors/global-http-error-interceptor';
 import { LoadingInterceptor } from '@core/interceptors/loading.interceptor';
+import { environment } from '@env';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -21,7 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    // provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
       withInterceptors([AuthInterceptor, LoadingInterceptor, GlobalHttpErrorInterceptor]),
