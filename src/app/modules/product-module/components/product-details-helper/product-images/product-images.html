@@ -16,7 +16,7 @@
   >
     @for (img of product().images; track img) {
       <li>
-        <button (click)="selectImage(img)">
+        <button type="button" (click)="selectImage(img)" [attr.aria-label]="'Select image for ' + product().title">
           <img
             [src]="img"
             [alt]="product().title + ' thumbnail ' + img"

@@ -7,7 +7,7 @@
               text-white text-sm font-medium animate-slide-in"
       >
         <span>{{ message()?.text }}</span>
-        <button (click)="onClose()" class="ml-2 text-white font-bold hover:opacity-80 transition">
+        <button type="button" (click)="onClose()" aria-label="Close message" class="ml-2 text-white font-bold hover:opacity-80 transition">
           ✖
         </button>
       </div>
