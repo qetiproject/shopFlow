@@ -24,6 +24,7 @@
         <button
           [routerLink]="['/cart']"
           type="button"
+          aria-label="View shopping cart"
           class="relative group inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white transition-all active:scale-[0.98] sm:w-auto"
         >
           <app-cart-icon class="transition-transform group-hover:translate-x-0.5" />
@@ -37,7 +38,7 @@
           }
         </button>
         <div class="relative hidden md:block">
-          <button (click)="toggleDropdown()" class="flex items-center space-x-2 focus:outline-none">
+          <button (click)="toggleDropdown()" class="flex items-center space-x-2 focus:outline-none" aria-label="User menu" [attr.aria-expanded]="isOpen()">
             <img
               class="w-10 h-10 rounded-full border-2 border-blue-500"
               src="https://dummyjson.com/icon/emilys/128"
@@ -95,7 +96,7 @@
         </div>
       </div>
 
-      <button (click)="toggleMobileMenu()" class="md:hidden text-gray-700 focus:outline-none">
+      <button (click)="toggleMobileMenu()" class="md:hidden text-gray-700 focus:outline-none" aria-label="Open menu" [attr.aria-expanded]="isMobileMenu()">
         <svg
           class="w-6 h-6"
           fill="none"

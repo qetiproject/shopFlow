@@ -3,7 +3,7 @@
 <div class="min-h-screen from-gray-50 to-indigo-50 flex items-center justify-center p-6">
   <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8">
     <div class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-800">Billing Details</h2>
+      <h1 class="text-2xl font-semibold text-gray-800">Billing Details</h1>
       <p class="text-sm text-gray-500 mt-1">Please enter your shipping and billing information</p>
     </div>
 
@@ -53,13 +53,16 @@
         <button
           [routerLink]="['/product/list']"
           type="button"
+          aria-label="Cancel and return to product list"
           class="flex-1 md:flex-none px-6 py-3 text-sm font-medium rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 transition duration-200"
         >
           Cancel
         </button>
 
         <button
+          type="submit"
           [disabled]="billingForm().invalid()"
+          aria-label="Save billing details and continue"
           class="flex-1 md:flex-none px-6 py-3 text-sm font-semibold rounded-xl transition duration-200 shadow-md"
           [class]="{
             'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-200': billingForm().valid(),
