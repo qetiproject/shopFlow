@@ -1,5 +1,4 @@
 export interface Cart {
-  id: number;
   products: CartProduct[];
   total: number;
   userId: number;
@@ -17,3 +16,5 @@ export type CartProduct = Cartable & {
   quantity: number;
   total: number;
 };
+
+export type CartsByUserId = Record<string, Cart>;
