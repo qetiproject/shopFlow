@@ -8,6 +8,7 @@ export interface Order {
   total: number;
   status: string;
   createdAt: Date;
+  userId: number;
 }
 
 export interface OrderList {

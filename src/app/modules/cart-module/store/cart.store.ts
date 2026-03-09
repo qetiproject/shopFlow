@@ -1,9 +1,13 @@
 import { computed, inject } from '@angular/core';
 import { UserStorage } from '@auth-module/services/user.storage';
+import { CartStorage } from '@cart-module/services/cart.storage';
+import {
+  addOrUpdateProduct,
+  calculateTotals,
+  updateQuantity,
+} from '@cart-module/store/store.utils';
 import { AddToCartRequest } from '@cart-module/types/cart.request';
 import { CartResponse } from '@cart-module/types/cart.response';
-import { CartStorage } from '@cart-module/services/cart.storage';
-import { addOrUpdateProduct, calculateTotals, updateQuantity } from '@cart-module/store/store.utils';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 export const CartStore = signalStore(
@@ -11,7 +15,6 @@ export const CartStore = signalStore(
   withState<CartResponse>({
     total: 0,
     cart: {
-      id: 0,
       products: [],
       total: 0,
       userId: 0,

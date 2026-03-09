@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { UserStorage } from '@auth-module/services';
 import { STORAGE_KEYS } from '@core/constants';
 import { Order, OrderList } from '../types';
 
@@ -6,16 +7,15 @@ import { Order, OrderList } from '../types';
   providedIn: 'root',
 })
 export class OrderStorage {
-  saveOrder(order: Order) {
-    const existing = this.getOrders() || { order: [], totalRecords: 0 };
+  #userStorage = inject(UserStorage);
 
+  saveOrder(order: Order): void {
+    const existing = this.getOrders();
     existing.order.push(order);
-
     const toSave: OrderList = {
       order: existing.order,
       totalRecords: existing.order.length,
     };
-
     localStorage.setItem(STORAGE_KEYS.ORDER, JSON.stringify(toSave));
   }
 
@@ -31,11 +31,19 @@ export class OrderStorage {
     }
   }
 
-  clear(): void {
-    localStorage.removeItem(STORAGE_KEYS.ORDER);
+  getOrdersByUserId(): OrderList {
+    const user = this.#userStorage.getUser();
+    if (user?.userId == null) return { order: [], totalRecords: 0 };
+
+    const all = this.getOrders();
+    const filtered = all.order.filter((o) => o.userId === user.userId);
+    return {
+      order: filtered,
+      totalRecords: filtered.length,
+    };
   }
 
-  getTotalRecords(): number {
-    return this.getOrders().totalRecords;
+  clear(): void {
+    localStorage.removeItem(STORAGE_KEYS.ORDER);
   }
 }
