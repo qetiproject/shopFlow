@@ -59,7 +59,7 @@ export const CartStore = signalStore(
       });
     };
 
-    const addCProductToCart = (request: AddToCartRequest): boolean => {
+    const addProductToCart = (request: AddToCartRequest): boolean => {
       let success = false;
 
       patchState(store, (state) => {
@@ -103,7 +103,7 @@ export const CartStore = signalStore(
     };
 
     return {
-      addCProductToCart,
+      addProductToCart,
       removeProductFromCart,
       changeQuantity,
       increase: (id: number) => changeQuantity(id, 1),

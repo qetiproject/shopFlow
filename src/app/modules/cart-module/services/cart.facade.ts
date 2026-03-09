@@ -20,6 +20,6 @@ export class CartFacade {
       },
     };
 
-    return this.#cartStore.addCProductToCart(newProduct);
+    return this.#cartStore.addProductToCart(newProduct);
   }
 }
