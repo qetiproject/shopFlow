@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
+import { MessageSeverity } from '@app-types/message';
 import { BillingDetails } from '@checkout-module/types/billingDetails';
 import { BillingForm } from '@checkout-module/types/billing-form';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { CheckoutApi } from '@checkout-module/services/checkout.api';
+import { MessagesService } from '@core/services/messages.service';
 import { toErrorMessage } from '@core/http/http-utils';
 import { firstValueFrom } from 'rxjs';
 
@@ -10,8 +12,9 @@ import { firstValueFrom } from 'rxjs';
 export class CheckoutFacade {
   #checkoutApi = inject(CheckoutApi);
   #billingStorage = inject(BillingStorage);
+  #messages = inject(MessagesService);
 
-  async checkout(form: BillingForm): Promise<{ success: boolean; error?: string }> {
+  async checkout(form: BillingForm): Promise<void> {
     try {
       const res = await firstValueFrom(this.#checkoutApi.checkout());
       const billingDetails: BillingDetails = {
@@ -26,10 +29,11 @@ export class CheckoutFacade {
       };
       this.#billingStorage.saveBillingInfo(billingDetails);
       window.location.href = res.url;
-      return { success: true };
     } catch (err) {
-      const error = toErrorMessage(err);
-      return { success: false, error };
+      this.#messages.showMessage({
+        text: toErrorMessage(err),
+        severity: MessageSeverity.Error,
+      });
     }
   }
 }
