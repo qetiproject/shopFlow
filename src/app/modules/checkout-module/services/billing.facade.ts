@@ -23,7 +23,7 @@ export class CheckoutFacade {
         fullName: `${form.firstName} ${form.lastName}`,
         fullAddress: `${form.address} ${form.city}`,
       };
-      this.#billingStorage.savebillingInfo(billingDetails);
+      this.#billingStorage.saveBillingInfo(billingDetails);
       window.location.href = res.url;
     } catch (err) {
       console.error(err);

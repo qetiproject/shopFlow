@@ -6,13 +6,18 @@ import { STORAGE_KEYS } from '@core/constants';
   providedIn: 'root',
 })
 export class BillingStorage {
-  savebillingInfo(billingInfo: BillingDetails) {
+  saveBillingInfo(billingInfo: BillingDetails): void {
     sessionStorage.setItem(STORAGE_KEYS.BILLING, JSON.stringify(billingInfo));
   }
 
   getBillingInfo(): BillingDetails | null {
     const billing = sessionStorage.getItem(STORAGE_KEYS.BILLING);
-    return billing ? JSON.parse(billing) : null;
+    if (!billing) return null;
+    try {
+      return JSON.parse(billing) as BillingDetails;
+    } catch {
+      return null;
+    }
   }
 
   clear(): void {

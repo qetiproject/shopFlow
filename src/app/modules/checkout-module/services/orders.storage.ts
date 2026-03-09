@@ -9,16 +9,13 @@ import { Order, OrderList } from '../types';
 export class OrderStorage {
   #userStorage = inject(UserStorage);
 
-  saveOrder(order: Order) {
-    const existing = this.getOrders() || { order: [], totalRecords: 0 };
-
+  saveOrder(order: Order): void {
+    const existing = this.getOrders();
     existing.order.push(order);
-
     const toSave: OrderList = {
       order: existing.order,
       totalRecords: existing.order.length,
     };
-
     localStorage.setItem(STORAGE_KEYS.ORDER, JSON.stringify(toSave));
   }
 
@@ -48,9 +45,5 @@ export class OrderStorage {
 
   clear(): void {
     localStorage.removeItem(STORAGE_KEYS.ORDER);
-  }
-
-  getTotalRecords(): number {
-    return this.getOrders().totalRecords;
   }
 }

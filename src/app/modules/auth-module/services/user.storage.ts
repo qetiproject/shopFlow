@@ -13,10 +13,15 @@ export class UserStorage {
 
     getUser(): UserAfterLogin | null {
         const user = sessionStorage.getItem(STORAGE_KEYS.USER);
-        return user ? JSON.parse(user) : null;
+        if (!user) return null;
+        try {
+            return JSON.parse(user) as UserAfterLogin;
+        } catch {
+            return null;
+        }
     }
 
     clear(): void {
         sessionStorage.removeItem(STORAGE_KEYS.USER);
-    }                   
+    }
 }
