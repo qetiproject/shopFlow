@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UserStorage } from '@auth-module/services';
 import { CartStore } from '@cart-module/store/cart.store';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
-import { Order } from '@checkout-module/types/order';
 import { OrderStorage } from '@checkout-module/services/orders.storage';
+import { Order } from '@checkout-module/types/order';
 import { SuccessSVG } from 'assets/icons';
 
 @Component({
@@ -17,6 +18,8 @@ export class CheckoutSuccess implements OnInit {
   #cartStore = inject(CartStore);
   #orderStorage = inject(OrderStorage);
   #billingStorage = inject(BillingStorage);
+  #userStorage = inject(UserStorage);
+  user = this.#userStorage.getUser();
 
   ngOnInit() {
     const billing = this.#billingStorage.getBillingInfo();
@@ -30,6 +33,7 @@ export class CheckoutSuccess implements OnInit {
       total,
       status: 'paid',
       createdAt: new Date(),
+      userId: this.user!.userId,
     };
 
     this.#orderStorage.saveOrder(order);
