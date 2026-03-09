@@ -16,7 +16,7 @@ import { formatCreatedDate } from '@utils/date';
 })
 export class Orders {
   #orderStorage = inject(OrderStorage);
-  orders = this.#orderStorage.getOrders();
+  orders = this.#orderStorage.getOrdersByUserId();
   pageNumber = signal<number>(1);
   pageSize = signal<number>(10);
 
