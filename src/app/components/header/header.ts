@@ -35,6 +35,10 @@ export class HeaderComponent {
   readonly totalItems = this.cartStore.totalItems;
   readonly navLinks = HEADER_NAV_LINKS;
 
+  get user() {
+    return this.userStorage.getUser();
+  }
+
   @HostListener('document:keydown.escape')
   onEscape(): void {
     this.closeMenus();
