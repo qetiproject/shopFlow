@@ -12,7 +12,7 @@ export const InitialRedirectGuard: CanActivateFn = () => {
     filter((v) => v !== null && v !== undefined),
     take(1),
     map((isLoggedIn) => {
-      return router.parseUrl(isLoggedIn ? 'product/list' : 'login');
+      return router.parseUrl(isLoggedIn ? '/product/list' : '/login');
     }),
   );
 };
