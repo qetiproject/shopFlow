@@ -1,5 +1,5 @@
 import { CartProduct } from '@cart-module/types/cart.model';
-import { BillingDetails } from '@checkout-module/types/billingDetails';
+import { BillingDetails } from './billingDetails';
 
 export interface Order {
   id: string;
@@ -8,6 +8,7 @@ export interface Order {
   total: number;
   status: string;
   createdAt: Date;
+  userId: number;
 }
 
 export interface OrderList {

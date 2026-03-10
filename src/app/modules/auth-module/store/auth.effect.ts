@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as AuthActions from '@auth-module/store/auth.actions';
+import { MessageSeverity } from '@app-types/message';
 import { AuthFacade } from '@auth-module/services/auth.facade';
-import { LoginStoreResponse } from '@auth-module/store/auth.store';
 import { TokenService } from '@auth-module/services/token.service';
 import { UserStorage } from '@auth-module/services/user.storage';
-import { MessagesService } from '@core/services/messages.service';
+import * as AuthActions from '@auth-module/store/auth.actions';
 import { toErrorMessage } from '@core/http/http-utils';
+import { MessagesService } from '@core/services/messages.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MessageSeverity } from '@types';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { LoginStoreResponse } from './auth.store';
 
 @Injectable()
 export class AuthEffects {
@@ -38,7 +38,9 @@ export class AuthEffects {
               });
               return AuthActions.registerUserSuccess({ data: response });
             }),
-            catchError((error) => of(AuthActions.registerUserFailure({ error: toErrorMessage(error) }))),
+            catchError((error) =>
+              of(AuthActions.registerUserFailure({ error: toErrorMessage(error) })),
+            ),
           ),
       ),
     ),

@@ -8,14 +8,14 @@ import { BackButtonSVG } from 'assets/icons';
   selector: 'app-back-button',
   standalone: true,
   imports: [BackButtonDirective, BackButtonSVG],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="pt-4 pl-4 mb-4">
-      <button (click)="goBack()" appBackBtnClass aria-label="Go back">
+      <button (click)="goBack()" appBackBtnClass>
         <app-back-button-svg />
       </button>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackButtonComponent {
   private location = inject(Location);

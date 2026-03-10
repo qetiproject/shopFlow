@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { INPUT_TYPES, InputType } from '@types';
+import { INPUT_TYPES, InputType } from '@app-types/input';
 import { EyeSVG, NotEyeSVG } from 'assets/icons';
 
 @Component({

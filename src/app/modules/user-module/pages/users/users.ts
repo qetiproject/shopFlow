@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { UserList } from '@user-module/components/user-list/user-list';
-import { Search } from '@features/search/search';
+import { Search } from 'app/features/search/search';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -11,9 +14,12 @@ import { Search } from '@features/search/search';
 })
 export class Users {
   placeholder = 'Search User';
-  search = signal('');
+
+  search$ = new BehaviorSubject<string>('');
+
+  search = toSignal(this.search$);
 
   onSearch(value: string): void {
-    this.search.set(value);
+    this.search$.next(value);
   }
 }

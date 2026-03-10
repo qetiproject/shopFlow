@@ -22,6 +22,8 @@
             "outputPath": "dist/shopFlow",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "server": "src/server.ts",
+            "ssr": { "entry": "src/server.ts" },
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "css",
@@ -59,7 +61,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "ssr": false
             },
             "analyze": {
               "fileReplacements": [

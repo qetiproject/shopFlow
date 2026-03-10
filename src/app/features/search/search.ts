@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, Output, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@custom-form/index';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
@@ -14,21 +13,12 @@ export class Search {
   search = new FormControl<string>('', { nonNullable: true });
 
   readonly placeholder = input<string>('Search');
-  readonly valueChange = output<string>();
 
-  private readonly searchValue = toSignal(
-    this.search.valueChanges.pipe(
-      startWith(''),
-      map((v) => v.toLowerCase()),
-      debounceTime(300),
-      distinctUntilChanged(),
-    ),
-    { initialValue: '' },
+  @Output()
+  readonly value$ = this.search.valueChanges.pipe(
+    startWith(''),
+    map((v) => v.toLowerCase()),
+    debounceTime(300),
+    distinctUntilChanged(),
   );
-
-  constructor() {
-    effect(() => {
-      this.valueChange.emit(this.searchValue());
-    });
-  }
 }

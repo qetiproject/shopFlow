@@ -23,9 +23,6 @@ export interface SelectOption<T = unknown> {
   ],
 })
 export class SelectComponent<T = unknown> implements ControlValueAccessor {
-  private static nextId = 0;
-  readonly selectId = `select-${SelectComponent.nextId++}`;
-
   options = input<SelectOption<T>[]>([]);
   label = input<string>('');
 

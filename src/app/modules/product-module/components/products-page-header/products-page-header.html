@@ -1,7 +1,7 @@
 <div class="flex flex-col lg:flex-row justify-between w-full mb-5">
   <div class="flex flex-wrap lg:flex-nowrap gap-4">
     <div class="w-full sm:w-auto">
-      <app-search (valueChange)="onSearch($event)" [placeholder]="placeholder" class="" />
+      <app-search (value$)="onSearch($event)" [placeholder]="placeholder" class="" />
     </div>
     <div class="w-full sm:w-auto">
       <app-category-list (categorySelected)="onCategorySelected($event)" />
@@ -13,8 +13,10 @@
 
   <div class="mt-4 lg:mt-0">
     <button
+      type="button"
       (click)="onAddProduct()"
-      class="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 transition w-full sm:w-auto flex-shrink-0"
+      aria-label="Add product"
+      class="flex items-center justify-center px-4 py-2 bg-blue-400 text-white rounded-lg shadow hover:bg-blue-300 transition w-full sm:w-auto flex-shrink-0"
     >
       <app-plus-svg class="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
       Add Product

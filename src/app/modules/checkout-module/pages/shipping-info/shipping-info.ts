@@ -1,12 +1,11 @@
-
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { CheckoutFacade } from '@checkout-module/services/billing.facade';
+import { INPUT_TYPES } from '@app-types/input';
+import { CheckoutFacade } from '@checkout-module/services/checkout.facade';
 import { createBillingForm, createBillingModel } from '@checkout-module/utils/billing-form';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
 import { FieldInput } from '@features/custom-form/custom-signal-form/field-input';
-import { INPUT_TYPES } from '@types';
 
 @Component({
   selector: 'app-shipping-info',

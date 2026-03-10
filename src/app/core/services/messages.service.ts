@@ -1,26 +1,25 @@
 import { Injectable, signal } from '@angular/core';
-import { Message } from '@types';
+import { Message } from '@app-types/message';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessagesService {
+  #messagesSignal = signal<Message | null>(null);
 
- #messagesSignal = signal<Message | null>(null);
-
- message = this.#messagesSignal.asReadonly();
+  message = this.#messagesSignal.asReadonly();
 
   showMessage(message: Message): void {
     const duration = message.duration ?? 3000;
-      this.#messagesSignal.set({
-        text: message.text,
-        severity: message.severity,
-        position: message.position
-      })
+    this.#messagesSignal.set({
+      text: message.text,
+      severity: message.severity,
+      position: message.position,
+    });
 
-      setTimeout(() => {
-        this.clear();
-      }, duration);
+    setTimeout(() => {
+      this.clear();
+    }, duration);
   }
 
   clear(): void {

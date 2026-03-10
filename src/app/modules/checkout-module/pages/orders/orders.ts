@@ -1,19 +1,11 @@
 import { CurrencyPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-  TemplateRef,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
+import { TableColumn } from '@app-types/table';
 import { OrderStorage } from '@checkout-module/services/orders.storage';
 import { Order } from '@checkout-module/types/order';
 import { Paging } from '@components/paging/paging';
 import { Table } from '@features/table/table';
-import { TableColumn } from '@types';
-import { formatCreatedDate } from '@utils';
+import { formatCreatedDate } from '@utils/date';
 
 @Component({
   selector: 'app-orders',
@@ -24,7 +16,7 @@ import { formatCreatedDate } from '@utils';
 })
 export class Orders {
   #orderStorage = inject(OrderStorage);
-  orders = this.#orderStorage.getOrders();
+  orders = this.#orderStorage.getOrdersByUserId();
   pageNumber = signal<number>(1);
   pageSize = signal<number>(10);
 

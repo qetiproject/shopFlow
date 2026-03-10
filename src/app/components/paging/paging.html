@@ -1,5 +1,6 @@
 <div class="flex items-center justify-center gap-2 mt-4">
   <button
+    type="button"
     class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
     [disabled]="currentPage() <= 1"
     (click)="prevPage()"
@@ -10,17 +11,21 @@
 
   @for (page of visiblePages(); track page) {
     <button
+      type="button"
       class="px-3 py-1 rounded"
       [class.bg-blue-500]="page === currentPage()"
       [class.text-white]="page === currentPage()"
       [class.bg-gray-200]="page !== currentPage()"
       (click)="goToPage(page)"
-      >
+      [attr.aria-label]="'Page ' + page"
+      [attr.aria-current]="page === currentPage() ? 'page' : null"
+    >
       {{ page }}
     </button>
   }
 
   <button
+    type="button"
     class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
     [disabled]="currentPage() >= maxPage()"
     (click)="nextPage()"

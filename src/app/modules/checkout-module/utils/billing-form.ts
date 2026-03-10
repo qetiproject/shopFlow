@@ -2,7 +2,7 @@
 import { signal } from '@angular/core';
 import { apply, form } from '@angular/forms/signals';
 import { BillingForm } from '@checkout-module/types/billing-form';
-import { createNameSchema } from '@features/custom-form/custom-signal-form/custom-error-message';
+import { createNameSchema, createZipSchema } from '@features/custom-form/custom-signal-form/custom-error-message';
 
 export const createBillingModel = () =>
   signal<BillingForm>({
@@ -19,5 +19,5 @@ export const createBillingForm = (model: ReturnType<typeof createBillingModel>) 
     apply(path.lastName, createNameSchema('Last Name'));
     apply(path.address, createNameSchema('Address'));
     apply(path.city, createNameSchema('City'));
-    apply(path.zip, createNameSchema('Zip Code'));
+    apply(path.zip, createZipSchema());
   });

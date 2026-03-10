@@ -45,6 +45,7 @@
         <button
           type="button"
           (click)="onCancel()"
+          aria-label="Cancel adding product"
           class="flex-1 md:flex-none bg-gray-200 text-gray-700 px-4 py-2 text-sm font-medium rounded-lg transition shadow hover:bg-gray-300"
         >
           Cancel
@@ -52,6 +53,7 @@
 
         <button
           type="submit"
+          aria-label="Save product"
           [class]="{
             'bg-blue-600 hover:bg-blue-700 text-white': form.valid,
             'bg-gray-200 text-gray-500 cursor-not-allowed opacity-70': form.invalid,

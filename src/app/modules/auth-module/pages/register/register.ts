@@ -1,13 +1,17 @@
-
 import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
-import { FormGroupDirective, FormsModule, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroupDirective,
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { INPUT_TYPES } from '@app-types/input';
 import * as AuthActions from '@auth-module/store/auth.actions';
 import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
 import { registerForm } from '@auth-module/utils/register.form';
 import { Store } from '@ngrx/store';
-import { INPUT_TYPES } from '@types';
-import { InputComponent } from '@features/custom-form/input/input';
+import { InputComponent } from 'app/features/custom-form/input/input';
 
 @Component({
   selector: 'app-register',
@@ -21,16 +25,15 @@ export class Register {
   #store = inject(Store);
 
   private readonly formDir = viewChild.required(FormGroupDirective);
-  INPUT_TYPES = INPUT_TYPES
+  INPUT_TYPES = INPUT_TYPES;
 
   form = registerForm(this.#fb);
 
   onSubmit(): void {
     const credentials: CreateUserRequest = this.form.getRawValue() as CreateUserRequest;
 
-    this.#store.dispatch(AuthActions.registerUser({ payload: credentials}));
-    
+    this.#store.dispatch(AuthActions.registerUser({ payload: credentials }));
+
     this.formDir().resetForm(this.form.value);
   }
-
 }

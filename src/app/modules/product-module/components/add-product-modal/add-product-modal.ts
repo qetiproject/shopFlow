@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { INPUT_TYPES } from '@app-types/input';
+import { MessageSeverity } from '@app-types/message';
 import { SelectComponent } from '@components/select/select';
 import { MessagesService } from '@core/services/messages.service';
 import { InputComponent } from '@features/custom-form/input/input';
@@ -10,7 +12,6 @@ import { FileUploadComponent } from '@features/upload-file/upload-file.component
 import { ProductFacade } from '@product-module/services/product.facade';
 import { AddProductModel } from '@product-module/types/product';
 import { AddProductForm } from '@product-module/utils/add-product-form';
-import { INPUT_TYPES, MessageSeverity } from '@types';
 
 @Component({
   selector: 'app-add-product-modal',

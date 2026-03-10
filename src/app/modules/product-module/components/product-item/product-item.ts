@@ -1,13 +1,13 @@
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { MessageSeverity } from '@app-types/message';
 import { CartFacade } from '@cart-module/services/cart.facade';
 import { CartStore } from '@cart-module/store/cart.store';
 import { MessagesService } from '@core/services/messages.service';
-import { ConfirmModalService } from '@product-module/features/confirm-modal/confirm-modal.service';
+import { ConfirmModalService } from '@features/confirm-modal/confirm-modal.service';
 import { ProductFacade } from '@product-module/services/product.facade';
 import { ProductViewModel } from '@product-module/types/product';
-import { MessageSeverity } from '@types';
 import { CartIcon, RemoveSVG } from 'assets/icons';
 
 @Component({

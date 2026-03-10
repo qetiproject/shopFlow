@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { ProductApi } from '@product-module/services/product.api';
 import {
   AddProductModel,
   Product,
@@ -9,6 +8,7 @@ import {
   ResponseProductDelete,
 } from '@product-module/types/product';
 import { Category } from '@product-module/types/category';
+import { ProductApi } from '@product-module/services/product.api';
 import { BehaviorSubject, map, Observable, of, take, tap } from 'rxjs';
 
 @Injectable({

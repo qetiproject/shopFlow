@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { CartStore } from '@cart-module/store/cart.store';
 import { AddToCartRequest } from '@cart-module/types/cart.request';
 import { Cartable } from '@cart-module/types/cart.model';
+import { CartStore } from '@cart-module/store/cart.store';
 
 @Injectable({ providedIn: 'root' })
 export class CartFacade {
