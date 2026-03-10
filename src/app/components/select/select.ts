@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ArrowDownSVG } from 'assets/icons';
 
-export interface SelectOption<T = unknown> {
+export interface SelectOption<T extends string | number = string> {
   label: string;
   value: T;
   url?: string;
@@ -22,9 +22,14 @@ export interface SelectOption<T = unknown> {
     },
   ],
 })
-export class SelectComponent<T = unknown> implements ControlValueAccessor {
+export class SelectComponent<T extends string | number = string> implements ControlValueAccessor {
   options = input<SelectOption<T>[]>([]);
   label = input<string>('');
+  placeholder = input<string | null>(null);
+  id = input<string>('');
+
+  private static nextId = 0;
+  readonly uid = `app-select-${++SelectComponent.nextId}`;
 
   value = signal<T | null>(null);
   disabled = false;
@@ -50,9 +55,13 @@ export class SelectComponent<T = unknown> implements ControlValueAccessor {
 
   selectOption(event: Event) {
     const selectEl = event.target as HTMLSelectElement;
-    const val = selectEl.value as T | null;
-    this.value.set(val);
-    this.onChange(this.value());
+    const raw = selectEl.value;
+
+    const option = this.options().find((o) => String(o.value) === raw) ?? null;
+    const nextValue = (option ? option.value : null) as T | null;
+
+    this.value.set(nextValue);
+    this.onChange(nextValue);
     this.onTouched();
   }
 }
