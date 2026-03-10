@@ -9,7 +9,7 @@ import { resetPasswordForm } from '@auth-module/utils/reset-password.form';
 import { MessagesService } from '@core/services/messages.service';
 import { InputComponent } from '@features/custom-form/input/input';
 import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -38,7 +38,9 @@ export class ResetPassword {
     this.#authFacade
       .resetPassword(this.form.getRawValue())
       .pipe(
+        catchError(() => of(null)),
         tap((response) => {
+          if (response == null) return;
           this.#messages.showMessage({
             text: response,
             severity: MessageSeverity.Success,

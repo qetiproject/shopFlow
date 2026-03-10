@@ -8,7 +8,7 @@ import { AuthFacade } from '@auth-module/services/auth.facade';
 import { MessagesService } from '@core/services/messages.service';
 import { InputComponent } from '@features/custom-form/input/input';
 import { DynamicValidatorMessage } from '@features/custom-form/validators/dynamic-validator-message.directive';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-send-reset-otp',
@@ -36,7 +36,9 @@ export class SendResetOtp {
     this.#authFacade
       .sendPasswordResetOtp(this.email.value as string)
       .pipe(
+        catchError(() => of(null)),
         tap((response) => {
+          if (!response) return;
           this.#messages.showMessage({
             text: response.message,
             severity: MessageSeverity.Success,
