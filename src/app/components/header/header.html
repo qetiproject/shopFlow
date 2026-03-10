@@ -69,6 +69,7 @@
               class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 animate-fadeIn"
               role="menu"
             >
+              @let user = userStorage.getUser();
               <button
                 [routerLink]="['/checkout/orders']"
                 routerLinkActive="text-blue-600 font-semibold"
@@ -78,7 +79,7 @@
                 My Orders
               </button>
               <button
-                [routerLink]="['/users/profile', email]"
+                [routerLink]="['/users/profile', user?.emailId]"
                 routerLinkActive="text-blue-600 font-semibold"
                 (click)="toggleDropdown()"
                 class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
@@ -115,6 +116,7 @@
   @if (isMobileMenu()) {
     <div class="md:hidden bg-white border-t animate-slideDown">
       <nav class="px-2 pt-2 pb-3 space-y-1">
+            @let user = userStorage.getUser();
         @for (link of navLinks; track link.path) {
           <a
             [routerLink]="link.path"
@@ -128,7 +130,7 @@
         }
         <div class="border-t mt-2 pt-2">
           <button
-            [routerLink]="['/users/profile', email]"
+            [routerLink]="['/users/profile', user?.emailId]"
             routerLinkActive="text-blue-600 font-semibold"
             (click)="toggleMobileMenu()"
             class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
