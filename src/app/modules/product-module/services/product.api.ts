@@ -42,9 +42,17 @@ export class ProductApi {
     return this.#http.get<Category[]>(`${environment.product}/categories`);
   }
 
-  productsByCategory(category: string, limit: number, skip: number) {
+  productsByCategory(
+    category: string,
+    limit: number,
+    skip: number,
+  ): Observable<ProductsApiResponse<ProductApiShape>> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('skip', skip.toString());
     return this.#http.get<ProductsApiResponse<ProductApiShape>>(
-      `${environment.product}/category/${category}?limit=${limit}&skip=${skip}`,
+      `${environment.product}/category/${category}`,
+      { params },
     );
   }
 
@@ -54,9 +62,12 @@ export class ProductApi {
     limit: number,
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
-    return this.#http.get<ProductsApiResponse<Product>>(
-      `${environment.product}?sortBy=${sortBy}&order=${orderBy}&limit=${limit}&skip=${skip}`,
-    );
+    const params = new HttpParams()
+      .set('sortBy', sortBy)
+      .set('order', orderBy)
+      .set('limit', limit.toString())
+      .set('skip', skip.toString());
+    return this.#http.get<ProductsApiResponse<Product>>(`${environment.product}`, { params });
   }
 
   addProduct(product: AddProductModel): Observable<AddProductModel> {

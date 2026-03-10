@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Paging } from '@components/paging/paging';
 import { ProductFacade } from '@product-module/services/product.facade';
 import { ProductItem } from '@product-module/components/product-item/product-item';
-import { ProductlistFacade } from '@product-module/services/facades/product-list.facade';
+import { ProductListFacade } from '@product-module/services/facades/product-list.facade';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +14,7 @@ import { ProductlistFacade } from '@product-module/services/facades/product-list
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductList {
-  #productListFacade = inject(ProductlistFacade);
+  #productListFacade = inject(ProductListFacade);
   productFacade = inject(ProductFacade);
 
   limit = this.#productListFacade.limit;
