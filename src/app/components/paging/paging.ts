@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 @Component({
@@ -9,23 +8,21 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Paging {
-  totalItems = input.required<number>();
-  currentPage = input.required<number>();
-  pageSize = input<number>(10);
-  windowSize = input<number>(5);
-  prevLabel = input<string>('Prev');
-  nextLabel = input<string>('Next');
-  pageNumber = output<number>();
+  readonly totalItems = input.required<number>();
+  readonly currentPage = input.required<number>();
+  readonly pageSize = input<number>(10);
+  readonly windowSize = input<number>(5);
+  readonly prevLabel = input<string>('Prev');
+  readonly nextLabel = input<string>('Next');
+  readonly pageNumber = output<number>();
 
-  /** Total number of pages (0 when there are no items). */
-  maxPage = computed(() => {
+  readonly maxPage = computed(() => {
     const size = Math.max(1, this.pageSize() || 1);
     const total = Math.max(0, this.totalItems() || 0);
     return total === 0 ? 0 : Math.ceil(total / size);
   });
 
-  /** Windowed page numbers to display. */
-  visiblePages = computed(() => {
+  readonly visiblePages = computed(() => {
     const max = this.maxPage();
     if (max === 0) return [];
 
@@ -50,7 +47,7 @@ export class Paging {
     }
   }
 
-  goToPage(page: number) {
+  goToPage(page: number): void {
     const max = this.maxPage();
     if (max === 0) return;
 

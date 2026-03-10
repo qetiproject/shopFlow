@@ -23,16 +23,20 @@ export interface SelectOption<T extends string | number = string> {
   ],
 })
 export class SelectComponent<T extends string | number = string> implements ControlValueAccessor {
-  options = input<SelectOption<T>[]>([]);
-  label = input<string>('');
-  placeholder = input<string | null>(null);
-  id = input<string>('');
+  readonly options = input<SelectOption<T>[]>([]);
+  readonly label = input<string>('');
+  readonly placeholder = input<string | null>(null);
+  readonly id = input<string>('');
 
   private static nextId = 0;
   readonly uid = `app-select-${++SelectComponent.nextId}`;
 
-  value = signal<T | null>(null);
-  disabled = false;
+  readonly value = signal<T | null>(null);
+  private _disabled = false;
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
 
   private onChange: (_: T | null) => void = (() => void 0) as (_: T | null) => void;
   private onTouched: () => void = () => void 0;
@@ -50,10 +54,10 @@ export class SelectComponent<T extends string | number = string> implements Cont
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this._disabled = isDisabled;
   }
 
-  selectOption(event: Event) {
+  selectOption(event: Event): void {
     const selectEl = event.target as HTMLSelectElement;
     const raw = selectEl.value;
 
