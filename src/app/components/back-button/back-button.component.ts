@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackButtonDirective } from '@features/directives/back-button.directive';
 import { BackButtonSVG } from 'assets/icons';
@@ -10,7 +10,7 @@ import { BackButtonSVG } from 'assets/icons';
   imports: [BackButtonDirective, BackButtonSVG],
   template: `
     <div class="pt-4 pl-4 mb-4">
-      <button (click)="goBack()" appBackBtnClass>
+      <button type="button" (click)="goBack()" appBackBtnClass aria-label="Go back">
         <app-back-button-svg />
       </button>
     </div>
@@ -18,14 +18,17 @@ import { BackButtonSVG } from 'assets/icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackButtonComponent {
-  private location = inject(Location);
-  private router = inject(Router);
+  private readonly location = inject(Location);
+  private readonly router = inject(Router);
 
-  goBack() {
-    if (window.history.length > 1) {
+  readonly fallbackUrl = input<string | string[]>('/product/list');
+
+  goBack(): void {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
       this.location.back();
     } else {
-      this.router.navigate(['product/list']);
+      const url = this.fallbackUrl();
+      this.router.navigate(Array.isArray(url) ? url : [url]);
     }
   }
 }
