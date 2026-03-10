@@ -1,4 +1,4 @@
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md" appClickoutside (appClickOutside)="closeMenus()">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <a
@@ -73,7 +73,7 @@
               <button
                 [routerLink]="['/checkout/orders']"
                 routerLinkActive="text-blue-600 font-semibold"
-                (click)="toggleDropdown()"
+                (click)="closeMenus()"
                 class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 My Orders
@@ -81,7 +81,7 @@
               <button
                 [routerLink]="['/users/profile', user?.emailId]"
                 routerLinkActive="text-blue-600 font-semibold"
-                (click)="toggleDropdown()"
+                (click)="closeMenus()"
                 class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 Profile
@@ -120,7 +120,7 @@
         @for (link of navLinks; track link.path) {
           <a
             [routerLink]="link.path"
-            (click)="toggleMobileMenu()"
+            (click)="closeMenus()"
             routerLinkActive="bg-blue-100 text-blue-700"
             [routerLinkActiveOptions]="{ exact: true }"
             class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors"
@@ -132,7 +132,7 @@
           <button
             [routerLink]="['/users/profile', user?.emailId]"
             routerLinkActive="text-blue-600 font-semibold"
-            (click)="toggleMobileMenu()"
+            (click)="closeMenus()"
             class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Profile
