@@ -59,6 +59,6 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
     })
   }
   ngOnDestroy() {
-    this.errorMessageTrigger.unsubscribe();
+    this.errorMessageTrigger?.unsubscribe();
   }
 }
