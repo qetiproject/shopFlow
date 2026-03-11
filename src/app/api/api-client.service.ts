@@ -1,13 +1,32 @@
-import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpContext,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env';
-import { Observable } from 'rxjs';
+import { concatMap, Observable, retryWhen, throwError, timeout, TimeoutError, timer } from 'rxjs';
+
+const DEFAULT_TIMEOUT_MS = 15_000;
+const RETRY_COUNT = 2;
+const RETRY_DELAY_MS = 500;
+
+function isRetriableError(error: unknown): boolean {
+  if (error instanceof TimeoutError) return true;
+  if (error instanceof HttpErrorResponse) {
+    return error.status === 0 || error.status >= 500;
+  }
+  return false;
+}
 
 export interface ApiRequestOptions {
   params?: HttpParams | Record<string, string | number | boolean>;
   headers?: HttpHeaders | Record<string, string>;
   context?: HttpContext;
   responseType?: 'json' | 'text' | 'blob' | 'arraybuffer';
+  timeoutMs?: number;
 }
 
 /** Options we pass to HttpClient (observe: 'body'). Cast at call site to satisfy overload union. */
@@ -18,7 +37,6 @@ type HttpClientOptionsBody = any;
 export class ApiClient {
   readonly #http = inject(HttpClient);
 
-  /** Base URLs from environment — use for consistent access in tests/mocks */
   get baseUrls(): Readonly<{
     userApp: string;
     product: string;
@@ -35,9 +53,18 @@ export class ApiClient {
 
   get<T>(baseUrl: string, path: string, options?: ApiRequestOptions): Observable<T> {
     const url = this.buildUrl(baseUrl, path);
-    return this.#http.get<T>(
-      url,
-      this.buildHttpOptions(options) as HttpClientOptionsBody,
+    const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+    return this.#http.get<T>(url, this.buildHttpOptions(options) as HttpClientOptionsBody).pipe(
+      timeout(timeoutMs),
+      retryWhen((errors) =>
+        errors.pipe(
+          concatMap((err, index) =>
+            index < RETRY_COUNT && isRetriableError(err)
+              ? timer(RETRY_DELAY_MS * Math.pow(2, index))
+              : throwError(() => err),
+          ),
+        ),
+      ),
     ) as Observable<T>;
   }
 
@@ -48,20 +75,18 @@ export class ApiClient {
     options?: ApiRequestOptions,
   ): Observable<T> {
     const url = this.buildUrl(baseUrl, path);
-    return this.#http.post<T>(
-      url,
-      body,
-      this.buildHttpOptions(options) as HttpClientOptionsBody,
-    ) as Observable<T>;
+    const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+    return this.#http
+      .post<T>(url, body, this.buildHttpOptions(options) as HttpClientOptionsBody)
+      .pipe(timeout(timeoutMs)) as Observable<T>;
   }
 
   put<T>(baseUrl: string, path: string, body: unknown, options?: ApiRequestOptions): Observable<T> {
     const url = this.buildUrl(baseUrl, path);
-    return this.#http.put<T>(
-      url,
-      body,
-      this.buildHttpOptions(options) as HttpClientOptionsBody,
-    ) as Observable<T>;
+    const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+    return this.#http
+      .put<T>(url, body, this.buildHttpOptions(options) as HttpClientOptionsBody)
+      .pipe(timeout(timeoutMs)) as Observable<T>;
   }
 
   patch<T>(
@@ -71,19 +96,18 @@ export class ApiClient {
     options?: ApiRequestOptions,
   ): Observable<T> {
     const url = this.buildUrl(baseUrl, path);
-    return this.#http.patch<T>(
-      url,
-      body,
-      this.buildHttpOptions(options) as HttpClientOptionsBody,
-    ) as Observable<T>;
+    const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+    return this.#http
+      .patch<T>(url, body, this.buildHttpOptions(options) as HttpClientOptionsBody)
+      .pipe(timeout(timeoutMs)) as Observable<T>;
   }
 
   delete<T>(baseUrl: string, path: string, options?: ApiRequestOptions): Observable<T> {
     const url = this.buildUrl(baseUrl, path);
-    return this.#http.delete<T>(
-      url,
-      this.buildHttpOptions(options) as HttpClientOptionsBody,
-    ) as Observable<T>;
+    const timeoutMs = options?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+    return this.#http
+      .delete<T>(url, this.buildHttpOptions(options) as HttpClientOptionsBody)
+      .pipe(timeout(timeoutMs)) as Observable<T>;
   }
 
   private buildHttpOptions(options?: ApiRequestOptions): HttpClientOptionsBody {
