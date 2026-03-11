@@ -1,6 +1,6 @@
-import { IUser } from '@user-module/types/user.api.model';
+import type { UserResponse } from '@app-types/dto';
 
-export type UserViewModel = Omit<IUser, 'password' | 'refreshToken' | 'refreshTokenExpiryTime'>;
+export type UserViewModel = Omit<UserResponse, 'password' | 'refreshToken' | 'refreshTokenExpiryTime'>;
 
 export interface UsersViewModel {
   totalRecords: number;

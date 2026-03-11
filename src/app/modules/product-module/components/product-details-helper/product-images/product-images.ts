@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, input, signal } from '@angular/core';
-import { Product } from '@product-module/types/product';
+import { Product } from '@app-types/dto';
 
 @Component({
   selector: 'app-product-images',

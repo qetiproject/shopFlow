@@ -8,7 +8,7 @@ import { MessagesService } from '@core/services/messages.service';
 import { ProductImages } from '@product-module/components/product-details-helper/product-images/product-images';
 import { ProductInfo } from '@product-module/components/product-details-helper/product-info/product-info';
 import { ProductReviews } from '@product-module/components/product-details-helper/product-reviews/product-reviews';
-import { Product } from '@product-module/types/product';
+import { Product } from '@app-types/dto';
 import { map } from 'rxjs';
 
 @Component({
