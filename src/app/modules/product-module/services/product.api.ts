@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiClient, Endpoints } from '@api';
-import {
+import type {
   AddProductModel,
+  Category,
   Product,
   ProductApiShape,
   ProductsApiResponse,
   ResponseProductDelete,
-} from '@product-module/types/product';
-import { Category } from '@product-module/types/category';
+} from '@app-types/dto';
 import { Observable } from 'rxjs';
 
 @Injectable({

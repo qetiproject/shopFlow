@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiClient, Endpoints } from '@api';
-import { IUsers } from '@user-module/types/user.api.model';
+import type { IUsers } from '@app-types/dto';
 import { Observable } from 'rxjs';
 
 @Injectable({

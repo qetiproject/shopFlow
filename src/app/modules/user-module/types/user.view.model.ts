@@ -1,4 +1,4 @@
-import { IUser } from '@user-module/types/user.api.model';
+import type { IUser } from '@app-types/dto';
 
 export type UserViewModel = Omit<IUser, 'password' | 'refreshToken' | 'refreshTokenExpiryTime'>;
 

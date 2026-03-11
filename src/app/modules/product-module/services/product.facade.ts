@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import {
+import type {
   AddProductModel,
+  Category,
   Product,
   ProductApiShape,
   ProductsApiResponse,
-  ProductViewModel,
   ResponseProductDelete,
-} from '@product-module/types/product';
-import { Category } from '@product-module/types/category';
+} from '@app-types/dto';
+import { ProductViewModel } from '@product-module/types/product';
 import { ProductApi } from '@product-module/services/product.api';
 import { BehaviorSubject, catchError, map, Observable, of, take, tap, throwError } from 'rxjs';
 

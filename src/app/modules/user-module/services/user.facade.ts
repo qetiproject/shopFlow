@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IUser } from '@user-module/types/user.api.model';
+import type { IUser } from '@app-types/dto';
 import { UserApiService } from '@user-module/services/user.api';
 import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
 import { map, Observable } from 'rxjs';

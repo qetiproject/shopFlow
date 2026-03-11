@@ -1,6 +1,8 @@
-import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
-import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
-import { LoginRequest } from '@auth-module/types/login/login.request';
+import type {
+  CreateUserRequest,
+  CreateUserResponse,
+  LoginRequest,
+} from '@app-types/dto';
 import { LoginStoreResponse } from '@auth-module/store/auth.store';
 import { createAction, props } from "@ngrx/store";
 

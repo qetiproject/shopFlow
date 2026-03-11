@@ -1,11 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiClient, Endpoints } from '@api';
-import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
-import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
-import { LoginRequest } from '@auth-module/types/login/login.request';
-import { LoginResponse } from '@auth-module/types/login/login.response';
-import { ResetPasswordRequest } from '@auth-module/types/reset-password.request';
+import type {
+  CreateUserRequest,
+  CreateUserResponse,
+  LoginRequest,
+  LoginResponse,
+  ResetPasswordRequest,
+} from '@app-types/dto';
 import { TokenService } from '@auth-module/services/token.service';
 import { Observable } from 'rxjs';
 
