@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BillingDetails } from '@checkout-module/types/billingDetails';
+import type { BillingDetails } from '@app-types/dto';
 import { STORAGE_KEYS } from '@core/constants';
 
 @Injectable({

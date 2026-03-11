@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartProduct } from '@cart-module/types/cart.model';
+import type { CartProduct } from '@app-types/dto';
 
 @Component({
   selector: 'app-cart-product-item',

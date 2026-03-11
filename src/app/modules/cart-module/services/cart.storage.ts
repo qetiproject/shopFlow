@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UserStorage } from '@auth-module/services';
-import { Cart, CartsByUserId } from '@cart-module/types/cart.model';
+import type { Cart, CartsByUserId } from '@app-types/dto';
 import { STORAGE_KEYS } from '@core/constants';
 
 @Injectable({

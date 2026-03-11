@@ -64,7 +64,7 @@ export enum ProductMode {
   ORDER = 'order',
 }
 
-export interface AddProductModel {
+export interface AddProductRequest {
   title: string;
   description: string;
   category: string;
@@ -78,7 +78,7 @@ export interface AddProductModel {
   updatedAt?: Date;
 }
 
-export interface ResponseProductDelete extends Product {
+export interface ProductDeleteResponse extends Product {
   isDeleted: boolean;
   deletedOn: Date;
 }

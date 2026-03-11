@@ -1,6 +1,6 @@
 
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Product, Review } from '@product-module/types/product';
+import { Product, Review } from '@app-types/dto';
 import { ProductActions } from '@product-module/components/product-details-helper/product-actions/product-actions';
 import { ProductHeader } from '@product-module/components/product-details-helper/product-header/product-header';
 import { ProductPrice } from '@product-module/components/product-details-helper/product-price/product-price';

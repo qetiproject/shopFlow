@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IUser } from '@user-module/types/user.api.model';
+import type { UserResponse } from '@app-types/dto';
 import { UserApiService } from '@user-module/services/user.api';
 import { UsersViewModel, UserViewModel } from '@user-module/types/user.view.model';
 import { map, Observable } from 'rxjs';
@@ -17,7 +17,7 @@ export class UserFacade {
   ): Observable<UsersViewModel> {
     return this.#userApi.searchUsers(searchText, pageNumber, pageSize).pipe(
       map((api) => ({
-        data: (api.data ?? []).map((user) => this.mapApiUserToView(user)),
+        data: (api.data ?? []).map((user) => this.toViewModel(user)),
         totalRecords: api.totalRecords,
         pageNumber: api.pageNumber,
         pageSize: api.pageSize,
@@ -30,11 +30,11 @@ export class UserFacade {
     return this.#userApi.userByEmail(email).pipe(
       map((api) => api.data ?? []),
       map((users) => users.find((user) => user.emailId === email)),
-      map((user) => (user ? this.mapApiUserToView(user) : null)),
+      map((user) => (user ? this.toViewModel(user) : null)),
     );
   }
 
-  private mapApiUserToView(user: IUser): UserViewModel {
+  private toViewModel(user: UserResponse): UserViewModel {
     return {
       userId: user.userId,
       userName: user.userName,

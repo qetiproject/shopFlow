@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
 import { TableColumn } from '@app-types/table';
 import { OrderStorage } from '@checkout-module/services/orders.storage';
-import { Order } from '@checkout-module/types/order';
+import { Order } from '@app-types/dto';
 import { Paging } from '@components/paging/paging';
 import { Table } from '@features/table/table';
 import { formatCreatedDate } from '@utils/date';
