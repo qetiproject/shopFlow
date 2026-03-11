@@ -68,6 +68,7 @@ export class AddProductModal {
         });
         this.router.navigate([{ outlets: { modal: null } }], { relativeTo: this.route.parent });
       },
+      error: () => {},
     });
   }
 

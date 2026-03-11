@@ -12,6 +12,5 @@ import { RemoveSVG } from 'assets/icons';
 })
 export class CartSummary {
   total = input.required<number>();
-  order = output<void>();
   clearList = output<void>();
 }

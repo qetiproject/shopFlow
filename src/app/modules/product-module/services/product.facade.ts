@@ -9,7 +9,7 @@ import {
 } from '@product-module/types/product';
 import { Category } from '@product-module/types/category';
 import { ProductApi } from '@product-module/services/product.api';
-import { BehaviorSubject, map, Observable, of, take, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, take, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,8 +34,11 @@ export class ProductFacade {
           ...result,
           products: result.products.map((p) => this.mapProductsApiToView(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
   loadProductsByCategory(category: string, limit: number, skip: number): void {
@@ -47,8 +50,11 @@ export class ProductFacade {
           ...result,
           products: result.products.map((p) => this.mapProductsApiToView(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
   loadProductsBySort(sortBy: string, orderBy: string, limit: number, skip: number): void {
@@ -60,8 +66,11 @@ export class ProductFacade {
           ...result,
           products: result.products.map((p) => this.mapProductsApiToView(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
   addProduct(product: AddProductModel): Observable<ProductViewModel> {
@@ -88,15 +97,20 @@ export class ProductFacade {
           total: current.total - 1,
         });
       }),
+      catchError((err) => throwError(() => err)),
     );
   }
 
   getProductDetails(id: number): Observable<Product | null> {
-    return this.#productApi.getProductDetails(id);
+    return this.#productApi.getProductDetails(id).pipe(
+      catchError(() => of(null)),
+    );
   }
 
   getProductCategories(): Observable<Category[]> {
-    return this.#productApi.productCategories();
+    return this.#productApi.productCategories().pipe(
+      catchError(() => of([])),
+    );
   }
 
   private mapProductsApiToView(product: ProductApiShape): ProductViewModel {

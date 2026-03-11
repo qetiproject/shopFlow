@@ -1,14 +1,14 @@
 import { computed, effect, inject, Injectable, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProductFacade } from '@product-module/services/product.facade';
 import { ProductHeaderFacade } from '@product-module/services/facades/product-header.facade';
-import { ProductMode } from '@product-module/types/product';
+import { ProductFacade } from '@product-module/services/product.facade';
 import { SortFacade } from '@product-module/services/sort.facade';
+import { ProductMode } from '@product-module/types/product';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductlistFacade {
+export class ProductListFacade {
   #productFacade = inject(ProductFacade);
   #sortFacade = inject(SortFacade);
   #productHeaderFacade = inject(ProductHeaderFacade);

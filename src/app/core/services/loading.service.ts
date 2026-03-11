@@ -1,18 +1,18 @@
 import { Injectable, signal } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoadingService {
-  #loadingSignal = signal<boolean>(false);
+  readonly #loadingSignal = signal<boolean>(false);
 
-  loading = this.#loadingSignal.asReadonly();
+  readonly loading = this.#loadingSignal.asReadonly();
 
-  loadingOn() {
+  loadingOn(): void {
     this.#loadingSignal.set(true);
   }
 
-  loadingOff() {
+  loadingOff(): void {
     this.#loadingSignal.set(false);
   }
 }

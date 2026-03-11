@@ -7,7 +7,7 @@ import { Message } from '@app-types/message';
 export class MessagesService {
   #messagesSignal = signal<Message | null>(null);
 
-  message = this.#messagesSignal.asReadonly();
+  readonly message = this.#messagesSignal.asReadonly();
 
   showMessage(message: Message): void {
     const duration = message.duration ?? 3000;
