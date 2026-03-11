@@ -20,6 +20,8 @@
     "useDefineForClassFields": false,
     "baseUrl": "src",
     "paths": {
+      "@api": ["app/api/index.ts"],
+      "@api/*": ["app/api/*"],
       "@components/*": ["app/components/*"],
       "@core/*": ["app/core/*"],
       "@features/*": ["app/features/*"],

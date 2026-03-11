@@ -1,6 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '@env';
+import { ApiClient, Endpoints } from '@api';
 import { IUsers } from '@user-module/types/user.api.model';
 import { Observable } from 'rxjs';
 
@@ -8,28 +7,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserApiService {
-  #http = inject(HttpClient);
+  readonly #api = inject(ApiClient);
+  readonly #baseUrl = this.#api.baseUrls.userApp;
 
   searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<IUsers> {
-    let params = new HttpParams();
-
-    if (searchText) {
-      params = params.set('searchText', searchText);
-    }
-
-    if (pageNumber !== undefined) {
-      params = params.set('pageNumber', pageNumber);
-    }
-
-    if (pageSize !== undefined) {
-      params = params.set('pageSize', pageSize);
-    }
-
-    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
+    const params: Record<string, string | number> = {};
+    if (searchText !== undefined) params['searchText'] = searchText;
+    if (pageNumber !== undefined) params['pageNumber'] = pageNumber;
+    if (pageSize !== undefined) params['pageSize'] = pageSize;
+    return this.#api.get<IUsers>(this.#baseUrl, Endpoints.user.searchUsers, {
+      params: Object.keys(params).length ? params : undefined,
+    });
   }
 
   userByEmail(searchText: string): Observable<IUsers> {
-    const params = new HttpParams().set('searchText', searchText);
-    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
+    return this.#api.get<IUsers>(this.#baseUrl, Endpoints.user.searchUsers, {
+      params: { searchText },
+    });
   }
 }

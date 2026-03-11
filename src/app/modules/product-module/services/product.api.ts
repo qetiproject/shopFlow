@@ -1,6 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '@env';
+import { ApiClient, Endpoints } from '@api';
 import {
   AddProductModel,
   Product,
@@ -15,31 +14,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductApi {
-  #http = inject(HttpClient);
+  readonly #api = inject(ApiClient);
+  readonly #baseUrl = this.#api.baseUrls.product;
 
   products(
     limit: number,
     skip: number,
     search?: string,
   ): Observable<ProductsApiResponse<ProductApiShape>> {
-    let params = new HttpParams();
-    if (search) {
-      params = params.set('q', search);
-    }
-    params = params.set('limit', limit.toString());
-    params = params.set('skip', skip.toString());
-
-    return this.#http.get<ProductsApiResponse<ProductApiShape>>(`${environment.product}/search`, {
-      params,
-    });
+    const params: Record<string, string | number> = { limit, skip };
+    if (search) params['q'] = search;
+    return this.#api.get<ProductsApiResponse<ProductApiShape>>(
+      this.#baseUrl,
+      Endpoints.product.search,
+      { params },
+    );
   }
 
   getProductDetails(id: number): Observable<Product | null> {
-    return this.#http.get<Product>(`${environment.product}/${id}`);
+    return this.#api.get<Product>(this.#baseUrl, Endpoints.product.byId(id));
   }
 
   productCategories(): Observable<Category[]> {
-    return this.#http.get<Category[]>(`${environment.product}/categories`);
+    return this.#api.get<Category[]>(this.#baseUrl, Endpoints.product.categories);
   }
 
   productsByCategory(
@@ -47,12 +44,10 @@ export class ProductApi {
     limit: number,
     skip: number,
   ): Observable<ProductsApiResponse<ProductApiShape>> {
-    const params = new HttpParams()
-      .set('limit', limit.toString())
-      .set('skip', skip.toString());
-    return this.#http.get<ProductsApiResponse<ProductApiShape>>(
-      `${environment.product}/category/${category}`,
-      { params },
+    return this.#api.get<ProductsApiResponse<ProductApiShape>>(
+      this.#baseUrl,
+      Endpoints.product.category(category),
+      { params: { limit, skip } },
     );
   }
 
@@ -62,19 +57,16 @@ export class ProductApi {
     limit: number,
     skip: number,
   ): Observable<ProductsApiResponse<Product>> {
-    const params = new HttpParams()
-      .set('sortBy', sortBy)
-      .set('order', orderBy)
-      .set('limit', limit.toString())
-      .set('skip', skip.toString());
-    return this.#http.get<ProductsApiResponse<Product>>(`${environment.product}`, { params });
+    return this.#api.get<ProductsApiResponse<Product>>(this.#baseUrl, Endpoints.product.root, {
+      params: { sortBy, order: orderBy, limit, skip },
+    });
   }
 
   addProduct(product: AddProductModel): Observable<AddProductModel> {
-    return this.#http.post<AddProductModel>(`${environment.product}/add`, product);
+    return this.#api.post<AddProductModel>(this.#baseUrl, Endpoints.product.add, product);
   }
 
   deleteProduct(id: number): Observable<ResponseProductDelete> {
-    return this.#http.delete<ResponseProductDelete>(`${environment.product}/${id}`);
+    return this.#api.delete<ResponseProductDelete>(this.#baseUrl, Endpoints.product.byId(id));
   }
 }

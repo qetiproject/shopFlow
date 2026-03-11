@@ -1,20 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
+import { ApiClient, Endpoints } from '@api';
 import { CartStore } from '@cart-module/store/cart.store';
-import { environment } from '@env';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutApi {
-  #http = inject(HttpClient);
-  #cartStore = inject(CartStore);
+  readonly #api = inject(ApiClient);
+  readonly #cartStore = inject(CartStore);
+  readonly #baseUrl = this.#api.baseUrls.api;
 
   readonly vm = computed(() => ({
     cart: this.#cartStore.cart(),
   }));
 
   checkout(): Observable<{ url: string }> {
-    return this.#http.post<{ url: string }>(`${environment.api}/checkout`, {
+    return this.#api.post<{ url: string }>(this.#baseUrl, Endpoints.checkout.create, {
       items: this.vm().cart,
     });
   }
