@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { MessageSeverity } from '@app-types/message';
-import { BillingDetails } from '@checkout-module/types/billingDetails';
+import type { BillingDetails } from '@app-types/dto';
 import { BillingForm } from '@checkout-module/types/billing-form';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { CheckoutApi } from '@checkout-module/services/checkout.api';

@@ -1,8 +1,8 @@
 export interface ProductsApiResponse<T> {
-  skip: number;
-  limit: number;
-  total: number;
-  products: T[];
+  readonly skip: number;
+  readonly limit: number;
+  readonly total: number;
+  readonly products: readonly T[];
 }
 
 export interface Product {
@@ -51,12 +51,12 @@ export interface Meta {
   qrCode: string;
 }
 
-export type ProductViewModel = ProductApiShape;
-
 export type ProductApiShape = Pick<
   Product,
   'id' | 'title' | 'description' | 'category' | 'price' | 'discountPercentage' | 'thumbnail'
 >;
+
+export type ProductViewModel = Readonly<ProductApiShape>;
 
 export enum ProductMode {
   SEARCH = 'search',
@@ -64,7 +64,7 @@ export enum ProductMode {
   ORDER = 'order',
 }
 
-export interface AddProductModel {
+export interface AddProductRequest {
   title: string;
   description: string;
   category: string;
@@ -78,7 +78,7 @@ export interface AddProductModel {
   updatedAt?: Date;
 }
 
-export interface ResponseProductDelete extends Product {
+export interface ProductDeleteResponse extends Product {
   isDeleted: boolean;
   deletedOn: Date;
 }

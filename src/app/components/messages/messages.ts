@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MessagesService } from '@core/services/messages.service';
 import { MessageDirective } from '@features/directives/message.directive';
@@ -26,13 +25,14 @@ import { MessageDirective } from '@features/directives/message.directive';
 
     .animate-slide-out {
       animation: slide-out 0.3s ease-in forwards;
-  }`
+    }
+  `,
 })
-export class Messages {
-  #messageService = inject(MessagesService);
-  message = this.#messageService.message;
-  
+export class MessagesComponent {
+  private readonly messageService = inject(MessagesService);
+  readonly message = this.messageService.message;
+
   onClose(): void {
-    this.#messageService.clear();
+    this.messageService.clear();
   }
 }

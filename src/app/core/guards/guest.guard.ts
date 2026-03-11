@@ -11,7 +11,7 @@ export const GuestGuard: CanActivateFn = (route, state): Observable<boolean | Ur
   return store.select(selectCheckAuth).pipe(
     take(1),
     map((isLoggedIn) => {
-      return isLoggedIn ? router.parseUrl('product/list') : true;
+      return isLoggedIn ? router.parseUrl('/product/list') : true;
     }),
   );
 };

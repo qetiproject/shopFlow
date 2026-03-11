@@ -1,8 +1,8 @@
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md" appClickoutside (appClickOutside)="closeMenus()">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <a
-        [routerLink]="['product/list']"
+        routerLink="/product/list"
         class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors"
       >
         Shop Flow
@@ -21,9 +21,8 @@
       </nav>
 
       <div class="flex justify-between align-middle">
-        <button
-          [routerLink]="['/cart']"
-          type="button"
+        <a
+          routerLink="/cart"
           aria-label="View shopping cart"
           class="relative group inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white transition-all active:scale-[0.98] sm:w-auto"
         >
@@ -36,15 +35,20 @@
               {{ totalItems() }}
             </span>
           }
-        </button>
+        </a>
         <div class="relative hidden md:block">
-          <button (click)="toggleDropdown()" class="flex items-center space-x-2 focus:outline-none" aria-label="User menu" [attr.aria-expanded]="isOpen()">
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center space-x-2 focus:outline-none"
+            aria-label="User menu"
+            [attr.aria-expanded]="isOpen()"
+            aria-haspopup="true"
+          >
             <img
               class="w-10 h-10 rounded-full border-2 border-blue-500"
               src="https://dummyjson.com/icon/emilys/128"
               alt="User Avatar"
             />
-            @let user = userStorage.getUser();
             <span class="hidden md:inline text-gray-700 font-medium">{{
               user?.fullName || user?.emailId
             }}</span>
@@ -68,25 +72,30 @@
             <div
               class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 animate-fadeIn"
               role="menu"
+              aria-label="User account menu"
             >
-              <button
-                [routerLink]="['/checkout/orders']"
+              <a
+                routerLink="/checkout/orders"
                 routerLinkActive="text-blue-600 font-semibold"
-                (click)="toggleDropdown()"
-                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+                (click)="closeMenus()"
+                role="menuitem"
+                class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 My Orders
-              </button>
-              <button
-                [routerLink]="['/users/profile', email]"
+              </a>
+              <a
+                [routerLink]="['/users/profile', user?.emailId]"
                 routerLinkActive="text-blue-600 font-semibold"
-                (click)="toggleDropdown()"
-                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+                (click)="closeMenus()"
+                role="menuitem"
+                class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 Profile
-              </button>
+              </a>
               <button
                 (click)="onLogout()"
+                type="button"
+                role="menuitem"
                 class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 Logout
@@ -96,7 +105,13 @@
         </div>
       </div>
 
-      <button (click)="toggleMobileMenu()" class="md:hidden text-gray-700 focus:outline-none" aria-label="Open menu" [attr.aria-expanded]="isMobileMenu()">
+      <button
+        (click)="toggleMobileMenu()"
+        class="md:hidden text-gray-700 focus:outline-none"
+        aria-label="Open main menu"
+        [attr.aria-expanded]="isMobileMenu()"
+        aria-haspopup="true"
+      >
         <svg
           class="w-6 h-6"
           fill="none"
@@ -118,7 +133,7 @@
         @for (link of navLinks; track link.path) {
           <a
             [routerLink]="link.path"
-            (click)="toggleMobileMenu()"
+            (click)="closeMenus()"
             routerLinkActive="bg-blue-100 text-blue-700"
             [routerLinkActiveOptions]="{ exact: true }"
             class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors"
@@ -127,16 +142,25 @@
           </a>
         }
         <div class="border-t mt-2 pt-2">
-          <button
-            [routerLink]="['/users/profile', email]"
+          <a
+            routerLink="/checkout/orders"
             routerLinkActive="text-blue-600 font-semibold"
-            (click)="toggleMobileMenu()"
-            class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+            (click)="closeMenus()"
+            class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            My Orders
+          </a>
+          <a
+            [routerLink]="['/users/profile', user?.emailId]"
+            routerLinkActive="text-blue-600 font-semibold"
+            (click)="closeMenus()"
+            class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Profile
-          </button>
+          </a>
           <button
             (click)="onLogout()"
+            type="button"
             class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Logout

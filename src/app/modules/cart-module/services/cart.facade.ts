@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AddToCartRequest } from '@cart-module/types/cart.request';
-import { Cartable } from '@cart-module/types/cart.model';
+import type { AddToCartRequest, Cartable } from '@app-types/dto';
 import { CartStore } from '@cart-module/store/cart.store';
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +19,6 @@ export class CartFacade {
       },
     };
 
-    return this.#cartStore.addCProductToCart(newProduct);
+    return this.#cartStore.addProductToCart(newProduct);
   }
 }

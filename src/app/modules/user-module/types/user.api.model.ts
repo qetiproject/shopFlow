@@ -1,4 +1,4 @@
-export interface IUser {
+export interface UserResponse {
   userId: number;
   userName: string;
   emailId: string;
@@ -11,9 +11,9 @@ export interface IUser {
   refreshTokenExpiryTime: Date;
 }
 
-export interface IUsers {
+export interface UsersResponse {
   totalRecords: number;
   pageNumber: number;
   pageSize: number;
-  data: IUser[];
+  data: UserResponse[];
 }

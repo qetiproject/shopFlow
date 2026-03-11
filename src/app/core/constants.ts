@@ -5,3 +5,5 @@ export const STORAGE_KEYS = {
   ORDER: 'ORDER_STORAGE_KEY',
   BILLING: 'BILLING_STORAGE_KEY',
 } as const;
+
+export const PROTECTED_ENDPOINTS = ['/auth/me'] as const;

@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from '@auth-module/services/auth.api';
-import { CreateUserRequest } from '@auth-module/types/create/create-user.request';
-import { CreateUserResponse } from '@auth-module/types/create/create-user.response';
-import { LoginRequest } from '@auth-module/types/login/login.request';
-import { LoginResponse } from '@auth-module/types/login/login.response';
-import { ResetPasswordRequest } from '@auth-module/types/reset-password.request';
+import type {
+  CreateUserRequest,
+  CreateUserResponse,
+  LoginRequest,
+  LoginResponse,
+  ResetPasswordRequest,
+} from '@app-types/dto';
 import { Observable } from 'rxjs';
 
 @Injectable({

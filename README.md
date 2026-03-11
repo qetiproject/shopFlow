@@ -1,50 +1,75 @@
-# 🛒 Shop Flow App
+# shopFlow
 
-Shop Flow App is a **scalable, modular and production-like web application** built with **Angular 21**.  
-It allows users to browse, manage and purchase products while demonstrating **modern Angular best practices**, **advanced TypeScript patterns** and **clean architecture principles**.
+Angular e-commerce application: product catalog, cart, checkout with Stripe, and user authentication.
 
-The project is fully dynamic, continuously evolving and designed for maintainability and long-term scalability.
+## Prerequisites
 
----
+- **Node.js** 20+ (see [.nvmrc](.nvmrc) if present)
+- **npm** 9+
 
-## ✨ Features
+## Getting started
 
-- **User Authentication:** Register, Login, Forgot Password, Email OTP verification
-- **Secure Routing:** Route guards and second router outlet for nested layouts
-- **State Management:** NgRx and Signal Store with advanced Angular Signals (`signal`, `computed`, `linkedSignal`, `untracked`, `resource`)
-- **Checkout & Payments:** Stripe integration with backend Node.js API
-- **Add Product & File Upload:** Users can add products with dynamic forms and upload images/files
-- **Cart & Orders Module:** Full shopping flow with cart management, order tracking and checkout
-- **Product Module:** Filtering, sorting, select filtering, pagination, dynamic tables and product search
-- **Dynamic Reactive Forms:** Custom controls, centralized validation schemas and dynamic error messages
-- **Local & Session Storage:** Cart, user session and temporary form data persisted for better UX
-- **Responsive UI:** Fully responsive layouts with Tailwind CSS
-- **Lazy Loading & Modular Architecture:** Feature-based lazy-loaded modules for scalability
-- **Advanced TypeScript:** Union types, generics, mapped types and type-safe patterns
+```bash
+npm install
+npm start
+```
 
----
+App runs at [http://localhost:4200](http://localhost:4200). The dev server uses `src/proxy.conf.json` to proxy API requests to backend services.
 
-## 🛠️ Technologies
+## Scripts
 
-- **Framework:** Angular 21
-- **Languages:** TypeScript, JavaScript (ES6+)
-- **State Management:** NgRx, Signal Store, RxJS
-- **Styling:** Tailwind CSS
-- **Backend:** Node.js REST API (Stripe Checkout)
-- **Architecture:** Modular, lazy-loaded, clean architecture
+| Command | Description |
+|---------|-------------|
+| `npm start` | Run dev server (proxy enabled) |
+| `npm run build` | Production build |
+| `npm run build:ssr` | Production build with SSR |
+| `npm run serve:ssr:ssr` | Run built SSR app: `node dist/shopFlow/server/server.mjs` |
+| `npm run watch` | Development build in watch mode |
+| `npm run lint` | Run ESLint on `src/**/*.ts` and `src/**/*.html` |
+| `npm run analyze` | Production build + bundle analysis (source-map-explorer) |
 
----
+## Environment
 
-## 🧱 Architecture
+- **Development:** `src/environment/environment.ts` — uses relative paths (`/UserApp`, `/products`, `/carts`, `/api`) and proxy.
+- **Production:** `src/environment/environment.prod.ts` (swapped via `fileReplacements` in `angular.json`) — full API URLs and Stripe key.
 
-- Modular, feature-based, lazy-loaded structure
-- Clear separation of responsibilities:
-  - Presentation components
-  - Business logic services
-  - State management via NgRx and Signal Store
-  - Routing with guards and nested outlets
-- **Form & File Handling:** Dynamic reactive forms with reusable custom controls and validation schemas; file uploads handled with type-safe Angular services
-- **State Persistence:** Cart, user session and temporary form data persisted in `localStorage` and `sessionStorage`
-- **Add Product Flow:** Uses reactive signals and centralized services to ensure type-safety, form validation and smooth integration with product and cart modules
-- Advanced reactive patterns using Angular Signals and computed/linked/untracked signals
-- Centralized, reusable form schemas for maintainability and type safety
+See [.env.example](.env.example) for expected variables when using build-time env injection. For local dev, editing the environment files is enough; proxy targets are in `src/proxy.conf.json`.
+
+## Project structure (overview)
+
+```
+src/
+├── app/
+│   ├── api/              # Unified API layer (ApiClient, Endpoints)
+│   ├── core/             # Guards, interceptors, HTTP utils, services
+│   ├── components/       # Shared UI (header, paging, messages, etc.)
+│   ├── features/        # Reusable features (table, modal, search, forms)
+│   ├── modules/         # Feature modules (auth, product, cart, user, checkout)
+│   ├── pages/           # Not-found and similar
+│   ├── types/           # Shared types; types/dto = API DTOs
+│   └── test-utils/      # Test helpers (HTTP mock, fake data, providers)
+├── assets/
+├── environment/         # environment.ts, environment.prod.ts
+├── proxy.conf.json      # Dev proxy for /UserApp, /products, /carts, /api
+└── styles.css
+```
+
+- **Routing:** Lazy-loaded modules for auth, product, cart, user, checkout; guards for auth and guest-only routes.
+- **State:** NgRx Store (auth) + NgRx Signals (cart). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+- **API:** Centralized in `src/app/api/`. Types from `@app-types/dto`. See [docs/API.md](docs/API.md).
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) — structure, state, HTTP layer, SSR
+- [API](docs/API.md) — backend endpoints and auth flow
+- [Contributing](CONTRIBUTING.md) — branch naming, commits, lint, format
+- [Deployment](docs/DEPLOYMENT.md) — build, SSR, hosting
+- [Testing](docs/TESTING.md) — test strategy and test-utils usage
+
+## Tech stack
+
+- Angular 21, standalone components, SSR
+- NgRx Store + Effects (auth), NgRx Signals (cart)
+- Tailwind CSS 4, Angular CDK
+- ngx-stripe for checkout
+- RxJS 7

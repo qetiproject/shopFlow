@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  AddProductModel,
+import type {
+  AddProductRequest,
+  Category,
   Product,
   ProductApiShape,
   ProductsApiResponse,
-  ProductViewModel,
-  ResponseProductDelete,
-} from '@product-module/types/product';
-import { Category } from '@product-module/types/category';
+  ProductDeleteResponse,
+} from '@app-types/dto';
+import { ProductViewModel } from '@product-module/types/product';
 import { ProductApi } from '@product-module/services/product.api';
-import { BehaviorSubject, map, Observable, of, take, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, take, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +32,13 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
   loadProductsByCategory(category: string, limit: number, skip: number): void {
@@ -45,10 +48,13 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
   loadProductsBySort(sortBy: string, orderBy: string, limit: number, skip: number): void {
@@ -58,13 +64,16 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
+        catchError(() => of(null)),
       )
-      .subscribe((mapped) => this.productsSubject.next(mapped));
+      .subscribe((mapped) => {
+        if (mapped) this.productsSubject.next(mapped);
+      });
   }
 
-  addProduct(product: AddProductModel): Observable<ProductViewModel> {
+  addProduct(product: AddProductRequest): Observable<ProductViewModel> {
     const current = this.productsSubject.getValue();
     const newProduct: ProductViewModel = {
       ...product,
@@ -77,7 +86,7 @@ export class ProductFacade {
     return of(newProduct);
   }
 
-  deleteProduct(id: number): Observable<ResponseProductDelete> {
+  deleteProduct(id: number): Observable<ProductDeleteResponse> {
     return this.#productApi.deleteProduct(id).pipe(
       take(1),
       tap((deleted) => {
@@ -88,18 +97,23 @@ export class ProductFacade {
           total: current.total - 1,
         });
       }),
+      catchError((err) => throwError(() => err)),
     );
   }
 
   getProductDetails(id: number): Observable<Product | null> {
-    return this.#productApi.getProductDetails(id);
+    return this.#productApi.getProductDetails(id).pipe(
+      catchError(() => of(null)),
+    );
   }
 
   getProductCategories(): Observable<Category[]> {
-    return this.#productApi.productCategories();
+    return this.#productApi.productCategories().pipe(
+      catchError(() => of([])),
+    );
   }
 
-  private mapProductsApiToView(product: ProductApiShape): ProductViewModel {
+  private toViewModel(product: ProductApiShape): ProductViewModel {
     return {
       id: product.id,
       title: product.title,

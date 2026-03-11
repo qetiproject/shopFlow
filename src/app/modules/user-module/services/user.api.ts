@@ -1,35 +1,28 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '@env';
-import { IUsers } from '@user-module/types/user.api.model';
+import { ApiClient, Endpoints } from '@api';
+import type { UsersResponse } from '@app-types/dto';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApiService {
-  #http = inject(HttpClient);
+  readonly #api = inject(ApiClient);
+  readonly #baseUrl = this.#api.baseUrls.userApp;
 
-  searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<IUsers> {
-    let params = new HttpParams();
-
-    if (searchText) {
-      params = params.set('searchText', searchText);
-    }
-
-    if (pageNumber !== undefined) {
-      params = params.set('pageNumber', pageNumber);
-    }
-
-    if (pageSize !== undefined) {
-      params = params.set('pageSize', pageSize);
-    }
-
-    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
+  searchUsers(searchText?: string, pageNumber?: number, pageSize?: number): Observable<UsersResponse> {
+    const params: Record<string, string | number> = {};
+    if (searchText !== undefined) params['searchText'] = searchText;
+    if (pageNumber !== undefined) params['pageNumber'] = pageNumber;
+    if (pageSize !== undefined) params['pageSize'] = pageSize;
+    return this.#api.get<UsersResponse>(this.#baseUrl, Endpoints.user.searchUsers, {
+      params: Object.keys(params).length ? params : undefined,
+    });
   }
 
-  userByEmail(searchText: string): Observable<IUsers> {
-    const params = new HttpParams().set('searchText', searchText);
-    return this.#http.get<IUsers>(`${environment.userApp}/searchUsers`, { params });
+  userByEmail(searchText: string): Observable<UsersResponse> {
+    return this.#api.get<UsersResponse>(this.#baseUrl, Endpoints.user.searchUsers, {
+      params: { searchText },
+    });
   }
 }

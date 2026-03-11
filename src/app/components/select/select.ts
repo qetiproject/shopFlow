@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ArrowDownSVG } from 'assets/icons';
 
-export interface SelectOption<T = unknown> {
+export interface SelectOption<T extends string | number = string> {
   label: string;
   value: T;
   url?: string;
@@ -22,12 +22,21 @@ export interface SelectOption<T = unknown> {
     },
   ],
 })
-export class SelectComponent<T = unknown> implements ControlValueAccessor {
-  options = input<SelectOption<T>[]>([]);
-  label = input<string>('');
+export class SelectComponent<T extends string | number = string> implements ControlValueAccessor {
+  readonly options = input<SelectOption<T>[]>([]);
+  readonly label = input<string>('');
+  readonly placeholder = input<string | null>(null);
+  readonly id = input<string>('');
 
-  value = signal<T | null>(null);
-  disabled = false;
+  private static nextId = 0;
+  readonly uid = `app-select-${++SelectComponent.nextId}`;
+
+  readonly value = signal<T | null>(null);
+  private _disabled = false;
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
 
   private onChange: (_: T | null) => void = (() => void 0) as (_: T | null) => void;
   private onTouched: () => void = () => void 0;
@@ -45,14 +54,18 @@ export class SelectComponent<T = unknown> implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this._disabled = isDisabled;
   }
 
-  selectOption(event: Event) {
+  selectOption(event: Event): void {
     const selectEl = event.target as HTMLSelectElement;
-    const val = selectEl.value as T | null;
-    this.value.set(val);
-    this.onChange(this.value());
+    const raw = selectEl.value;
+
+    const option = this.options().find((o) => String(o.value) === raw) ?? null;
+    const nextValue = (option ? option.value : null) as T | null;
+
+    this.value.set(nextValue);
+    this.onChange(nextValue);
     this.onTouched();
   }
 }

@@ -6,8 +6,7 @@ import {
   calculateTotals,
   updateQuantity,
 } from '@cart-module/store/store.utils';
-import { AddToCartRequest } from '@cart-module/types/cart.request';
-import { CartResponse } from '@cart-module/types/cart.response';
+import { AddToCartRequest, CartResponse } from '@app-types/dto';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 export const CartStore = signalStore(
@@ -59,7 +58,7 @@ export const CartStore = signalStore(
       });
     };
 
-    const addCProductToCart = (request: AddToCartRequest): boolean => {
+    const addProductToCart = (request: AddToCartRequest): boolean => {
       let success = false;
 
       patchState(store, (state) => {
@@ -103,7 +102,7 @@ export const CartStore = signalStore(
     };
 
     return {
-      addCProductToCart,
+      addProductToCart,
       removeProductFromCart,
       changeQuantity,
       increase: (id: number) => changeQuantity(id, 1),
