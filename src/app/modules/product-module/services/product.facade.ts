@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import type {
-  AddProductModel,
+  AddProductRequest,
   Category,
   Product,
   ProductApiShape,
   ProductsApiResponse,
-  ResponseProductDelete,
+  ProductDeleteResponse,
 } from '@app-types/dto';
 import { ProductViewModel } from '@product-module/types/product';
 import { ProductApi } from '@product-module/services/product.api';
@@ -32,7 +32,7 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
         catchError(() => of(null)),
       )
@@ -48,7 +48,7 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
         catchError(() => of(null)),
       )
@@ -64,7 +64,7 @@ export class ProductFacade {
         take(1),
         map((result) => ({
           ...result,
-          products: result.products.map((p) => this.mapProductsApiToView(p)),
+          products: result.products.map((p) => this.toViewModel(p)),
         })),
         catchError(() => of(null)),
       )
@@ -73,7 +73,7 @@ export class ProductFacade {
       });
   }
 
-  addProduct(product: AddProductModel): Observable<ProductViewModel> {
+  addProduct(product: AddProductRequest): Observable<ProductViewModel> {
     const current = this.productsSubject.getValue();
     const newProduct: ProductViewModel = {
       ...product,
@@ -86,7 +86,7 @@ export class ProductFacade {
     return of(newProduct);
   }
 
-  deleteProduct(id: number): Observable<ResponseProductDelete> {
+  deleteProduct(id: number): Observable<ProductDeleteResponse> {
     return this.#productApi.deleteProduct(id).pipe(
       take(1),
       tap((deleted) => {
@@ -113,7 +113,7 @@ export class ProductFacade {
     );
   }
 
-  private mapProductsApiToView(product: ProductApiShape): ProductViewModel {
+  private toViewModel(product: ProductApiShape): ProductViewModel {
     return {
       id: product.id,
       title: product.title,

@@ -6,12 +6,12 @@ import type { CartProduct } from '@cart-module/types/cart.model';
 export type { Order, OrderList } from '@checkout-module/types/order';
 export type { BillingDetails } from '@checkout-module/types/billingDetails';
 
-/** Checkout session creation request (items sent to backend). */
-export interface CheckoutRequestDto {
+/** Request body for creating a checkout session (items sent to backend). */
+export interface CheckoutRequest {
   items: readonly CartProduct[];
 }
 
-/** Checkout session creation response (Stripe URL). */
-export interface CheckoutResponseDto {
+/** Response from checkout session creation (Stripe URL). */
+export interface CheckoutResponse {
   url: string;
 }

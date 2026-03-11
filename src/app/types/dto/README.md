@@ -2,10 +2,26 @@
 
 Single source of truth for API request and response types. All consumers should import these types from `@app-types/dto` (or `@app-types/dto/<domain>.dto`).
 
+## Naming convention
+
+- **Request types** (payload sent to the API): suffix `Request` — e.g. `CreateUserRequest`, `LoginRequest`, `AddProductRequest`, `CheckoutRequest`.
+- **Response types** (payload returned from the API): suffix `Response` or wrapper name — e.g. `LoginResponse`, `CreateUserResponse`, `UsersResponse`, `UserResponse`, `ProductDeleteResponse`, `CartResponse`, `CheckoutResponse`. List wrappers: `ProductsApiResponse<T>`, `UsersResponse` (with `data: UserResponse[]`).
+- **Entity shapes** used in both list and detail: no suffix (e.g. `Product`, `Cart`, `Order`) or `*ApiShape` when it’s a subset (e.g. `ProductApiShape`).
+- **View models** (UI-only, derived from API): stay in feature modules with suffix `ViewModel` (e.g. `UserViewModel`, `ProductViewModel`). API → View mapping is done in facades with a single method name: `toViewModel(api): ViewModel`.
+
+## Mapping (API → View)
+
+Mapping from API DTOs to view models is done **only in facades**, using a single method name:
+
+- **ProductFacade:** `toViewModel(product: ProductApiShape): ProductViewModel`
+- **UserFacade:** `toViewModel(user: UserResponse): UserViewModel`
+
+Components and resolvers consume view models or observables that already return view models from the facade. Do not map from API types to view types in components or in API services.
+
 ## Barrel import
 
 ```ts
-import type { Product, CartProduct, LoginResponse, CheckoutResponseDto } from '@app-types/dto';
+import type { Product, CartProduct, LoginResponse, CheckoutResponse } from '@app-types/dto';
 ```
 
 ## Per-domain files
@@ -13,12 +29,12 @@ import type { Product, CartProduct, LoginResponse, CheckoutResponseDto } from '@
 | File | Types |
 |------|--------|
 | **auth.dto.ts** | CreateUserRequest, CreateUserResponse, LoginRequest, LoginResponse, ResetPasswordRequest, AuthTokens, AuthUser |
-| **product.dto.ts** | Product, ProductApiShape, ProductsApiResponse, AddProductModel, ResponseProductDelete, Category, Dimensions, Review, Meta |
-| **user.dto.ts** | IUser, IUsers |
+| **product.dto.ts** | Product, ProductApiShape, ProductsApiResponse, AddProductRequest, ProductDeleteResponse, Category, Dimensions, Review, Meta |
+| **user.dto.ts** | UserResponse, UsersResponse |
 | **cart.dto.ts** | Cart, CartProduct, Cartable, CartsByUserId, AddToCartRequest, CartResponse |
-| **checkout.dto.ts** | Order, OrderList, BillingDetails, CheckoutRequestDto, CheckoutResponseDto |
+| **checkout.dto.ts** | Order, OrderList, BillingDetails, CheckoutRequest, CheckoutResponse |
 
-Definitions are re-exported from the feature modules (e.g. `@auth-module/types/...`, `@product-module/types/product`). Only **CheckoutRequestDto** and **CheckoutResponseDto** are defined directly here for the checkout API contract.
+Definitions are re-exported from the feature modules (e.g. `@auth-module/types/...`, `@product-module/types/product`). Only **CheckoutRequest** and **CheckoutResponse** are defined directly here for the checkout API contract.
 
 ## Usage
 

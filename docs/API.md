@@ -32,7 +32,7 @@ Base URL: `environment.userApp`.
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET    | `/searchUsers` | Query params: `searchText`, `pageNumber`, `pageSize`. Response: `IUsers` (paginated list of `IUser`). |
+| GET    | `/searchUsers` | Query params: `searchText`, `pageNumber`, `pageSize`. Response: `UsersResponse` (paginated list of `UserResponse`). |
 
 ## Product (product)
 
@@ -45,8 +45,8 @@ Base URL: `environment.product` (e.g. DummyJSON `/products`).
 | GET    | `/categories` | Response: `Category[]`. |
 | GET    | `/category/{slug}` | Params: `limit`, `skip`. Response: `ProductsApiResponse<ProductApiShape>`. |
 | GET    | `` (root) | Params: `sortBy`, `order`, `limit`, `skip`. Response: `ProductsApiResponse<Product>`. |
-| POST   | `/add` | Body: `AddProductModel`. Response: same shape. |
-| DELETE | `/{id}` | Response: `ResponseProductDelete`. |
+| POST   | `/add` | Body: `AddProductRequest`. Response: same shape. |
+| DELETE | `/{id}` | Response: `ProductDeleteResponse`. |
 
 ## Cart (cart)
 
@@ -58,7 +58,7 @@ Base URL: `environment.api` (Stripe backend).
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST   | `/checkout` | Body: `CheckoutRequestDto` (`items`: array of cart line items). Response: `CheckoutResponseDto` (`url`: Stripe Checkout session URL). Frontend redirects user to `url`. |
+| POST   | `/checkout` | Body: `CheckoutRequest` (`items`: array of cart line items). Response: `CheckoutResponse` (`url`: Stripe Checkout session URL). Frontend redirects user to `url`. |
 
 ## Shared types (DTOs)
 

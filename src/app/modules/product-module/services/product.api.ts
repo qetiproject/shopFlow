@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiClient, Endpoints } from '@api';
 import type {
-  AddProductModel,
+  AddProductRequest,
   Category,
   Product,
   ProductApiShape,
   ProductsApiResponse,
-  ResponseProductDelete,
+  ProductDeleteResponse,
 } from '@app-types/dto';
 import { Observable } from 'rxjs';
 
@@ -62,11 +62,11 @@ export class ProductApi {
     });
   }
 
-  addProduct(product: AddProductModel): Observable<AddProductModel> {
-    return this.#api.post<AddProductModel>(this.#baseUrl, Endpoints.product.add, product);
+  addProduct(product: AddProductRequest): Observable<AddProductRequest> {
+    return this.#api.post<AddProductRequest>(this.#baseUrl, Endpoints.product.add, product);
   }
 
-  deleteProduct(id: number): Observable<ResponseProductDelete> {
-    return this.#api.delete<ResponseProductDelete>(this.#baseUrl, Endpoints.product.byId(id));
+  deleteProduct(id: number): Observable<ProductDeleteResponse> {
+    return this.#api.delete<ProductDeleteResponse>(this.#baseUrl, Endpoints.product.byId(id));
   }
 }
