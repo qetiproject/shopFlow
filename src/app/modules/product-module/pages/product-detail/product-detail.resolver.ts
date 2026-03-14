@@ -10,16 +10,16 @@ export const ProductDetailResolve: ResolveFn<Product | null> = (route: Activated
   const router = inject(Router);
 
   if (!id) {
-    router.navigate(['/products/list']);
+    router.navigate(['/product/list']);
     return of(null);
   }
 
   return productFacade.getProductDetails(id).pipe(
     tap((product) => {
-      if (!product) router.navigate(['/products/list']);
+      if (!product) router.navigate(['/product/list']);
     }),
     catchError(() => {
-      router.navigate(['/products/list']);
+      router.navigate(['/product/list']);
       return of(null);
     }),
   );

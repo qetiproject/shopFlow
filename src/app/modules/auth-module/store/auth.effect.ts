@@ -25,10 +25,7 @@ export class AuthEffects {
       ofType(AuthActions.registerUser),
       switchMap(({ payload }) =>
         this.authFacade
-          .registerUser({
-            ...payload,
-            userId: Math.floor(Math.random() * 100000),
-          })
+          .registerUser(payload)
           .pipe(
             map((response) => {
               this.#userStorage.saveUser({
