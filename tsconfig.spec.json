@@ -1,10 +1,32 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./out-tsc/spec",
     "module": "CommonJS",
-    "moduleResolution": "node",
-    "types": ["jest", "node"]
+    "moduleResolution": "node16",
+    "types": ["jest", "node"],
+    "paths": {
+      "@angular/core/testing": ["node_modules/@angular/core/types/testing.d.ts"],
+      "assets/*": ["src/assets/*"],
+      "@api": ["src/app/api/index.ts"],
+      "@components/*": ["src/app/components/*"],
+      "@core/*": ["src/app/core/*"],
+      "@features/*": ["src/app/features/*"],
+      "@app-types/*": ["src/app/types/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@utils": ["src/app/utils/index.ts"],
+      "@utils/*": ["src/app/utils/*"],
+      "@test-utils/*": ["src/app/test-utils/*"],
+      "@custom-form/*": ["src/app/features/custom-form/*"],
+      "@custom-form-validators/*": ["src/app/features/custom-form-validators/*"],
+      "@auth-module/*": ["src/app/modules/auth-module/*"],
+      "@env": ["src/environment/environment"],
+      "@user-module/*": ["src/app/modules/user-module/*"],
+      "@product-module/*": ["src/app/modules/product-module/*"],
+      "@cart-module/*": ["src/app/modules/cart-module/*"],
+      "@checkout-module/*": ["src/app/modules/checkout-module/*"]
+    }
   },
-  "include": ["src/**/*.spec.ts", "setup-jest.ts", "**/*.d.ts"]
+  "include": ["src/**/*.spec.ts", "setup-jest.ts", "jest-globals.d.ts", "**/*.d.ts"]
 }

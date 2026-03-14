@@ -44,5 +44,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": ["**/*.spec.ts", "**/*.spec.ts.snap"]
+  "include": ["src/**/*.ts", "jest-globals.d.ts"],
+  "exclude": ["**/*.spec.ts.snap"]
 }
