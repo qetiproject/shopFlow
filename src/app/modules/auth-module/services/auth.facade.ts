@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class AuthFacade {
   #authApi = inject(AuthApiService);
 
-  registerUser(data: CreateUserRequest): Observable<CreateUserResponse> {
+  registerUser(data: Omit<CreateUserRequest, 'userId'>): Observable<CreateUserResponse> {
     return this.#authApi.createUser(data);
   }
 
