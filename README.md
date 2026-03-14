@@ -64,7 +64,6 @@ src/
 - [API](docs/API.md) — backend endpoints and auth flow
 - [Contributing](CONTRIBUTING.md) — branch naming, commits, lint, format
 - [Deployment](docs/DEPLOYMENT.md) — build, SSR, hosting
-- [Testing](docs/TESTING.md) — test strategy and test-utils usage
 
 ## Tech stack
 

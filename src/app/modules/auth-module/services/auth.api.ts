@@ -20,7 +20,7 @@ export class AuthApiService {
   readonly #router = inject(Router);
   readonly #baseUrl = this.#api.baseUrls.userApp;
 
-  createUser(user: CreateUserRequest): Observable<CreateUserResponse> {
+  createUser(user: Omit<CreateUserRequest, 'userId'>): Observable<CreateUserResponse> {
     return this.#api.post<CreateUserResponse>(
       this.#baseUrl,
       Endpoints.auth.createUser,

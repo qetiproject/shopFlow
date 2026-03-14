@@ -8,7 +8,6 @@ import {
 import { RouterModule } from '@angular/router';
 import { INPUT_TYPES } from '@app-types/input';
 import * as AuthActions from '@auth-module/store/auth.actions';
-import { CreateUserRequest } from '@app-types/dto';
 import { registerForm } from '@auth-module/utils/register.form';
 import { Store } from '@ngrx/store';
 import { InputComponent } from 'app/features/custom-form/input/input';
@@ -30,7 +29,7 @@ export class Register {
   form = registerForm(this.#fb);
 
   onSubmit(): void {
-    const credentials: CreateUserRequest = this.form.getRawValue() as CreateUserRequest;
+    const credentials = this.form.getRawValue();
 
     this.#store.dispatch(AuthActions.registerUser({ payload: credentials }));
 
