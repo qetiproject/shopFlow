@@ -12,6 +12,7 @@
       "@angular/common/http": ["node_modules/@angular/common/types/http.d.ts"],
       "@angular/common/http/testing": ["node_modules/@angular/common/types/http-testing.d.ts"],
       "@angular/forms/signals": ["node_modules/@angular/forms/types/signals.d.ts"],
+      "@ngrx/effects/testing": ["node_modules/@ngrx/effects/types/ngrx-effects-testing.d.ts"],
       "assets/*": ["src/assets/*"],
       "@api": ["src/app/api/index.ts"],
       "@components/*": ["src/app/components/*"],

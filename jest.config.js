@@ -18,6 +18,7 @@ module.exports = {
     '^@custom-form/(.*)$': '<rootDir>/src/app/features/custom-form/$1',
     '^@custom-form-validators/(.*)$': '<rootDir>/src/app/features/custom-form-validators/$1',
     '^@auth-module/(.*)$': '<rootDir>/src/app/modules/auth-module/$1',
+    '^@ngrx/effects/testing$': '<rootDir>/node_modules/@ngrx/effects/fesm2022/ngrx-effects-testing.mjs',
     '^@env$': '<rootDir>/src/environment/environment',
     '^@user-module/(.*)$': '<rootDir>/src/app/modules/user-module/$1',
     '^@product-module/(.*)$': '<rootDir>/src/app/modules/product-module/$1',
