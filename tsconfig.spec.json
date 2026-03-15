@@ -22,6 +22,7 @@
       "@pages/*": ["src/app/pages/*"],
       "@utils": ["src/app/utils/index.ts"],
       "@utils/*": ["src/app/utils/*"],
+      "@test-utils": ["src/app/test-utils/index.ts"],
       "@test-utils/*": ["src/app/test-utils/*"],
       "@custom-form/*": ["src/app/features/custom-form/*"],
       "@custom-form-validators/*": ["src/app/features/custom-form-validators/*"],

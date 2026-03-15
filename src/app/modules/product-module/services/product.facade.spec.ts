@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, of, throwError } from 'rxjs';
 import type { Product } from '@app-types/dto';
 import { ProductApi } from '@product-module/services/product.api';
-import { mockAddProductRequest } from '@utils/mock-data';
+import { mockAddProductRequest } from '@test-utils/mock-data';
 import { ProductFacade } from './product.facade';
 
 describe('ProductFacade', () => {

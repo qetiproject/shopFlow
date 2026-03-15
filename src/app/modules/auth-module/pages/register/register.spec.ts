@@ -2,8 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { provideMockStore } from '@utils/mock.store';
-import { setupComponent } from '@utils/setup-component-testing';
+import { provideMockStore, setupComponent } from '@test-utils';
 import * as AuthActions from '../../store/auth.actions';
 import { Register } from './register';
 

@@ -1,38 +1,53 @@
-# E2E ტესტები (Playwright)
+# E2E tests (Playwright)
 
-## კონფიგურაცია
+## Configuration
 
-ყველა დეტალი არის **პროექტის ფესვში**: `playwright.config.ts`.
+All settings are in the project root: `playwright.config.ts`.
 
-| პარამეტრი | მნიშვნელობა | რისთვის |
-|-----------|-------------|--------|
-| `testDir` | `e2e` | ტესტის ფაილები იქნება ამ ფოლდერში |
-| `testMatch` | `*.e2e.ts` | მხოლოდ `.e2e.ts` ფაილები ითვლება ტესტებად |
-| `baseURL` | `http://localhost:4200` | `page.goto('/login')` → `http://localhost:4200/login` |
-| `webServer` | `npm run start` | ტესტებამდე ავტომატურად იშვება `ng serve` |
-| `workers` | `1` | ერთი ტესტი ერთ დროს (თუ 2 ან მეტი — პარალელური გაშვება) |
-| `timeout` | 25000 ms | ერთი ტესტის მაქს დრო |
-| `expect.timeout` | 10000 ms | ასერციის ლოდინი |
-| `use.screenshot` | `only-on-failure` | ჩავარდნისას ინახება სკრინშოტი |
-| `use.video` | `on-first-retry` | retry-ზე იწერება ვიდეო |
-| `projects` | chromium (და სურვილისამებრ firefox, webkit) | რომელ ბრაუზერებში გაეშვება |
+| Parameter | Value | Purpose |
+|-----------|-------|---------|
+| `testDir` | `e2e` | Test files live in this folder |
+| `testMatch` | `*.e2e.ts` | Only `.e2e.ts` files are treated as tests |
+| `baseURL` | `BASE_URL` / `E2E_BASE_URL` env or `http://localhost:4200` | Local: localhost. Server/CI: set env to deployed URL so e2e runs against it. |
+| `webServer` | `npm run start` | Starts `ng serve` automatically before tests |
+| `workers` | `1` | One test at a time (increase for parallel runs) |
+| `timeout` | 25000 ms | Max time per test |
+| `expect.timeout` | 10000 ms | Assertion wait timeout |
+| `use.screenshot` | `only-on-failure` | Save screenshot on failure |
+| `use.video` | `on-first-retry` | Record video on retry |
+| `projects` | chromium (optionally firefox, webkit) | Browsers to run tests in |
 
-## სკრიპტები (package.json)
+## Scripts (package.json)
 
-- **`npm run e2e`** — ტესტების გაშვება (headless, უხილავი ბრაუზერი).
-- **`npm run e2e:ui`** — Playwright UI (ინტერაკტიული, ტესტების არჩევა, ნაბიჯების ნახვა).
-- **`npm run e2e:headed`** — ტესტები ხილულ ბრაუზერში (დებაგისთვის).
+- **`npm run e2e`** — Run tests (headless).
+- **`npm run e2e:ui`** — Playwright UI (interactive, pick tests, see steps).
+- **`npm run e2e:headed`** — Run tests in a visible browser (for debugging).
 
-## პირველი გაშვება
+## Server / CI
 
-1. დააყენე პაკეტი: `npm install`
-2. დააყენე ბრაუზერები (ერთხელ): `npx playwright install chromium`
-3. გაუშვი ტესტები: `npm run e2e`
+Locally, `npm run e2e` uses `http://localhost:4200`. To run tests against a deployed app in CI or on a server, set the env var to the deployed app URL:
 
-ტესტის ფაილები დაამატე აქ `e2e/` ფოლდერში, გაფართოება: `*.e2e.ts`.
+- **BASE_URL** or **E2E_BASE_URL** — e.g. `BASE_URL=https://myapp.vercel.app` or `E2E_BASE_URL=https://staging.example.com`
 
-## კონვენციები
+Example (CI):
 
-- **e2e/env.ts** — `BASE_URL` (process.env-დან); გამოიყენე smoke ან სადაც URL უნდა იყოს დინამიური.
-- **e2e/helpers.ts** — გამოსაყენებელი ფუნქციები (მაგ. `expectLoginPage(page)`) რომ არ გაიმეორო იგივე assertion-ები.
-- პროტექტედ როუტები — ერთი `describe` + მასივი URL-ების მიხედვით ციკლით ტესტები, იგივე ლოგიკა ერთ ადგილზე.
+```bash
+export E2E_BASE_URL=https://shopflow-staging.vercel.app
+npm run e2e
+```
+
+The app must already be running on that server (or disable webServer and run tests against BASE_URL only).
+
+## First-time setup
+
+1. Install deps: `npm install`
+2. Install browsers (once): `npx playwright install chromium`
+3. Run tests: `npm run e2e`
+
+Add test files under `e2e/` with extension `*.e2e.ts`.
+
+## Conventions
+
+- **e2e/env.ts** — `BASE_URL` from process.env; use in smoke or wherever the URL must be dynamic.
+- **e2e/helpers.ts** — Reusable helpers (e.g. `expectLoginPage(page)`) to avoid repeating the same assertions.
+- Protected routes — One `describe` and a loop over a URL array so the same logic lives in one place.

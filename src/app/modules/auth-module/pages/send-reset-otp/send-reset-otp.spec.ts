@@ -3,7 +3,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { setupComponent } from '@utils/setup-component-testing';
+import { setupComponent } from '@test-utils/setup-component-testing';
 import { SendResetOtp } from './send-reset-otp';
 
 describe('SendResetOtp', () => {

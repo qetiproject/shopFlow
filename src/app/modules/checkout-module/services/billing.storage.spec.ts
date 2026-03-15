@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { STORAGE_KEYS } from '@core/constants';
-import { mockBillingDetails } from '@utils/mock-data';
+import { mockBillingDetails } from '@test-utils/mock-data';
 import { BillingStorage } from './billing.storage';
 
 describe('BillingStorage', () => {

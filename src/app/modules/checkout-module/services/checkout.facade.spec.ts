@@ -3,7 +3,7 @@ import { of, throwError } from 'rxjs';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { CheckoutApi } from '@checkout-module/services/checkout.api';
 import { MessagesService } from '@core/services/messages.service';
-import { mockBillingForm } from '@utils/mock-data';
+import { mockBillingForm } from '@test-utils/mock-data';
 import { CHECKOUT_REDIRECT, CheckoutFacade } from './checkout.facade';
 
 describe('CheckoutFacade', () => {

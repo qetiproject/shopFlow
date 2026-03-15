@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { type MockStore, provideMockStore } from '@utils/mock.store';
+import { type MockStore, provideMockStore } from '@test-utils/mock.store';
 import { firstValueFrom, isObservable, of } from 'rxjs';
 import { AuthGuard } from './auth.guard';
 
