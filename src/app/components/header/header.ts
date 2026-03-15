@@ -7,12 +7,11 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import type { UserAfterLogin } from '@auth-module/types/user-login';
-import { logoutUser } from '@auth-module/store/auth.actions';
 import { UserStorage } from '@auth-module/services/user.storage';
 import { CartStore } from '@cart-module/store/cart.store';
-import { Store } from '@ngrx/store';
 import { CartIcon } from 'assets/icons/cart';
 import { ClickOutsideDirective } from '@features/directives/click-outsides.directive';
+import { UserMenuContentComponent } from './user-menu-content';
 
 const HEADER_NAV_LINKS = [
   { path: '/users', label: 'Users' },
@@ -22,12 +21,11 @@ const HEADER_NAV_LINKS = [
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CartIcon, ClickOutsideDirective],
+  imports: [RouterModule, CartIcon, ClickOutsideDirective, UserMenuContentComponent],
   templateUrl: './header.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private readonly store = inject(Store);
   readonly userStorage = inject(UserStorage);
   private readonly cartStore = inject(CartStore);
 
@@ -56,10 +54,5 @@ export class HeaderComponent {
   closeMenus(): void {
     this.isOpen.set(false);
     this.isMobileMenu.set(false);
-  }
-
-  onLogout(): void {
-    this.closeMenus();
-    this.store.dispatch(logoutUser());
   }
 }
