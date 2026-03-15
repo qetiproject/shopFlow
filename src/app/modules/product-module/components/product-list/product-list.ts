@@ -23,7 +23,7 @@ export class ProductList {
   readonly productsResponse = this.#productListFacade.productsResponse;
   products = toSignal(this.productFacade.products$);
 
-  onPageNumber(page: number) {
+  onPageNumber(page: number): void {
     this.pageNumber.set(page);
   }
 }

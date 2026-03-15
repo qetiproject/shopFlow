@@ -11,7 +11,7 @@
     "test:coverage": "jest --coverage",
     "build": "ng build",
     "build:analyze": "ng build --configuration=analyze",
-    "analyze": "npm run build:analyze && npx source-map-explorer dist/shopFlow/browser/*.js --html dist/shopFlow/bundle-stats.html --no-open",
+    "analyze": "npm run build:analyze && npx source-map-explorer \"dist/shopFlow/browser/*.js\" --html \"bundle-stats.html\" --no-border-checks",
     "watch": "ng build --watch --configuration development",
     "build:ssr": "ng build --configuration=production",
     "serve:ssr:ssr": "node dist/shopFlow/server/server.mjs",

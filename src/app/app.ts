@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { selectCheckAuth } from '@auth-module/store/auth.selector';
 import { HeaderComponent } from '@components/header/header';
@@ -10,7 +9,7 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, LoadingComponent, HeaderComponent, MessagesComponent],
+  imports: [RouterOutlet, LoadingComponent, HeaderComponent, MessagesComponent],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
