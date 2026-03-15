@@ -5,7 +5,14 @@
 >
   <div class="col-span-5 flex items-center gap-4">
     <div class="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden">
-      <img [src]="item.thumbnail" class="w-full h-full object-cover" alt="img" />
+      <img
+        [src]="item.thumbnail"
+        class="w-full h-full object-cover"
+        [alt]="item.title"
+        loading="lazy"
+        width="64"
+        height="64"
+      />
     </div>
 
     <div>

@@ -40,7 +40,9 @@ Manual steps: `npm run build:analyze` then `npx source-map-explorer dist/shopFlo
 
 ### 4. Styles and assets
 
-- **Tailwind:** Tailwind 4 purges unused CSS by default. Keep `@import 'tailwindcss'` and use only the utilities you need.
+- **Tailwind:** Purge is already on — `tailwind.config.js` has `content: ["./src/**/*.{html,ts}"]`, so only classes that appear in the app are in the final CSS (~45 kB). Nothing to change there unless you want to go further:
+  - **Optional — fewer base styles:** The full `@import 'tailwindcss'` includes Preflight (Tailwind’s base reset). If you don’t need it, you can import only theme + utilities (Tailwind v4) and add your own base (e.g. `box-sizing`, minimal reset) in `styles.css`. That can save a few kB but may affect layout; test after switching.
+  - **Optional — fewer utilities:** Prefer a small set of spacing/color classes (e.g. one gray scale, one or two spacing scales) instead of many one-off values; that doesn’t reduce size much with purge but keeps the design consistent and the source easier to maintain.
 - **Icons:** SVG components in `src/assets/icons/` are in the JS bundle. If the set grows large, consider a sprite or lazy-loaded icon set.
 - **Images:** Use `loading="lazy"` and fixed dimensions where possible to avoid layout shift; optimize assets (WebP, compression).
 
@@ -56,6 +58,22 @@ Manual steps: `npm run build:analyze` then `npx source-map-explorer dist/shopFlo
 - **Barrel imports:** In hot path (app.config, app.routes, root component) prefer direct imports; in lazy modules, barrels are less critical but can still pull extra code.
 - **NgRx:** Auth store and effects are in the main bundle by design. To shrink further you’d need a lighter auth solution (e.g. service + signals), which is a larger refactor.
 - **Zoneless (experimental):** Angular’s zoneless option can reduce bundle size by not loading zone.js; it requires compatibility checks and testing.
+
+## What's left to reduce bundle size (checklist)
+
+Already done: lazy route configs (loadChildren), no ReactiveFormsModule in root, direct icon imports, StoreDevtools only in dev.
+
+| Option | Impact | Effort | Notes |
+|--------|--------|--------|--------|
+| **Run `npm run analyze`** | — | Low | Open `bundle-stats.html`, see exact chunks; decide next cut from the largest blocks. |
+| **NgRx → lighter auth** | High (~20–40 kB) | High | Replace auth store/effects with a service + signals; removes @ngrx/store and @ngrx/effects from initial. |
+| **Zoneless** | Medium (polyfills) | Medium | Use zoneless; test all async, forms, animations. |
+| **Disable SSR** | Server bundle only | Low | If you don't need SSR, set `ssr: false` in the build config; doesn't change initial browser bundle. |
+| **Tailwind: no Preflight** | Low (few kB) | Low | In `styles.css`, import only theme + utilities (see comment there); add your own base (e.g. box-sizing). |
+| **npm dedupe / deps:check** | Low | Low | Fewer duplicate deps can slightly reduce build output. |
+| **Fewer design tokens** | Low | Medium | In Tailwind, use a smaller palette/spacing scale so fewer utility variants are generated. |
+
+Beyond that, the remaining size is mostly Angular core, RxJS, router, and zone — hard to reduce without changing framework or going zoneless.
 
 ## Duplicate deps
 

@@ -6,6 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import type { UserAfterLogin } from '@auth-module/types/user-login';
 import { logoutUser } from '@auth-module/store/auth.actions';
 import { UserStorage } from '@auth-module/services/user.storage';
 import { CartStore } from '@cart-module/store/cart.store';
@@ -35,7 +36,7 @@ export class HeaderComponent {
   readonly totalItems = this.cartStore.totalItems;
   readonly navLinks = HEADER_NAV_LINKS;
 
-  get user() {
+  get user(): UserAfterLogin | null {
     return this.userStorage.getUser();
   }
 

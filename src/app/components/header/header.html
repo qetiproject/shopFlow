@@ -48,9 +48,12 @@
               class="w-10 h-10 rounded-full border-2 border-blue-500"
               src="https://dummyjson.com/icon/emilys/128"
               alt="User Avatar"
+              loading="lazy"
+              width="40"
+              height="40"
             />
             <span class="hidden md:inline text-gray-700 font-medium">{{
-              user?.fullName || user?.emailId
+              (user?.fullName ?? user?.emailId) || ''
             }}</span>
 
             <svg
@@ -84,7 +87,7 @@
                 My Orders
               </a>
               <a
-                [routerLink]="['/users/profile', user?.emailId]"
+                [routerLink]="['/users/profile', user?.emailId ?? '']"
                 routerLinkActive="text-blue-600 font-semibold"
                 (click)="closeMenus()"
                 role="menuitem"
@@ -151,7 +154,7 @@
             My Orders
           </a>
           <a
-            [routerLink]="['/users/profile', user?.emailId]"
+            [routerLink]="['/users/profile', user?.emailId ?? '']"
             routerLinkActive="text-blue-600 font-semibold"
             (click)="closeMenus()"
             class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
