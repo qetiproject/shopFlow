@@ -14,6 +14,7 @@ module.exports = {
     '^@pages/(.*)$': '<rootDir>/src/app/pages/$1',
     '^@utils$': '<rootDir>/src/app/utils/index.ts',
     '^@utils/(.*)$': '<rootDir>/src/app/utils/$1',
+    '^@test-utils$': '<rootDir>/src/app/test-utils/index.ts',
     '^@test-utils/(.*)$': '<rootDir>/src/app/test-utils/$1',
     '^@custom-form/(.*)$': '<rootDir>/src/app/features/custom-form/$1',
     '^@custom-form-validators/(.*)$': '<rootDir>/src/app/features/custom-form-validators/$1',

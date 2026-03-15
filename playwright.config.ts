@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL ?? 'http://localhost:4200';
+/** Local: default localhost. Server/CI: set BASE_URL or E2E_BASE_URL to deployed app URL. */
+const BASE_URL =
+  process.env.BASE_URL ?? process.env.E2E_BASE_URL ?? 'http://localhost:4200';
 
 export default defineConfig({
   testDir: 'e2e',

@@ -1,5 +1,5 @@
 import type { CreateUserRequest } from '@app-types/dto';
-import { mockLoginRequest } from '@utils/mock-data';
+import { mockLoginRequest } from '@test-utils/mock-data';
 import * as AuthActions from './auth.actions';
 import { LoginStoreResponse } from './auth.store';
 

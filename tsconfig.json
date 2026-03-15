@@ -27,6 +27,7 @@
       "@app-types/*": ["app/types/*"],
       "@pages/*": ["app/pages/*"],
       "@utils/*": ["app/utils/*"],
+      "@test-utils": ["app/test-utils/index.ts"],
       "@test-utils/*": ["app/test-utils/*"],
       "@custom-form/*": ["app/features/custom-form/*"],
       "@custom-form-validators/*": ["app/features/custom-form-validators/*"],

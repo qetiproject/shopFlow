@@ -1,3 +1,1 @@
-export * from './mock.store';
-export * from './mock-data';
-export * from './setup-component-testing';
+/** App utilities only. Test helpers live in @test-utils. */

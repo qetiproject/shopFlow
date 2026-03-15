@@ -26,11 +26,11 @@ Build fails if any budget is exceeded.
 
 Use the report to find large dependencies and confirm chunking (lazy routes = separate chunks).
 
-**როგორ იპოვო სად არის საჭირო შემცირება (initial bundle):**
-1. `npm install` (რომ იყოს source-map-explorer).
-2. `npm run analyze` — ააგებს production-like build-ს source map-ებით და ქმნის ანალიზის HTML-ს.
-3. გახსენი ბრაუზერში: `dist/shopFlow/bundle-stats.html` (ან იგივე ფოლდერიდან `index.html` თუ რამე სხვა სახელით იქმნება).
-4. ანალიზში დააკვირდი **უდიდეს ბლოკებს** initial (main) chunk-ში — ხშირად: `node_modules` (rxjs, @angular/core, @ngrx, zone.js, tailwind), ან твой კოდი. რაც უფრო დიდია, იქიდან დაიწყე: lazy load, lighter lib, ან ზედმეტი import-ის მოშორება.
+**How to find where to reduce size (initial bundle):**
+1. `npm install` (so source-map-explorer is available).
+2. `npm run analyze` — builds a production-like build with source maps and generates the analysis HTML.
+3. Open in the browser: `dist/shopFlow/bundle-stats.html` (or `index.html` from that folder if the filename differs).
+4. In the report, look at the **largest blocks** in the initial (main) chunk — often: `node_modules` (rxjs, @angular/core, @ngrx, zone.js, tailwind) or your app code. Start with the biggest: lazy load, lighter lib, or remove unnecessary imports.
 
 ## Duplicate deps
 

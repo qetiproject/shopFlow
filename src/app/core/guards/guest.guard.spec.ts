@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { type MockStore, provideMockStore } from '@utils/mock.store';
+import { type MockStore, provideMockStore } from '@test-utils/mock.store';
 import { firstValueFrom, isObservable, of } from 'rxjs';
 import { GuestGuard } from './guest.guard';
 
