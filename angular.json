@@ -37,6 +37,10 @@
                 {
                   "replace": "src/environment/environment.ts",
                   "with": "src/environment/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/app.config.extra.ts",
+                  "with": "src/app/app.config.extra.prod.ts"
                 }
               ],
               "budgets": [
@@ -69,6 +73,10 @@
                 {
                   "replace": "src/environment/environment.ts",
                   "with": "src/environment/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/app.config.extra.ts",
+                  "with": "src/app/app.config.extra.prod.ts"
                 }
               ],
               "sourceMap": true,
