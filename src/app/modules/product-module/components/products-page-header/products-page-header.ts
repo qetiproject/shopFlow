@@ -5,7 +5,7 @@ import { CategoryComponent } from '@product-module/components/category/category'
 import { ProductHeaderFacade } from '@product-module/services/facades/product-header.facade';
 import { ProductMode } from '@product-module/types/product';
 import { SortOrder } from '@product-module/types/sort';
-import { PlusSVG } from 'assets/icons';
+import { PlusSVG } from 'assets/icons/plus';
 import { SortComponent } from '../sort/sort';
 
 @Component({

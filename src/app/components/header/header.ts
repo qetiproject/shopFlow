@@ -10,7 +10,7 @@ import { logoutUser } from '@auth-module/store/auth.actions';
 import { UserStorage } from '@auth-module/services/user.storage';
 import { CartStore } from '@cart-module/store/cart.store';
 import { Store } from '@ngrx/store';
-import { CartIcon } from 'assets/icons';
+import { CartIcon } from 'assets/icons/cart';
 import { ClickOutsideDirective } from '@features/directives/click-outsides.directive';
 
 const HEADER_NAV_LINKS = [

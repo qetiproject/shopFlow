@@ -8,7 +8,8 @@ import { MessagesService } from '@core/services/messages.service';
 import { ConfirmModalService } from '@features/confirm-modal/confirm-modal.service';
 import { ProductFacade } from '@product-module/services/product.facade';
 import { ProductViewModel } from '@product-module/types/product';
-import { CartIcon, RemoveSVG } from 'assets/icons';
+import { CartIcon } from 'assets/icons/cart';
+import { RemoveSVG } from 'assets/icons/remove';
 
 @Component({
   selector: 'app-product-item',

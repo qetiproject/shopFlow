@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { SortFacade } from '@product-module/services/sort.facade';
 import { SortOrder } from '@product-module/types/sort';
-import { SortSVG } from 'assets/icons';
+import { SortSVG } from 'assets/icons/sort';
 
 @Component({
   selector: 'app-sort',

@@ -5,7 +5,7 @@ import { CartStore } from '@cart-module/store/cart.store';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { OrderStorage } from '@checkout-module/services/orders.storage';
 import type { Order } from '@app-types/dto';
-import { SuccessSVG } from 'assets/icons';
+import { SuccessSVG } from 'assets/icons/success';
 
 @Component({
   selector: 'app-checkout-success',
