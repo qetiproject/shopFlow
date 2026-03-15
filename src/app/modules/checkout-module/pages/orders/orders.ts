@@ -51,7 +51,7 @@ export class Orders {
     ];
   });
 
-  onPageNumber(page: number) {
+  onPageNumber(page: number): void {
     this.pageNumber.set(page);
   }
 

@@ -9,13 +9,13 @@ export interface ErrorStateMatcher {
     providedIn: 'root'
 })
 export class ErrorStateMatcher {
-    isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null ) {
+    isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
         return Boolean(control && control.invalid && (control.disable || (form && form.submitted)))
     }
 }
 
 export class OnTouchedErrorStateMatcher {
-    isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null) {
+    isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
         return Boolean(control && control.invalid && (control.disable || form && form.submitted))
     }
 }

@@ -19,7 +19,7 @@ export class ProductImages {
     });
   }
 
-  selectImage(img: string) {
+  selectImage(img: string): void {
     this.mainImage.set(img);
   }
 }

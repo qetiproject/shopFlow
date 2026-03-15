@@ -23,7 +23,7 @@ export class ProducsPagetHeader {
   router = inject(Router);
   route = inject(ActivatedRoute);
 
-  onCategorySelected(value: string) {
+  onCategorySelected(value: string): void {
     this.#productHeaderFacade.categoryValue.set(value);
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
@@ -32,7 +32,7 @@ export class ProducsPagetHeader {
     }
   }
 
-  onSearch(value: string) {
+  onSearch(value: string): void {
     this.#productHeaderFacade.searchValue.set(value);
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.SEARCH);

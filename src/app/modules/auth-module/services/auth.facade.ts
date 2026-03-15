@@ -31,7 +31,7 @@ export class AuthFacade {
     return this.#authApi.resetPassword(data);
   }
 
-  logoutUser() {
+  logoutUser(): Promise<boolean> {
     return this.#authApi.logout();
   }
 }

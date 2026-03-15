@@ -46,7 +46,7 @@ export class ProductItem {
     return Math.round(p.price / (1 - p.discountPercentage / 100));
   });
 
-  async onOpenModal() {
+  async onOpenModal(): Promise<void> {
     const { id, title } = this.product();
     const confirmed = await this.confirmModal.open({
       title: 'Delete Product',
@@ -64,7 +64,7 @@ export class ProductItem {
     }
   }
 
-  addToCart(product: ProductViewModel) {
+  addToCart(product: ProductViewModel): void {
     const success = this.#cartFacade.addProductInCart(product, 1);
 
     if (success) {

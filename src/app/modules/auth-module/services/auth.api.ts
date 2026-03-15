@@ -49,8 +49,8 @@ export class AuthApiService {
     );
   }
 
-  async logout() {
+  async logout(): Promise<boolean> {
     this.#tokenService.clear();
-    await this.#router.navigateByUrl('/login');
+    return this.#router.navigateByUrl('/login');
   }
 }

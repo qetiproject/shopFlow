@@ -49,16 +49,16 @@ export class InputComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  handleInput(val: string) {
+  handleInput(val: string): void {
     this.value = val;
     this.onChange(val);
   }
 
-  togglePassword() {
+  togglePassword(): void {
     this.showPassword.update((v) => !v);
   }
 }
