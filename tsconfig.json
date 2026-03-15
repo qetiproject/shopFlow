@@ -43,5 +43,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": ["src/**/*.ts", "jest-globals.d.ts"],
+  "exclude": ["**/*.spec.ts.snap"]
 }
