@@ -4,6 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "e2e": "playwright test",
+    "e2e:report": "playwright test && playwright show-report",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "build": "ng build",
     "build:analyze": "ng build --configuration=analyze",
     "analyze": "npm run build:analyze && npx source-map-explorer dist/shopFlow/browser/*.js --html dist/shopFlow/bundle-stats.html --no-open",
@@ -50,16 +55,23 @@
     "@angular/build": "^21.2.0",
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
+    "@angular/platform-browser-dynamic": "^21.2.4",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/express": "^5.0.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.17.19",
     "angular-eslint": "21.2.0",
     "baseline-browser-mapping": "^2.9.11",
-    "eslint": "^10.0.2",
+    "eslint": "^9.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "@playwright/test": "^1.49.0",
+    "jest-preset-angular": "^16.1.1",
+    "jsdom": "^28.1.0",
     "postcss": "^8.5.3",
+    "source-map-explorer": "^2.5.3",
     "tailwindcss": "^4.1.16",
     "typescript": "~5.9.2",
-    "typescript-eslint": "8.56.1",
-    "source-map-explorer": "^2.5.3"
+    "typescript-eslint": "8.56.1"
   }
 }
