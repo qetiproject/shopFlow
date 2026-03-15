@@ -2,8 +2,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Store } from '@ngrx/store';
-import type { LoginRequest } from '../../../../types/dto/auth.dto';
 import { provideMockStore, setupComponent } from '../../../../utils';
+import { mockLoginRequest } from '../../../../utils/mock-data';
 import * as AuthActions from '../../store/auth.actions';
 import { Login } from '../login/login';
 
@@ -49,12 +49,7 @@ describe('Login', () => {
   });
 
   it('submit button is enabled when form is valid', () => {
-    const credentials: LoginRequest = {
-      emailId: 'test@mail.com',
-      password: '123456',
-    };
-
-    component.form.setValue(credentials);
+    component.form.setValue(mockLoginRequest);
     fixture.detectChanges();
 
     const el = fixture.nativeElement;
@@ -64,15 +59,12 @@ describe('Login', () => {
   });
 
   it('dispatches loginUser with credentials on submit', () => {
-    const credentials: LoginRequest = {
-      emailId: 'test@mail.com',
-      password: '123456',
-    };
-
-    component.form.setValue(credentials);
+    component.form.setValue(mockLoginRequest);
     component.onSubmit();
 
-    expect(store.dispatch).toHaveBeenCalledWith(AuthActions.loginUser({ payload: credentials }));
+    expect(store.dispatch).toHaveBeenCalledWith(
+      AuthActions.loginUser({ payload: mockLoginRequest }),
+    );
   });
 
   it('has email and password controls', () => {

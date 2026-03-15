@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, of, throwError } from 'rxjs';
-import type { AddProductRequest, Product } from '@app-types/dto';
+import type { Product } from '@app-types/dto';
 import { ProductApi } from '@product-module/services/product.api';
+import { mockAddProductRequest } from '@utils/mock-data';
 import { ProductFacade } from './product.facade';
 
 describe('ProductFacade', () => {
@@ -30,21 +31,18 @@ describe('ProductFacade', () => {
   });
 
   it('addProduct prepends product and increments total', async () => {
-    const product: AddProductRequest = {
-      title: 'New',
-      description: 'Desc',
-      category: 'cat',
-      price: 10,
-      thumbnail: null,
-    };
+    const result = await firstValueFrom(facade.addProduct(mockAddProductRequest));
 
-    const result = await firstValueFrom(facade.addProduct(product));
-
-    expect(result).toMatchObject({ title: 'New', description: 'Desc', category: 'cat', price: 10 });
+    expect(result).toMatchObject({
+      title: mockAddProductRequest.title,
+      description: mockAddProductRequest.description,
+      category: mockAddProductRequest.category,
+      price: mockAddProductRequest.price,
+    });
 
     const state = await firstValueFrom(facade.products$);
     expect(state.products.length).toBe(1);
-    expect(state.products[0]).toMatchObject({ title: 'New' });
+    expect(state.products[0]).toMatchObject({ title: mockAddProductRequest.title });
     expect(state.total).toBe(1);
   });
 

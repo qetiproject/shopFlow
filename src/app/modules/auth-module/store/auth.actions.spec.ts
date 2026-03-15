@@ -1,6 +1,7 @@
-import type { CreateUserRequest, LoginRequest } from '@app-types/dto';
-import type { LoginStoreResponse } from '@auth-module/store/auth.store';
+import type { CreateUserRequest } from '@app-types/dto';
+import { mockLoginRequest } from '@utils/mock-data';
 import * as AuthActions from './auth.actions';
+import { LoginStoreResponse } from './auth.store';
 
 describe('Auth Actions', () => {
   describe('registerUser', () => {
@@ -44,12 +45,10 @@ describe('Auth Actions', () => {
 
   describe('loginUser', () => {
     it('creates action with payload', () => {
-      const payload: LoginRequest = { emailId: 'u@mail.com', password: 'pass' };
-
-      const action = AuthActions.loginUser({ payload });
+      const action = AuthActions.loginUser({ payload: mockLoginRequest });
 
       expect(action.type).toBe('[Auth] login User');
-      expect(action.payload).toEqual(payload);
+      expect(action.payload).toEqual(mockLoginRequest);
     });
   });
 

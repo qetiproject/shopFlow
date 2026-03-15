@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { provideMockStore } from '@utils/mock.store';
+import { type MockStore, provideMockStore } from '@utils/mock.store';
 import { firstValueFrom, isObservable, of } from 'rxjs';
 import { InitialRedirectGuard } from './initial-redirect.guard';
 
@@ -27,8 +27,8 @@ describe('InitialRedirectGuard', () => {
     });
   });
 
-  it('should redirect to /product/list when user is logged in', async () => {
-    const store = TestBed.inject(Store) as unknown as { select: jest.Mock };
+  it('redirects to /product/list when user is logged in', async () => {
+    const store = TestBed.inject(Store) as unknown as MockStore;
     store.select.mockReturnValue(of(true));
 
     const route = {} as ActivatedRouteSnapshot;
@@ -46,8 +46,8 @@ describe('InitialRedirectGuard', () => {
     expect(result).toBe(productListUrlTree);
   });
 
-  it('should redirect to /login when user is not logged in', async () => {
-    const store = TestBed.inject(Store) as unknown as { select: jest.Mock };
+  it('redirects to /login when user is not logged in', async () => {
+    const store = TestBed.inject(Store) as unknown as MockStore;
     store.select.mockReturnValue(of(false));
 
     const route = {} as ActivatedRouteSnapshot;
