@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
 import { INPUT_TYPES } from '@app-types/input';
 import * as AuthActions from '@auth-module/store/auth.actions';
 import { registerForm } from '@auth-module/utils/register.form';
+import { InputComponent } from '@features/custom-form';
 import { Store } from '@ngrx/store';
-import { InputComponent } from 'app/features/custom-form/input/input';
 
 @Component({
   selector: 'app-register',
