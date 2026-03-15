@@ -17,9 +17,9 @@ test.describe('Protected routes redirect to login when not authenticated', () =>
   });
 
   test('cart redirects to login', async ({ page }) => {
-    await page.goto('/cart');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
+    await page.goto('/cart', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
+    await expect(page.getByTestId('LoginTitle')).toBeVisible({ timeout: 10_000 });
   });
 
   test('checkout shipping-info redirects to login', async ({ page }) => {

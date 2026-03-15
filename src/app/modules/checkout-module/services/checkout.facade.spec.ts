@@ -4,7 +4,7 @@ import type { BillingForm } from '@checkout-module/types/billing-form';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { CheckoutApi } from '@checkout-module/services/checkout.api';
 import { MessagesService } from '@core/services/messages.service';
-import { CheckoutFacade } from './checkout.facade';
+import { CHECKOUT_REDIRECT, CheckoutFacade } from './checkout.facade';
 
 describe('CheckoutFacade', () => {
   let facade: CheckoutFacade;
@@ -31,6 +31,7 @@ describe('CheckoutFacade', () => {
         { provide: CheckoutApi, useValue: checkoutApi },
         { provide: BillingStorage, useValue: billingStorage },
         { provide: MessagesService, useValue: messages },
+        { provide: CHECKOUT_REDIRECT, useValue: jest.fn() },
       ],
     });
 
