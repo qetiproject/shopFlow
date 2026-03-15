@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { provideMockStore } from '@utils/mock.store';
+import { type MockStore, provideMockStore } from '@utils/mock.store';
 import { firstValueFrom, isObservable, of } from 'rxjs';
 import { AuthGuard } from './auth.guard';
 
@@ -16,8 +16,8 @@ describe('AuthGuard', () => {
     });
   });
 
-  it('should allow access when user is logged in', async () => {
-    const store = TestBed.inject(Store) as unknown as { select: jest.Mock };
+  it('allows access when user is logged in', async () => {
+    const store = TestBed.inject(Store) as unknown as MockStore;
     store.select.mockReturnValue(of(true));
 
     const route = {} as ActivatedRouteSnapshot;
@@ -34,9 +34,9 @@ describe('AuthGuard', () => {
     expect(result).toBe(true);
   });
 
-  it('should redirect to /login when user is not logged in', async () => {
+  it('redirects to /login when user is not logged in', async () => {
     const urlTree = {} as UrlTree;
-    const store = TestBed.inject(Store) as unknown as { select: jest.Mock };
+    const store = TestBed.inject(Store) as unknown as MockStore;
     store.select.mockReturnValue(of(false));
     router.parseUrl.mockReturnValue(urlTree);
 

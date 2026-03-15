@@ -1,48 +1,21 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
+import { expectLoginPage } from './helpers';
 
-/**
- * All routes under AuthGuard must redirect to login when user is not authenticated.
- */
 test.describe('Protected routes redirect to login when not authenticated', () => {
-  test('product list redirects to login', async ({ page }) => {
-    await page.goto('/product/list');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
-  });
+  const protectedUrls = [
+    { path: '/product/list', name: 'product list' },
+    { path: '/product/details/1', name: 'product detail' },
+    { path: '/cart', name: 'cart' },
+    { path: '/checkout/shipping-info', name: 'checkout shipping-info' },
+    { path: '/checkout/orders', name: 'checkout orders' },
+    { path: '/users', name: 'users list' },
+    { path: '/users/profile/test%40example.com', name: 'user profile' },
+  ] as const;
 
-  test('product detail redirects to login', async ({ page }) => {
-    await page.goto('/product/details/1');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
-  });
-
-  test('cart redirects to login', async ({ page }) => {
-    await page.goto('/cart', { waitUntil: 'domcontentloaded' });
-    await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
-    await expect(page.getByTestId('LoginTitle')).toBeVisible({ timeout: 10_000 });
-  });
-
-  test('checkout shipping-info redirects to login', async ({ page }) => {
-    await page.goto('/checkout/shipping-info');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
-  });
-
-  test('checkout orders redirects to login', async ({ page }) => {
-    await page.goto('/checkout/orders');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
-  });
-
-  test('users list redirects to login', async ({ page }) => {
-    await page.goto('/users');
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
-  });
-
-  test('user profile redirects to login', async ({ page }) => {
-    await page.goto('/users/profile/test%40example.com');
-    await expect(page).toHaveURL(/\/login/, { timeout: 10_000 });
-    await expect(page.getByTestId('LoginTitle')).toBeVisible({ timeout: 10_000 });
-  });
+  for (const { path, name } of protectedUrls) {
+    test(`${name} redirects to login`, async ({ page }) => {
+      await page.goto(path, { waitUntil: 'domcontentloaded' });
+      await expectLoginPage(page);
+    });
+  }
 });

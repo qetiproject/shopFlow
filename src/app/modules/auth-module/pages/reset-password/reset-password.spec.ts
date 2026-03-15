@@ -26,11 +26,11 @@ describe('ResetPassword', () => {
     expect(component).toBeTruthy();
   });
 
-  it('form should be invalid initially', () => {
+  it('form is invalid initially', () => {
     expect(component.form.invalid).toBe(true);
   });
 
-  it('submit button should be disabled when form is invalid', () => {
+  it('submit button is disabled when form is invalid', () => {
     fixture.detectChanges();
 
     const el = fixture.nativeElement;
@@ -40,7 +40,7 @@ describe('ResetPassword', () => {
     expect(submit.disabled).toBe(true);
   });
 
-  it('submit button should be enabled when form is valid', () => {
+  it('submit button is enabled when form is valid', () => {
     const credentials = {
       email: 'keti@gmail.com',
       otp: '123456',

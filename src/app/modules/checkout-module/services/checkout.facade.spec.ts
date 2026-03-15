@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import type { BillingForm } from '@checkout-module/types/billing-form';
 import { BillingStorage } from '@checkout-module/services/billing.storage';
 import { CheckoutApi } from '@checkout-module/services/checkout.api';
 import { MessagesService } from '@core/services/messages.service';
+import { mockBillingForm } from '@utils/mock-data';
 import { CHECKOUT_REDIRECT, CheckoutFacade } from './checkout.facade';
 
 describe('CheckoutFacade', () => {
@@ -11,14 +11,6 @@ describe('CheckoutFacade', () => {
   let checkoutApi: jest.Mocked<Pick<CheckoutApi, 'checkout'>>;
   let billingStorage: jest.Mocked<Pick<BillingStorage, 'saveBillingInfo'>>;
   let messages: jest.Mocked<Pick<MessagesService, 'showMessage'>>;
-
-  const form: BillingForm = {
-    firstName: 'John',
-    lastName: 'Doe',
-    address: 'Street 1',
-    city: 'City',
-    zip: '12345',
-  };
 
   beforeEach(() => {
     checkoutApi = { checkout: jest.fn() };
@@ -45,21 +37,19 @@ describe('CheckoutFacade', () => {
   it('checkout on success saves billing and redirects', async () => {
     (checkoutApi.checkout as jest.Mock).mockReturnValue(of({ url: 'https://stripe.com/pay' }));
 
-    await facade.checkout(form);
+    await facade.checkout(mockBillingForm);
 
     expect(billingStorage.saveBillingInfo).toHaveBeenCalledWith(
       expect.objectContaining({
-        firstName: 'John',
-        lastName: 'Doe',
-        address: 'Street 1',
-        city: 'City',
+        id: expect.any(String),
+        firstName: mockBillingForm.firstName,
+        lastName: mockBillingForm.lastName,
+        address: mockBillingForm.address,
+        city: mockBillingForm.city,
         zip: 12345,
         fullName: 'John Doe',
         fullAddress: 'Street 1 City',
       }),
-    );
-    expect(billingStorage.saveBillingInfo).toHaveBeenCalledWith(
-      expect.objectContaining({ id: expect.any(String) }),
     );
   });
 
@@ -68,7 +58,7 @@ describe('CheckoutFacade', () => {
       throwError(() => new Error('Network error')),
     );
 
-    await facade.checkout(form);
+    await facade.checkout(mockBillingForm);
 
     expect(messages.showMessage).toHaveBeenCalledWith(
       expect.objectContaining({

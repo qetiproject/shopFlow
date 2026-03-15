@@ -11,8 +11,8 @@ export default defineConfig({
 
   retries: 0,
 
-  timeout: 15_000,
-  expect: { timeout: 5_000 },
+  timeout: 25_000,
+  expect: { timeout: 10_000 },
 
   reporter: [['list'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],
 

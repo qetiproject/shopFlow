@@ -6,13 +6,13 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { provideMockStore } from '@utils/mock.store';
+import { type MockStore, provideMockStore } from '@utils/mock.store';
 import { firstValueFrom, isObservable, of } from 'rxjs';
 import { GuestGuard } from './guest.guard';
 
 describe('GuestGuard', () => {
   let router: { parseUrl: jest.Mock };
-  let store: { select: jest.Mock };
+  let store: MockStore;
 
   beforeEach(() => {
     router = { parseUrl: jest.fn() };
@@ -20,10 +20,10 @@ describe('GuestGuard', () => {
     TestBed.configureTestingModule({
       providers: [provideMockStore(), { provide: Router, useValue: router }],
     });
-    store = TestBed.inject(Store) as unknown as { select: jest.Mock };
+    store = TestBed.inject(Store) as unknown as MockStore;
   });
 
-  it('should allow access when user is logged out', async () => {
+  it('allows access when user is logged out', async () => {
     store.select.mockReturnValue(of(false));
 
     const route = {} as ActivatedRouteSnapshot;
@@ -40,7 +40,7 @@ describe('GuestGuard', () => {
     expect(result).toBe(true);
   });
 
-  it('should redirect to /product/list when user is logged in', async () => {
+  it('redirects to /product/list when user is logged in', async () => {
     const urlTree = {} as UrlTree;
     store.select.mockReturnValue(of(true));
     router.parseUrl.mockReturnValue(urlTree);

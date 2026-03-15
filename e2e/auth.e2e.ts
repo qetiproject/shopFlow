@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { expectLoginPage } from './helpers';
 
 test.describe('Auth module', () => {
   test('login page loads with title and form', async ({ page }) => {
@@ -11,10 +12,9 @@ test.describe('Auth module', () => {
   });
 
   test('register page loads with title and form', async ({ page }) => {
-    test.setTimeout(30_000);
     await page.goto('/register', { waitUntil: 'domcontentloaded' });
-    await page.waitForURL(/\/register/, { timeout: 15_000 });
-    await expect(page.getByTestId('RegisterTitle')).toBeVisible({ timeout: 15_000 });
+    await page.waitForURL(/\/register/);
+    await expect(page.getByTestId('RegisterTitle')).toBeVisible();
     await expect(page.getByTestId('RegisterTitle')).toContainText('Register');
     await expect(page.getByTestId('RegisterSubmit')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
@@ -36,19 +36,14 @@ test.describe('Auth module', () => {
   });
 
   test('navigation: Login -> Register -> Login', async ({ page }) => {
-    test.setTimeout(30_000);
-    const registerLink = page.getByRole('link', { name: 'Register' });
-    const loginLink = page.getByRole('link', { name: 'Login' });
-
     await page.goto('/login', { waitUntil: 'domcontentloaded' });
-    await expect(page.getByTestId('LoginTitle')).toBeVisible({ timeout: 15_000 });
-    await registerLink.click({ timeout: 10_000 });
-    await expect(page).toHaveURL(/\/register/, { timeout: 15_000 });
-    await expect(page.getByTestId('RegisterTitle')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId('LoginTitle')).toBeVisible();
+    await page.getByRole('link', { name: 'Register' }).click();
+    await expect(page).toHaveURL(/\/register/);
+    await expect(page.getByTestId('RegisterTitle')).toBeVisible();
 
-    await loginLink.click({ timeout: 10_000 });
-    await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
-    await expect(page.getByTestId('LoginTitle')).toBeVisible({ timeout: 15_000 });
+    await page.getByRole('link', { name: 'Login' }).click();
+    await expectLoginPage(page);
   });
 
   test('navigation: Login -> Forgot password -> Back to Login', async ({ page }) => {
@@ -58,8 +53,7 @@ test.describe('Auth module', () => {
     await expect(page.getByTestId('ForgetPassTitle')).toBeVisible();
 
     await page.getByRole('link', { name: 'Back to Login' }).click();
-    await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByTestId('LoginTitle')).toBeVisible();
+    await expectLoginPage(page);
   });
 
   test('root path shows login when guest', async ({ page }) => {

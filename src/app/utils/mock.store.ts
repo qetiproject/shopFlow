@@ -1,11 +1,21 @@
-import { Store } from "@ngrx/store";
+import { Provider } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-export function provideMockStore() {
+export interface MockStore {
+  dispatch: jest.Mock;
+  select: jest.Mock;
+}
+
+function createMockStore(): MockStore {
+  return {
+    dispatch: jest.fn(),
+    select: jest.fn(),
+  };
+}
+
+export function provideMockStore(): Provider {
   return {
     provide: Store,
-    useValue: {
-      dispatch: jest.fn(),
-      select: jest.fn(),
-    },
+    useValue: createMockStore(),
   };
 }

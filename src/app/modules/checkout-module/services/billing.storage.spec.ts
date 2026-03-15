@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import type { BillingDetails } from '@app-types/dto';
 import { STORAGE_KEYS } from '@core/constants';
+import { mockBillingDetails } from '@utils/mock-data';
 import { BillingStorage } from './billing.storage';
 
 describe('BillingStorage', () => {
@@ -8,17 +8,6 @@ describe('BillingStorage', () => {
   let sessionGet: jest.SpyInstance;
   let sessionSet: jest.SpyInstance;
   let sessionRemove: jest.SpyInstance;
-
-  const billing: BillingDetails = {
-    id: 'id-1',
-    firstName: 'John',
-    lastName: 'Doe',
-    address: 'Street',
-    city: 'City',
-    fullName: 'John Doe',
-    fullAddress: 'Street City',
-    zip: 1234,
-  };
 
   beforeEach(() => {
     let stored: string | null = null;
@@ -52,8 +41,11 @@ describe('BillingStorage', () => {
   });
 
   it('saveBillingInfo stores JSON', () => {
-    storage.saveBillingInfo(billing);
-    expect(sessionSet).toHaveBeenCalledWith(STORAGE_KEYS.BILLING, JSON.stringify(billing));
+    storage.saveBillingInfo(mockBillingDetails);
+    expect(sessionSet).toHaveBeenCalledWith(
+      STORAGE_KEYS.BILLING,
+      JSON.stringify(mockBillingDetails),
+    );
   });
 
   it('getBillingInfo returns null when empty', () => {
@@ -61,9 +53,9 @@ describe('BillingStorage', () => {
   });
 
   it('getBillingInfo returns parsed billing after save', () => {
-    storage.saveBillingInfo(billing);
+    storage.saveBillingInfo(mockBillingDetails);
     const got = storage.getBillingInfo();
-    expect(got).toEqual(billing);
+    expect(got).toEqual(mockBillingDetails);
   });
 
   it('getBillingInfo returns null on invalid JSON', () => {
