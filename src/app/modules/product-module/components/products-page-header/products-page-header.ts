@@ -5,7 +5,7 @@ import { CategoryComponent } from '@product-module/components/category/category'
 import { ProductHeaderFacade } from '@product-module/services/facades/product-header.facade';
 import { ProductMode } from '@product-module/types/product';
 import { SortOrder } from '@product-module/types/sort';
-import { PlusSVG } from 'assets/icons';
+import { PlusSVG } from 'assets/icons/plus';
 import { SortComponent } from '../sort/sort';
 
 @Component({
@@ -23,7 +23,7 @@ export class ProducsPagetHeader {
   router = inject(Router);
   route = inject(ActivatedRoute);
 
-  onCategorySelected(value: string) {
+  onCategorySelected(value: string): void {
     this.#productHeaderFacade.categoryValue.set(value);
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.CATEGORY);
@@ -32,7 +32,7 @@ export class ProducsPagetHeader {
     }
   }
 
-  onSearch(value: string) {
+  onSearch(value: string): void {
     this.#productHeaderFacade.searchValue.set(value);
     if (value) {
       this.#productHeaderFacade.mode.set(ProductMode.SEARCH);

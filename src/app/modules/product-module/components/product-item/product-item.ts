@@ -8,7 +8,8 @@ import { MessagesService } from '@core/services/messages.service';
 import { ConfirmModalService } from '@features/confirm-modal/confirm-modal.service';
 import { ProductFacade } from '@product-module/services/product.facade';
 import { ProductViewModel } from '@product-module/types/product';
-import { CartIcon, RemoveSVG } from 'assets/icons';
+import { CartIcon } from 'assets/icons/cart';
+import { RemoveSVG } from 'assets/icons/remove';
 
 @Component({
   selector: 'app-product-item',
@@ -45,7 +46,7 @@ export class ProductItem {
     return Math.round(p.price / (1 - p.discountPercentage / 100));
   });
 
-  async onOpenModal() {
+  async onOpenModal(): Promise<void> {
     const { id, title } = this.product();
     const confirmed = await this.confirmModal.open({
       title: 'Delete Product',
@@ -63,7 +64,7 @@ export class ProductItem {
     }
   }
 
-  addToCart(product: ProductViewModel) {
+  addToCart(product: ProductViewModel): void {
     const success = this.#cartFacade.addProductInCart(product, 1);
 
     if (success) {

@@ -49,7 +49,7 @@ export class TextareaComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  handleInput(event: Event) {
+  handleInput(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
     const val = target.value;
     this.value = val;

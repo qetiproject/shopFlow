@@ -56,11 +56,11 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
-  handleFileInput(event: Event) {
+  handleFileInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (!input.files?.length) return;
 
@@ -69,7 +69,7 @@ export class FileUploadComponent implements ControlValueAccessor {
     input.value = '';
   }
 
-  onDrop(event: DragEvent) {
+  onDrop(event: DragEvent): void {
     event.preventDefault();
     this.dragging = false;
 
@@ -78,16 +78,16 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.setFile(file);
   }
 
-  onDragOver(event: DragEvent) {
+  onDragOver(event: DragEvent): void {
     event.preventDefault();
     this.dragging = true;
   }
 
-  onDragLeave() {
+  onDragLeave(): void {
     this.dragging = false;
   }
 
-  clearFile() {
+  clearFile(): void {
     if (this.previewUrl()) {
       if (this.previewUrl()!.startsWith('blob:')) {
         URL.revokeObjectURL(this.previewUrl()!);

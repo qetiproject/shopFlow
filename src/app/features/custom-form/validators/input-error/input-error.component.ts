@@ -29,8 +29,8 @@ export class InputErrorComponent{
 
     readonly errors = input<ValidationErrors | null | undefined>(null);
 
-    trackByFn(index: number, item: KeyValue<string, any>) {
-        return item.key
+    trackByFn(_index: number, item: KeyValue<string, unknown>): string {
+        return item.key;
     }
 
 
