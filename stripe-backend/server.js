@@ -33,8 +33,8 @@ app.post('/api/checkout', async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.LOCAL_CLIENT_URL}/checkout/success`,
-      cancel_url: `${process.env.LOCAL_CLIENT_URL}/checkout/canceled`,
+      success_url: `${process.env.LOCAL_CLIENT_URL}/shopFlow/checkout/success`,
+      cancel_url: `${process.env.LOCAL_CLIENT_URL}/shopFlow/checkout/canceled`,
     });
 
     res.json({ url: session.url });
