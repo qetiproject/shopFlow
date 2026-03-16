@@ -15,6 +15,9 @@
       class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
       [src]="p().thumbnail"
       [alt]="p().title + ' thumbnail'"
+      loading="lazy"
+      width="208"
+      height="208"
     />
     @if (p().discountPercentage) {
       <div

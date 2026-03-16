@@ -9,7 +9,7 @@ export class ErrorMessagePipe implements PipeTransform {
     
     private errorMessages = inject(VALIDATION_ERROR_MESSAGES);
 
-    transform(key: string, errValue: string | number) {
+    transform(key: string, errValue: string | number): string {
         if(!this.errorMessages[key]) return '';
         return this.errorMessages[key](errValue)
     }

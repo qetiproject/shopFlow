@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { RemoveSVG } from 'assets/icons';
+import { RemoveSVG } from 'assets/icons/remove';
 
 @Component({
   selector: 'app-checkout-canceled',

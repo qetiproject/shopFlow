@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ArrowDownSVG } from 'assets/icons';
+import { ArrowDownSVG } from 'assets/icons/arrow-down';
 
 export interface SelectOption<T extends string | number = string> {
   label: string;

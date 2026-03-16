@@ -16,6 +16,8 @@ npm start
 
 App runs at [http://localhost:4200](http://localhost:4200). The dev server uses `src/proxy.conf.json` to proxy API requests to backend services.
 
+**Backend (`stripe-backend/`):** The repo contains a `stripe-backend` folder (Node/Express + Stripe). Its `node_modules` are not committed. To run the backend locally: `cd stripe-backend`, copy `.env.example` to `.env`, run `npm install`, then start the server. Production may use a deployed backend (see `environment.prod.ts`).
+
 ## Scripts
 
 | Command                 | Description                                               |

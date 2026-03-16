@@ -48,9 +48,12 @@
               class="w-10 h-10 rounded-full border-2 border-blue-500"
               src="https://dummyjson.com/icon/emilys/128"
               alt="User Avatar"
+              loading="lazy"
+              width="40"
+              height="40"
             />
             <span class="hidden md:inline text-gray-700 font-medium">{{
-              user?.fullName || user?.emailId
+              (user?.fullName ?? user?.emailId) || ''
             }}</span>
 
             <svg
@@ -74,32 +77,9 @@
               role="menu"
               aria-label="User account menu"
             >
-              <a
-                routerLink="/checkout/orders"
-                routerLinkActive="text-blue-600 font-semibold"
-                (click)="closeMenus()"
-                role="menuitem"
-                class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                My Orders
-              </a>
-              <a
-                [routerLink]="['/users/profile', user?.emailId]"
-                routerLinkActive="text-blue-600 font-semibold"
-                (click)="closeMenus()"
-                role="menuitem"
-                class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Profile
-              </a>
-              <button
-                (click)="onLogout()"
-                type="button"
-                role="menuitem"
-                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Logout
-              </button>
+              @defer (when isOpen()) {
+                <app-user-menu-content [user]="user" (closed)="closeMenus()" />
+              }
             </div>
           }
         </div>
@@ -142,29 +122,9 @@
           </a>
         }
         <div class="border-t mt-2 pt-2">
-          <a
-            routerLink="/checkout/orders"
-            routerLinkActive="text-blue-600 font-semibold"
-            (click)="closeMenus()"
-            class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            My Orders
-          </a>
-          <a
-            [routerLink]="['/users/profile', user?.emailId]"
-            routerLinkActive="text-blue-600 font-semibold"
-            (click)="closeMenus()"
-            class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Profile
-          </a>
-          <button
-            (click)="onLogout()"
-            type="button"
-            class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Logout
-          </button>
+          @defer (when isMobileMenu()) {
+            <app-user-menu-content [user]="user" (closed)="closeMenus()" />
+          }
         </div>
       </nav>
     </div>

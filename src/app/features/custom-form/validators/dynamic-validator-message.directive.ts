@@ -17,7 +17,7 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
   ngControl = inject(NgControl, { self: true, optional: true }) || inject(ControlContainer, { self: true });
   elementRef = inject(ElementRef);
 
-  get form() {
+  get form(): NgForm | FormGroupDirective | null {
     return this.parentContainer?.formDirective as NgForm | FormGroupDirective | null;
   }
   
@@ -29,7 +29,7 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
   private errorMessageTrigger!: Subscription;
   private parentContainer = inject(ControlContainer, { optional: true });
 
-  ngOnInit() {
+  ngOnInit(): void {
     queueMicrotask(() => {
       if (!this.ngControl.control)
         throw Error(`No control model for ${this.ngControl.name} control...`);
@@ -58,7 +58,7 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
 
     })
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.errorMessageTrigger?.unsubscribe();
   }
 }
