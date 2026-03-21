@@ -1,4 +1,5 @@
 import { computed, inject } from '@angular/core';
+import type { AddToCartRequest, CartResponse } from '@app-types/dto';
 import { UserStorage } from '@auth-module/services/user.storage';
 import { CartStorage } from '@cart-module/services/cart.storage';
 import {
@@ -6,13 +7,11 @@ import {
   calculateTotals,
   updateQuantity,
 } from '@cart-module/store/store.utils';
-import { AddToCartRequest, CartResponse } from '@app-types/dto';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 export const CartStore = signalStore(
   { providedIn: 'root' },
   withState<CartResponse>({
-    total: 0,
     cart: {
       products: [],
       total: 0,
