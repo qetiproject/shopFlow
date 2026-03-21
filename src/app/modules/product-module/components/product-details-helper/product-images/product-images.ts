@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { Product } from '@app-types/dto';
 
 @Component({
@@ -11,15 +11,21 @@ import { Product } from '@app-types/dto';
 export class ProductImages {
   product = input.required<Product>();
 
-  mainImage = signal<string>('');
+  readonly picked = signal<string | null>(null);
 
   constructor() {
     effect(() => {
-      this.mainImage.set(this.product().thumbnail);
+      this.product();
+      this.picked.set(null);
     });
   }
 
+  readonly mainUrl = computed(() => {
+    const p = this.product();
+    return (this.picked() ?? p.thumbnail) || p.images?.[0] || '';
+  });
+
   selectImage(img: string): void {
-    this.mainImage.set(img);
+    this.picked.set(img);
   }
 }

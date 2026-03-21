@@ -2,12 +2,22 @@
   <figure
     class="bg-gray-50 rounded-2xl p-4 flex justify-center shadow-inner ring-1 ring-gray-100 transition-transform duration-300 hover:scale-[1.02]"
   >
-    <img
-      [src]="mainImage()"
-      [alt]="product().title + ' main image'"
-      class="h-[420px] object-contain"
-      fetchpriority="high"
-    />
+    @if (mainUrl()) {
+      <img
+        [src]="mainUrl()"
+        [alt]="product().title + ' main image'"
+        class="h-[420px] object-contain"
+        fetchpriority="high"
+      />
+    } @else {
+      <div
+        class="h-[420px] min-w-[200px] flex items-center justify-center text-gray-400 text-sm px-4"
+        role="img"
+        [attr.aria-label]="product().title + ' — no image available'"
+      >
+        No image available
+      </div>
+    }
     <figcaption class="sr-only">{{ product().title }} main image</figcaption>
   </figure>
 
