@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { UserAfterLogin } from '@auth-module/types/user-login';
 import { logoutUser } from '@auth-module/store/auth.actions';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
   selector: 'app-user-menu-content',
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a
       routerLink="/checkout/orders"
